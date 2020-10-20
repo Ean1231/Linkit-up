@@ -1,0 +1,7 @@
+{
+  "name": "Link_up",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color='light'>
+    <ion-title>Institution Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    
+<img src={{showdata.img}}>
+
+<a href={{showdata.Apply}}><ion-button style="padding: 5px;">Apply</ion-button></a> 
+<ion-button  (click)="presentActionSheet()"  style="margin-left: 8%; padding: 5px;">Contact</ion-button>
+<ion-button (click)="bursaries()"   style="margin-left: 9%; padding: 5px;">Funding</ion-button>
+
+
+
+<u><h5>Institution Name:</h5></u> <br> {{showdata.University}} <br>
+<u><h5>Qualification:</h5></u> <br> {{showdata.Field}} in {{ showdata.QualificationType }} <br>
+<u><h5>City:</h5></u> <br> {{showdata.City}} <br>
+<u><h3>About Institution: </h3></u><br> {{showdata.description}}
+</ion-card>
+
+</ion-content>
+
+

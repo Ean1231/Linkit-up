@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color='light'>
+    <ion-title>
+      Aps Search
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullFactor="0.5" pullMin="100" ></ion-refresher-content>
+  </ion-refresher>
+
+<ion-searchbar placeholder="Enter Your APS Score" (ionInput)="filterData($event)" style='color: black'></ion-searchbar>
+
+
+<div *ngIf="showUniversities">
+
+  <ion-item *ngFor= "let university of Universities" (click)="submit(university)"> <br>
+    Institution: {{university.University}} <br>
+    Aps Score: {{university.aps}} <br>
+    Course you qualify for: {{university.Field}} in {{ university.QualificationType }}<br>
+    City: {{university.City}}
+     </ion-item>
+
+</div>
+  
+</ion-content>
