@@ -14,6 +14,8 @@ const routes: Routes = [
     path: 'bursaries',
     loadChildren: () => import('./bursaries/bursaries.module').then( m => m.BursariesPageModule)
   },
+ 
+
 ];
 @NgModule({
   imports: [
