@@ -15,7 +15,7 @@
 <ion-searchbar placeholder="Enter Your APS Score" (ionInput)="filterData($event)" style='color: black'></ion-searchbar>
 
 
-<div *ngIf="showUniversities">
+<!-- <div *ngIf="showUniversities">
 
   <ion-item *ngFor= "let university of Universities" (click)="submit(university)"> <br>
     Institution: {{university.University}} <br>
@@ -25,5 +25,28 @@
      </ion-item>
 
 </div>
+   -->
+
+
+   <div *ngIf="showUniversities">
+
+
+     <ion-list>
+  <ion-item *ngFor="let university of items ; let index=index" (click)="submit(university)">
+
+    Institution: {{university.institution}}
+  <br>
+  Aps Score: {{university.aps}}
+  <br>
+  Years: {{university.years}}
+  <br>
+  Location: {{university.location}}
+  <br>
+  Qualification Type: {{university.qualification}}
   
+  </ion-item>
+ </ion-list>
+   </div>
+
+ 
 </ion-content>

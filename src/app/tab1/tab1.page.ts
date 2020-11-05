@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Aps } from './aps';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
+
 
 
 
@@ -69,6 +72,17 @@ export class Tab1Page {
   this.router.navigateByUrl("/details" , {state:university});
   }
 
+
+  items: Observable<any[]>
+  getData(){
+    this.firestore.collection('Add').valueChanges().subscribe((items: any) => {
+    this.items = items;
+    console.log(items)
+    })
+    }
+   
+
+
   doRefresh(event){
     console.log('RefreshPage');
 
@@ -80,7 +94,11 @@ export class Tab1Page {
 
   
 
-  constructor(public router: Router ) {}
+  constructor(public router: Router, private firestore: AngularFirestore, )
+  {
+    this.getData();
+
+  }
 
 
 
