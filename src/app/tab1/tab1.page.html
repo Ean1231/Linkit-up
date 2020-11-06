@@ -1,18 +1,23 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color='light'>
-    <ion-title>
-      Aps Search
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" >
 
-<ion-content [fullscreen]="true">
+
+<body>
+ 
+<div style="text-align: center; margin-top: 30px; font-family: cursive; ">
+<p>
+  This feature allows you to find <br> a suitable course based on your aps.
+</p>  
+
+</div>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullFactor="0.5" pullMin="100" ></ion-refresher-content>
   </ion-refresher>
 
-<ion-searchbar placeholder="Enter Your APS Score" (ionInput)="filterData($event)" style='color: black'></ion-searchbar>
+  <div style="margin-top: 60px;">
+    <ion-searchbar placeholder="Enter Your APS Score" (ionInput)="filterData($event)" ></ion-searchbar>
+  </div>
+
 
 
 <!-- <div *ngIf="showUniversities">
@@ -32,21 +37,67 @@
 
 
      <ion-list>
+
   <ion-item *ngFor="let university of items ; let index=index" (click)="submit(university)">
 
-    Institution: {{university.institution}}
-  <br>
-  Aps Score: {{university.aps}}
-  <br>
-  Years: {{university.years}}
-  <br>
-  Location: {{university.location}}
-  <br>
-  Qualification Type: {{university.qualification}}
+  
+  <div style="font-size: x-small;">
+    <ion-icon name="school-outline"></ion-icon>
+  </div>
+  <div style="font-size: x-small;">
+    Institution:{{university.institution}}
+  </div>
+      
+
+  <div style="font-size: x-small;">
+    <ion-icon name="clipboard-outline" style="height: 10px; width: 10px;"></ion-icon>
+  </div>
+
+  <div style="font-size: x-small;">
+     Aps Score: {{university.aps}}
+  </div>
+  
+
+  <div style="font-size: x-small; height: 10px; width: 10px;">
+    <ion-icon name="calendar-outline"></ion-icon>
+  </div>
+
+  <div style="font-size: x-small;">
+    Years: {{university.years}}
+  </div>
+    
+
+  <div style="font-size: x-small; height: 10px; width: 10px;">
+    <ion-icon name="location-outline"></ion-icon>
+  </div>
+
+  <div style="font-size: x-small;">
+     Location: {{university.location}}
+  </div>
+     
+  
+  <div style="size: 30%; height: 10px; width: 10px;">
+    <ion-icon name="book-outline"></ion-icon>
+  </div>
+<br>
+  <div style="font-size: x-small; ">
+      Qualification Type: {{university.qualification}}
+  </div>
+    
+  
   
   </ion-item>
- </ion-list>
-   </div>
 
- 
+
+ </ion-list>
+
+
+
+
+</div>
+
+
+ </body>
 </ion-content>
+
+

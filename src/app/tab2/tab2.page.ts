@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonInfiniteScroll, Platform } from '@ionic/angular';
@@ -9,6 +9,7 @@ import { IonInfiniteScroll, Platform } from '@ionic/angular';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+@ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   
   perc;
   perc1;
@@ -185,6 +186,7 @@ export class Tab2Page {
     this.initializeApp();   
   }
 
+  
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
