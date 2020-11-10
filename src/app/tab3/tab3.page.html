@@ -1,0 +1,124 @@
+    <!-- Button to open the modal login form -->
+      <button class="loginbtn" style="width: 100px; border-color: transparent;" 
+      onclick="document.getElementById('id01').style.display='block'">
+        Login
+      </button>
+      
+   
+
+      
+
+
+<!-- The Modal -->
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'"
+class="close" title="Close Modal">&times;</span>
+
+  <!-- Modal Content -->
+  <form class="modal-content animate" action="/action_page.php">
+    <div class="imgcontainer">
+      <img src="../assets/g.png" alt="Avatar" >
+    </div>
+
+    <div class="container">
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" required>
+
+      <label for="password"><b>Password</b></label>
+      <div>
+      <input type="password" placeholder="Enter Password" name="password" required>
+      <br>
+      <br>
+      <span class="password">Forgot <a href="#">password?</a></span>
+      <br>
+      <br>
+      </div>
+
+    
+      <button type="submit" class="loginbtn">Login</button> 
+      <button class="signupbtn" style="width: 100px; border-color: transparent;" 
+      onclick="document.getElementById('id02').style.display='block'">
+        Sign-up
+      </button>
+
+
+      <br>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+      <br>
+      <br>
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+     
+      
+      
+    
+    </div>
+
+  </form>
+</div>
+
+
+<!--
+
+
+
+Sign-Up model
+vvvvvvvvvvvvv
+
+
+
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- The Sign-up Modal -->
+<div id="id02" class="modal">
+  <span onclick="document.getElementById('id02').style.display='none'"
+class="close" title="Close Modal">&times;</span>
+
+  <!-- Modal Content -->
+  <form class="modal-content animate" action="/action_page.php">
+    <div class="imgcontainer">
+      <img src="../assets/g.png" alt="Avatar" >
+    </div>
+
+    <div class="container">
+    <input type="text" id="name" placeholder="Name:">
+    <input type="text" id="surname" placeholder="Surname:">
+    <input type="text" id="username" placeholder="Username:">
+    <input type="text" id="number" placeholder="Phone Number:">
+    <input type="text" id="email" placeholder="Email:">
+    <input type="text" id="password" placeholder="Password:">
+    <input type="text" id="rPassword" placeholder="Re-enter password:">
+    
+    <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+    </div>
+
+  </form>
+</div>
+
