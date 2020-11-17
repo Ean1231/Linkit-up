@@ -21,12 +21,13 @@
       <label for="exampleInputPassword1">Password</label>
       <input type="password" class="form-control" id="exampleInputPassword1"  [(ngModel)]="password">
     </div>
-    <label style="display: flex; float: centre; margin-left: 65%;"><small>Forgot Password? </small></label>
+
+    <label style="display: flex; margin-left: 65%;"><small [routerLink]="['/forgot-password']">Forgot Password? </small></label>
   
-    <button type="button" class="btn btn-primary" style="display: flex; margin-left: 5%;width: 70%; margin-left: 15%; text-align: center;padding-left: 30%;" (click)="login()" >SIGN IN</button>
+    <button [routerLink]="['/tabs']" type="button" class="btn btn-primary" style="display: flex; margin-left: 5%;width: 70%; margin-left: 15%; text-align: center;padding-left: 30%;" (click)="login()" >SIGN IN</button>
 
 
-    <small id="emailHelp" class="form-text text-muted" style="display: flex; margin-left: 30%; ">Do you have an account?</small>  <br>
+    <small [routerLink]="['/registration']" id="emailHelp" class="form-text text-muted" style="display: flex; margin-left: 30%; " >Do you have an account?</small>  <br>
     
    
   </div>

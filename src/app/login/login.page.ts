@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 
+import { AuthService} from "../auth.service"
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -13,28 +15,25 @@ export class LoginPage implements OnInit {
   email;
   password;
 
-  constructor(  public router: Router)
+  constructor(  public router: Router, public auth:AuthService)
   {
 
   }
 
 
-  //TabsPage
-  Login()
-   {
-    this.auth.auth.signInWithEmailAndPassword(this.email, this.password).then(() =>
-    {
-      this.router.navigateByUrl('/tab3')
-    }).catch((error) =>
-    {
+  
+  login(){
+    this.auth.Login(this.email , this.password).then(()=>{
+   
+    }).catch((error)=>{
       console.log(error.message)
     })
-
-
-  
-    
-  this.router.navigateByUrl('/tabs')
   }
+
+  signup(){
+    this.router.navigateByUrl('/sign-up');
+  }
+
 
   
   ngOnInit() {
