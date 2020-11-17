@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
+
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,13 +13,15 @@ export class LoginPage implements OnInit {
   email;
   password;
 
-  constructor( public auth: AngularFireAuth, public router: Router)
+  constructor(  public router: Router)
   {
 
   }
 
+
+  //TabsPage
   Login()
-  {
+   {
     this.auth.auth.signInWithEmailAndPassword(this.email, this.password).then(() =>
     {
       this.router.navigateByUrl('/tab3')
@@ -27,6 +29,11 @@ export class LoginPage implements OnInit {
     {
       console.log(error.message)
     })
+
+
+  
+    
+  this.router.navigateByUrl('/tabs')
   }
 
   

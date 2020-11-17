@@ -1,206 +1,139 @@
-<ion-content [fullscreen]="true">
-<body>
- 
-  <div style="font-family: 'Times New Roman', Times, serif; color: gray; text-align: center; font-size: x-small;">
-    <p>
-      Choose subject name and corrisponding mark. <br>
-      The calculate button will appear when all fields are submitted.
-    </p>
-    </div>
-  
-   
-  
-    <mat-grid-list cols="2" rowHeight="2:1">
-  
-      
-        <mat-grid-title>  
-    
-      <ion-select style="height: 50px;" class="select-css" placeholder="--Select Subject--">
-        <ion-select-option *ngFor="let sub of subList" >
-  
-         <div style="text-align: left;">
-           {{sub.title}}
-         </div>
+<div style="font-family: 'Times New Roman', Times, serif; color: gray; text-align: center; font-size: x-small;">
+  <p>
+    Choose subject name and corrisponding mark. <br>
+    The calculate button will appear when all fields are submitted.
+  </p>
+  </div>
+
+ <ion-item>
+    <ion-select style="width:40%; margin-left: 12px;   float:left"class="select-css" placeholder="Select Subject">
+      <ion-select-option *ngFor="let sub of subList" slot="end"  >
+       <div>
+         {{sub.title}}
+       </div>
+         </ion-select-option>
+          </ion-select>
+
+           <ion-select style="width:40% ; margin-left: 12px; float:left"class="select-css" [(ngModel)]="perc" placeholder="--Select Mark--">
+           <ion-select-option *ngFor="let mar of marks">
+          {{mar.name}}
+        </ion-select-option>
         
-      </ion-select-option>
       </ion-select>
-  </mat-grid-title>
-  
-     <mat-grid-title>
-    
-        <ion-select style="height: 50px;" class="select-css" [(ngModel)]="perc" placeholder="--Select Mark--">
-          <ion-select-option *ngFor="let mar of marks">
-            {{mar.name}}
-          </ion-select-option>
-          
-        </ion-select>
-    
-    </mat-grid-title>
-  
+    </ion-item>
+  <br>
+
+  <ion-item>
+    <ion-select style="width:40%; margin-left: 12px;   float:left"class="select-css" placeholder="Select Subject">
+      <ion-select-option *ngFor="let sub of subList" slot="end"  >
+       <div>
+         {{sub.title}}
+       </div>
+         </ion-select-option>
+          </ion-select>
+
+           <ion-select style="width:40% ; margin-left: 12px; float:left"class="select-css" [(ngModel)]="perc1" placeholder="--Select Mark--">
+           <ion-select-option *ngFor="let mar of marks">
+          {{mar.name}}
+        </ion-select-option>
+        
+      </ion-select>
+    </ion-item>
+  <br>
+
+
+  <ion-item>
+    <ion-select style="width:40%; margin-left: 12px;   float:left"class="select-css" placeholder="Select Subject">
+      <ion-select-option *ngFor="let sub of subList" slot="end"  >
+       <div>
+         {{sub.title}}
+       </div>
+         </ion-select-option>
+          </ion-select>
+
+           <ion-select style="width:40% ; margin-left: 12px; float:left"class="select-css" [(ngModel)]="perc2" placeholder="--Select Mark--">
+           <ion-select-option *ngFor="let mar of marks">
+          {{mar.name}}
+        </ion-select-option>
+        
+      </ion-select>
+    </ion-item>
+  <br>
+
+  <ion-item>
+    <ion-select style="width:40%; margin-left: 12px;   float:left"class="select-css" placeholder="Select Subject">
+      <ion-select-option *ngFor="let sub of subList" slot="end"  >
+       <div>
+         {{sub.title}}
+       </div>
+         </ion-select-option>
+          </ion-select>
+
+           <ion-select style="width:40% ; margin-left: 12px; float:left"class="select-css" [(ngModel)]="perc3" placeholder="--Select Mark--">
+           <ion-select-option *ngFor="let mar of marks">
+          {{mar.name}}
+        </ion-select-option>
+        
+      </ion-select>
+    </ion-item>
+  <br>
+  <ion-item>
+    <ion-select style="width:40%; margin-left: 12px;   float:left"class="select-css" placeholder="Select Subject">
+      <ion-select-option *ngFor="let sub of subList" slot="end"  >
+       <div>
+         {{sub.title}}
+       </div>
+         </ion-select-option>
+          </ion-select>
+
+           <ion-select style="width:40% ; margin-left: 12px; float:left"class="select-css" [(ngModel)]="perc4" placeholder="--Select Mark--">
+           <ion-select-option *ngFor="let mar of marks">
+          {{mar.name}}
+        </ion-select-option>
+        
+      </ion-select>
+    </ion-item>
+  <br>
+
+    <ion-select style="width:40%; margin-left: 12px;   float:left"class="select-css" placeholder="Select Subject">
+      <ion-select-option *ngFor="let sub of subList" slot="end"  >
+       <div>
+         {{sub.title}}
+       </div>
+         </ion-select-option>
+          </ion-select>
+
+           <ion-select style="width:40% ; margin-left: 12px; float:left"class="select-css" [(ngModel)]="perc5" placeholder="--Select Mark--">
+           <ion-select-option *ngFor="let mar of marks">
+          {{mar.name}}
+        </ion-select-option>
+        
+      </ion-select>
    
-  
-    <br>
-  
-  <mat-grid-title>
-    <ion-select style="height: 50px;" class="select-css" placeholder="*Select subject">
-      <ion-select-option *ngFor="let sub of subList" >
-  
-       <div style="text-align: left;">
-         {{sub.title}}
-       </div>
-      
-    </ion-select-option>
-    </ion-select>
-  
-  </mat-grid-title>
-  
-  <mat-grid-title>
-    <ion-select style="height: 50px;" class="select-css" [(ngModel)]="perc1"  placeholder="*Select mark">
-     <ion-select-option *ngFor="let mar of marks">
-       {{mar.name}}
-     </ion-select-option>
-   </ion-select>
-  </mat-grid-title>
-  
   <br>
-  
-  
-  <mat-grid-title>
-    <ion-select style="height: 50px;" class="select-css" placeholder="*Select subject">
-      <ion-select-option *ngFor="let sub of subList" >
-  
-       <div style="text-align: left;">
-         {{sub.title}}
-       </div>
-      
-    </ion-select-option>
-    </ion-select>
-  </mat-grid-title>
-  
-  
-  <mat-grid-title>
-    <ion-select style="height: 50px;" class="select-css" [(ngModel)]="perc2"  placeholder="*Select mark">
-      <ion-select-option *ngFor="let mar of marks">
-        {{mar.name}}
-      </ion-select-option>
-    </ion-select>
-  </mat-grid-title>
-  
-  <br>
-  
-  <mat-grid-title>
-    <ion-select style="height: 50px;" class="select-css" placeholder="*Select subject">
-      <ion-select-option *ngFor="let sub of subList" >
-     
-       <div style="text-align: left;">
-         {{sub.title}}
-       </div>
-      
-     </ion-select-option>
-     </ion-select>
-  </mat-grid-title>
-  
-  
-  <mat-grid-title>
-    <ion-select style="height: 50px;" class="select-css" [(ngModel)]="perc3"  placeholder="*Select mark">
-      <ion-select-option *ngFor="let mar of marks">
-        {{mar.name}}
-      </ion-select-option>
-      </ion-select>
-  </mat-grid-title>
-  
-  
-  <br>
-  
-  <mat-grid-title>
-    <ion-select style="height: 50px;" class="select-css" placeholder="*Select subject">
-      <ion-select-option *ngFor="let sub of subList" >
-     
-       <div style="text-align: left;">
-         {{sub.title}}
-       </div>
-      
-     </ion-select-option>
-     </ion-select>
-  </mat-grid-title>
-  
-  <mat-grid-title>
-    <ion-select style="height: 50px;" class="select-css" [(ngModel)]="perc4"  placeholder="*Select mark">
-    <ion-select-option *ngFor="let mar of marks">
-      {{mar.name}}
-    </ion-select-option>
-    
-  </ion-select>
-  </mat-grid-title>
-  
-  <br>
-  
-  <mat-grid-title>
-    <ion-select style="height: 50px;" class="select-css" placeholder="*Select subject">
-      <ion-select-option *ngFor="let sub of subList" >
-     
-       <div style="text-align: left;">
-         {{sub.title}}
-       </div>
-      
-     </ion-select-option>
-     </ion-select>
-  </mat-grid-title>
-  
-  <mat-grid-title>
-    <ion-select style="height: 50px;" class="select-css" [(ngModel)]="perc5"  placeholder="*Select mark">
-      <ion-select-option *ngFor="let mar of marks">
-        {{mar.name}}
-      </ion-select-option>
-      </ion-select>
-  </mat-grid-title>
-  
-  
-  <br>
-  
-  <mat-grid-title>
-    <ion-select style="height: 50px;" class="select-css" placeholder="*Select subject">
-      <ion-select-option *ngFor="let sub of subList" >
-     
-       <div style="text-align: left;">
-         {{sub.title}}
-       </div>
-      
-     </ion-select-option>
-     </ion-select>
-  </mat-grid-title>
-  
-  
-  <mat-grid-title>
-    <ion-select style="height: 50px;" class="select-css" [(ngModel)]="perc6"  placeholder="*Select mark">
-      <ion-select-option *ngFor="let mar of marks">
-        {{mar.name}}
-      </ion-select-option>
-      </ion-select>
-  </mat-grid-title>
 
-  
-    </mat-grid-list>
-     
-   <div style="margin-top: 60px; margin-left: 80px; font-style: bold;">
-     <ion-label>
-       Aps Score: {{sum}}
-     </ion-label>
-   </div>
+    <ion-select style="width:40%; margin-left: 12px;   float:left"class="select-css" placeholder="Select Subject">
+      <ion-select-option *ngFor="let sub of subList" slot="end"  >
+       <div>
+         {{sub.title}}
+       </div>
+         </ion-select-option>
+          </ion-select>
+
+           <ion-select style="width:40% ; margin-left: 12px; float:left"class="select-css" [(ngModel)]="perc6" placeholder="--Select Mark--">
+           <ion-select-option *ngFor="let mar of marks">
+          {{mar.name}}
+        </ion-select-option>
+        
+      </ion-select>
    
-  
-   <div style="margin-left: 34%;">
-   <ion-button style="margin-top: 90px; "  (click)="calculate()">
-     Calcuate
-   </ion-button>
-  
-   
+  <br>
 
-   </div>
-</body>
+ 
+ <ion-label>
+   Aps Score: {{sum}}
+ </ion-label>
 
-
-</ion-content>
-
-
-
+ <ion-button style="width:40%; margin-left: 12px; float:left"  (click)="calculate()">
+   Calcuate
+ </ion-button>
