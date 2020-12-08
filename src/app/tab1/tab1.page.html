@@ -10,9 +10,45 @@
     </ion-refresher>
   
     <div style="margin-top: 60px;">
-      <ion-searchbar placeholder="Enter Your APS Score"  ></ion-searchbar>
+      <ion-searchbar placeholder="Enter Your APS Score" (ionInput)="filterData($event)" ></ion-searchbar>
     </div>
-    <div >
+
+    <div *ngIf="showUniversities">
+  
+  
+      <ion-card>
+ 
+   <ion-item *ngFor="let university of items ; let index=index" >
+ 
+   
+   
+   <div >
+     Institution:{{university.institution}}
+   </div>   
+ <br>
+   
+   <ion-item>
+      Aps Score: {{university.aps}}
+   </ion-item>
+ <br>
+   <div>
+     Years: {{university.years}}
+   </div>
+     <br>
+ 
+   <div>
+      Location: {{university.location}}
+   </div>
+      
+ <br>
+   
+   
+   </ion-item>
+  </ion-card>
+ 
+ </div>
+ 
+    <!-- <div >
       
         <label style="margin: 4%;" for="validationDefault04">Choose Location</label>
       <select class="custom-select" id="validationDefault04" required   style="width:93%; margin-left: 12px;" >
@@ -31,7 +67,7 @@
         <option>Business studies</option>
        
       </select>
-    </div>
+    </div> -->
     <br>
     <ion-button  style="align-items:center;" (click)="submit(university)" (ionInput)="filterData($event)" >Submit</ion-button>
     <ion-button > Cancel</ion-button>
@@ -53,38 +89,4 @@
      -->
   
   
-     <div *ngIf="showUniversities">
-  
-  
-       <ion-card>
-  
-    <ion-item *ngFor="let university of items ; let index=index" >
-  
-    
-    
-    <div >
-      Institution:{{university.institution}}
-    </div>   
-  <br>
-    
-    <ion-item>
-       Aps Score: {{university.aps}}
-    </ion-item>
-  <br>
-    <div>
-      Years: {{university.years}}
-    </div>
-      <br>
-  
-    <div>
-       Location: {{university.location}}
-    </div>
-       
-  <br>
-    
-    
-    </ion-item>
-   </ion-card>
-  
-  </div>
-  
+     

@@ -14,17 +14,25 @@
   <div style=" margin-top: 40%;" >
     <div class="form-group"  style="width: 90%; margin-left: 5%;">
       <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control"  [(ngModel)]="email"  >
+      <input required #emailControl="ngModel" id="email" type="email"
+      class="form-control" [(ngModel)]="email" >
+
+      <div>
+        
+        touched: {{emailControl.touched}}
+        
+      </div>
    
     </div>
     <div class="form-group" style="width: 90%; margin-left: 5%;">
       <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1"  [(ngModel)]="password">
+      <input required #passwordControl="ngModel" type="password" class="form-control"
+      id="exampleInputPassword1"  [(ngModel)]="password">
     </div>
 
     <label style="display: flex; margin-left: 65%;"><small [routerLink]="['/forgot-password']">Forgot Password? </small></label>
   
-    <button [routerLink]="['/tabs']" type="button" class="btn btn-primary" style="display: flex; margin-left: 5%;width: 70%; margin-left: 15%; text-align: center;padding-left: 30%;" (click)="login()" >SIGN IN</button>
+    <button  [routerLink]="['/tabs']" type="button" class="btn btn-primary" style="display: flex; margin-left: 5%;width: 70%; margin-left: 15%; text-align: center;padding-left: 30%;" (click)="login()" >SIGN IN</button>
 
 
     <small [routerLink]="['/registration']" id="emailHelp" class="form-text text-muted" style="display: flex; margin-left: 30%; " >Do you have an account?</small>  <br>
