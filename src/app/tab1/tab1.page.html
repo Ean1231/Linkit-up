@@ -1,3 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-back-button></ion-back-button> -->
+    <img src="../assets/logos.PNG" style="height: 70px"/>
+   
+  </ion-toolbar>
+</ion-header>
+
 <div style="text-align: center; margin-top: 30px; font-family: cursive; ">
   <p>
     This feature allows you to find <br> a suitable course based on your aps.
@@ -5,51 +13,39 @@
   
   </div>
   
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content pullFactor="0.5" pullMin="100" ></ion-refresher-content>
-    </ion-refresher>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullFactor="0.5" pullMin="100" ></ion-refresher-content>
+  </ion-refresher>
   
-    <div style="margin-top: 60px;">
-      <ion-searchbar placeholder="Enter Your APS Score" (ionInput)="filterData($event)" ></ion-searchbar>
-    </div>
+    
+      <ion-searchbar placeholder="Enter Your APS Score"  (ionInput)="filterData($event)"></ion-searchbar>
+ 
+      <div *ngIf="showUniversities">
 
-    <div *ngIf="showUniversities">
+
+     <ion-list>
   
+     <ion-item *ngFor="let university of items; let index=index">
+   Institution: {{university.institution}}
+  <br>
+  Aps Score: {{university.aps}}
+  <br>
+  Years: {{university.years}}
+  <br>
+  Location: {{university.location}}
+  <br>
+  Qualification Type: {{university.qualification}}
   
-      <ion-card>
+
+     </ion-item> 
+
  
-   <ion-item *ngFor="let university of items ; let index=index" >
- 
-   
-   
-   <div >
-     Institution:{{university.institution}}
-   </div>   
- <br>
-   
-   <ion-item>
-      Aps Score: {{university.aps}}
-   </ion-item>
- <br>
-   <div>
-     Years: {{university.years}}
+
+ </ion-list>
    </div>
-     <br>
- 
-   <div>
-      Location: {{university.location}}
-   </div>
-      
- <br>
-   
-   
-   </ion-item>
-  </ion-card>
- 
- </div>
- 
-    <!-- <div >
-      
+
+   <div style="margin-top: 20px;">
+
         <label style="margin: 4%;" for="validationDefault04">Choose Location</label>
       <select class="custom-select" id="validationDefault04" required   style="width:93%; margin-left: 12px;" >
         <option selected disabled value="">Cape Town</option>
@@ -57,21 +53,43 @@
         <option>Mahikeng</option>
         <option>Johhanesburg</option>
       </select>
-    </div>
-  <br>
-    <div >
+   
+
+   
       <label style="margin: 4%;" for="validationDefault04">Preffered Field of study</label>
       <select class="custom-select" id="validationDefault04" required  style="width:93%; margin-left: 12px;">
-        <option selected disabled value="">Enginnering</option>
-        <option>Techonogy and Science</option>
+        <option selected disabled value="">Engineering</option>
+        <option>Techonology and Science</option>
         <option>Business studies</option>
        
       </select>
-    </div> -->
+    </div>
+  <br>
+    <div class="submit" style="margin-bottom: 200px;  ">
+    <button   (click)="submit(this.Universities)" (ionInput)="filterData($event)"  type="button"
+    class="btn"
+    style="
+    background-color: rgb(98, 188, 230);
+      display: flex;
+      margin-left: 5%;
+      width: 30%;
+      margin-left: 15%;
+      padding-left: 30%;
+    ">Submit</button>
     <br>
-    <ion-button  style="align-items:center;" (click)="submit(university)" (ionInput)="filterData($event)" >Submit</ion-button>
-    <ion-button > Cancel</ion-button>
-  
+    <button  type="button"
+    class="btnCancel"
+    style="
+    background-color: rgb(98, 188, 230);
+      display: flex;
+      margin-left: 5%;
+      width: 30%;
+      margin-left: 15%;
+      text-align: center;
+      padding-left: 30%;
+    "
+    > Cancel</button>
+  </div>
   
   
   
@@ -85,8 +103,4 @@
       City: {{university.City}}
        </ion-item>
   
-  </div>
-     -->
-  
-  
-     
+  </div> -->

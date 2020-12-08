@@ -136,3 +136,19 @@ form {
 	  width: 100%;
 	}
   }
+	.subject {
+		display: grid;
+		grid-template-columns: repeat(2, 50%);
+	}
+	
+	#button1,#button2
+	{
+	float:left;
+	width:100%;
+	text-align:center;
+	}
+	.button{
+	display:inline-block;
+	margin-top: 30px;
+	align-content: center;
+	}
