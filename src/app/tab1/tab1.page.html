@@ -1,7 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <!-- <ion-back-button></ion-back-button> -->
-    <img src="../assets/logos.PNG" style="height: 70px"/>
+    <img src="../assets/L.png" style="height: 50px"/>
+    <div style="float: right; margin-top: 20px;">
+      <ion-title>Search</ion-title>
+    </div>
    
   </ion-toolbar>
 </ion-header>
@@ -25,7 +28,7 @@
 
      <ion-list>
   
-     <ion-item *ngFor="let university of items; let index=index">
+  <ion-item *ngFor="let university of items; let index=index">
    Institution: {{university.institution}}
   <br>
   Aps Score: {{university.aps}}
@@ -65,30 +68,10 @@
       </select>
     </div>
   <br>
-    <div class="submit" style="margin-bottom: 200px;  ">
-    <button   (click)="submit(this.Universities)" (ionInput)="filterData($event)"  type="button"
-    class="btn"
-    style="
-    background-color: rgb(98, 188, 230);
-      display: flex;
-      margin-left: 5%;
-      width: 30%;
-      margin-left: 15%;
-      padding-left: 30%;
-    ">Submit</button>
+    <div class="btnButtons">
+    <ion-button (click)="submit(this.Universities)" (ionInput)="filterData($event)"  type="button">Submit</ion-button>
     <br>
-    <button  type="button"
-    class="btnCancel"
-    style="
-    background-color: rgb(98, 188, 230);
-      display: flex;
-      margin-left: 5%;
-      width: 30%;
-      margin-left: 15%;
-      text-align: center;
-      padding-left: 30%;
-    "
-    > Cancel</button>
+    <ion-button type="button"> Cancel</ion-button  >
   </div>
   
   

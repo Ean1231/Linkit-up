@@ -1,10 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Register</ion-title>
+    <!-- <ion-back-button></ion-back-button> -->
+    <img src="../assets/L.png" style="height: 50px"/>
+    <div style="float: right; margin-top: 20px;">
+      <ion-title>Sign-up</ion-title>
+    </div>
+   
   </ion-toolbar>
 </ion-header>
-
-<img src="../assets/user.jpg" alt="image">
 
 <ion-content>
  <form [formGroup] = "registrationForm" (ngSubmit)="submit()" style="margin-top: 160px;">
