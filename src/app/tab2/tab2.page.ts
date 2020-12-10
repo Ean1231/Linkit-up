@@ -184,8 +184,25 @@ export class Tab2Page {
     private statusBar: StatusBar)
   {
     this.initializeApp();   
+
+
+    
   }
 
+  loadData(event) {
+    setTimeout(() => {
+      console.log('Done');
+      event.target.complete();
+
+      // App logic to determine if all data is loaded
+      // and disable the infinite scroll
+      
+    }, 500);
+  }
+
+  toggleInfiniteScroll() {
+    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
   
   initializeApp() {
     this.platform.ready().then(() => {

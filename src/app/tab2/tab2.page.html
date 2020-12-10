@@ -1,148 +1,366 @@
 <ion-header>
   <ion-toolbar>
-    <!-- <ion-back-button></ion-back-button> -->
-    <img src="../assets/L.png" style="height: 50px"/>
-    <div style="float: right; margin-top: 20px;">
-      <ion-title>Calculator</ion-title>
-    </div>
-   
+  
+
+    <ion-title> Apps calculator</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content [scrollEvents]="true">
+  <ion-list>
+    
+    
+<div style="text-align: center; margin-top: 30px; font-family: cursive; ">
+  <p>
+   This is to help you to be able to calculate your APS score.
+  </p> 
+</div>
 
+<div class="subject">
+  <div class="mt-3">
+    <label for="edit-submitted-first-language" style="margin: 4%;">Select language*</label>
+    <select required="required" class="custom-select" style="width:93%; margin-left: 12px;" >
 
-<div style="font-family: 'Times New Roman', Times, serif; color: black; text-align: center; font-size: small;">
-  <p style="margin-top: 30px; font-family: cursive;">
-    <b>
-    Choose subject name <br> and corrisponding mark
-    </b>
-  </p>
+      <option value="" selected="selected">*</option>
+      <option value="Afrikaans-First-Additional-Language">Afrikaans First Additional Language</option>
+      <option value="Afrikaans-Home-Language">Afrikaans Home Language</option>
+      <option value="English-First-Additional-Language">English First Additional Language</option>
+      <option value="English-Home-Language">English Home Language</option>
+      <option value="IsiNdebele-First-Additional-Language">IsiNdebele First Additional Language</option>
+      <option value="IsiNdebele-Home-Language">IsiNdebele Home Language</option>
+      <option value="IsiXhosa-First-Additional-Language">IsiXhosa First Additional Language</option>
+      <option value="IsiXhosa-Home-Language">IsiXhosa Home Language</option
+        ><option value="IsiZulu-First-Additional-Language">IsiZulu First Additional Language</option>
+      <option value="IsiZulu-Home-Language">IsiZulu Home Language</option>
+      <option value="Sepedi-First-Additional-Language">Sepedi First Additional Language</option>
+      <option value="Sepedi-Home-Language">Sepedi Home Language</option>
+      <option value="Sesotho-First-Additional-Language">Sesotho First Additional Language</option>
+      <option value="Sesotho-Home-Language">Sesotho Home Language</option>
+      <option value="Setswana-First-Additional-Language">Setswana First Additional Language</option>
+      <option value="Setswana-Home-Language">Setswana Home Language</option>
+      <option value="SiSwati-First-Additional-Language">SiSwati First Additional Language</option>
+      <option value="SiSwati-Home-Language">SiSwati Home Language</option>
+      <option value="Tshivenda-First-Additional-Language">Tshivenda First Additional Language</option>
+      <option value="Tshivenda-Home-Language">Tshivenda Home Language</option>
+      <option value="Xitsonga-First-Additional-Language">Xitsonga First Additional Language</option>
+      <option value="Xitsonga-Home-Language">Xitsonga Home Language</option></select>
   </div>
 
-<ion-list>
-    <ion-select style="width:40%; margin-left: 12px;   float:left" class="select-css" placeholder="--Select Subject--">
-      <ion-select-option *ngFor="let sub of subList" slot="end"  >
-       <div>
-         {{sub.title}}
-       </div>
-         </ion-select-option>
-          </ion-select>
-
-           <ion-select style="width:40% ; margin-left: 12px; float:left"class="select-css" [(ngModel)]="perc" placeholder="--Select Mark--">
-           <ion-select-option *ngFor="let mar of marks">
-          {{mar.name}}
-        </ion-select-option>
-        
-      </ion-select>
-  <br>
-<br>
-    <ion-select style="width:40%; margin-left: 12px;   float:left"class="select-css" placeholder="--Select Subject--">
-      <ion-select-option *ngFor="let sub of subList" slot="end"  >
-       <div>
-         {{sub.title}}
-       </div>
-         </ion-select-option>
-          </ion-select>
-
-           <ion-select style="width:40% ; margin-left: 12px; float:left"class="select-css" [(ngModel)]="perc1" placeholder="--Select Mark--">
-           <ion-select-option *ngFor="let mar of marks">
-          {{mar.name}}
-        </ion-select-option>
-        
-      </ion-select>
-  <br>
-
-<br>
-    <ion-select style="width:40%; margin-left: 12px;   float:left"class="select-css" placeholder="--Select Subject--">
-      <ion-select-option *ngFor="let sub of subList" slot="end"  >
-       <div>
-         {{sub.title}}
-       </div>
-         </ion-select-option>
-          </ion-select>
-
-           <ion-select style="width:40% ; margin-left: 12px; float:left"class="select-css" [(ngModel)]="perc2" placeholder="--Select Mark--">
-           <ion-select-option *ngFor="let mar of marks">
-          {{mar.name}}
-        </ion-select-option>
-        
-      </ion-select>
-  <br>
-<br>
-    <ion-select style="width:40%; margin-left: 12px;   float:left"class="select-css" placeholder="--Select Subject--">
-      <ion-select-option *ngFor="let sub of subList" slot="end"  >
-       <div>
-         {{sub.title}}
-       </div>
-         </ion-select-option>
-          </ion-select>
-
-           <ion-select style="width:40% ; margin-left: 12px; float:left"class="select-css" [(ngModel)]="perc3" placeholder="--Select Mark--">
-           <ion-select-option *ngFor="let mar of marks">
-          {{mar.name}}
-        </ion-select-option>
-        
-      </ion-select>
-  <br>
-  <br>
-    <ion-select style="width:40%; margin-left: 12px;   float:left"class="select-css" placeholder="--Select Subject--">
-      <ion-select-option *ngFor="let sub of subList" slot="end"  >
-       <div>
-         {{sub.title}}
-       </div>
-         </ion-select-option>
-          </ion-select>
-
-           <ion-select style="width:40% ; margin-left: 12px; float:left"class="select-css" [(ngModel)]="perc4" placeholder="--Select Mark--">
-           <ion-select-option *ngFor="let mar of marks">
-          {{mar.name}}
-        </ion-select-option>
-        
-      </ion-select>
-  <br>
-  <br>
-
-    <ion-select style="width:40%; margin-left: 12px;   float:left"class="select-css" placeholder="--Select Subject--">
-      <ion-select-option *ngFor="let sub of subList" slot="end"  >
-       <div>
-         {{sub.title}}
-       </div>
-         </ion-select-option>
-          </ion-select>
-
-           <ion-select style="width:40% ; margin-left: 12px; float:left"class="select-css" [(ngModel)]="perc5" placeholder="--Select Mark--">
-           <ion-select-option *ngFor="let mar of marks">
-          {{mar.name}}
-        </ion-select-option>
-        
-      </ion-select>
+  
+  <div class="mt-5" style="padding-top: 6px;">
+    <select required="required" class="custom-select" style="width:93%; margin-left: 12px;" [(ngModel)]="perc" >
+      <option value="" selected="selected">Select your Marks...</option>
+   <option *ngFor="let mar of marks">
+     {{mar.name}}
+   </option>
    
-  <br>
-  <br>
-
-    <ion-select style="width:40%; margin-left: 12px;   float:left"class="select-css" placeholder="--Select Subject--">
-      <ion-select-option *ngFor="let sub of subList" slot="end"  >
-       <div>
-         {{sub.title}}
-       </div>
-         </ion-select-option>
-          </ion-select>
+  </select>
+  </div>
 
 
-          
-           <ion-select style="width:40% ; margin-left: 12px; float:left"class="select-css" [(ngModel)]="perc6" placeholder="--Select Mark--">
-           <ion-select-option *ngFor="let mar of marks">
-          {{mar.name}}
-        </ion-select-option>
-        
-      </ion-select>
+  <div class="mt-3">
+    <label for="edit-submitted-first-language" style="margin: 4%;">Select language <span class="form-required" title="This field is required.">*</span></label>
+    <select required="required" class="custom-select" style="width:93%; margin-left: 12px;" >
+      <option value="" selected="selected">*</option>
+      <option value="Afrikaans-First-Additional-Language">Afrikaans First Additional Language</option>
+      <option value="Afrikaans-Home-Language">Afrikaans Home Language</option><option value="English-First-Additional-Language">English First Additional Language</option>
+      <option value="English-Home-Language">English Home Language</option><option value="IsiNdebele-First-Additional-Language">IsiNdebele First Additional Language</option>
+      <option value="IsiNdebele-Home-Language">IsiNdebele Home Language</option><option value="IsiXhosa-First-Additional-Language">IsiXhosa First Additional Language</option>
+      <option value="IsiXhosa-Home-Language">IsiXhosa Home Language</option><option value="IsiZulu-First-Additional-Language">IsiZulu First Additional Language</option>
+      <option value="IsiZulu-Home-Language">IsiZulu Home Language</option><option value="Sepedi-First-Additional-Language">Sepedi First Additional Language</option>
+      <option value="Sepedi-Home-Language">Sepedi Home Language</option><option value="Sesotho-First-Additional-Language">Sesotho First Additional Language</option>
+      <option value="Sesotho-Home-Language">Sesotho Home Language</option><option value="Setswana-First-Additional-Language">Setswana First Additional Language</option>
+      <option value="Setswana-Home-Language">Setswana Home Language</option><option value="SiSwati-First-Additional-Language">SiSwati First Additional Language</option>
+      <option value="SiSwati-Home-Language">SiSwati Home Language</option><option value="Tshivenda-First-Additional-Language">Tshivenda First Additional Language</option>
+      <option value="Tshivenda-Home-Language">Tshivenda Home Language</option><option value="Xitsonga-First-Additional-Language">Xitsonga First Additional Language</option>
+      <option value="Xitsonga-Home-Language">Xitsonga Home Language</option></select>
+  </div>
+
+ <div class="mt-5"  style="padding-top: 7px">
+      <select required="required" class="custom-select" style="width:93%; margin-left: 12px;" [(ngModel)]="perc1" >
+        <option value="" selected="selected"></option>
+  
+        <option *ngFor="let mar of marks">
+       {{mar.name}}
+     </option>
+     
+    </select>
+    </div>
+  
+    <div class="mt-3">
+      <label style="margin: 4%;" for="validationDefault04">Maths</label>
+      <select class="custom-select" id="validationDefault04" required  style="width:93%; margin-left: 12px;">
+        <option value="" selected="selected">*</option>
+        <option value="Mathematical-Literacy">Mathematical Literacy</option>
+        <option value="Mathematics">Mathematics</option></select>
+    </div>
+  
+    <div class="mt-5" style="padding-top: 7px">
+      <select required="required" class="custom-select" style="width:93%; margin-left: 12px;" [(ngModel)]="perc2" >
+        <option value="" selected="selected">Enter your Marks...</option>
+        <option *ngFor="let mar of marks">
+       {{mar.name}}
+     </option>
+     
+    </select>
+    </div>
+  
+    <div class="mt-3">
+      <label style="margin: 4%;" for="validationDefault04">Select a subject</label>
+  
+      <select class="custom-select" id="validationDefault04" required  style="width:93%; margin-left: 12px;">
+        <option value="" selected="selected">*</option>
+        <option value="ABRSM-Practical-Music-Grade-7">ABRSM Practical Music Grade 7</option>
+        <option value="Accounting">Accounting</option>
+        <option value="Afrikaans-Second-Additional-Language">Afrikaans Second Additional Language</option>
+        <option value="Agricultural-Management-Practices">Agricultural Management Practices</option>
+        <option value="Agricultural-Sciences">Agricultural Sciences</option>
+        <option value="Agricultural-Technology">Agricultural Technology</option>
+        <option value="Arabic-Second-Additional-Language">Arabic Second Additional Language</option>
+        <option value="Business-Studies">Business Studies</option>
+        <option value="Chinese-A-Level">Chinese A-Level</option>
+        <option value="Civil-Technology">Civil Technology</option>
+        <option value="Computer-Applications-Technology">Computer Applications Technology</option>
+        <option value="Consumer-Studies">Consumer Studies</option>
+        <option value="Dance-Studies">Dance Studies</option>
+        <option value="Design">Design</option>
+        <option value="Dramatic-Arts">Dramatic Arts</option>
+        <option value="Economics">Economics</option>
+        <option value="Electrical-Technology">Electrical Technology</option>
+        <option value="Engineering-Graphics-and-Design">Engineering Graphics and Design</option>
+        <option value="English-Second-Additional-Language">English Second Additional Language</option>
+        <option value="Equine-Studies">Equine Studies</option>
+        <option value="French-Second-Additional-Language">French Second Additional Language</option>
+        <option value="Geography">Geography</option>
+        <option value="German-Home-Language">German Home Language</option>
+        <option value="German-Second-Additional-Language">German Second Additional Language</option>
+        <option value="Gujarati-First-Additional-Language">Gujarati First Additional Language</option>
+        <option value="Gujarati-Second-Additional-Language">Gujarati Second Additional Language</option>
+        <option value="Hebrew-Second-Additional-Language">Hebrew Second Additional Language</option>
+        <option value="Hindi-First-Additional-Language">Hindi First Additional Language</option>
+        <option value="Hindi-Second-Additional-Language">Hindi Second Additional Language</option>
+        <option value="History">History</option>
+        <option value="Hospitality-Studies">Hospitality Studies</option>
+        <option value="Information-Technology">Information Technology</option>
+          <option value="IsiNdebele-Second-Additional-Language">IsiNdebele Second Additional Language</option>
+          <option value="IsiXhosa-Second-Additional-Language">IsiXhosa Second Additional Language</option>
+          <option value="IsiZulu-Second-Additional-Language">IsiZulu Second Additional Language</option>
+          <option value="Italian-Second-Additional-Language">Italian Second Additional Language</option>
+          <option value="Latin-Second-Additional-Language">Latin Second Additional Language</option>
+          <option value="Life-Sciences">Life Sciences</option>
+          <option value="Maritime-Economics">Maritime Economics</option>
+          <option value="Mechanical-Technology">Mechanical Technology</option>
+          <option value="Modern-Greek-Second-Additional-Language">Modern Greek Second Additional Language</option>
+          <option value="Music">Music</option><option value="Nautical-Science">Nautical Science</option>
+          <option value="Physical-Sciences">Physical Sciences</option>
+          <option value="Portuguese-Second-Additional-Language">Portuguese Second Additional Language</option>
+          <option value="Religion-Studies">Religion Studies</option>
+          <option value="Sepedi-Second-Additional-Language">Sepedi Second Additional Language</option>
+          <option value="Sesotho-Second-Additional-Language">Sesotho Second Additional Language</option>
+          <option value="Setswana-Second-Additional-Language">Setswana Second Additional Language</option>
+          <option value="Spanish-Second-Additional-Language">Spanish Second Additional Language</option>
+          <option value="Sport-and-Exercise-Science">Sport and Exercise Science</option>
+          <option value="Tamil-First-Additional-Language">Tamil First Additional Language</option>
+          <option value="Tamil-Second-Additional-Language">Tamil Second Additional Language</option>
+          <option value="TCL-Practical-Music-Grade-7">TCL Practical Music Grade 7</option>
+          <option value="Telegu-Second-Additional-Language">Telegu Second Additional Language</option>
+          <option value="Tourism">Tourism</option><option value="UNISA-Practical-Music-Grade-7">UNISA Practical Music Grade 7</option>
+          <option value="Urdu-First-Additional-Language">Urdu First Additional Language</option>
+          <option value="Urdu-Second-Additional-Language">Urdu Second Additional Language</option>
+          <option value="Visual-Arts">Visual Arts</option>
+          <option value="Xitsonga-Second-Additional-Language">Xitsonga Second Additional Language</option></select>
+    </div>
+  
+    <div class="mt-5" style="padding-top: 7px">
+      <select required="required" class="custom-select" style="width:93%; margin-left: 12px;" [(ngModel)]="perc3" >
+        <option value="" selected="selected">Enter your Marks...</option>
+        <option *ngFor="let mar of marks">
+       {{mar.name}}
+     </option>
+     
+    </select>
+    </div>
+  
+    <div class="mt-3">
+      <label style="margin: 4%;" for="validationDefault04">Select a subject</label>
+  
+      <select class="custom-select" id="validationDefault04" required  style="width:93%; margin-left: 12px;">
+        <option value="" selected="selected">*</option>
+        <option value="ABRSM-Practical-Music-Grade-7">ABRSM Practical Music Grade 7</option>
+        <option value="Accounting">Accounting</option>
+        <option value="Afrikaans-Second-Additional-Language">Afrikaans Second Additional Language</option>
+        <option value="Agricultural-Management-Practices">Agricultural Management Practices</option>
+        <option value="Agricultural-Sciences">Agricultural Sciences</option>
+        <option value="Agricultural-Technology">Agricultural Technology</option>
+        <option value="Arabic-Second-Additional-Language">Arabic Second Additional Language</option>
+        <option value="Business-Studies">Business Studies</option>
+        <option value="Chinese-A-Level">Chinese A-Level</option>
+        <option value="Civil-Technology">Civil Technology</option>
+        <option value="Computer-Applications-Technology">Computer Applications Technology</option>
+        <option value="Consumer-Studies">Consumer Studies</option>
+        <option value="Dance-Studies">Dance Studies</option>
+        <option value="Design">Design</option>
+        <option value="Dramatic-Arts">Dramatic Arts</option>
+        <option value="Economics">Economics</option>
+        <option value="Electrical-Technology">Electrical Technology</option>
+        <option value="Engineering-Graphics-and-Design">Engineering Graphics and Design</option>
+        <option value="English-Second-Additional-Language">English Second Additional Language</option>
+        <option value="Equine-Studies">Equine Studies</option>
+        <option value="French-Second-Additional-Language">French Second Additional Language</option>
+        <option value="Geography">Geography</option>
+        <option value="German-Home-Language">German Home Language</option>
+        <option value="German-Second-Additional-Language">German Second Additional Language</option>
+        <option value="Gujarati-First-Additional-Language">Gujarati First Additional Language</option>
+        <option value="Gujarati-Second-Additional-Language">Gujarati Second Additional Language</option>
+        <option value="Hebrew-Second-Additional-Language">Hebrew Second Additional Language</option>
+        <option value="Hindi-First-Additional-Language">Hindi First Additional Language</option>
+        <option value="Hindi-Second-Additional-Language">Hindi Second Additional Language</option>
+        <option value="History">History</option>
+        <option value="Hospitality-Studies">Hospitality Studies</option>
+        <option value="Information-Technology">Information Technology</option>
+          <option value="IsiNdebele-Second-Additional-Language">IsiNdebele Second Additional Language</option>
+          <option value="IsiXhosa-Second-Additional-Language">IsiXhosa Second Additional Language</option>
+          <option value="IsiZulu-Second-Additional-Language">IsiZulu Second Additional Language</option>
+          <option value="Italian-Second-Additional-Language">Italian Second Additional Language</option>
+          <option value="Latin-Second-Additional-Language">Latin Second Additional Language</option>
+          <option value="Life-Sciences">Life Sciences</option>
+          <option value="Maritime-Economics">Maritime Economics</option>
+          <option value="Mechanical-Technology">Mechanical Technology</option>
+          <option value="Modern-Greek-Second-Additional-Language">Modern Greek Second Additional Language</option>
+          <option value="Music">Music</option><option value="Nautical-Science">Nautical Science</option>
+          <option value="Physical-Sciences">Physical Sciences</option>
+          <option value="Portuguese-Second-Additional-Language">Portuguese Second Additional Language</option>
+          <option value="Religion-Studies">Religion Studies</option>
+          <option value="Sepedi-Second-Additional-Language">Sepedi Second Additional Language</option>
+          <option value="Sesotho-Second-Additional-Language">Sesotho Second Additional Language</option>
+          <option value="Setswana-Second-Additional-Language">Setswana Second Additional Language</option>
+          <option value="Spanish-Second-Additional-Language">Spanish Second Additional Language</option>
+          <option value="Sport-and-Exercise-Science">Sport and Exercise Science</option>
+          <option value="Tamil-First-Additional-Language">Tamil First Additional Language</option>
+          <option value="Tamil-Second-Additional-Language">Tamil Second Additional Language</option>
+          <option value="TCL-Practical-Music-Grade-7">TCL Practical Music Grade 7</option>
+          <option value="Telegu-Second-Additional-Language">Telegu Second Additional Language</option>
+          <option value="Tourism">Tourism</option><option value="UNISA-Practical-Music-Grade-7">UNISA Practical Music Grade 7</option>
+          <option value="Urdu-First-Additional-Language">Urdu First Additional Language</option>
+          <option value="Urdu-Second-Additional-Language">Urdu Second Additional Language</option>
+          <option value="Visual-Arts">Visual Arts</option>
+          <option value="Xitsonga-Second-Additional-Language">Xitsonga Second Additional Language</option></select>
+    </div>
+  
+  
+    <div class="mt-5" style="padding-top: 7px">
+      <select required="required" class="custom-select" style="width:93%; margin-left: 12px;"  [(ngModel)]="perc4">
+        <option value="" selected="selected">Enter your Marks...</option>
+        <option *ngFor="let mar of marks">
+       {{mar.name}}
+     </option>
+     
+    </select>
+    </div>
+  
+    <div class="mt-3">
+      <label style="margin: 4%;" for="validationDefault04">Select a subject...</label>
+  
+      <select class="custom-select" id="validationDefault04" required  style="width:93%; margin-left: 12px;">
+        <option value="" selected="selected">*</option>
+        <option value="ABRSM-Practical-Music-Grade-7">ABRSM Practical Music Grade 7</option>
+        <option value="Accounting">Accounting</option>
+        <option value="Afrikaans-Second-Additional-Language">Afrikaans Second Additional Language</option>
+        <option value="Agricultural-Management-Practices">Agricultural Management Practices</option>
+        <option value="Agricultural-Sciences">Agricultural Sciences</option>
+        <option value="Agricultural-Technology">Agricultural Technology</option>
+        <option value="Arabic-Second-Additional-Language">Arabic Second Additional Language</option>
+        <option value="Business-Studies">Business Studies</option>
+        <option value="Chinese-A-Level">Chinese A-Level</option>
+        <option value="Civil-Technology">Civil Technology</option>
+        <option value="Computer-Applications-Technology">Computer Applications Technology</option>
+        <option value="Consumer-Studies">Consumer Studies</option>
+        <option value="Dance-Studies">Dance Studies</option>
+        <option value="Design">Design</option>
+        <option value="Dramatic-Arts">Dramatic Arts</option>
+        <option value="Economics">Economics</option>
+        <option value="Electrical-Technology">Electrical Technology</option>
+        <option value="Engineering-Graphics-and-Design">Engineering Graphics and Design</option>
+        <option value="English-Second-Additional-Language">English Second Additional Language</option>
+        <option value="Equine-Studies">Equine Studies</option>
+        <option value="French-Second-Additional-Language">French Second Additional Language</option>
+        <option value="Geography">Geography</option>
+        <option value="German-Home-Language">German Home Language</option>
+        <option value="German-Second-Additional-Language">German Second Additional Language</option>
+        <option value="Gujarati-First-Additional-Language">Gujarati First Additional Language</option>
+        <option value="Gujarati-Second-Additional-Language">Gujarati Second Additional Language</option>
+        <option value="Hebrew-Second-Additional-Language">Hebrew Second Additional Language</option>
+        <option value="Hindi-First-Additional-Language">Hindi First Additional Language</option>
+        <option value="Hindi-Second-Additional-Language">Hindi Second Additional Language</option>
+        <option value="History">History</option>
+        <option value="Hospitality-Studies">Hospitality Studies</option>
+        <option value="Information-Technology">Information Technology</option>
+          <option value="IsiNdebele-Second-Additional-Language">IsiNdebele Second Additional Language</option>
+          <option value="IsiXhosa-Second-Additional-Language">IsiXhosa Second Additional Language</option>
+          <option value="IsiZulu-Second-Additional-Language">IsiZulu Second Additional Language</option>
+          <option value="Italian-Second-Additional-Language">Italian Second Additional Language</option>
+          <option value="Latin-Second-Additional-Language">Latin Second Additional Language</option>
+          <option value="Life-Sciences">Life Sciences</option>
+          <option value="Maritime-Economics">Maritime Economics</option>
+          <option value="Mechanical-Technology">Mechanical Technology</option>
+          <option value="Modern-Greek-Second-Additional-Language">Modern Greek Second Additional Language</option>
+          <option value="Music">Music</option><option value="Nautical-Science">Nautical Science</option>
+          <option value="Physical-Sciences">Physical Sciences</option>
+          <option value="Portuguese-Second-Additional-Language">Portuguese Second Additional Language</option>
+          <option value="Religion-Studies">Religion Studies</option>
+          <option value="Sepedi-Second-Additional-Language">Sepedi Second Additional Language</option>
+          <option value="Sesotho-Second-Additional-Language">Sesotho Second Additional Language</option>
+          <option value="Setswana-Second-Additional-Language">Setswana Second Additional Language</option>
+          <option value="Spanish-Second-Additional-Language">Spanish Second Additional Language</option>
+          <option value="Sport-and-Exercise-Science">Sport and Exercise Science</option>
+          <option value="Tamil-First-Additional-Language">Tamil First Additional Language</option>
+          <option value="Tamil-Second-Additional-Language">Tamil Second Additional Language</option>
+          <option value="TCL-Practical-Music-Grade-7">TCL Practical Music Grade 7</option>
+          <option value="Telegu-Second-Additional-Language">Telegu Second Additional Language</option>
+          <option value="Tourism">Tourism</option>
+          <option value="UNISA-Practical-Music-Grade-7">UNISA Practical Music Grade 7</option>
+          <option value="Urdu-First-Additional-Language">Urdu First Additional Language</option>
+          <option value="Urdu-Second-Additional-Language">Urdu Second Additional Language</option>
+          <option value="Visual-Arts">Visual Arts</option>
+          <option value="Xitsonga-Second-Additional-Language">Xitsonga Second Additional Language</option></select>
+    </div>
+  
+    <div class="mt-5" style="padding-top: 7px">
+      <select required="required" class="custom-select" style="width:93%; margin-left: 12px;" [(ngModel)]="perc5" >
+        <option value="" selected="true">Enter your Marks...</option>
+        <option *ngFor="let mar of marks">
+       {{mar.name}}
+     </option>
+    </select>
+    </div>
+
+
+
+<div class="submit">
+  <ion-button  (click)="calculate()">
+    Calculate
+  </ion-button>
+</div>
+<br>
+ <ion-label>
+    Aps Score: {{sum}}
+  </ion-label>
+
+
+</div>
+
+
+
+  </ion-list>
+</ion-content>
    
-</ion-list>
- 
- 
- <ion-label style="margin-left: 100px;">
-   Aps Score: {{sum}}
- </ion-label>
 
- <ion-button style="width:40%; margin-left: 100px;"  (click)="calculate()">
-   Calcuate
- </ion-button>
+
+
+ 
+
+ 
+
+  
+
+
+
