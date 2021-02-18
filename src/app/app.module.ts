@@ -13,11 +13,13 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { InstitutionListPipe } from './institution-list.pipe';
+import { InstitutionsPipe } from './institutions.pipe';
 
 @NgModule({
 
   
-  declarations: [AppComponent],
+  declarations: [AppComponent, InstitutionListPipe, InstitutionsPipe],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireAuthModule,
    AngularFireModule.initializeApp(environment.firebaseConfig), AngularFirestoreModule, AngularFireAuthModule],

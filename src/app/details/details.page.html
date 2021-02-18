@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<!--<ion-content>
   <ion-card>
     
 <img src={{showdata.img}}>
@@ -19,6 +19,45 @@
 <u><h5>Qualification:</h5></u> <br> {{showdata.Field}} {{ showdata.QualificationType }} <br>
 <u><h5>Location:</h5></u> <br> {{showdata.City}} <br>
 <u><h3>About Institution: </h3></u><br> {{showdata.description}}
+</ion-card>
+
+</ion-content> -->
+
+
+<ion-content>
+  <ion-card >
+    <img src="../../assets/Boston.jpg">
+    <ion-card-content>
+      <ion-card-title>
+        {{ showdata.institution }}
+      </ion-card-title>
+      <p>
+{{ showdata.description }}      </p>
+    </ion-card-content>
+    
+
+
+<a><ion-button style="padding: 5px;">Apply</ion-button></a> 
+<ion-button  style="margin-left: 8%; padding: 5px;">Contact</ion-button>
+
+<!--{{ showdata.qualification }}
+{{ showdata.years }}
+{{ showdata.location }}
+{{ showdata.description }}
+
+<u><h3>Institution Name:</h3></u>
+<h5>{{ showdata.institution }}</h5>
+
+<u><h5>Qualification:</h5></u>
+{{ showdata.qualification }}
+
+
+<u><h5>Duration:</h5></u> <br>  <br>
+
+<u><h5>Location:</h5></u> <br>  <br>
+
+<u><h3>About Institution: </h3></u><br> -->
+
 </ion-card>
 
 </ion-content>

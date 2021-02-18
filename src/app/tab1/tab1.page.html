@@ -15,63 +15,69 @@
   </p>  
   
   </div>
-  
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullFactor="0.5" pullMin="100" ></ion-refresher-content>
-  </ion-refresher>
+
   
     
-      <ion-searchbar placeholder="Enter Your APS Score"  (ionInput)="filterData($event)"></ion-searchbar>
- 
-      <div *ngIf="showUniversities">
+
+      <!--
+<div *ngIf="showUniversities">
+           <ion-list>
+                <ion-item *ngFor="let university of items; let index=index">
+                          Institution: {{university.institution}}
+                          <br>
+                          Aps Score: {{university.aps}}
+                          <br>
+                          Years: {{university.years}}
+                          <br>
+                          Location: {{university.location}}
+                          <br>
+                          Qualification Type: {{university.qualification}}
+                 </ion-item> 
+              </ion-list>
+         </div>
+
+      -->  
 
 
-     <ion-list>
-  
-  <ion-item *ngFor="let university of items; let index=index">
-   Institution: {{university.institution}}
-  <br>
-  Aps Score: {{university.aps}}
-  <br>
-  Years: {{university.years}}
-  <br>
-  Location: {{university.location}}
-  <br>
-  Qualification Type: {{university.qualification}}
-  
+           <div style="margin-top: 20px;">
+            <ion-item lines="full">
+              <ion-label position="floating" >Search Aps</ion-label>
+              <ion-input type="text" required [(ngModel)]="aps"></ion-input>
+            </ion-item>
+                              <label style="margin: 4%;" for="validationDefault04">Choose Location</label>
+                            <select [(ngModel)]="location" class="custom-select" id="validationDefault04" required   style="width:93%; margin-left: 12px;" >
+                              <option selected disabled value="">Choose Location</option>
+                              <option>Kimberley</option>
+                              <option>Mahikeng</option>
+                              <option>Johhanesburg</option>
+                              <option>Bloemfontein</option>
+                              <option>De Aar</option>
+                              <option>vredendal</option>
+                              <option>Pretoria</option>
+                            </select>
+                        
 
-     </ion-item> 
-
- 
-
- </ion-list>
-   </div>
-
-   <div style="margin-top: 20px;">
-
-        <label style="margin: 4%;" for="validationDefault04">Choose Location</label>
-      <select class="custom-select" id="validationDefault04" required   style="width:93%; margin-left: 12px;" >
-        <option selected disabled value="">Cape Town</option>
-        <option>Kimberley</option>
-        <option>Mahikeng</option>
-        <option>Johhanesburg</option>
-      </select>
-   
-
-   
-      <label style="margin: 4%;" for="validationDefault04">Preffered Field of study</label>
-      <select class="custom-select" id="validationDefault04" required  style="width:93%; margin-left: 12px;">
-        <option selected disabled value="">Engineering</option>
-        <option>Techonology and Science</option>
-        <option>Business studies</option>
-       
-      </select>
-    </div>
-  <br>
-    <div class="btnButtons">
-    <ion-button (click)="submit(this.Universities)" (ionInput)="filterData($event)"  type="button">Submit</ion-button>
-  
-  </div>
+                        
+                            <label style="margin: 4%;" for="validationDefault04">Preffered Field of study</label>
+                            <select [(ngModel)]="field" class="custom-select" id="validationDefault04" required  style="width:93%; margin-left: 12px;">
+                              <option selected disabled value="">Choose Field of study</option>
+                              <option>Teaching</option>
+                              <option>Engineering</option>
+                              <option>Financial management</option>
+                              <option>Business Management</option>
+                              <option>Criminal justice</option>
+                              <option>Retailing</option>
+                              <option>Tourism</option>
+                              <option>Management</option>
+                              <option>Software Development</option>
+                            
+                            </select>
+                          </div>
+                        <br>
+                  <div class="btnButtons">
+              <ion-button (click)="submit()"  type="button" >Submit</ion-button>
+                        
+          </div>
   
   
   
