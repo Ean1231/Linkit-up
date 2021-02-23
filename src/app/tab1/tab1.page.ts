@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Aps } from './aps';
+// import { Aps } from './aps';
 import { Router } from '@angular/router';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
+// import { AngularFirestore} from '@angular/fire/firestore';
+// import { Observable } from 'rxjs';
 import {ServiceService} from '../service.service';
 
 
