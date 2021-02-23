@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AngularFireAuth} from 'angularfire2/auth' ;
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -12,29 +12,29 @@ export class AuthService {
 
   Login(email , password) {
 
-    return new Promise ((resolve, reject)=>{
+    return new Promise((resolve, reject)=>{
+      this.auth.signInWithEmailAndPassword(email, password).then(()=>{
+        resolve('')
 
-      this.auth.auth.signInWithEmailAndPassword(email, password).then(() => {
-        resolve()
-     
-      }).catch((error) => {
-      reject(error)
+      }).catch((err)=>{
+        reject(err)
+
       })
     })
-   
+
   }
 
 
  
   SignUp(email , password){
     
-    return new Promise ((resolve, reject)=>{
+    return new Promise((resolve, reject)=>{
+      this.auth.createUserWithEmailAndPassword(email, password).then(()=>{
+        resolve('')
 
-      this.auth.auth.createUserWithEmailAndPassword(email, password).then(() => {
-        resolve()
-     
-      }).catch((error) => {
-      reject(error)
+      }).catch((err)=>{
+        reject(err)
+
       })
     })
    

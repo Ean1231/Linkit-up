@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
 
 
+import { AngularFirestore} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,10 @@ import { AngularFirestore } from 'angularfire2/firestore';
 export class ServiceService {
 listUniversities = [];
 listopportuniites = []
-  constructor( public firestore:AngularFirestore) { }
+  constructor( public firestore:AngularFirestore) { 
+
+  
+  }
 
 
   getVarsities(){
