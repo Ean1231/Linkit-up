@@ -10,15 +10,19 @@ import { ServiceService } from '../service.service';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  opportunities = []
 
   constructor(private firestore: AngularFirestore,private service: ServiceService)
  {
 
-  service.getOpportunities().then((res)=>{
-    console.log(res)
+  this.service.getOpportunities().then((items:any)=>{
+    console.log(items);
+     this.opportunities = items;
   })
    
  }
+
+ 
 
   
 

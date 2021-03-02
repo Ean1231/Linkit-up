@@ -2,67 +2,51 @@
   <ion-toolbar>
     <!-- <img src="../assets/L.png" style="height: 50px"/> -->
     <div style="text-align: center;">
-    <ion-title> News Feeds</ion-title>
+      <ion-title> News Feeds</ion-title>
     </div>
   </ion-toolbar>
 </ion-header>
 
 <div style="text-align: center; margin-top: 30px; font-family: cursive; ">
   <p>
-    The latest News and updates on Busaries,university aplliactions and Career Development expos and events. 
-  </p>  
-  
-  </div>
-<ion-content >
+    The latest News and updates on Busaries,university aplliactions and Career Development expos and events.
+  </p>
+
+</div>
+<ion-content>
   <ion-list>
-<ion-card >
-    <img src="../../assets/CareerWorkshops.jpg"/>
-    <ion-card-content>
-      <ion-card-title>
-        Busary Applications now open
-        </ion-card-title>
-      <p>
-        The National Student Financial Aid Scheme (NSFAS) is now encouraging youngsters
-         to apply for the academic year ahead...
-        </p>
-        <ion-button color="tertiary">Apply</ion-button>
-        <ion-button color="tertiary"><ion-icon name="share-social-outline"></ion-icon></ion-button>
-      
-
-    </ion-card-content>
-
-  </ion-card>
 
 
-
-  <ion-card>
-    <img src="../../assets/careerExpo.jpg"/>
-    <ion-card-content>
-      <ion-card-title>
-        Career opportunity
+    <ion-card *ngFor='let opportunity of opportunities'>
+      <img src="../../assets/CareerWorkshops.jpg" />
+      <ion-card-content>
+        <ion-card-title>
+          {{opportunity.title}}
         </ion-card-title>
         <p>
-          Full Stack Developer,permanant position read more...
+          {{opportunity.description}}
         </p>
-        <ion-button color="tertiary">Apply</ion-button>
-        <ion-button color="tertiary" slot="end"><ion-icon name="share-social-outline"></ion-icon></ion-button>
-    </ion-card-content>
-  </ion-card>
+        Type of Opportunity: {{opportunity.type}} <br>
 
 
+        <div *ngIf="opportunity.type == 'Bursaries' ; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
 
-  <ion-card>
-    <img src="../../assets/CareerWorkshops.jpg"/>
-    <ion-card-content>
-      <ion-card-title>
-        Career Expo
-        </ion-card-title>
-        <p>
-          for a list of all the companies who will be attending prior to the event, and prioritize the ones you want to approach...
-        </p>
-        <ion-button color="tertiary">Book</ion-button>
-        <ion-button color="tertiary"><ion-icon name="share-social-outline"></ion-icon></ion-button>
-    </ion-card-content>
-  </ion-card>
-</ion-list>
-</ion-content>
+         
+          <ion-button color="tertiary">Apply</ion-button>
+
+
+        </ng-template>
+        <ng-template #elseBlock>
+
+          <ion-button color="tertiary">Book</ion-button>
+        </ng-template>
+       
+        <ion-button color="tertiary">
+          <ion-icon name="share-social-outline"></ion-icon>
+        </ion-button>
+
+
+      </ion-card-content>
+
+    </ion-card>
