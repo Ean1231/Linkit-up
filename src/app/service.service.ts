@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 
 import { AngularFirestore} from '@angular/fire/firestore';
+import { RegistrationPage } from './registration/registration.page';
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +25,10 @@ listopportuniites = []
         res(this.listUniversities) ;
         })
 
-    })
-
-    
-    
+    })   
 
   }
+  
 
   getOpportunities(){
     return new Promise((res, rej)=>{

@@ -3,27 +3,45 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <div style="float: right; margin-top: 20px;">
     <ion-title>Log In</ion-title>
+    </div>    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form>
+  <div style="margin-top: 120px; margin-left: 100px;">
+    <img src="../assets/L.png" style="height: 100px"/>
+    
+  </div>
+  
+  <b>
+      <p style="text-align: center;">Linking you to your future</p>
+    </b>
+
+  <br>
+  
     <ion-item lines="full">
+      <ion-icon slot="start" name="mail-outline"></ion-icon>
       <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" required></ion-input>
+      <ion-input type="text" required [(ngModel)]="email"></ion-input>
     </ion-item>
 
     <ion-item lines="full">
+      <ion-icon slot="start" name="keypad-outline"></ion-icon> 
       <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" required></ion-input>
+      <ion-input type="password" required [(ngModel)]="password"></ion-input>
     </ion-item>
 
     <ion-row>
       <ion-col>
-        <ion-button [routerLink]="['/tabs']" type="submit" color="danger" expand="block">Sign In</ion-button>
-        <a [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a>
+        <ion-button color="tertiary" type="submit" expand="block" (click)= "login()" style="margin-bottom: 10px;">Sign In</ion-button>
+        <a style="margin-right: 40px; margin-left: 4px;" [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a>
+       
+        <a [routerLink]="['/registration']" class="small-text">Don't have an account?</a>
       </ion-col>
+
+      
     </ion-row>
-  </form>
+  
 </ion-content>
