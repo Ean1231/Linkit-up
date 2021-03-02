@@ -20,6 +20,7 @@ export class Tab1Page {
 
   
 varsities = [] ;
+
   constructor(public router: Router, public service :ServiceService)
   {
     this.service.getVarsities().then((items:any)=>{
