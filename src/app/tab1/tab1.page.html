@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar >
     <!-- <ion-back-button></ion-back-button> -->
     <!-- <img src="../assets/L.png" style="height: 50px"/> -->
     <div style="text-align: center;">
@@ -40,11 +40,11 @@
 
 
            <div style="margin-top: 20px;">
-            <ion-item lines="full">
-              <ion-label position="floating" >Search Aps</ion-label>
+            <ion-item style="margin-left: 40px; margin-right: 40px; border-radius: 30px;">
+              <ion-label>Search Aps: </ion-label>
               <ion-input type="text" required [(ngModel)]="aps"></ion-input>
             </ion-item>
-                              <label style="margin: 4%;" for="validationDefault04">Choose Location</label>
+                            <label style="margin: 4%;" for="validationDefault04">Choose Location</label>
                             <select [(ngModel)]="location" class="custom-select" id="validationDefault04" required   style="width:93%; margin-left: 12px;" >
                               <option selected disabled value="">Choose Location</option>
                               <option>Kimberley</option>
