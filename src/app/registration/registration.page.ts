@@ -9,7 +9,7 @@ import { AuthService} from "../auth.service"
   templateUrl: './registration.page.html',
   styleUrls: ['./registration.page.scss'],
 })
-export class RegistrationPage{
+export class RegistrationPage implements OnInit{
 
   log(x)
   {
@@ -39,6 +39,16 @@ ngOnInit()
 {
     
 }
+
+ SignUp(){
+    this.auth.SignUp(this.email,this.password).then(()=>{
+      this.router.navigateByUrl('/tabs')
+
+    }).catch((error)=>{
+      alert(error)
+      
+    })
+  }
 
 
 

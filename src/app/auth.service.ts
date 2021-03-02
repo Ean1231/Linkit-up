@@ -40,6 +40,14 @@ export class AuthService {
    
   }
 
+  forgotPassword(email)
+  {
+    this.auth.sendPasswordResetEmail(email).then(()=>{
+
+    })
+  }
+
+ 
 
   }
 

@@ -1,7 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <!-- <ion-back-button></ion-back-button> -->
-    <!-- <img src="../assets/L.png" style="height: 50px"/> -->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <div style="float: right; margin-top: 20px;">
       <ion-title>Sign-up</ion-title>
     </div>
@@ -10,16 +11,20 @@
 </ion-header>
 
 <ion-content>
-  <div style="margin-top: 120px; margin-left: 100px;">
+  <div style="margin-top: 90px; margin-left: 100px;">
     <img src="../assets/L.png" style="height: 100px"/>
+   
   </div>
- 
+
+  <b>
+      <p style="text-align: center;">Linking you to your future</p>
+    </b>
   
- <form [formGroup] = "registrationForm" (ngSubmit)="submit()" style="margin-top: 160px;">
+ <form [formGroup] = "registrationForm" (ngSubmit)="submit()" style="margin-top: 80px;">
    <ion-list>
      <ion-item>
        <ion-label position="floating">Name</ion-label>
-       <ion-input formControlName="name" autocapitalize inputmode="text"></ion-input>
+       <ion-input formControlName="name" required [(ngModel)]="name" autocapitalize inputmode="text"></ion-input>
        <ion-icon slot="start" name="people-outline"></ion-icon>
        
        </ion-item>
@@ -36,7 +41,7 @@
 
        <ion-item>
         <ion-label position="floating">Surname</ion-label>
-        <ion-input formControlName="surname" autocapitalize inputmode="text"></ion-input>
+        <ion-input formControlName="surname" required [(ngModel)]="surname" autocapitalize inputmode="text"></ion-input>
         <ion-icon slot="start" name="people-outline"></ion-icon> 
         
       </ion-item>
@@ -52,7 +57,7 @@
 
         <ion-item>
           <ion-label position="floating">Email</ion-label>
-          <ion-input formControlName="email" autocapitalize inputmode="email"></ion-input>
+          <ion-input formControlName="email" required [(ngModel)]="email" autocapitalize inputmode="email"></ion-input>
           <ion-icon slot="start" name="mail-outline"></ion-icon> 
         </ion-item>
           <!-- <div *ngFor="let error of messages.email">
@@ -67,7 +72,7 @@
 
           <ion-item>
             <ion-label position="floating">Password</ion-label>
-            <ion-input formControlName="password" autocapitalize inputmode="password"></ion-input>
+            <ion-input formControlName="password" required [(ngModel)]="password" autocapitalize inputmode="password"></ion-input>
             <ion-icon slot="start" name="keypad-outline"></ion-icon> 
           </ion-item>
             <!-- <div *ngFor="let error of messages.password">
@@ -83,7 +88,7 @@
 
             <ion-item>
               <ion-label position="floating">Confirm Password</ion-label>
-              <ion-input formControlName="confirmPassword" autocapitalize inputmode="confirmPassword"></ion-input>
+              <ion-input formControlName="confirmPassword" required [(ngModel)]="confirmPassword" autocapitalize inputmode="confirmPassword"></ion-input>
               <ion-icon slot="start" name="keypad-outline"></ion-icon>  
             </ion-item>
               <!-- <div *ngFor="let error of messages.confirmPassword">
@@ -94,8 +99,8 @@
                 </ng-container>
               </div> -->
 
-              <ion-button [routerLink]="['/tabs']" type="submit" expand="block">
-                Submit
+              <ion-button color="tertiary" (click)= "Sign-up()" type="submit" expand="block">
+                Sign-up
                 <ion-icon slot="start" name="create"></ion-icon>
               </ion-button>
    </ion-list>

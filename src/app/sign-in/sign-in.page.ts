@@ -9,6 +9,10 @@ import { AuthService} from "../auth.service"
 })
 export class SignInPage implements OnInit {
 
+  email;
+  password;
+
+
   constructor(  public router: Router, public auth:AuthService)
   {
 
@@ -16,6 +20,18 @@ export class SignInPage implements OnInit {
 
 
   ngOnInit() {
+
+  }
+
+
+  login(){
+    this.auth.Login(this.email, this.password).then(()=>{
+      this.router.navigateByUrl('/tabs')
+
+    }).catch((error)=>{
+      alert(error)
+      
+    }) 
   }
 
 }

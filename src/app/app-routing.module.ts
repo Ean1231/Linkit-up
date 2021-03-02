@@ -27,7 +27,7 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: '',
+    path: 'registration',
     loadChildren: () => import('./registration/registration.module').then( m => m.RegistrationPageModule)
   },
   {
@@ -35,12 +35,17 @@ const routes: Routes = [
     loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
   {
-    path: 'sign-in',
+    path: '',
     loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule)
-  },  {
+  },
+  {
     path: 'institutions',
     loadChildren: () => import('./institutions/institutions.module').then( m => m.InstitutionsPageModule)
+  },  {
+    path: 'ap-score',
+    loadChildren: () => import('./ap-score/ap-score.module').then( m => m.ApScorePageModule)
   },
+
 
 
 
