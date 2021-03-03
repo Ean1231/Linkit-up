@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AngularFirestore} from '@angular/fire/firestore';
 // import { Observable } from 'rxjs';
 import { ServiceService } from '../service.service';
+import { LoadingController } from "@ionic/angular";
+
 
 
 @Component({
@@ -10,15 +12,32 @@ import { ServiceService } from '../service.service';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  opportunities = []
 
-  constructor(private firestore: AngularFirestore,private service: ServiceService)
+  constructor(private firestore: AngularFirestore,private service: ServiceService,  public load: LoadingController)
  {
-
-  service.getOpportunities().then((res)=>{
-    console.log(res)
+  this.presentLoadingWithOptions();
+  this.service.getOpportunities().then((items:any)=>{
+    console.log(items);
+     this.opportunities = items;
   })
    
  }
+ async presentLoadingWithOptions() {
+  const loading = await this.load.create({
+    spinner: "circles",
+    duration: 1000,
+    message: "Please wait",
+    translucent: true,
+    cssClass: "custom-class custom-loading",
+    backdropDismiss: true,
+  });
+  await loading.present();
+
+  const { role, data } = await loading.onDidDismiss();
+  console.log("Loading dismissed with role:", role);
+}
+ 
 
   
 

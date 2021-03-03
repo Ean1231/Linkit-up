@@ -15,7 +15,7 @@ export class InstitutionsPage implements OnInit {
   constructor( public service: ServiceService, public router: Router) { 
 
     this.service.getVarsities().then((items:any)=>{
-      console.log(items);
+     // console.log(items);
       this.varsities = items;
 
     });

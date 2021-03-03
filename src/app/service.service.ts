@@ -35,7 +35,7 @@ listopportuniites = []
       this.firestore.collection('timeline').valueChanges().subscribe((items: any) => {
         this.listopportuniites = items;
         //console.log(items)
-        res(this.listUniversities) ;
+        res(this.listopportuniites) ;
         })
 
     })
