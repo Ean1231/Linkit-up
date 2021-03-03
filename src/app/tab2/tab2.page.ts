@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonInfiniteScroll, Platform } from '@ionic/angular';
@@ -11,7 +12,7 @@ import { IonInfiniteScroll, Platform } from '@ionic/angular';
 export class Tab2Page {
 @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   
-  perc;
+   perc;
   perc1;
   perc2;
   perc3;
@@ -181,7 +182,8 @@ export class Tab2Page {
 
   constructor( private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar)
+    private statusBar: StatusBar, 
+    public router: Router)
   {
     this.initializeApp();   
 
@@ -438,5 +440,9 @@ export class Tab2Page {
     
   }
  
+  Navigate(){
+    this.router.navigateByUrl('/ap-score') ;
   
+  }
+ 
 }
