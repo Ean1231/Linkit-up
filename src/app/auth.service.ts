@@ -42,9 +42,19 @@ export class AuthService {
 
   forgotPassword(email)
   {
-    this.auth.sendPasswordResetEmail(email).then(()=>{
+
+    return new Promise((resolve , reject)=>{
+      this.auth.sendPasswordResetEmail(email).then(()=>{
+        resolve("Success")
+
+
+      }).catch((err)=>{
+        reject(err)
+      })
 
     })
+    
+    
   }
 
  

@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { ServiceService } from '../service.service';
+import { AuthService} from "../auth.service"
 
 @Component({
   selector: 'app-forgot-password',
@@ -9,35 +10,20 @@ import { ServiceService } from '../service.service';
 })
 export class ForgotPasswordPage  {
 
-  constructor(private service: ServiceService,  public load: LoadingController )
+  constructor(private auth:  AuthService ,  public load: LoadingController )
   {
-  //   this.presentLoadingWithOptions();
-  // this.service.getOpportunities().then((items:any)=>{
-  //   console.log(items);
-  //    this.load = items;
-  // }
-
+  
   }
 
 
-// async presentLoadingWithOptions() {
-//  const loading = await this.load.create({
-//    spinner: "circles",
-//    duration: 1000,
-//    message: "Please wait",
-//    translucent: true,
-//    cssClass: "custom-class custom-loading",
-//    backdropDismiss: true,
-//  });
-//  await loading.present();
+  forgotPassword(){
+    this.auth.forgotPassword("kabelo@mlab.co.za").then(()=>{
+      console.log("Check your email , to  confirm")
 
-//  const { role, data } = await loading.onDidDismiss();
-//  console.log("Loading dismissed with role:", role);
-// }
+    })
 
+  }
   
-  // ngOnInit() {
-  // }
-
+  
 }
 
