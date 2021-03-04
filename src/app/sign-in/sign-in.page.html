@@ -21,22 +21,20 @@
 
   <br>
   
-    <ion-item lines="full">
+    <ion-item style="margin-left: 30px; margin-right: 30px;">
       <ion-icon slot="start" name="mail-outline"></ion-icon>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" required [(ngModel)]="email"></ion-input>
+      <ion-input placeholder="Email" type="text" required [(ngModel)]="email"></ion-input>
     </ion-item>
 
-    <ion-item lines="full">
-      <ion-icon slot="start" name="keypad-outline"></ion-icon> 
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" required [(ngModel)]="password"></ion-input>
+    <ion-item style="margin-left: 30px; margin-right: 30px;">
+      <ion-icon slot="start" name="keypad-outline"></ion-icon>
+      <ion-input placeholder="Password" type="password" required [(ngModel)]="password"></ion-input>
     </ion-item>
 
     <ion-row>
       <ion-col>
-        <ion-button color="tertiary" type="submit" expand="block" (click)= "login()" style="margin-bottom: 10px;">Sign In</ion-button>
-        <a style="margin-right: 40px; margin-left: 4px;" [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a>
+        <ion-button color="tertiary" type="submit" expand="block" (click)= "login()" style="margin-top: 30px; margin-left: 20px;  margin-right: 20px; margin-bottom: 10px">Sign In</ion-button>
+        <a style="margin-right: 18px; margin-left: 20px;" [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a>
        
         <a [routerLink]="['/registration']" class="small-text">Don't have an account?</a>
       </ion-col>
