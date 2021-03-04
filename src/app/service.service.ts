@@ -16,6 +16,7 @@ listopportuniites = []
   }
 
 
+
   getVarsities(){
 
     return new Promise((res, rej)=>{
@@ -37,8 +38,9 @@ listopportuniites = []
         //console.log(items)
         res(this.listopportuniites) ;
         })
-
     })
-
   }
+
+
+  
 }
