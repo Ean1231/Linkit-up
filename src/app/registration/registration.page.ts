@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { AuthService} from "../auth.service"
 
@@ -10,9 +11,13 @@ import { AuthService} from "../auth.service"
   styleUrls: ['./registration.page.scss'],
 })
 export class RegistrationPage implements OnInit{
+  showmessage
+  name
+  surname
+  email
+  confirmPassword
 
-
- constructor( public router: Router, public auth:AuthService)
+ constructor( public router: Router, public auth:AuthService, private firestore: AngularFirestore)
   {
 
   }
@@ -24,19 +29,30 @@ ngOnInit()
     
 }
 
- SignUp(){
 
+
+SignUp(email, password, name, surname, confirmPassword){
+  let id = this.firestore.createId();
+  this.firestore.collection('users').doc(id).set({
+  name: name,
+  surname: surname,
+  email: email,
+  password:password,
+  confirmPassword:confirmPassword
   
-    this.auth.SignUp("Kabelo@mlab.co.za"  ,"123456").then(()=>{
-      this.router.navigateByUrl('/tabs')
-    }).catch((error)=>{
-      alert(error)
-      
-    })
-  }
-
-
-
+  }).then(()=>{
+  this.auth.SignUp(email, password )
+  this.showmessage = true
+  setTimeout(()=> this.showmessage = false, 3000);
+  this.name = '';
+  this.surname = '';
+  this.email = '';
+  this.router.navigateByUrl('/tabs')
+  }).catch((error)=>{
+    alert(error)
+    
+  })
+}
  
  
  
@@ -45,3 +61,42 @@ ngOnInit()
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+//  SignUp(email, password){
+
+//     this.auth.SignUp(email, password).then(()=>{
+//       this.router.navigateByUrl('/tabs')
+//     }).catch((error)=>{
+//       alert(error)
+      
+//     })
+//   }
+
+//   Add(name, surname, email) {
+//     let id = this.firestore.createId();
+//     this.firestore.collection('users').doc(id).set({
+//       name: name,
+//       surname: surname,
+//       email: email,
+    
+
+//   }).then(()=>{
+//     this.showmessage = true
+//     setTimeout(()=> this.showmessage = false, 3000);
+//     this.name = '';
+//     this.surname = '';
+//     this.email = '';
+//   }).catch((error)=>{
+//     console.log(error)
+//   })
+// }
