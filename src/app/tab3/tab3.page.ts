@@ -3,6 +3,8 @@ import { AngularFirestore} from '@angular/fire/firestore';
 // import { Observable } from 'rxjs';
 import { ServiceService } from '../service.service';
 import { LoadingController } from "@ionic/angular";
+import { Plugins } from '@capacitor/core';
+const { Share } = Plugins;
 
 
 
@@ -37,7 +39,18 @@ export class Tab3Page {
   const { role, data } = await loading.onDidDismiss();
   console.log("Loading dismissed with role:", role);
 }
- 
+
+
+async d(){
+  let shareRet = await Share.share({
+    title: 'See cool stuff',
+    text: 'Really awesome thing you need to see right meow',
+    url: 'http://ionicframework.com/',
+    dialogTitle: 'Share with buddies'
+  });
+   
+}
+
 
   
 
