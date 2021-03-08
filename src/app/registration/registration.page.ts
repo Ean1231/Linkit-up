@@ -41,7 +41,7 @@ SignUp(email, password, name, surname, confirmPassword){
   confirmPassword:confirmPassword
   
   }).then(()=>{
-  this.auth.SignUp(email, password )
+  this.auth.SignUp(email, password, )
   this.showmessage = true
   setTimeout(()=> this.showmessage = false, 3000);
   this.name = '';
@@ -68,35 +68,3 @@ SignUp(email, password, name, surname, confirmPassword){
 
 
 
-
-
-
-
-//  SignUp(email, password){
-
-//     this.auth.SignUp(email, password).then(()=>{
-//       this.router.navigateByUrl('/tabs')
-//     }).catch((error)=>{
-//       alert(error)
-      
-//     })
-//   }
-
-//   Add(name, surname, email) {
-//     let id = this.firestore.createId();
-//     this.firestore.collection('users').doc(id).set({
-//       name: name,
-//       surname: surname,
-//       email: email,
-    
-
-//   }).then(()=>{
-//     this.showmessage = true
-//     setTimeout(()=> this.showmessage = false, 3000);
-//     this.name = '';
-//     this.surname = '';
-//     this.email = '';
-//   }).catch((error)=>{
-//     console.log(error)
-//   })
-// }

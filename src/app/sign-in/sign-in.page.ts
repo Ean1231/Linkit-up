@@ -26,7 +26,7 @@ export class SignInPage implements OnInit {
 
   login(){
     this.auth.Login(this.email, this.password).then(()=>{
-      this.router.navigateByUrl('/tabs')
+     this.router.navigateByUrl('/tabs')
 
     }).catch((error)=>{
       alert(error)

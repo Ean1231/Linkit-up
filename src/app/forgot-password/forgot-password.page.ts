@@ -15,11 +15,12 @@ export class ForgotPasswordPage  {
   
   }
 
-
+message
   forgotPassword(){
-    this.auth.forgotPassword("kabelo@mlab.co.za").then(()=>{
-      console.log("Check your email , to  confirm")
-
+      this.auth.forgotPassword("email@gmail.com").then(()=>{
+      this.message = true
+      setTimeout(()=> this.message = false, 3000);
+      //console.log("Check your email , to  confirm")
     })
 
   }

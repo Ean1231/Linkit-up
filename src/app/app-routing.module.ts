@@ -41,7 +41,8 @@ const routes: Routes = [
   {
     path: 'institutions',
     loadChildren: () => import('./institutions/institutions.module').then( m => m.InstitutionsPageModule)
-  },  {
+  },
+  {
     path: 'ap-score',
     loadChildren: () => import('./ap-score/ap-score.module').then( m => m.ApScorePageModule)
   },
