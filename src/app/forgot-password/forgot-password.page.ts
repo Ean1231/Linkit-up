@@ -16,8 +16,8 @@ export class ForgotPasswordPage  {
   }
 
 message
-  forgotPassword(){
-      this.auth.forgotPassword("email@gmail.com").then(()=>{
+  forgotPassword(email){
+      this.auth.forgotPassword(email).then(()=>{
       this.message = true
       setTimeout(()=> this.message = false, 3000);
       //console.log("Check your email , to  confirm")

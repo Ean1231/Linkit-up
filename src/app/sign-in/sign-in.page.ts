@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService} from "../auth.service"
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-sign-in',
@@ -13,7 +15,7 @@ export class SignInPage implements OnInit {
   password;
 
 
-  constructor(  public router: Router, public auth:AuthService)
+  constructor(  public router: Router, public auth:AuthService, public alertController: AlertController)
   {
 
   }
@@ -29,10 +31,20 @@ export class SignInPage implements OnInit {
      this.router.navigateByUrl('/tabs/tabs/tab3')
 
     }).catch((error)=>{
-      alert(error)
+     this.presentAlert(error.message);
       
     }) 
     
+  }
+
+  async presentAlert(message) {
+    const alert = await this.alertController.create({
+      header: 'Attention User',
+      message:message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
 }
