@@ -11,7 +11,7 @@ import { IonInfiniteScroll, Platform } from '@ionic/angular';
 export class Tab2Page {
 @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   
-   perc;
+  perc;
   perc1;
   perc2;
   perc3;
@@ -21,7 +21,7 @@ export class Tab2Page {
 
   radioSelected:any;
 
-  sum = 0;
+ sum :any  = 0 ;
 
 
   marks: any [] = [
@@ -211,36 +211,37 @@ export class Tab2Page {
     });
   }
 
-  calculate(){
+  calculate(sum)
+  {
 
     
 
     //Perc
-    if (this.perc.trim()== "80 - 100%".trim())
+    if (this.perc == "80 - 100%")
     {
       this.sum += 7;
     }
-    else if (this.perc.trim()== "70 - 79%".trim())
+    else if (this.perc == "70 - 79%")
     {
       this.sum += 6
     }
-    else if (this.perc.trim()== "60 - 69%".trim())
+    else if (this.perc == "60 - 69%")
     {
       this.sum += 5
     }
-    else if (this.perc.trim() == "50 - 59%".trim())
+    else if (this.perc == "50 - 59%")
     {
       this.sum += 4
     }
-    else if (this.perc.trim()==  "40 - 49%".trim())
+    else if (this.perc ==  "40 - 49%")
     {
       this.sum += 3
     }
-    else if (this.perc.trim()== "30 - 39%".trim())
+    else if (this.perc == "30 - 39%")
     {
       this.sum += 2
     }
-    else if (this.perc.trim()== "0 - 29%".trim())
+    else if (this.perc == "0 - 29%")
     {
       this.sum += 1
     }
@@ -248,31 +249,31 @@ export class Tab2Page {
 
     //Perc1
 
-    if (this.perc1.trim() == "80 - 100%".trim())
+    if (this.perc1 == "80 - 100%")
     {
       this.sum += 7;
     }
-    else if (this.perc1.trim() == "70 - 79%".trim())
+    else if (this.perc1 == "70 - 79%")
     {
       this.sum += 6
     }
-    else if (this.perc1.trim() == "60 - 69%".trim())
+    else if (this.perc1 == "60 - 69%")
     {
       this.sum += 5
     }
-    else if (this.perc1.trim() == "50 - 59%".trim())
+    else if (this.perc1 == "50 - 59%")
     {
       this.sum += 4
     }
-    else if (this.perc1.trim() ==  "40 - 49%".trim())
+    else if (this.perc1 ==  "40 - 49%")
     {
       this.sum += 3
     }
-    else if (this.perc1.trim() == "30 - 39%".trim())
+    else if (this.perc1 == "30 - 39%")
     {
       this.sum += 2
     }
-    else if (this.perc1.trim() == "0 - 29%".trim())
+    else if (this.perc1 == "0 - 29%")
     {
       this.sum += 1
     }
@@ -282,165 +283,165 @@ export class Tab2Page {
     //perc2
 
 
-   if (this.perc2.trim() == "80 - 100%".trim())
+   if (this.perc2 == "80 - 100%")
     {
       this.sum += 7;
     }
-    else if (this.perc2.trim() == "70 - 79%".trim())
+    else if (this.perc2 == "70 - 79%")
     {
       this.sum += 6
     }
-    else if (this.perc2.trim() == "60 - 69%".trim())
+    else if (this.perc2 == "60 - 69%")
     {
       this.sum += 5
     }
-    else if (this.perc2.trim() == "50 - 59%".trim())
+    else if (this.perc2 == "50 - 59%")
     {
       this.sum += 4
     }
-    else if (this.perc2.trim() ==  "40 - 49%".trim())
+    else if (this.perc2 ==  "40 - 49%")
     {
       this.sum += 3
     }
-    else if (this.perc2.trim() == "30 - 39%".trim())
+    else if (this.perc2 == "30 - 39%")
     {
       this.sum += 2
     }
-    else if (this.perc2.trim() == "0 - 29%".trim())
+    else if (this.perc2 == "0 - 29%")
     {
       this.sum += 1
     }
 
     //perc3
 
-    if (this.perc3.trim() == "80 - 100%".trim())
+    if (this.perc3 == "80 - 100%")
     {
       this.sum += 7;
     }
-    else if (this.perc3.trim() == "70 - 79%".trim())
+    else if (this.perc3 == "70 - 79%")
     {
       this.sum += 6
     }
-    else if (this.perc3.trim() == "60 - 69%".trim())
+    else if (this.perc3 == "60 - 69%")
     {
       this.sum += 5
     }
-    else if (this.perc3.trim() == "50 - 59%".trim())
+    else if (this.perc3 == "50 - 59%")
     {
       this.sum += 4
     }
-    else if (this.perc3.trim() ==  "40 - 49%".trim())
+    else if (this.perc3 ==  "40 - 49%")
     {
       this.sum += 3
     }
-    else if (this.perc3.trim() == "30 - 39%".trim())
+    else if (this.perc3 == "30 - 39%")
     {
       this.sum += 2
     }
-    else if (this.perc3.trim() == "0 - 29%".trim())
+    else if (this.perc3 == "0 - 29%")
     {
       this.sum += 1
     }
 
     //perc4
 
-    if (this.perc4.trim() == "80 - 100%".trim())
+    if (this.perc4 == "80 - 100%")
     {
       this.sum += 7;
     }
-    else if (this.perc4.trim() == "70 - 79%".trim())
+    else if (this.perc4 == "70 - 79%")
     {
       this.sum += 6
     }
-    else if (this.perc4.trim() == "60 - 69%".trim())
+    else if (this.perc4 == "60 - 69%")
     {
       this.sum += 5
     }
-    else if (this.perc4.trim() == "50 - 59%".trim())
+    else if (this.perc4 == "50 - 59%")
     {
       this.sum += 4
     }
-    else if (this.perc4.trim() ==  "40 - 49%".trim())
+    else if (this.perc4 ==  "40 - 49%")
     {
       this.sum += 3
     }
-    else if (this.perc4.trim() == "30 - 39%".trim())
+    else if (this.perc4 == "30 - 39%")
     {
       this.sum += 2
     }
-    else if (this.perc4.trim() == "0 - 29%".trim())
+    else if (this.perc4 == "0 - 29%")
     {
       this.sum += 1
     }
 
     //perc5
 
-    if (this.perc5.trim() == "80 - 100%".trim())
+    if (this.perc5 == "80 - 100%")
     {
       this.sum += 7;
     }
-    else if (this.perc5.trim() == "70 - 79%".trim())
+    else if (this.perc5 == "70 - 79%")
     {
       this.sum += 6
     }
-    else if (this.perc5.trim() == "60 - 69%".trim())
+    else if (this.perc5 == "60 - 69%")
     {
       this.sum += 5
     }
-    else if (this.perc5.trim() == "50 - 59%".trim())
+    else if (this.perc5 == "50 - 59%")
     {
       this.sum += 4
     }
-    else if (this.perc5.trim() ==  "40 - 49%".trim())
+    else if (this.perc5 ==  "40 - 49%")
     {
       this.sum += 3
     }
-    else if (this.perc5.trim() == "30 - 39%".trim())
+    else if (this.perc5 == "30 - 39%")
     {
       this.sum += 2
     }
-    else if (this.perc5.trim() == "0 - 29%".trim())
+    else if (this.perc5 == "0 - 29%")
     {
       this.sum += 1
     }
 
     //perc6
 
-   if (this.perc6.trim() == "80 - 100%".trim())
+   if (this.perc6 == "80 - 100%")
     {
       this.sum += 7;
     }
-    else if (this.perc6.trim() == "70 - 79%".trim())
+    else if (this.perc6 == "70 - 79%")
     {
       this.sum += 6
     }
-    else if (this.perc6.trim() == "60 - 69%".trim())
+    else if (this.perc6 == "60 - 69%")
     {
       this.sum += 5
     }
-    else if (this.perc6.trim() == "50 - 59%".trim())
+    else if (this.perc6 == "50 - 59%")
     {
       this.sum += 4
     }
-    else if (this.perc6.trim() ==  "40 - 49%".trim())
+    else if (this.perc6 ==  "40 - 49%")
     {
       this.sum += 3
     }
-    else if (this.perc6.trim() == "30 - 39%".trim())
+    else if (this.perc6 == "30 - 39%")
     {
       this.sum += 2
     }
-    else if (this.perc6.trim() == "0 - 29%".trim())
+    else if (this.perc6 == "0 - 29%")
     {
       this.sum += 1
     }
    
-    
+    this.router.navigateByUrl('/ap-score', {state: {sum:this.sum}})
   }
  
-  Navigate(){
-    this.router.navigateByUrl('/ap-score') ;
+  // Navigate(){
+  //   this.router.navigateByUrl('/ap-score', {state: {sum}}) ;
   
   }
  
-}
+
