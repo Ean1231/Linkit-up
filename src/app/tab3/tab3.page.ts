@@ -41,7 +41,7 @@ export class Tab3Page {
 }
 
 
-async d(){
+async share(){
   let shareRet = await Share.share({
     title: 'See cool stuff',
     text: 'Really awesome thing you need to see right meow',

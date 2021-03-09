@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { IonInfiniteScroll, Platform } from '@ionic/angular';
+import { IonInfiniteScroll, LoadingController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -181,12 +181,29 @@ export class Tab2Page {
 
   constructor( private platform: Platform,
     private splashScreen: SplashScreen, 
-    public router: Router)
+    public router: Router,
+    public load: LoadingController)
   {
+    this.presentLoadingWithOptions();
     this.initializeApp();   
 
 
     
+  }
+
+  async presentLoadingWithOptions() {
+    const loading = await this.load.create({
+      spinner: "circles",
+      duration: 1000,
+      message: "Please wait",
+      translucent: true,
+      cssClass: "custom-class custom-loading",
+      backdropDismiss: true,
+    });
+    await loading.present();
+  
+    const { role, data } = await loading.onDidDismiss();
+    console.log("Loading dismissed with role:", role);
   }
 
   loadData(event) {
