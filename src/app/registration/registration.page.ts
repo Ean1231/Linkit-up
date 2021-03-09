@@ -47,7 +47,7 @@ SignUp(email, password, name, surname, confirmPassword){
   this.name = '';
   this.surname = '';
   this.email = '';
-  this.router.navigateByUrl('/tabs')
+  this.router.navigateByUrl('/tabs/tabs/tab3')
   }).catch((error)=>{
     alert(error)
     

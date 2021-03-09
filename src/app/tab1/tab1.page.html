@@ -19,30 +19,13 @@
   
     
 
-      <!--
-<div *ngIf="showUniversities">
-           <ion-list>
-                <ion-item *ngFor="let university of items; let index=index">
-                          Institution: {{university.institution}}
-                          <br>
-                          Aps Score: {{university.aps}}
-                          <br>
-                          Years: {{university.years}}
-                          <br>
-                          Location: {{university.location}}
-                          <br>
-                          Qualification Type: {{university.qualification}}
-                 </ion-item> 
-              </ion-list>
-         </div>
-
-      -->  
 
 
            <div style="margin-top: 20px;">
-            <ion-item style="margin-left: 40px; margin-right: 40px; border-radius: 30px;">
+            <ion-item style="margin-left: 24px; margin-right: 24px; border-radius: 30px;">
               <ion-input placeholder="APS" type="text" required [(ngModel)]="aps"></ion-input>
             </ion-item>
+            
                             <label style="margin: 4%;" for="validationDefault04">Choose Location</label>
                             <select  [(ngModel)]="location" class="custom-select" id="validationDefault04" required   style="width:93%; margin-left: 12px;" >
                               <option selected disabled value="">Choose Location</option>

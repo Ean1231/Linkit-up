@@ -26,12 +26,13 @@ export class SignInPage implements OnInit {
 
   login(){
     this.auth.Login(this.email, this.password).then(()=>{
-     this.router.navigateByUrl('/tabs')
+     this.router.navigateByUrl('/tabs/tabs/tab3')
 
     }).catch((error)=>{
       alert(error)
       
     }) 
+    
   }
 
 }

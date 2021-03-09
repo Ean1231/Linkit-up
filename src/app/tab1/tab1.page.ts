@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 // import { Aps } from './aps';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 // import { AngularFirestore} from '@angular/fire/firestore';
 // import { Observable } from 'rxjs';
 import {ServiceService} from '../service.service';
@@ -21,14 +22,30 @@ export class Tab1Page {
   
 varsities = [] ;
 
-  constructor(public router: Router, public service :ServiceService)
+  constructor(public router: Router, public service :ServiceService,
+    public load: LoadingController)
   {
+    this.presentLoadingWithOptions();
     this.service.getVarsities().then((items:any)=>{
       console.log(items);
       this.varsities = items;
 
     });
 
+  }
+  async presentLoadingWithOptions() {
+    const loading = await this.load.create({
+      spinner: "circles",
+      duration: 1000,
+      message: "Please wait",
+      translucent: true,
+      cssClass: "custom-class custom-loading",
+      backdropDismiss: true,
+    });
+    await loading.present();
+  
+    const { role, data } = await loading.onDidDismiss();
+    console.log("Loading dismissed with role:", role);
   }
 
 
