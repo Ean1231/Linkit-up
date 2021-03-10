@@ -5,6 +5,8 @@ import { ServiceService } from '../service.service';
 import { LoadingController } from "@ionic/angular";
 import { Plugins } from '@capacitor/core';
 const { Share } = Plugins;
+import { ToastController } from '@ionic/angular'
+import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 
 
@@ -16,7 +18,7 @@ const { Share } = Plugins;
 export class Tab3Page {
   opportunities = []
 
-  constructor(private firestore: AngularFirestore,private service: ServiceService,  public load: LoadingController)
+  constructor(private firestore: AngularFirestore,private service: ServiceService,  public load: LoadingController, private alertController: ToastController)
  {
   this.presentLoadingWithOptions();
   this.service.getOpportunities().then((items:any)=>{
@@ -51,6 +53,17 @@ async share(){
    
 }
 
+
+filterData(ev: any) {
+  
+  const val = ev.target.value;
+  if (val && val.trim() != "") {
+    this.opportunities = this.opportunities.filter((item) => {
+      
+      return item.type.toLowerCase().indexOf(val.toLowerCase()) > -1;
+    });
+  }
+}
 
   
 

@@ -14,9 +14,11 @@
 
 </div>
 <ion-content>
+
   <ion-list>
-
-
+ 
+    <ion-searchbar (ionInput)="filterData($event)" color="light"></ion-searchbar>
+    
     <ion-card *ngFor='let opportunity of opportunities'>
       <img src="../../assets/CareerWorkshops.jpg" />
       <ion-card-content>
@@ -24,9 +26,15 @@
           {{opportunity.title}}
         </ion-card-title>
         <p>
-          {{opportunity.description}}
+          {{opportunity.description}} <br><br>
         </p>
-        Type of Opportunity: {{opportunity.type}} <br>
+        Type of Opportunity: {{opportunity.type}} <br><br>
+        <div style="background-color:  #5bc0de;; color: white; ">
+          Closing date: {{ opportunity.closingDate }} 
+        </div>
+        <br>
+        Field of study: {{ opportunity.studyField }}
+        <br>
 
 
         <div *ngIf="opportunity.type == 'Bursaries' ; then thenBlock else elseBlock"></div>
@@ -48,4 +56,7 @@
 
 
       </ion-card-content>
+
+
+      
     </ion-card>
