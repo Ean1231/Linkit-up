@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AlertController } from '@ionic/angular';
 
 import { AuthService} from "../auth.service"
 
@@ -17,7 +18,7 @@ export class RegistrationPage implements OnInit{
   email
   confirmPassword
 
- constructor( public router: Router, public auth:AuthService, private firestore: AngularFirestore)
+ constructor( public router: Router, public auth:AuthService, private firestore: AngularFirestore, public alertController: AlertController)
   {
 
   }
@@ -42,16 +43,26 @@ SignUp(email, password, name, surname, confirmPassword){
   
   }).then(()=>{
   this.auth.SignUp(email, password, )
-  this.showmessage = true
+  this.presentAlert('Congradulations!!  Now Sign in with email  and password')
   setTimeout(()=> this.showmessage = false, 3000);
   this.name = '';
   this.surname = '';
   this.email = '';
-  this.router.navigateByUrl('/tabs/tabs/tab3')
+  this.router.navigateByUrl('')      
   }).catch((error)=>{
-    alert(error)
+    this.presentAlert(error.message)
     
   })
+}
+
+async presentAlert(message) {
+  const alert = await this.alertController.create({
+    header: 'Attention User',
+    message:message,
+    buttons: ['OK']
+  });
+
+  await alert.present();
 }
  
  
