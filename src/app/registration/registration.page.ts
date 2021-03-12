@@ -17,6 +17,7 @@ export class RegistrationPage implements OnInit{
   surname
   email
   confirmPassword
+  Date
 
  constructor( public router: Router, public auth:AuthService, private firestore: AngularFirestore, public alertController: AlertController)
   {
@@ -32,14 +33,15 @@ ngOnInit()
 
 
 
-SignUp(email, password, name, surname, confirmPassword){
+SignUp(email, password, name, surname, confirmPassword, Date){
   let id = this.firestore.createId();
   this.firestore.collection('users').doc(id).set({
   name: name,
   surname: surname,
   email: email,
   password:password,
-  confirmPassword:confirmPassword
+  confirmPassword:confirmPassword,
+  Date:Date
   
   }).then(()=>{
   this.auth.SignUp(email, password, )
@@ -48,6 +50,7 @@ SignUp(email, password, name, surname, confirmPassword){
   this.name = '';
   this.surname = '';
   this.email = '';
+  this.Date = '';
   this.router.navigateByUrl('')      
   }).catch((error)=>{
     this.presentAlert(error.message)
