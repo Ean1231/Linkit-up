@@ -179,7 +179,7 @@ export class Tab2Page {
   ];
 
 
-  constructor( private platform: Platform,
+  constructor(private platform: Platform,
     private splashScreen: SplashScreen, 
     public router: Router,
     public load: LoadingController)
