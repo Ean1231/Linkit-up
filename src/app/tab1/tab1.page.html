@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<div style="text-align: center; margin-top: 20px; font-family: cursive; ">
+<div style="text-align: center; margin-top: 20px;">
   <p>
     This feature allows you to find <br> a suitable course based on your aps.
   </p>  
@@ -20,13 +20,17 @@
     
 
 
+ 
 
            <div style="margin-top: 20px;">
-            <ion-item style="margin-left: 24px; margin-right: 24px; border-radius: 30px;">
-              <ion-input placeholder="APS" type="text" required [(ngModel)]="aps"></ion-input>
-            </ion-item>
-            
-                            <label style="margin: 4%;" for="validationDefault04">Choose Location</label>
+            <!-- <ion-item style="margin-left: 24px; margin-right: 24px; border-radius: 30px;">
+              
+            </ion-item> -->
+             <label style="margin: 4%;" for="text"><b>Enter Score</b></label>
+             <br>
+             <input type="text" required [(ngModel)]="aps">
+            <br>
+                            <label style="margin: 4%;" for="validationDefault04"><b>Choose Location</b></label>
                             <select  [(ngModel)]="location" class="custom-select" id="validationDefault04" required   style="width:93%; margin-left: 12px;" >
                               <option selected disabled value="">Choose Location</option>
                               <option>Kimberley</option>
@@ -40,7 +44,7 @@
                         
 
                         
-                            <label style="margin: 4%;" for="validationDefault04">Preffered Field of study</label>
+                            <label style="margin: 4%;" for="validationDefault04"><b>Preffered Field of study</b></label>
                             <select [(ngModel)]="field" class="custom-select" id="validationDefault04" required  style="width:93%; margin-left: 12px;">
                               <option selected disabled value="">Choose Field of study</option>
                               <option>Teaching</option>

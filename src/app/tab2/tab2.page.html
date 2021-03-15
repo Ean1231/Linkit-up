@@ -10,7 +10,7 @@
 <ion-list>
     
     
-<div style="text-align: center; margin-top: 30px; font-family: cursive; ">
+<div style="text-align: center; margin-top: 30px;">
   <p> 
    This feature helps you calculate your APS score.
   </p> 
@@ -48,7 +48,7 @@
 
   
   <div style="margin-top: 46px;">
-    <select required="required" class="custom-select" style="width: 100px; margin-left: 12px;" [(ngModel)]="perc" >
+    <select required="required" class="custom-select" style="width: 150px; margin-left: 12px;" [(ngModel)]="perc" >
     <option value="" selected="selected">Select your Mark</option>
    <option *ngFor="let mar of marks">
      {{mar.name}}
@@ -77,7 +77,7 @@
   </div>
 
  <div style="margin-top: 46px;">
-      <select required="required" class="custom-select" style="width: 100px; margin-left: 12px;" [(ngModel)]="perc1" >
+      <select required="required" class="custom-select" style="width: 150px; margin-left: 12px;" [(ngModel)]="perc1" >
         <option value="" selected="selected"></option>
   
         <option *ngFor="let mar of marks">
@@ -96,7 +96,7 @@
     </div>
   
     <div style="margin-top: 46px;">
-      <select required="required" class="custom-select" style="width: 100px; margin-left: 12px;" [(ngModel)]="perc2" >
+      <select required="required" class="custom-select" style="width: 150px; margin-left: 12px;" [(ngModel)]="perc2" >
         <option value="" selected="selected">Enter your Marks...</option>
         <option *ngFor="let mar of marks">
        {{mar.name}}
@@ -171,7 +171,7 @@
     </div>
   
     <div style="margin-top: 24px;">
-      <select required="required" class="custom-select" style="width: 100px; margin-left: 12px;" [(ngModel)]="perc3" >
+      <select required="required" class="custom-select" style="width: 150px; margin-left: 12px;" [(ngModel)]="perc3" >
         <option value="" selected="selected">Enter your Marks...</option>
         <option *ngFor="let mar of marks">
        {{mar.name}}
@@ -248,7 +248,7 @@
   
   
     <div style="margin-top: 48px;">
-      <select required="required" class="custom-select" style="width: 100px; margin-left: 12px;"  [(ngModel)]="perc4">
+      <select required="required" class="custom-select" style="width: 150px; margin-left: 12px;"  [(ngModel)]="perc4">
         <option value="" selected="selected">Enter your Marks...</option>
         <option *ngFor="let mar of marks">
        {{mar.name}}
@@ -325,7 +325,7 @@
     </div>
   
     <div style="margin-top: 48px;">
-      <select required="required" class="custom-select" style="width: 100px; margin-left: 12px;" [(ngModel)]="perc5" >
+      <select required="required" class="custom-select" style="width: 150px; margin-left: 12px;" [(ngModel)]="perc5" >
         <option value="" selected="true">Enter your Marks...</option>
         <option *ngFor="let mar of marks">
        {{mar.name}}
@@ -335,7 +335,7 @@
 
 
 
-<div class="submit mt-3" style="margin-left: 100px; ">
+<div class="submit mt-3" style="margin-left: 140px; ">
   <ion-button color="tertiary" (click)="calculate()" [routerLink]="'/ap-score'">
     Calculate
   </ion-button>
