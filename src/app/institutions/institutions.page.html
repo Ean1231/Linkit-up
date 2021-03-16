@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Institutions</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,7 +13,7 @@
   <div *ngIf="data.length == 0 ; then thenBlock else elseBlock"></div>
   <ng-template #thenBlock>
    
-    No course available at moment based what you searche 
+    No course available at moment.
 
     
 
@@ -18,12 +21,12 @@
   <ng-template #elseBlock>
     
     <ion-item *ngFor="let data of data">
-      <ion-thumbnail item-start>
+      <ion-thumbnail class="align-baseline" item-start>
         <img src="../../assets/institutions/download.png" alt="">
         </ion-thumbnail>
-      <h4>{{ data.institution }}</h4> <br>
-       <p>{{ data.location }}</p>
-       <button ion-button (click)="details(data)">view</button>
+      <p class="align-text-top">{{ data.institution }}</p>
+       <p class="align-text-bottom">{{ data.location }}</p>
+       <ion-button ion-button (click)="details(data)">view</ion-button>
       </ion-item>
 
   </ng-template>

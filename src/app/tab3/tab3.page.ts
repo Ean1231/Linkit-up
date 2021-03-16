@@ -16,7 +16,10 @@ import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-  opportunities = []
+  opportunities = [] ;
+  showContent:boolean =true;
+  readMoreContent:boolean =false;
+
 
   constructor(private firestore: AngularFirestore,private service: ServiceService,  public load: LoadingController, private alertController: ToastController)
  {
@@ -40,6 +43,12 @@ export class Tab3Page {
 
   const { role, data } = await loading.onDidDismiss();
   console.log("Loading dismissed with role:", role);
+}
+
+showMore(){
+  this.showContent =false;
+  this.readMoreContent =true;
+
 }
 
 

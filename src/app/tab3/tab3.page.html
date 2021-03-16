@@ -4,6 +4,8 @@
     <div style="text-align: center;">
       <ion-title> News Feeds</ion-title>
     </div>
+    
+    
   </ion-toolbar>
 </ion-header>
 
@@ -25,9 +27,20 @@
         <ion-card-title>
           {{opportunity.title}}
         </ion-card-title>
-        <p>
-          {{opportunity.description}} <br><br>
+
+        <!-- showMore -->
+        <p (click)="showMore()" *ngIf="showContent">
+          {{opportunity.description.substring(0, 60)}} ...Show more<br><br>
         </p>
+
+        <!-- showMore -->
+        <p (click)="showMore()" *ngIf="readMoreContent">
+          {{opportunity.description}}  <br><br>
+        </p>
+
+
+
+
         Type of Opportunity: {{opportunity.type}} <br><br>
         <div style="background-color:  #5bc0de;; color: white; ">
           Closing date: {{ opportunity.closingDate }} 
