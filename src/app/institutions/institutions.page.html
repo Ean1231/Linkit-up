@@ -19,7 +19,7 @@
     
     <ion-item *ngFor="let data of data">
       <ion-thumbnail item-start>
-        <img src="../../assets/institutions/download.png" alt="">
+        <img src={{data.img}} alt="">
         </ion-thumbnail>
       <h4>{{ data.institution }}</h4> <br>
        <p>{{ data.location }}</p>
