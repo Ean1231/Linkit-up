@@ -20,7 +20,7 @@
     <ion-searchbar (ionInput)="filterData($event)" color="light"></ion-searchbar>
     
     <ion-card *ngFor='let opportunity of opportunities'>
-      <img src="../../assets/CareerWorkshops.jpg" />
+      <img src={{opportunity.img}} />
       <ion-card-content>
         <ion-card-title>
           {{opportunity.title}}
