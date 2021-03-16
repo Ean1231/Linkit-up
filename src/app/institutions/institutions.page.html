@@ -21,8 +21,13 @@
   <ng-template #elseBlock>
     
     <ion-item *ngFor="let data of data">
+<<<<<<< HEAD
       <ion-thumbnail class="align-baseline" item-start>
         <img src="../../assets/institutions/download.png" alt="">
+=======
+      <ion-thumbnail item-start>
+        <img src={{data.img}} alt="">
+>>>>>>> c5ddb94086a37e602bdaffe2b85f7580d672022c
         </ion-thumbnail>
       <p class="align-text-top">{{ data.institution }}</p>
        <p class="align-text-bottom">{{ data.location }}</p>
