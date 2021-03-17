@@ -1,3 +1,20 @@
 ion-title{
     color: #10545a;
   }
+  .container{
+    display: flex;
+    gap: 2%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    
+  }
+  img{
+    width: 150px;
+    height: 120px;
+    margin: 0;
+    padding: 0;
+  }
+  p{
+    color: grey;
+  }

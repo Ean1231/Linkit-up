@@ -17,14 +17,31 @@
   </ng-template>
   <ng-template #elseBlock>
     
+  <!--
     <ion-item *ngFor="let data of data">
       <ion-thumbnail item-start>
         <img src={{data.img}} alt="">
         </ion-thumbnail>
       <h4>{{ data.institution }}</h4> <br>
        <p>{{ data.location }}</p>
+       <p>{{data.description.substring(0, 50)}} ....</p>
        <button ion-button (click)="details(data)">view</button>
       </ion-item>
+  -->  
+      
+  <div  (click)="details(data)" class="container"  *ngFor="let data of data">
+    <hr>
+    <div style="width: 50%;">
+      <img src="{{data.img}}"  alt="image">
+    </div>
+    <div style="margin-right: 50px; width: 100%;">
+      <h4 >{{ data.institution }}</h4> 
+     {{data.description.substring(0, 60)}}... 
+      <p >{{ data.location }}</p>
+    </div>
+    
+  </div>
+
 
   </ng-template>
   

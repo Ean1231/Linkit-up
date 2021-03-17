@@ -54,9 +54,11 @@ submit (){
   let aps = this.varsities.filter(aps => aps.aps == this.aps);
   console.log(aps);
   let location =  aps.filter(location =>location.location == this.location) ;
+  console.log(this.field)
   let field =  location.filter(field =>field.qualification == this.field) ;
-  console.log(location)
-  this.router.navigateByUrl('/institutions', {state: field})
+  console.log(field)
+ console.log(location)
+  this.router.navigateByUrl('/institutions', {state:field})
 }
 
 }
