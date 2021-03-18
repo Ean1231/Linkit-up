@@ -48,7 +48,6 @@ export class Tab3Page {
 showMore(){
   this.showContent =false;
   this.readMoreContent =true;
-
 }
 
 
