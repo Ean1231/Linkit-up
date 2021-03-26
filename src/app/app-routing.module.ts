@@ -3,6 +3,11 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'onboarding',
+    pathMatch: 'full'
+  },
+  {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
@@ -34,10 +39,10 @@ const routes: Routes = [
     path: 'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
-  {
-    path: '',
-    loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule)
-  },
+  // {
+  //   path: '',
+  //   loadChildren: () => import('./sign-in/sign-in.module').then( m => m.SignInPageModule)
+  // },
   {
     path: 'institutions',
     loadChildren: () => import('./institutions/institutions.module').then( m => m.InstitutionsPageModule)
@@ -46,6 +51,19 @@ const routes: Routes = [
     path: 'ap-score',
     loadChildren: () => import('./ap-score/ap-score.module').then( m => m.ApScorePageModule)
   },
+  {
+    path: 'welcome',
+    loadChildren: () => import('./welcome/welcome.module').then( m => m.WelcomePageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./onboarding/onboarding.module').then( m => m.OnboardingPageModule)
+  },
+
 
 
 

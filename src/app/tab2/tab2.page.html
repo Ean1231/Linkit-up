@@ -1,18 +1,22 @@
-<ion-header>
-  <ion-toolbar >
-  
-
-    <ion-title class="text-center"> Aps calculator</ion-title>
+<ion-header [translucent]="true">
+  <ion-toolbar color="tertiary">
+ 
+    <ion-buttons [routerLink]="'/welcome'" slot="start">
+        <ion-menu-button  menu="first"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <ion-content [scrollEvents]="true">
   
 <ion-list>
     
     
-<div style="text-align: center; margin-top: 30px;">
-  <p> 
-   This feature helps you calculate your APS score.
+<div style="text-align: center; margin-top: 60px;">
+  <p>
+      <b>
+        This feature helps you calculate your APS score.
+      </b>
   </p> 
 </div>
 
@@ -335,8 +339,8 @@
 
 
 
-<div class="submit mt-3" style="margin-left: 140px; ">
-  <ion-button color="tertiary" (click)="calculate()" [routerLink]="'/ap-score'">
+<div class="submit mt-3" style="margin-left: 120px; ">
+  <ion-button color="primary" (click)="calculate()" [routerLink]="'/ap-score'">
     Calculate
   </ion-button>
 </div>

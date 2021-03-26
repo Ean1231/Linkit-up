@@ -1,42 +1,17 @@
-app-login {
-    font-size: medium;
+.title {
+    margin-bottom: 30px;
 }
 
-$white-color: #fff;
-$height100: 100%;
-
-ion-grid {
-    width:100%;
-    height: $height100;
-    background: #dfdfdf;
-    margin-top: 400px;
+.title h4 {
+    color: var(--ion-color-primary);
 }
 
-ion-row {
-    height: $height100;
+.title p {
+    margin-top: 0 !important;
+    color: #999999;
+    font-size: small;
 }
 
-ion-col {
-    border: 1px solid #488aff;
-    background: $white-color;
-}
-
-ion-button {
-    font-weight: 300;
-    padding-left: 50px;
-    padding-right: 50px;
-    
-}
-
-@media (min-width: 240px) and (max-width: 768px) {
-    ion-grid {
-        background: $white-color;
-    }
-    ion-col {
-        border: none;
-    }
-}
-
-.error-message {
-    color: var(--ion-color-danger);
+.forget a {
+    font-size: small !important;
 }

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { IonInfiniteScroll, LoadingController, Platform } from '@ionic/angular';
 
+import { ModalController } from '@ionic/angular';
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',

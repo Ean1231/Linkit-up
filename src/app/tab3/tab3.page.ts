@@ -5,7 +5,9 @@ import { ServiceService } from '../service.service';
 import { LoadingController } from "@ionic/angular";
 import { Plugins } from '@capacitor/core';
 const { Share } = Plugins;
-import { ToastController } from '@ionic/angular'
+import { ToastController } from '@ionic/angular';
+
+import { ModalController } from '@ionic/angular';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 

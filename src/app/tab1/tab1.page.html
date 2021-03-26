@@ -1,17 +1,20 @@
-<ion-header>
-  <ion-toolbar >
-    <!-- <ion-back-button></ion-back-button> -->
-    <!-- <img src="../assets/L.png" style="height: 50px"/> -->
-    <div style="text-align: center;">
-      <ion-title>Search</ion-title>
-    </div>
+
+<ion-header [translucent]="true">
+  <ion-toolbar color="tertiary">
    
+    <ion-buttons [routerLink]="'/welcome'" slot="start">
+        <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<div style="text-align: center; margin-top: 20px;">
+
+<div style="text-align: center; margin-top: 40px;">
   <p>
-    This feature allows you to find <br> a suitable course based on your aps.
+    <b>
+      This feature allows you to find <br> a suitable course based on your aps.
+    </b>
+    
   </p>  
   
   </div>
@@ -28,7 +31,7 @@
             </ion-item> -->
              <label style="margin: 4%;" for="text"><b>Enter Score</b></label>
              <br>
-             <input type="text" required [(ngModel)]="aps">
+             <input type="text" style="width: 245px;" required [(ngModel)]="aps">
             <br>
                             <label style="margin: 4%;" for="validationDefault04"><b>Choose Location</b></label>
                             <select  [(ngModel)]="location" class="custom-select" id="validationDefault04" required   style="width:93%; margin-left: 12px;" >
@@ -71,7 +74,7 @@
                           </div>
                         <br>
                   <div class="btnButtons">
-              <ion-button color="tertiary" (click)="submit()"  type="button" style="width: 200px;">Submit</ion-button>
+              <ion-button  color="primaryy" (click)="submit()"  type="button" style="width: 200px; ">Submit</ion-button>
                         
           </div>
           

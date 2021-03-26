@@ -1,81 +1,52 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Router } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
-
-import { AuthService} from "../auth.service";
-
-import { FormGroup, FormControl } from '@angular/forms';
-
+import { ModalController } from '@ionic/angular';
+import  { AuthService} from "../auth.service"
+import { Router } from '@angular/router'
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage {
+export class LoginPage implements OnInit {
+email:any;
+password ;
+  constructor(
+    public modalCtrl: ModalController,
+    public auth: AuthService,
+    public router: Router,
+    public alertController: AlertController
+  ) { }
+
+  ngOnInit() {
+  }
+
+  async dismiss() {
+    await this.modalCtrl.dismiss();
+  }
 
   
-  email;
-  password;
 
-
-
-
-  userEmail = new FormGroup({
-    email: new FormControl('',[Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-
-    password: new FormControl('', [Validators.required])
-  });
-
-  constructor( private FormBuilder: FormBuilder, public router: Router, public auth:AuthService)
-  {
-
-  }
-
-  public submit()
-  {
-    console.log(this.loginForm.value);
-  }
-
-  get Email()
-  {
-    return this.loginForm.get('email')
-  }
-
-  get Password()
-  {
-    return this.loginForm.get('password')
-  }
-
-  public errorMessages = {
-    email: [
-      {type: 'required', message: 'Email is required'},
-      {type: 'pattern', message: 'Please eneter a valid email address'}
-    ],
-
-    password: [
-      {type: 'required', message: 'Password is required'},
-      {type: 'length', message: 'Please enter password'}
-    ]
-  }
- 
-  loginForm = this.FormBuilder.group({
-    email: ['', [Validators.required, Validators.pattern]],
-    password: ['', [Validators.required, Validators.length]]
-  })
-  
   login(){
-    this.auth.Login(this.email , this.password).then(()=>{
-   
-    }).catch((error)=>{
-      console.log(error.message)
-    })
-  }
+    this.auth.Login(this.email ,this.password).then(()=>{
+        this.router.navigateByUrl('/tabs/tabs/tab3')
 
-  signup(){
-    this.router.navigateByUrl('/sign-up');
+    }).catch((error)=>{
+      this.presentAlert(error.message);
+       
+     }) 
+  }
+  
+
+  async presentAlert(message) {
+    const alert = await this.alertController.create({
+      header: 'Attention User',
+      message:message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
 

@@ -1,15 +1,13 @@
-<ion-header style="background-color: #1e9ba7;">
-  <ion-toolbar>
-    <!-- <img src="../assets/L.png" style="height: 50px"/> -->
-    <div style="text-align: center;">
-      <ion-title> News Feeds</ion-title>
-    </div>
-    
-    
+<ion-header [translucent]="true">
+  <ion-toolbar color="tertiary">
+  
+    <ion-buttons [routerLink]="'routerLink'" slot="start">
+        <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<div style="text-align: center; margin-top: 30px;">
+<div style="text-align: center; margin-top: 60px;">
   <p>
     Get your latest updates on Busaries, Career Oppertunities and much more.
   </p>
@@ -42,7 +40,10 @@
 
 
         Type of Opportunity: {{opportunity.type}} <br><br>
-        <div style="background-color:  #5bc0de;; color: white; ">
+        <div style="background-color: transparent; color: #7857fe; ">
+          <b>
+            
+          </b>
           Closing date: {{ opportunity.closingDate }} 
         </div>
         <br>
@@ -54,16 +55,16 @@
         <ng-template #thenBlock>
 
          
-         <a href="{{opportunity.link}}"><ion-button color="tertiary">Apply</ion-button></a> 
+         <a href="{{opportunity.link}}"><ion-button color="primary">Apply</ion-button></a> 
 
 
         </ng-template>
         <ng-template #elseBlock>
 
-         <a href={{opportunity.link}}> <ion-button color="tertiary">Book</ion-button></a> 
+         <a href={{opportunity.link}}> <ion-button color="primary">Book</ion-button></a> 
         </ng-template>
        
-        <ion-button color="tertiary" (click)="share()">
+        <ion-button color="primary" (click)="share()">
           <ion-icon name="share-social-outline"></ion-icon>
         </ion-button>
 

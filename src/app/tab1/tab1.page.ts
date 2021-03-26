@@ -6,6 +6,8 @@ import { LoadingController } from '@ionic/angular';
 // import { Observable } from 'rxjs';
 import {ServiceService} from '../service.service';
 
+import { ModalController } from '@ionic/angular';
+
 
 
 
@@ -21,6 +23,7 @@ export class Tab1Page {
 
   
 varsities = [] ;
+  modalCtrl: any;
 
   constructor(public router: Router, public service :ServiceService,
     public load: LoadingController)
@@ -59,6 +62,11 @@ submit (){
   console.log(field)
  console.log(location)
   this.router.navigateByUrl('/institutions', {state:field})
+}
+
+
+async dismiss() {
+  return await this.modalCtrl.dismiss();
 }
 
 }
