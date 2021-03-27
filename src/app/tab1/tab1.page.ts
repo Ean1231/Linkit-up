@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 // import { Aps } from './aps';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
@@ -20,6 +20,9 @@ export class Tab1Page {
   aps;
   location;
   field;
+ 
+
+
 
   
 varsities = [] ;
@@ -34,8 +37,22 @@ varsities = [] ;
       this.varsities = items;
 
     });
+    
+    
 
+   
   }
+
+  ionViewWillEnter() {
+   
+  }
+
+  ngOnInit() {
+   
+  
+  }
+
+
   async presentLoadingWithOptions() {
     const loading = await this.load.create({
       spinner: "circles",
@@ -52,9 +69,9 @@ varsities = [] ;
   }
 
 
-submit (){
+submit (ap){
   
-  let aps = this.varsities.filter(aps => aps.aps == this.aps);
+  let aps = this.varsities.filter(aps => aps.aps == ap);
   console.log(aps);
   let location =  aps.filter(location =>location.location == this.location) ;
   console.log(this.field)
@@ -70,3 +87,7 @@ async dismiss() {
 }
 
 }
+function ngOnInit() {
+  throw new Error('Function not implemented.');
+}
+

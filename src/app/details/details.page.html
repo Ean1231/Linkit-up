@@ -1,32 +1,67 @@
-<ion-header>
-  <ion-toolbar color='light'>
-    <ion-title>Institution Details</ion-title>
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+   
+    <ion-buttons [routerLink]="'/welcome'" slot="start">
+        <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 
+<ion-content style="height: 100%">
+  <ion-list>
+    <div class="ml-1" style="height: 100%">
+      <div class="card" style=" height: 100%">
+        <img src="{{showdata.img}}" class="card-img-top" alt="..." />
 
+        <div class="card-body">
+          <h5 class="card-title">{{showdata.institution}}</h5>
+          <h3>Description</h3>
+          <p color="primary">{{showdata.description}}</p>
+        </div>
+        <div class="border-top"></div>
+        <div
+          class="container mt-3"
+          style="
+            display: grid;
+            grid-template-columns: 50% 50%;
+            gap: 12px;
+            height: 100%;
+          "
+        > 
+        </div>
 
-<ion-content>
-  <ion-card >
-    <img src={{showdata.img}}>
-    <ion-card-content>
-      <ion-card-title>
-        {{ showdata.institution }}
-      </ion-card-title>
-      <p>
-{{ showdata.description}}      </p>
-    </ion-card-content>
-    
+        <div style="display:grid;  grid-template-columns: 50% 50%;  ">
+          <div class="m-0">
+            <ion-icon color="primary" name="location-outline"></ion-icon>
+            <small class="pl-2">{{showdata.location}}</small><br />
+          </div>
 
-
-<a href={{showdata.website}}><ion-button style="padding: 5px;">Apply</ion-button></a> 
-<ion-button  style="margin-left: 8%; padding: 5px;">Contact</ion-button>
-
-
-
-</ion-card>
-
+          <div class="ml-5">
+            <ion-icon color="primary" name="call-outline"></ion-icon>
+            <small class="pl-2">{{showdata.contact}} </small>
+          </div>
+          <div class="">
+            <ion-icon color="primary" name="mail-outline"></ion-icon>
+            <small class="pl-2"> {{showdata.email}} </small>
+          </div>
+          <div class="ml-5">
+           <a href={{showdata.website}}> 
+             <ion-button
+              
+              
+            >
+              Apply
+            </ion-button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-list>
 </ion-content>
 
 
+<!--
+
+  
+-->

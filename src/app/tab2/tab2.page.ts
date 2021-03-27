@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { IonInfiniteScroll, LoadingController, Platform } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 import { ModalController } from '@ionic/angular';
 
@@ -24,6 +25,24 @@ export class Tab2Page {
   radioSelected:any;
 
  sum :any  = 0 ;
+
+ async presentAlertMultipleButtons(APS ,message, ) {
+  const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+    header: 'AP SCORE',
+    subHeader: APS,
+    message: message,
+    buttons: [ {
+      text: 'ok',
+      handler: () => {
+        this.router.navigateByUrl('/tabs/tabs/tab1', {state: {sum:this.sum}})
+      
+      }
+    },]
+  });
+
+  await alert.present();
+}
 
 
   marks: any [] = [
@@ -184,7 +203,8 @@ export class Tab2Page {
   constructor(private platform: Platform,
     private splashScreen: SplashScreen, 
     public router: Router,
-    public load: LoadingController)
+    public load: LoadingController,
+    public alertController: AlertController)
   {
     this.presentLoadingWithOptions();
     this.initializeApp();   
@@ -455,7 +475,8 @@ export class Tab2Page {
       this.sum += 1
     }
    
-    this.router.navigateByUrl('/ap-score', {state: {sum:this.sum}})
+    this.presentAlertMultipleButtons('Your aps score :'+ this.sum ,'Would you like to see which unversity do you qualify for')
+   // this.router.navigateByUrl('/ap-score', {state: {sum:this.sum}})
   }
  
   // Navigate(){

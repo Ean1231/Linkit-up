@@ -8,45 +8,32 @@
 </ion-header>
 
 <ion-content>
-<ion-list>
+  <ion-list>
+    <div *ngIf="data.length == 0 ; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock> No course available at moment. </ng-template>
 
-  <div *ngIf="data.length == 0 ; then thenBlock else elseBlock"></div>
-  <ng-template #thenBlock>
-   
-    No course available at moment.
+    <ng-template #elseBlock>
+      <div (click)="details(data)" class="container" *ngFor="let data of data">
+        <div class="card cardContent">
+          <div >
+            <img src="{{data.img}}" alt="image" />
+          </div>
 
-    
+          <div>
+            <h5 class="card-title">{{ data.institution }}</h5>
 
-  </ng-template>
-  <ng-template #elseBlock>
-    
-  <!--
-    <ion-item *ngFor="let data of data">
-      <ion-thumbnail item-start>
-        <img src={{data.img}} alt="">
-        </ion-thumbnail>
-      <p class="align-text-top">{{ data.institution }}</p>
-       <p class="align-text-bottom">{{ data.location }}</p>
-       <ion-button ion-button (click)="details(data)">view</ion-button>
-      </ion-item>
-  -->  
-      
-  <div  (click)="details(data)" class="container"  *ngFor="let data of data">
-    <hr>
-    <div style="width: 50%;">
-      <img src="{{data.img}}"  alt="image">
-    </div>
-    <div style="margin-right: 50px; width: 100%;">
-      <h5 >{{ data.institution }}</h5> 
-     {{data.description.substring(0, 30)}}... <br>
-     <small style="color: gray; font-size: 12pt;">{{ data.location }}</small> 
-    </div>
-    
-  </div>
+            <small style="color: gray; font-size: 12pt"
+              >{{ data.location }}</small
+            >
 
-
-  </ng-template>
+            <div style="display: flex; justify-content:space-between;">
+              <div><small>{{ data.qualification}}</small></div>
+              <div><small>{{data.years}}</small></div>
   
-  
-</ion-list>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ion-list>
 </ion-content>
