@@ -43,6 +43,7 @@ export class RegisterPage implements OnInit {
     this.name = '';
     this.surname = '';
     this.email = '';
+    this.Date = '';
     this.router.navigateByUrl('')      
     }).catch((error)=>{
       this.presentAlert(error.message)
@@ -54,10 +55,17 @@ export class RegisterPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Attention User',
       message:message,
-      buttons: ['OK']
+      buttons: [{
+        text:'OK',
+        handler: () => {
+         this.dismiss()
+        }
+      
+      }]
     });
   
     await alert.present();
+   
   }
   
 
