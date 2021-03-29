@@ -17,4 +17,7 @@ export class OnboardingPage implements OnInit {
   next(){
     this.slides.slideNext();
   }
+  pervious(){
+    this.slides.slidePrev();
+  }
 }
