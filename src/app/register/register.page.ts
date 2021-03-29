@@ -27,15 +27,14 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
-  SignUp(email, password, name, surname, confirmPassword, Date){
+  SignUp(email, password, name, surname){
     let id = this.firestore.createId();
     this.firestore.collection('users').doc(id).set({
     name: name,
     surname: surname,
     email: email,
     password:password,
-    confirmPassword:confirmPassword,
-    Date:Date
+
     
     }).then(()=>{
     this.auth.SignUp(email, password, )
@@ -44,7 +43,6 @@ export class RegisterPage implements OnInit {
     this.name = '';
     this.surname = '';
     this.email = '';
-    this.Date = '';
     this.router.navigateByUrl('')      
     }).catch((error)=>{
       this.presentAlert(error.message)
