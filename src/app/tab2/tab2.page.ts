@@ -29,8 +29,8 @@ export class Tab2Page {
  async presentAlert() {
   const alert = await this.alertController.create({
     cssClass: 'my-custom-class',
-    header: 'Alert',
-    subHeader: 'Subtitle',
+    header: 'Attention User',
+    subHeader: 'Confirm Logout',
     message: 'Are you sure you want to log out?',
     buttons: [ {
       text: 'ok',
