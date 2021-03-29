@@ -26,6 +26,30 @@ export class Tab2Page {
 
  sum :any  = 0 ;
 
+ async presentAlert() {
+  const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+    header: 'Alert',
+    subHeader: 'Subtitle',
+    message: 'Are you sure you want to log out?',
+    buttons: [ {
+      text: 'ok',
+      handler: () => {
+        this.router.navigateByUrl('/welcome')
+      }
+    },
+    {
+      text: 'Cancel',
+      handler: () => {
+        this.router.navigateByUrl('/tabs/tabs/tab2')
+      }
+    }]
+    
+  });
+
+  await alert.present();
+}
+
  async presentAlertMultipleButtons(APS ,message, ) {
   const alert = await this.alertController.create({
     cssClass: 'my-custom-class',

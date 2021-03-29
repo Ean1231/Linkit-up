@@ -6,7 +6,8 @@ import { LoadingController } from "@ionic/angular";
 import { Plugins } from '@capacitor/core';
 const { Share } = Plugins;
 import { ToastController } from '@ionic/angular';
-
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 
@@ -23,7 +24,7 @@ export class Tab3Page {
   readMoreContent:boolean =false;
 
 
-  constructor(private firestore: AngularFirestore,private service: ServiceService,  public load: LoadingController, private alertController: ToastController)
+  constructor(private router: Router, private firestore: AngularFirestore,private service: ServiceService,  public load: LoadingController, private alertController: ToastController, public alertControllerr: AlertController)
  {
   this.presentLoadingWithOptions();
   this.service.getOpportunities().then((items:any)=>{
@@ -32,6 +33,30 @@ export class Tab3Page {
   })
    
  }
+ async presentAlert() {
+  const alert = await this.alertControllerr.create({
+    cssClass: 'my-custom-class',
+    header: 'Alert',
+    subHeader: 'Subtitle',
+    message: 'Are you sure you want to log out?',
+    buttons: [ {
+      text: 'ok',
+      handler: () => {
+        this.router.navigateByUrl('/welcome')
+      }
+    },
+    {
+      text: 'Cancel',
+      handler: () => {
+        this.router.navigateByUrl('/tabs/tabs/tab3')
+      }
+    }]
+    
+  });
+
+  await alert.present();
+}
+ 
  async presentLoadingWithOptions() {
   const loading = await this.load.create({
     spinner: "circles",
@@ -74,6 +99,8 @@ filterData(ev: any) {
     });
   }
 }
+
+
 
   
 

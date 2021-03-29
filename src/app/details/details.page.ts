@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import {Router} from '@angular/router' ;
 import { ServiceService } from '../service.service'
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { ServiceService } from '../service.service'
 export class DetailsPage implements OnInit {
 
 showdata:any;
-  constructor(public router :Router, public actionsheetcontroller: ActionSheetController, public service: ServiceService) { 
+  constructor(public router :Router, public actionsheetcontroller: ActionSheetController, public service: ServiceService, public alertControllerr: AlertController) { 
 
   }
   
@@ -25,7 +26,29 @@ showdata:any;
     this.service.getVarsities() 
   }
 
-
+  async presentAlert() {
+    const alert = await this.alertControllerr.create({
+      cssClass: 'my-custom-class',
+      header: 'Alert',
+      subHeader: 'Subtitle',
+      message: 'Are you sure you want to log out?',
+      buttons: [ {
+        text: 'ok',
+        handler: () => {
+          this.router.navigateByUrl('/welcome')
+        }
+      },
+      {
+        text: 'Cancel',
+        handler: () => {
+          this.router.navigateByUrl('/details')
+        }
+      }]
+      
+    });
+  
+    await alert.present();
+  }
 
 
   async presentActionSheet() {

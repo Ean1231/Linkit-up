@@ -5,7 +5,7 @@ import { LoadingController } from '@ionic/angular';
 // import { AngularFirestore} from '@angular/fire/firestore';
 // import { Observable } from 'rxjs';
 import {ServiceService} from '../service.service';
-
+import { AlertController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 
 
@@ -29,7 +29,7 @@ varsities = [] ;
   modalCtrl: any;
 
   constructor(public router: Router, public service :ServiceService,
-    public load: LoadingController)
+    public load: LoadingController, public alertControllerr: AlertController)
   {
     this.presentLoadingWithOptions();
     this.service.getVarsities().then((items:any)=>{
@@ -43,8 +43,28 @@ varsities = [] ;
    
   }
 
-  ionViewWillEnter() {
-   
+  async presentAlert() {
+    const alert = await this.alertControllerr.create({
+      cssClass: 'my-custom-class',
+      header: 'Alert',
+      subHeader: 'Subtitle',
+      message: 'Are you sure you want to log out?',
+      buttons: [ {
+        text: 'ok',
+        handler: () => {
+          this.router.navigateByUrl('/welcome')
+        }
+      },
+      {
+        text: 'Cancel',
+        handler: () => {
+          this.router.navigateByUrl('/tabs/tabs/tab1')
+        }
+      }]
+      
+    });
+  
+    await alert.present();
   }
 
   ngOnInit() {
