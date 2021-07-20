@@ -6,70 +6,122 @@
 </ion-header>
 
 
-<div style="text-align: center; margin-top: 60px;">
+<div style="text-align: center; margin-top: 20px;">
   <p>
-    Get your latest updates on Busaries, Career Oppertunities and much more.
+    <b>
+       Get your latest updates on Busaries, Career Oppertunities and much more.
+    </b>   
   </p>
 
 </div>
+
+
+
 <ion-content>
 
+  
   <ion-list>
  
-    <ion-searchbar (ionInput)="filterData($event)" color="light"></ion-searchbar>
+    <!-- <ion-searchbar (ionInput)="filterData($event)" color="light"></ion-searchbar> -->
     
-    <ion-card *ngFor='let opportunity of opportunities'>
-      <img src={{opportunity.img}} />
-      <ion-card-content>
-        <ion-card-title>
-          {{opportunity.title}}
-        </ion-card-title>
+    <ion-slides
+      pager="false"
+      [options]="slideOptsCategory"
+      style="width: 100%; margin-top: 5%"
+    >
 
-        <!-- showMore -->
-        <p (click)="showMore()" *ngIf="showContent">
-          {{opportunity.description.substring(0, 60)}} ...Show more<br><br>
-        </p>
+    <ion-slide style="margin-left: 5%;">
+      <button class="btn btn-primary" type="button"
+      data-bs-toggle="button" autocomplete="off">
+      <i class="fas fa-globe-africa" style="padding-left:5px; padding-right: 6px;"></i>
+        All
+      </button>
+    </ion-slide>
 
-        <!-- showMore -->
-        <p (click)="showMore()" *ngIf="readMoreContent">
-          {{opportunity.description}}  <br><br>
-        </p>
-
-
-
-
-        Type of Opportunity: {{opportunity.type}} <br><br>
-        <div style="background-color: transparent; color: #7857fe; ">
-          <b>
-            
-          </b>
-          Closing date: {{ opportunity.closingDate }} 
-        </div>
-        <br>
-        Field of study: {{ opportunity.studyField }}
-        <br>
-
-
-        <div *ngIf="opportunity.type == 'Bursaries' ; then thenBlock else elseBlock"></div>
-        <ng-template #thenBlock>
-
-         
-         <a href="{{opportunity.link}}"><ion-button color="primary">Apply</ion-button></a> 
-
-
-        </ng-template>
-        <ng-template #elseBlock>
-
-         <a href={{opportunity.link}}> <ion-button color="primary">Book</ion-button></a> 
-        </ng-template>
-       
-        <ion-button color="primary" (click)="share()">
-          <ion-icon name="share-social-outline"></ion-icon>
-        </ion-button>
-
-
-      </ion-card-content>
-
-
+      <ion-slide>
       
-    </ion-card>
+        <button class="btn btn-primary"style="border-radius: 20px;
+         margin-top: 2px;" type="button"
+         data-bs-toggle="button" autocomplete="off"
+         >
+         <i class="fas fa-university" style="padding-left:5px; padding-right: 6px;"></i>
+           Bursaries         
+        </button>
+      </ion-slide>
+
+      <ion-slide style="margin-left: -8%;">
+
+        <!-- <ion-button shape="round">
+
+          <div style="padding-right: 8px; padding-bottom: 4px;">
+            <i class="fas fa-briefcase"></i>
+          </div> -->
+          <!-- <ion-icon
+            name="airplane-outline"
+            style="color: #5188d6"
+          ></ion-icon> -->
+          <!-- Career Opportunities
+        </ion-button> -->
+
+        <button class="btn btn-primary" type="button"
+         data-bs-toggle="button" autocomplete="off"
+         >
+         <i class="fas fa-briefcase"></i>
+          Career Opportunities        
+        </button>
+      </ion-slide>
+
+      <ion-slide>
+        <button class="btn btn-primary" type="button"
+        data-bs-toggle="button" autocomplete="off">
+            <i class="fas fa-home"></i>
+          Accommodation
+        </button>
+      </ion-slide>
+
+
+      <ion-slide style="margin-left: 5%;">
+        <button class="btn btn-primary" type="button"
+        data-bs-toggle="button" autocomplete="off">
+
+            <i class="fas fa-graduation-cap"></i>
+          <!-- <ion-icon slot="start" name="restaurant-outline" style="color: #5188d6"></ion-icon> -->
+          Institutions
+        </button>
+      </ion-slide>
+      
+      <!-- <ion-slide (click)="navPremium()" style="margin-left:5% ;">
+        <ion-button color="primary-contrast" shape="round">
+          <ion-icon slot="start" name="star-outline" style="color: #5188d6"></ion-icon>
+          Premium
+        </ion-button>
+      </ion-slide> -->
+    </ion-slides>
+
+
+  </ion-list>
+
+  <ion-card *ngFor='let opportunity of opportunities' class="card-travel">
+    <div class="cards-travel">
+      <div>
+        <img
+          src={{opportunity.img}}
+          style="
+            width: 93%;
+            margin-top: 4%;
+            height: 140px;
+            border-radius: 10px;
+          "
+        />
+      </div>
+
+      <div>
+        <small style="padding-top: 55%;">{{opportunity.title}}</small> <br>
+       <small> <b> Closing date: {{ opportunity.closingDate }}</b></small>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>
+  
+    
+    
