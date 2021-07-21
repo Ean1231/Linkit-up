@@ -1,126 +1,120 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title style="margin-left: 20px;">News feeds</ion-title>
-   <ion-icon (click)="presentAlert()" slot="start" name="log-out-outline" style="height: 30px; width: 30px; margin-left: 15px;"></ion-icon>
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="primary" no-border>
+    <ion-buttons slot="start">
+      <ion-button>
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title style="margin-left: 20px;">
+      News feeds
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <i class="fa fa-bell" aria-hidden="true"></i>
+      </ion-button>
+    </ion-buttons>
+   <!-- <ion-icon (click)="presentAlert()" slot="start" name="log-out-outline" style="height: 30px; width: 30px; margin-left: 15px;"></ion-icon> -->
   </ion-toolbar>
 </ion-header>
 
 
-<div style="text-align: center; margin-top: 20px;">
-  <p>
-    <b>
-       Get your latest updates on Busaries, Career Oppertunities and much more.
-    </b>   
-  </p>
 
-</div>
-
-
-
-<ion-content>
-
-  
-  <ion-list>
- 
-    <!-- <ion-searchbar (ionInput)="filterData($event)" color="light"></ion-searchbar> -->
+<ion-content [fullscreen]="true">
+  <div class="banner">
+    <img src="../assets/geometric-purple-urban-art-on-brick-wall.jpg">
     
-    <ion-slides
-      pager="false"
-      [options]="slideOptsCategory"
-      style="width: 100%; margin-top: 5%"
-    >
-
-    <ion-slide style="margin-left: 5%;">
-      <button class="btn btn-primary" type="button"
-      data-bs-toggle="button" autocomplete="off">
-      <i class="fas fa-globe-africa" style="padding-left:5px; padding-right: 6px;"></i>
-        All
-      </button>
-    </ion-slide>
-
-      <ion-slide>
-      
-        <button class="btn btn-primary"style="border-radius: 20px;
-         margin-top: 2px;" type="button"
-         data-bs-toggle="button" autocomplete="off"
-         >
-         <i class="fas fa-university" style="padding-left:5px; padding-right: 6px;"></i>
-           Bursaries         
-        </button>
-      </ion-slide>
-
-      <ion-slide style="margin-left: -8%;">
-
-        <!-- <ion-button shape="round">
-
-          <div style="padding-right: 8px; padding-bottom: 4px;">
-            <i class="fas fa-briefcase"></i>
-          </div> -->
-          <!-- <ion-icon
-            name="airplane-outline"
-            style="color: #5188d6"
-          ></ion-icon> -->
-          <!-- Career Opportunities
-        </ion-button> -->
-
-        <button class="btn btn-primary" type="button"
-         data-bs-toggle="button" autocomplete="off"
-         >
-         <i class="fas fa-briefcase"></i>
-          Career Opportunities        
-        </button>
-      </ion-slide>
-
-      <ion-slide>
-        <button class="btn btn-primary" type="button"
-        data-bs-toggle="button" autocomplete="off">
-            <i class="fas fa-home"></i>
-          Accommodation
-        </button>
-      </ion-slide>
-
-
-      <ion-slide style="margin-left: 5%;">
-        <button class="btn btn-primary" type="button"
-        data-bs-toggle="button" autocomplete="off">
-
-            <i class="fas fa-graduation-cap"></i>
-          <!-- <ion-icon slot="start" name="restaurant-outline" style="color: #5188d6"></ion-icon> -->
-          Institutions
-        </button>
-      </ion-slide>
-      
-      <!-- <ion-slide (click)="navPremium()" style="margin-left:5% ;">
-        <ion-button color="primary-contrast" shape="round">
-          <ion-icon slot="start" name="star-outline" style="color: #5188d6"></ion-icon>
-          Premium
-        </ion-button>
-      </ion-slide> -->
-    </ion-slides>
-
-
-  </ion-list>
-
-  <ion-card *ngFor='let opportunity of opportunities' class="card-travel">
-    <div class="cards-travel">
-      <div>
-        <img
-          src={{opportunity.img}}
-          style="
-            width: 93%;
-            margin-top: 4%;
-            height: 140px;
-            border-radius: 10px;
-          "
-        />
-      </div>
-
-      <div>
-        <small style="padding-top: 55%;">{{opportunity.title}}</small> <br>
-       <small> <b> Closing date: {{ opportunity.closingDate }}</b></small>
-      </div>
+    <div class="caption">
+      Bursaries, Career Oppertunities and <br>
+      much more.
     </div>
-  </ion-card>
+  </div> 
+
+
+  <div class="search">
+    <ion-item lines="none">
+      <ion-icon slot="start" name="search-outline"></ion-icon>
+      <ion-input placeholder="Search"></ion-input>
+      <ion-button slot='end'>
+        <i class="fa fa-filter" aria-hidden="true"></i>
+      </ion-button>
+    </ion-item>
+  </div>
+
+  <div class="title">
+    <h2>Workshop/Event</h2>
+    <p>See all</p>
+  </div>
+
+  <div class="bursary-slider">
+    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" class="default-left-padding">
+      <ion-slide>
+        <ion-col class="ion-text-left">
+          <ion-card>
+            <ion-card-header class="ion-no-padding">
+              <img src="../assets/nsfas.png" >
+            </ion-card-header>
+
+    
+            <ion-card-content>
+              <p class="date">21 July 2021</p>
+              <h2 class="eventName">Mandela Day 2021</h2>
+              <p class="location"><ion-icon name="location" style="margin-right: 5px;"></ion-icon>Online Event</p>
+            
+              <div class="additional-info">
+                <div class="attendees">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  <i class="fa fa-user" aria-hidden="true" style="color: green;"></i>
+                  <i class="fa fa-user" aria-hidden="true" style="color: orange;"></i>
+                  <i class="fa fa-user" aria-hidden="true" style="color: black;"></i>
+                  <div class="count">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <p>+11</p>
+                  </div>
+                </div>
+
+                <p class="time">7:30am</p>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-slide>
+
+
+      <ion-slide>
+        <ion-col class="ion-text-left">
+          <ion-card>
+            <ion-card-header class="ion-no-padding">
+              <img src="../assets/nsfas.png" >
+            </ion-card-header>
+
+    
+            <ion-card-content>
+              <p class="date">21 July 2021</p>
+              <h2 class="eventName">NSFAS</h2>
+              <p class="location"><ion-icon name="location" style="margin-right: 5px;"></ion-icon> Kimberley, Galeshewe</p>
+            
+              <div class="additional-info">
+                <div class="attendees">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                  <i class="fa fa-user" aria-hidden="true" style="color: green;"></i>
+                  <i class="fa fa-user" aria-hidden="true" style="color: orange;"></i>
+                  <i class="fa fa-user" aria-hidden="true" style="color: black;"></i>
+                  <div class="count">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <p>+11</p>
+                  </div>
+                </div>
+
+                <p class="time">10:25pm</p>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+  </div>
 </ion-content>
   
     
