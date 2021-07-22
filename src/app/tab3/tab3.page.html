@@ -48,72 +48,76 @@
   </div>
 
   <div class="bursary-slider">
-    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" class="default-left-padding">
-      <ion-slide>
-        <ion-col class="ion-text-left">
-          <ion-card>
-            <ion-card-header class="ion-no-padding">
-              <img src="../assets/nsfas.png" >
-            </ion-card-header>
+      <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" class="default-left-padding">
 
-    
-            <ion-card-content>
-              <p class="date">21 July 2021</p>
-              <h2 class="eventName">Mandela Day 2021</h2>
-              <p class="location"><ion-icon name="location" style="margin-right: 5px;"></ion-icon>Online Event</p>
-            
-              <div class="additional-info">
-                <div class="attendees">
+          <ion-slide *ngFor="let opportunity of opportunities">
+                  <ion-col class="ion-text-left">
+                      <ion-card>
+                          <ion-card-header class="ion-no-padding">
+                              <img src={{opportunity.img}}>
+                          </ion-card-header>
+
+
+                          <ion-card-content>
+                              <p class="date">{{opportunity.closingDate}}</p>
+                              <h2 class="eventName">{{opportunity.title.substring(0, 15)}}..</h2>
+                              <p class="location"><ion-icon name="location" style="margin-right: 5px;"></ion-icon>{{opportunity.type}}</p>
+
+                              <div class="additional-info">
+                                  <div class="attendees">
+                                      <i class="fa fa-user" aria-hidden="true"></i>
+                                      <i class="fa fa-user" aria-hidden="true" style="color: green;"></i>
+                                      <i class="fa fa-user" aria-hidden="true" style="color: orange;"></i>
+                                      <i class="fa fa-user" aria-hidden="true" style="color: black;"></i>
+                                      <div class="count">
+                                          <i class="fa fa-user" aria-hidden="true"></i>
+                                          <p>+11</p>
+                                      </div>
+                                  </div>
+
+                                  <p class="time">{{opportunity.studyField}}</p>
+                              </div>
+                          </ion-card-content>
+                      </ion-card>
+                  </ion-col>
+
+
+          </ion-slide>
+          <!--
+          <ion-slide>
+      <ion-col class="ion-text-left">
+        <ion-card>
+          <ion-card-header class="ion-no-padding">
+            <img src="../assets/nsfas.png" >
+          </ion-card-header>
+
+
+          <ion-card-content>
+            <p class="date">21 July 2021</p>
+            <h2 class="eventName">NSFAS</h2>
+            <p class="location"><ion-icon name="location" style="margin-right: 5px;"></ion-icon> Kimberley, Galeshewe</p>
+
+            <div class="additional-info">
+              <div class="attendees">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <i class="fa fa-user" aria-hidden="true" style="color: green;"></i>
+                <i class="fa fa-user" aria-hidden="true" style="color: orange;"></i>
+                <i class="fa fa-user" aria-hidden="true" style="color: black;"></i>
+                <div class="count">
                   <i class="fa fa-user" aria-hidden="true"></i>
-                  <i class="fa fa-user" aria-hidden="true" style="color: green;"></i>
-                  <i class="fa fa-user" aria-hidden="true" style="color: orange;"></i>
-                  <i class="fa fa-user" aria-hidden="true" style="color: black;"></i>
-                  <div class="count">
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                    <p>+11</p>
-                  </div>
+                  <p>+11</p>
                 </div>
-
-                <p class="time">7:30am</p>
               </div>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-slide>
 
+              <p class="time">10:25pm</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-slide>
+      -->
 
-      <ion-slide>
-        <ion-col class="ion-text-left">
-          <ion-card>
-            <ion-card-header class="ion-no-padding">
-              <img src="../assets/nsfas.png" >
-            </ion-card-header>
-
-    
-            <ion-card-content>
-              <p class="date">21 July 2021</p>
-              <h2 class="eventName">NSFAS</h2>
-              <p class="location"><ion-icon name="location" style="margin-right: 5px;"></ion-icon> Kimberley, Galeshewe</p>
-            
-              <div class="additional-info">
-                <div class="attendees">
-                  <i class="fa fa-user" aria-hidden="true"></i>
-                  <i class="fa fa-user" aria-hidden="true" style="color: green;"></i>
-                  <i class="fa fa-user" aria-hidden="true" style="color: orange;"></i>
-                  <i class="fa fa-user" aria-hidden="true" style="color: black;"></i>
-                  <div class="count">
-                    <i class="fa fa-user" aria-hidden="true"></i>
-                    <p>+11</p>
-                  </div>
-                </div>
-
-                <p class="time">10:25pm</p>
-              </div>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-slide>
-    </ion-slides>
+      </ion-slides>
   </div>
   <div class="default-top-padding title">
     <h2>Need Funding?</h2>
