@@ -90,6 +90,9 @@ ion-header {
         padding-left: 26px
       }
 
+      default-top-padding{
+        padding-top: 26 !important;
+      }
       .bursary-slider{
 
         margin-left: 30px;
@@ -196,4 +199,59 @@ ion-header {
         
         }
       
+        .accom {
+          border-radius: 10px;
+          box-shadow: 0px 3px 12px 2px rgba(0,0,0,0.16);
+          margin: 0 26px 26px 26px;
+          display: flex;
+          justify-content: space-between;
+          margin-right: 200px;
+          padding-right: 100px;
+          img{
+            border-radius: 10px 0 0 10px;
+            object-fit: cover;
+          }
+
+          .info{
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            .content{
+              h6{
+                color: #364f6B;
+                font-size: 14px;
+                font-weight: bold;
+                margin-top: 0px;
+              }
+
+              .location{
+                display: flex;
+                align-items: center;
+                color: var(--ion-color-primary);
+                font-size: 10px;
+                margin-bottom: 5px;
+                margin-top: 0;
+              }
+
+              .stats{
+                display: flex;
+                margin-bottom: 5px;
+                margin-top: 0;
+
+                span{
+                  display: flex;
+                  align-items: center;
+                  color: #364f6B;
+                  font-size: 10px;
+                  margin-right: 10px;
+                }
+              }
+            }
+          }
+        }
+          
+        
+
       
