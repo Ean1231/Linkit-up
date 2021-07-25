@@ -9,7 +9,9 @@ import { RegistrationPage } from './registration/registration.page';
 })
 export class ServiceService {
 listUniversities = [];
-listopportuniites = []
+listopportuniites = [];
+listbursaries = [];
+
   constructor( public firestore:AngularFirestore) { 
 
   
@@ -42,5 +44,14 @@ listopportuniites = []
   }
 
 
+  getBursaries(){
+    return new Promise((res, rej)=>{
+      this.firestore.collection('bursaries').valueChanges().subscribe((items: any) => {
+        this.listbursaries = items;
+        //console.log(items)
+        res(this.listbursaries) ;
+        })
+    })
+  }
   
 }

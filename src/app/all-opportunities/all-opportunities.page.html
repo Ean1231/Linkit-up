@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons color="light" slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Opportunities</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div  class="container" *ngFor="let opportunity of opportunities">
+    <div class="card cardContent">
+      <div >
+        <img src="{{opportunity.img}}" alt="image" />
+      </div>
+
+      <div>
+        <h5 class="card-title">{{ opportunity.title.substring(0, 20) }}</h5>
+
+        <small style="color: gray; font-size: 12pt"
+          > Closing date: {{ opportunity.closingDate }}</small
+        >
+
+        <div style="display: flex; justify-content:space-between;">
+          <div >
+            <a href={{opportunity.link}}> 
+              <button 
+                style="background-color: indigo; border-radius: 10px; color: white;"
+               
+             >
+               Apply
+            </button></a>
+           </div>          
+           <div><small>Type: {{opportunity.type}}</small></div>
+
+        </div>
+      </div>
+    </div>
+  </div><br><br>
+</ion-content>

@@ -11,8 +11,6 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 
-
-
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -20,19 +18,48 @@ import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 })
 export class Tab3Page {
   opportunities = [] ;
+  bursaries = [];
+
   showContent:boolean =true;
   readMoreContent:boolean =false;
+  data:any;
 
 
-  constructor(private router: Router, private firestore: AngularFirestore,private service: ServiceService,  public load: LoadingController, private alertController: ToastController, public alertControllerr: AlertController)
+  constructor(public router: Router, public firestore: AngularFirestore,public service: ServiceService,  public load: LoadingController, private alertController: ToastController, public alertControllerr: AlertController)
  {
+ 
+
   this.presentLoadingWithOptions();
   this.service.getOpportunities().then((items:any)=>{
     console.log(items);
      this.opportunities = items;
-  })
-   
+  });
+
+  this.service.getBursaries().then((items:any)=>{
+   // console.log(items);
+     this.bursaries = items;
+  
+  });
  }
+
+ ngOnInit() {
+  this.data = this.router.getCurrentNavigation().extras.state;
+  console.log(this.data)
+}
+
+details(data){
+  console.log(data)
+  this.router.navigateByUrl('/opportunity-details', {state:data});
+}
+
+
+//  ngOnInit() {
+//     this.data = this.router.getCurrentNavigation().extras.state;
+//     console.log(this.data)
+
+// }
+
+
  async presentAlert() {
   const alert = await this.alertControllerr.create({
     cssClass: 'my-custom-class',
@@ -78,6 +105,8 @@ showMore(){
 }
 
 
+
+
 async share(){
   let shareRet = await Share.share({
     title: 'See cool stuff',
@@ -96,10 +125,10 @@ filterData(ev: any) {
     this.opportunities = this.opportunities.filter((item) => {
       
       return item.type.toLowerCase().indexOf(val.toLowerCase()) > -1;
-    });
+    })
+    
   }
 }
-
 
 
   

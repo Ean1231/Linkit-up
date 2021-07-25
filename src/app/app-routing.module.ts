@@ -62,7 +62,19 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./onboarding/onboarding.module').then( m => m.OnboardingPageModule)
+  },  {
+    path: 'opportunity-details',
+    loadChildren: () => import('./opportunity-details/opportunity-details.module').then( m => m.OpportunityDetailsPageModule)
   },
+  {
+    path: 'all-opportunities',
+    loadChildren: () => import('./all-opportunities/all-opportunities.module').then( m => m.AllOpportunitiesPageModule)
+  },
+  {
+    path: 'all-bursarues',
+    loadChildren: () => import('./all-bursarues/all-bursarues.module').then( m => m.AllBursaruesPageModule)
+  },
+
 
 
 

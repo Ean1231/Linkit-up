@@ -1,8 +1,8 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar color="primary" no-border>
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" >
       <ion-button>
-        <i class="fa fa-bars" aria-hidden="true"></i>
+        <ion-icon  (click)="presentAlert()" slot="start" name="log-out-outline" style="height: 30px; width: 30px; margin-left: -12px;"></ion-icon>
       </ion-button>
     </ion-buttons>
 
@@ -12,7 +12,7 @@
 
     <ion-buttons slot="end">
       <ion-button>
-        <i class="fa fa-bell" aria-hidden="true"></i>
+        <!-- <i class="fa fa-bell" aria-hidden="true"></i> -->
       </ion-button>
     </ion-buttons>
    <!-- <ion-icon (click)="presentAlert()" slot="start" name="log-out-outline" style="height: 30px; width: 30px; margin-left: 15px;"></ion-icon> -->
@@ -35,7 +35,7 @@
   <div class="search">
     <ion-item lines="none">
       <ion-icon slot="start" name="search-outline"></ion-icon>
-      <ion-input placeholder="Search"></ion-input>
+      <ion-input (ionInput)="filterData($event)" placeholder="Search"></ion-input>
       <ion-button slot='end'>
         <i class="fa fa-filter" aria-hidden="true"></i>
       </ion-button>
@@ -44,7 +44,7 @@
 
   <div class="title">
     <h2>Workshop/Event</h2>
-    <p>See all</p>
+    <p [routerLink]="'/all-opportunities'">See all</p>
   </div>
 
   <div class="bursary-slider">
@@ -121,30 +121,30 @@
   </div>
   <div class="default-top-padding title">
     <h2>Need Funding?</h2>
-    <p>See all</p>
+    <p [routerLink]="'/all-bursarues'">See all</p>
   </div>
 
 
-  <div class="bursary-slider">
-     <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" class="default-left-padding">
-    <ion-slide>
+  <div    class="bursary-slider">
+     <ion-slides  [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" class="default-left-padding">
+    <ion-slide  *ngFor="let bursary of bursaries">
       
-  <div class="accom">
-    <img src="../assets/nsfas.jpg">
+  <div  class="accom">
+    <img style="object-fit: contain;" src={{bursary.img}}>
 
     <div class="info">
       <div class="content">
-        <h6>NSFAS Applications</h6>
+        <h6>{{bursary.title.substring(0, 10)}}</h6>
         <p class="stats">
-          <span><ion-icon name="eye"></ion-icon>&nbsp;2.3K</span>
-          <span><ion-icon name="heart"></ion-icon>3758</span>
+          <span><ion-icon name="lock-closed-outline"></ion-icon></span>
+          <span>{{bursary.closingDate}}</span>
         </p>
       </div>
     </div>
   </div>
     </ion-slide>
 
-
+<!-- 
     <ion-slide>
       
       <div class="accom">
@@ -160,7 +160,7 @@
           </div>
         </div>
       </div>
-        </ion-slide>
+        </ion-slide> -->
   </ion-slides>
   </div>
  
