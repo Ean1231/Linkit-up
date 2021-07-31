@@ -1,29 +1,36 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons color="light" slot="end">
+    <ion-buttons slot="end">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Opportunities</ion-title>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div  class="container" *ngFor="let opportunity of opportunities">
+  <div class="search">
+    <ion-item lines="none">
+      <ion-icon slot="start" name="search-outline"></ion-icon>
+      <ion-input (ionInput)="filterData($event)" placeholder="Search by title"></ion-input>
+    </ion-item>
+  </div>
+
+  <div (click)="details(data)"  class="container" *ngFor="let data of opportunities">
     <div class="card cardContent">
       <div >
-        <img src="{{opportunity.img}}" alt="image" />
+        <img src="{{data.img}}" alt="image" />
       </div>
 
       <div>
-        <h5 class="card-title">{{ opportunity.title.substring(0, 20) }}</h5>
+        <h5 class="card-title">{{ data.title.substring(0, 20) }}</h5>
 
         <small style="color: gray; font-size: 12pt"
-          > Closing date: {{ opportunity.closingDate }}</small
+          > Closing date: {{ data.closingDate }}</small
         >
 
         <div style="display: flex; justify-content:space-between;">
           <div >
-            <a href={{opportunity.link}}> 
+            <a href={{data.link}}> 
               <button 
                 style="background-color: indigo; border-radius: 10px; color: white;"
                
@@ -31,7 +38,7 @@
                Apply
             </button></a>
            </div>          
-           <div><small>Type: {{opportunity.type}}</small></div>
+           <div><small>Type: {{data.type}}</small></div>
 
         </div>
       </div>

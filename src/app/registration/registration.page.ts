@@ -18,7 +18,7 @@ export class RegistrationPage implements OnInit{
   email
   confirmPassword
   Date
-
+  password
  constructor( public router: Router, public auth:AuthService, private firestore: AngularFirestore, public alertController: AlertController)
   {
 

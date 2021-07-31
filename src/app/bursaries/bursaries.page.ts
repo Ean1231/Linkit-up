@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router' ;
+import { ServiceService } from '../service.service'
 
 @Component({
   selector: 'app-bursaries',
@@ -8,12 +9,13 @@ import {Router} from '@angular/router' ;
 })
 export class BursariesPage implements OnInit {
   bursaries;
-
-  constructor(public router: Router) { }
+  showdata: any;
+  constructor(public router: Router, public service: ServiceService) { }
 
   ngOnInit() {
-    this.bursaries = this.router.getCurrentNavigation().extras.state;
-    console.log(this.bursaries)
+    this.showdata = this.router.getCurrentNavigation().extras.state;
+    console.log(this.showdata)   
+    this.service.getBursaries();
   }
 
 }

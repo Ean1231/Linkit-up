@@ -16,7 +16,31 @@ data: any;
     });
   }
 
+
+
   ngOnInit() {
+    this.data = this.router.getCurrentNavigation().extras.state;
+    console.log(this.data)
+  
+   
+  }
+  
+  details(data){
+    console.log(data)
+    this.router.navigateByUrl('/opportunity-details', {state:data});
+  }
+
+
+  filterData(ev: any) {
+  
+    const val = ev.target.value;
+    if (val && val.trim() != "") {
+      this.opportunities = this.opportunities.filter((item) => {
+        
+        return item.type.toLowerCase().indexOf(val.toLowerCase()) > -1;
+      })
+      
+    }
   }
 
 }

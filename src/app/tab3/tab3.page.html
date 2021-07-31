@@ -6,8 +6,8 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title style="margin-left: 20px;">
-      News feeds
+    <ion-title style="margin-left: 30px;">
+      Opportunities
     </ion-title>
 
     <ion-buttons slot="end">
@@ -21,7 +21,7 @@
 
 
 
-<ion-content [fullscreen]="true">
+<ion-content >
   <div class="banner">
     <img src="../assets/geometric-purple-urban-art-on-brick-wall.jpg">
     
@@ -50,32 +50,26 @@
   <div class="bursary-slider">
       <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" class="default-left-padding">
 
-          <ion-slide *ngFor="let opportunity of opportunities">
+          <ion-slide (click)="details(data)" *ngFor="let data of opportunities">
                   <ion-col class="ion-text-left">
                       <ion-card>
                           <ion-card-header class="ion-no-padding">
-                              <img src={{opportunity.img}}>
+                              <img style="height: 100px; width: 200px;" src={{data.img}}>
                           </ion-card-header>
 
 
                           <ion-card-content>
-                              <p class="date">{{opportunity.closingDate}}</p>
-                              <h2 class="eventName">{{opportunity.title.substring(0, 15)}}..</h2>
-                              <p class="location"><ion-icon name="location" style="margin-right: 5px;"></ion-icon>{{opportunity.type}}</p>
+                              <p class="date">{{data.closingDate}}</p>
+                              <h2 class="eventName">{{data.title.substring(0, 12)}}..</h2>
+                              <p class="location"><ion-icon name="location" style="margin-right: 5px;"></ion-icon>{{data.type}}</p>
 
                               <div class="additional-info">
                                   <div class="attendees">
                                       <i class="fa fa-user" aria-hidden="true"></i>
-                                      <i class="fa fa-user" aria-hidden="true" style="color: green;"></i>
-                                      <i class="fa fa-user" aria-hidden="true" style="color: orange;"></i>
-                                      <i class="fa fa-user" aria-hidden="true" style="color: black;"></i>
-                                      <div class="count">
-                                          <i class="fa fa-user" aria-hidden="true"></i>
-                                          <p>+11</p>
-                                      </div>
+                                     
                                   </div>
 
-                                  <p class="time">{{opportunity.studyField}}</p>
+                                  <p class="time">{{data.studyField}}</p>
                               </div>
                           </ion-card-content>
                       </ion-card>
@@ -125,19 +119,19 @@
   </div>
 
 
-  <div    class="bursary-slider">
-     <ion-slides  [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" class="default-left-padding">
-    <ion-slide  *ngFor="let bursary of bursaries">
+  <div  class="bursary-slider">
+     <ion-slides   [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" class="default-left-padding">
+    <ion-slide (click)="bursaryDetails(data)"  *ngFor="let data of bursaries">
       
-  <div  class="accom">
-    <img style="object-fit: contain;" src={{bursary.img}}>
+  <div style="height: 100px; width: 700px;"  class="accom">
+    <img style="object-fit: contain;" src={{data.img}}>
 
     <div class="info">
       <div class="content">
-        <h6>{{bursary.title.substring(0, 10)}}</h6>
+        <h6>{{data.title.substring(0, 10)}}</h6>
         <p class="stats">
           <span><ion-icon name="lock-closed-outline"></ion-icon></span>
-          <span>{{bursary.closingDate}}</span>
+          <span>{{data.closingDate}}</span>
         </p>
       </div>
     </div>

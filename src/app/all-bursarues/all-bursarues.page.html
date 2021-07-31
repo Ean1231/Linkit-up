@@ -1,29 +1,36 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons color="light" slot="end">
+    <ion-buttons slot="end">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Bursaries</ion-title>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div  class="container" *ngFor="let bursary of bursaries">
+  <div class="search">
+    <ion-item lines="none">
+      <ion-icon slot="start" name="search-outline"></ion-icon>
+      <ion-input (ionInput)="filterData($event)" placeholder="Search by title"></ion-input>
+      
+    </ion-item>
+  </div>
+  <div (click)="bursaryDetails(data)"  class="container" *ngFor="let data of bursaries">
     <div class="card cardContent">
       <div >
-        <img src="{{bursary.img}}" alt="image" />
+        <img src="{{data.img}}" alt="image" />
       </div>
 
       <div>
-        <h5 class="card-title">{{ bursary.title.substring(0, 20) }}</h5>
+        <h5 class="card-title">{{ data.title.substring(0, 20) }}</h5>
 
         <small style="color: gray; font-size: 12pt"
-          > Closing date: {{ bursary.closingDate }}</small
+          > Closing date: {{ data.closingDate }}</small
         >
 
         <div style="display: flex; justify-content:space-between;">
           <div >
-            <a href={{bursary.link}}> 
+            <a href={{data.link}}> 
               <button 
                 style="background-color: indigo; border-radius: 10px; color: white;"
                

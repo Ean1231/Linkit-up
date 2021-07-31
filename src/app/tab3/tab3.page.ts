@@ -23,6 +23,7 @@ export class Tab3Page {
   showContent:boolean =true;
   readMoreContent:boolean =false;
   data:any;
+  datta:any;
 
 
   constructor(public router: Router, public firestore: AngularFirestore,public service: ServiceService,  public load: LoadingController, private alertController: ToastController, public alertControllerr: AlertController)
@@ -40,16 +41,24 @@ export class Tab3Page {
      this.bursaries = items;
   
   });
+
  }
 
  ngOnInit() {
   this.data = this.router.getCurrentNavigation().extras.state;
   console.log(this.data)
+
+ 
 }
 
 details(data){
   console.log(data)
   this.router.navigateByUrl('/opportunity-details', {state:data});
+}
+
+bursaryDetails(data){
+  console.log(data)
+  this.router.navigateByUrl('/bursaries', {state:data});
 }
 
 
