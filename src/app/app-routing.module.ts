@@ -74,6 +74,14 @@ const routes: Routes = [
     path: 'all-bursarues',
     loadChildren: () => import('./all-bursarues/all-bursarues.module').then( m => m.AllBursaruesPageModule)
   },
+  {
+    path: 'ap-calculator',
+    loadChildren: () => import('./ap-calculator/ap-calculator.module').then( m => m.ApCalculatorPageModule)
+  },
+  {
+    path: 'ap-search',
+    loadChildren: () => import('./ap-search/ap-search.module').then( m => m.ApSearchPageModule)
+  },
 
 
 

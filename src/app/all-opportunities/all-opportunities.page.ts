@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServiceService } from '../service.service';
 import { Router } from '@angular/router'
+import { IonSearchbar } from '@ionic/angular';
 @Component({
   selector: 'app-all-opportunities',
   templateUrl: './all-opportunities.page.html',
   styleUrls: ['./all-opportunities.page.scss'],
 })
 export class AllOpportunitiesPage implements OnInit {
+  @ViewChild('search', {static: false}) search: IonSearchbar;
   opportunities = [] ;
 data: any;
   constructor(public service: ServiceService, public router: Router) { 
@@ -16,7 +18,11 @@ data: any;
     });
   }
 
-
+ionViewDidEnter(){
+  setTimeout(() => {
+    this.search.setFocus()
+  }, );
+}
 
   ngOnInit() {
     this.data = this.router.getCurrentNavigation().extras.state;
@@ -31,13 +37,13 @@ data: any;
   }
 
 
-  filterData(ev: any) {
+  _ionChange(event) {
   
-    const val = ev.target.value;
+    const val = event.target.value;
     if (val && val.trim() != "") {
-      this.opportunities = this.opportunities.filter((item) => {
+      this.opportunities = this.opportunities.filter((item: any) => {
         
-        return item.type.toLowerCase().indexOf(val.toLowerCase()) > -1;
+        return (item.type.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
       
     }

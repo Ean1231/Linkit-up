@@ -1,78 +1,62 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title style="margin-left: 20px;">Search for institution</ion-title>
+    <ion-title style="margin-left: 20px;">Accomodation</ion-title>
    <ion-icon (click)="presentAlert()" slot="start" name="log-out-outline" style="height: 30px; width: 30px; margin-left: 15px;"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
+<ion-content>
+  <ion-content [scrollEvents]="true">
+    <div class="banner" style="margin-top: 30px;">
+      <img src="../assets/geometric-purple-urban-art-on-brick-wall.jpg">
+      
+      <div class="caption">
+Search and find accomodation near your desired study location </div>
+    </div> 
 
-
-<div style="text-align: center; margin-top: 40px;">
-  <p>
-    <b>
-      This feature allows you to find <br> a suitable course based on your aps.
-    </b>
-    
-  </p>  
-  
+  <div class="search">
+    <ion-item lines="none">
+      <ion-icon slot="start" name="search-outline"></ion-icon>
+      <ion-input (ionInput)="filterData($event)" placeholder="Search by location"></ion-input>
+      <ion-button slot='end'>
+        <i class="fa fa-filter" aria-hidden="true"></i>
+      </ion-button>
+    </ion-item>
   </div>
 
+  <div  class="container" *ngFor="let data of accomodation">
+    <div class="card cardContent">
+      <div >
+        <img src="{{data.image}}" style="height: 200px; width: 100%;" />
+      </div>
+
+      <div>
+        <h5 class="card-title">{{ data.AccomodationName }}</h5>
+
+        <small style="color: rgb(240, 116, 116); font-size: 12pt"
+          >{{ data.description }}</small
+        >
+
+        <div style="display: flex; justify-content:space-between;">
+          <div><small>Located in:{{ data.location}}</small></div>
+          <div><small><ion-icon name="call-outline"></ion-icon>{{data.contact}}</small></div>
+
+        </div>
+        <div style="display: flex; justify-content:space-between;">
+          <div><small>Available spaces:{{ data.rooms}}</small></div>
+          <!-- <div><small><ion-icon name="call-outline"></ion-icon>{{data.contact}}</small></div> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
   
  
  
 
-           <div style="margin-top: 20px;">
-            <!-- <ion-item style="margin-left: 24px; margin-right: 24px; border-radius: 30px;">
-              
-            </ion-item> -->
-             <label style="margin: 4%;" for="text"><b>Enter Score</b></label>
-             <br>
-             <input type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1"  style="width:93%; margin-right: 12px;" #aps>
-            <br>
-                            <label style="margin: 4%;" for="validationDefault04"><b>Choose Location</b></label>
-                            <select  [(ngModel)]="location" class="custom-select" id="validationDefault04" required   style="width:93%; margin-left: 12px;" >
-                              <option selected disabled value="">Choose Location</option>
-                              <option>Kimberley</option>
-                              <option>Mahikeng</option>
-                              <option>Johhanesburg</option>
-                              <option>Bloemfontein</option>
-                              <option>De Aar</option>
-                              <option>vredendal</option>
-                              <option>Pretoria</option>
-                              <option>Cape Town</option>
-                              
-                            </select>
-                        
-
-                        
-                            <label style="margin: 4%;" for="validationDefault04"><b>Preffered Field of study</b></label>
-                            <select [(ngModel)]="field" class="custom-select" id="validationDefault04" required  style="width:93%; margin-left: 12px;">
-                              <option selected disabled value="">Choose Field of study</option>
-                              <option class='form-control' value="Diploma in Retail Management " >Diploma in Retail Management </option>
-                              <option class='form-control' value="Advanced Diploma in Management">Advanced Diploma in Management</option>
-                              <option class='form-control' value="Postgraduate Diploma in Public Management " >Postgraduate Diploma in Public Management </option>
-                              <option class='form-control' value="Postgraduate Diploma in Entrepreneurship">Postgraduate Diploma in Entrepreneurship</option>
-                              <option class='form-control' value="Bachelor of Education – Intermediate Phase " >Bachelor of Education – Intermediate Phase </option>
-                              <option class='form-control' value="Bachelor of Education – Senior & FET Phase " >Bachelor of Education – Senior & FET Phase </option>
-                              <option class='form-control' value="Bachelor of Education Honours – Curriculum Development ">Bachelor of Education Honours – Curriculum Development </option>
-                              <option class='form-control' value="Bachelor of Science  " >Bachelor of Science  </option>
-                              <option class='form-control' value="Postgraduate Diploma in Management">Postgraduate Diploma in Management</option>
-                              <option class='form-control' value="Bachelor of Commerce in Human Resource Management " >Bachelor of Commerce in Human Resource Management</option>
-                              <option class='form-control' value="MOBILE APP DEVELOPMENT">MOBILE APP DEVELOPMENT</option>
-                              <option class='form-control' value="DIPLOMA IN SYSTEMS DEVELOPMENT" >DIPLOMA IN SYSTEMS DEVELOPMENT </option>
-                              <option class='form-control' value="SOFTWARE SPECIALIST" >SOFTWARE SPECIALIST </option>
-                              <option class='form-control' value="COMPUTER CLERK">COMPUTER CLERK </option>
-                              <option class='form-control' value="Bachelor in Education (BEd)">Bachelor in Education (BEd) </option> 
-                              <option class='form-control' value="Law">Law </option> 
-                              <option class='form-control' value="Management Sciences in Accountancy">Management Sciences in Accountancy </option>
-
-                            </select>
-                          </div>
-                        <br>
-                  <div class="btnButtons">
-              <ion-button  color="primary" (click)="submit(aps.value)"  type="button" style="width: 200px; ">Submit</ion-button>
-                        
-          </div>
+          
           
   
   

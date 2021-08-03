@@ -8,24 +8,16 @@ import {ServiceService} from '../service.service';
 import { AlertController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 
-
-
-
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-ap-search',
+  templateUrl: './ap-search.page.html',
+  styleUrls: ['./ap-search.page.scss'],
 })
-export class Tab1Page {
+export class ApSearchPage implements OnInit {
   aps;
   location;
   field;
-  accomodation;
-
-
-
-  
-varsities = [] ;
+  varsities = [] ;
   modalCtrl: any;
 
   constructor(public router: Router, public service :ServiceService,
@@ -37,15 +29,6 @@ varsities = [] ;
       this.varsities = items;
 
     });
-    this.service.getAccomodation().then((items:any)=>{
-      console.log(items);
-      this.accomodation = items;
-
-    });
-    
-    
-
-   
   }
 
   async presentAlert() {
@@ -72,12 +55,6 @@ varsities = [] ;
     await alert.present();
   }
 
-  ngOnInit() {
-   
-  
-  }
-
-
   async presentLoadingWithOptions() {
     const loading = await this.load.create({
       spinner: "circles",
@@ -93,38 +70,25 @@ varsities = [] ;
     console.log("Loading dismissed with role:", role);
   }
 
-  filterData(ev: any) {
+  submit (ap){
   
-    const val = ev.target.value;
-    if (val && val.trim() != "") {
-      this.accomodation = this.accomodation.filter((item) => {
-        
-        return item.location.toLowerCase().indexOf(val.toLowerCase()) > -1;
-      })
-      
-    }
+    let aps = this.varsities.filter(aps => aps.aps == ap);
+    console.log(aps);
+    let location =  aps.filter(location =>location.location == this.location) ;
+    console.log(this.field)
+    let field =  location.filter(field =>field.qualification == this.field) ;
+    console.log(field)
+   console.log(location)
+    this.router.navigateByUrl('/institutions', {state:field})
   }
 
+  async dismiss() {
+    return await this.modalCtrl.dismiss();
+  }
 
-submit (ap){
-  
-  let aps = this.varsities.filter(aps => aps.aps == ap);
-  console.log(aps);
-  let location =  aps.filter(location =>location.location == this.location) ;
-  console.log(this.field)
-  let field =  location.filter(field =>field.qualification == this.field) ;
-  console.log(field)
- console.log(location)
-  this.router.navigateByUrl('/institutions', {state:field})
-}
+ 
 
-
-async dismiss() {
-  return await this.modalCtrl.dismiss();
-}
+  ngOnInit() {
+  }
 
 }
-function ngOnInit() {
-  throw new Error('Function not implemented.');
-}
-

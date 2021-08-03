@@ -11,7 +11,7 @@ export class ServiceService {
 listUniversities = [];
 listopportuniites = [];
 listbursaries = [];
-
+listAccomodation = [];
   constructor( public firestore:AngularFirestore) { 
 
   
@@ -50,6 +50,15 @@ listbursaries = [];
         this.listbursaries = items;
         //console.log(items)
         res(this.listbursaries) ;
+        })
+    })
+  }
+  getAccomodation(){
+    return new Promise((res, rej)=>{
+      this.firestore.collection('accomodation').valueChanges().subscribe((items: any) => {
+        this.listAccomodation = items;
+        //console.log(items)
+        res(this.listAccomodation) ;
         })
     })
   }

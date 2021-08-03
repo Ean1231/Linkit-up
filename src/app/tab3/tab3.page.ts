@@ -28,8 +28,6 @@ export class Tab3Page {
 
   constructor(public router: Router, public firestore: AngularFirestore,public service: ServiceService,  public load: LoadingController, private alertController: ToastController, public alertControllerr: AlertController)
  {
- 
-
   this.presentLoadingWithOptions();
   this.service.getOpportunities().then((items:any)=>{
     console.log(items);

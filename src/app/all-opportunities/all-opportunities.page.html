@@ -10,12 +10,11 @@
 <ion-content>
   <div class="search">
     <ion-item lines="none">
-      <ion-icon slot="start" name="search-outline"></ion-icon>
-      <ion-input (ionInput)="filterData($event)" placeholder="Search by title"></ion-input>
+      <ion-searchbar #search (ionChange)="_ionChange($event); " placeholder="Search by title"></ion-searchbar>
     </ion-item>
   </div>
 
-  <div (click)="details(data)"  class="container" *ngFor="let data of opportunities">
+  <div (click)="details(data)"  class="container" *ngFor="let data of opportunities ">
     <div class="card cardContent">
       <div >
         <img src="{{data.img}}" alt="image" />
