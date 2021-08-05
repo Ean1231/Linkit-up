@@ -10,13 +10,17 @@
 <ion-content>
   <div class="ml-1" style="height: 100%">
     <div class="card" style=" height: 100%">
-      <img style="height: 150px;" src="{{showdata.image}}" class="card-img-top" alt="..." />
+      <img style="height: 250px;" src="{{showdata.image}}" class="card-img-top" alt="..." />
 
       <div class="card-body">
         <h5 class="card-title">{{showdata.AccomodationName}}</h5>
         <h3>Description</h3>
         <p color="primary">{{showdata.description.substring(0, 280)}}... </p>
-        <h6><ion-icon name="location-outline"></ion-icon>{{showdata.location}}</h6>
+        <div style="display:flex;">
+          <h6><ion-icon name="location-outline"></ion-icon>{{showdata.location}}</h6>
+<h6 style="margin-left: 100px;"><ion-icon name="call-outline"></ion-icon>{{showdata.contact}}</h6>
+
+        </div>
       </div>
       <div class="border-top"></div>
       <div
