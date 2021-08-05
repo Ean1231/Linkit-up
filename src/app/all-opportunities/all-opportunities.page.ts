@@ -37,13 +37,13 @@ ionViewDidEnter(){
   }
 
 
-  _ionChange(event) {
+  filterData(ev: any) {
   
-    const val = event.target.value;
+    const val = ev.target.value;
     if (val && val.trim() != "") {
-      this.opportunities = this.opportunities.filter((item: any) => {
+      this.opportunities = this.opportunities.filter((item) => {
         
-        return (item.type.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return item.type.toLowerCase().indexOf(val.toLowerCase()) > -1;
       })
       
     }

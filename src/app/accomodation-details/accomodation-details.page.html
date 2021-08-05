@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ml-1" style="height: 100%">
+    <div class="card" style=" height: 100%">
+      <img style="height: 150px;" src="{{showdata.image}}" class="card-img-top" alt="..." />
+
+      <div class="card-body">
+        <h5 class="card-title">{{showdata.AccomodationName}}</h5>
+        <h3>Description</h3>
+        <p color="primary">{{showdata.description.substring(0, 280)}}... </p>
+        <h6><ion-icon name="location-outline"></ion-icon>{{showdata.location}}</h6>
+      </div>
+      <div class="border-top"></div>
+      <div
+        class="container mt-3"
+        style="
+          display: grid;
+          grid-template-columns: 50% 50%;
+          gap: 12px;
+          height: 100%;
+        "
+      > 
+      </div>
+
+      <div style="display:grid;  grid-template-columns: 50% 50%;  ">
+        <!-- <div class="m-0">
+          <ion-icon color="primary" name="location-outline"></ion-icon>
+          <small class="pl-2">{{location}}</small><br />
+        </div> -->
+
+        <!-- <div class="ml-5">
+          <ion-icon color="primary" name="call-outline"></ion-icon>
+          <small class="pl-2">{{contact}} </small>
+        </div> -->
+        <!-- <div class="">
+          <ion-icon color="primary" name="mail-outline"></ion-icon>
+          <small class="pl-2"> {{showdata.email}} </small>
+        </div> -->
+        <div >
+         <a href={{showdata.link}}> 
+           <ion-button style="width: 100%; margin-left: 90px;"
+            
+            
+          >
+            Apply
+          </ion-button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

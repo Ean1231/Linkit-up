@@ -82,6 +82,10 @@ const routes: Routes = [
     path: 'ap-search',
     loadChildren: () => import('./ap-search/ap-search.module').then( m => m.ApSearchPageModule)
   },
+  {
+    path: 'accomodation-details',
+    loadChildren: () => import('./accomodation-details/accomodation-details.module').then( m => m.AccomodationDetailsPageModule)
+  },
 
 
 

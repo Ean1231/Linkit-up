@@ -22,7 +22,7 @@ export class Tab1Page {
   location;
   field;
   accomodation;
-
+data: any;
 
 
   
@@ -47,6 +47,11 @@ varsities = [] ;
     
 
    
+  }
+
+  details(data){
+    console.log(data)
+    this.router.navigateByUrl('/accomodation-details', {state:data});
   }
 
   async presentAlert() {
@@ -74,7 +79,8 @@ varsities = [] ;
   }
 
   ngOnInit() {
-   
+    this.data = this.router.getCurrentNavigation().extras.state;
+    console.log(this.data)
   
   }
   async share(){
