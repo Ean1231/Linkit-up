@@ -46,7 +46,7 @@ export class ApSearchPage implements OnInit {
       {
         text: 'Cancel',
         handler: () => {
-          this.router.navigateByUrl('/tabs/tabs/tab1')
+          this.router.navigateByUrl('/ap-search')
         }
       }]
       

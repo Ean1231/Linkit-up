@@ -7,7 +7,8 @@ import { LoadingController } from '@ionic/angular';
 import {ServiceService} from '../service.service';
 import { AlertController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-
+import { Plugins } from '@capacitor/core';
+const { Share } = Plugins;
 
 
 
@@ -75,6 +76,15 @@ varsities = [] ;
   ngOnInit() {
    
   
+  }
+  async share(){
+    let shareRet = await Share.share({
+      title: 'Share with friends',
+      text: 'Let others know about available places',
+      url: '', //http://ionicframework.com/
+      dialogTitle: 'Share with buddies'
+    });
+     
   }
 
 

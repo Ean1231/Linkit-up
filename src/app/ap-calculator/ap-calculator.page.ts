@@ -54,7 +54,7 @@ export class ApCalculatorPage implements OnInit {
       {
         text: 'Cancel',
         handler: () => {
-          this.router.navigateByUrl('/tabs/tabs/tab2')
+          this.router.navigateByUrl('/ap-calculator')
         }
       }]
       
