@@ -16,14 +16,14 @@
     </ion-item>
   </div>
   <div (click)="bursaryDetails(data)"  class="container" *ngFor="let data of bursaries">
-    <div class="card cardContent" style="box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.16); height: 150px;">
+    <div class="card cardContent" style="box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.10); height: 150px;">
       <div>
         <img class="img1" src="{{data.img}}" style="height: 80px; width: 80%; " /><br>
       <!-- <p style="margin-left: 18px; color: green;">Available</p>   -->
       </div>
 
       <div style="margin-left: 0px;">
-        <p class="card-title" style="margin-right: 2px; margin-top: 10px;"><strong>{{ data.title.substring(0, 20) }}</strong></p>
+        <p class="card-title" style="margin-right: 2px; margin-top: 10px;"><strong>{{ data.title.substring(0, 25)}}</strong></p>
 
         <!-- <small style="color: rgb(240, 116, 116); font-size: 12pt"
           >{{ data.description }}</small
@@ -31,7 +31,7 @@
 
         <div style=" justify-content:space-between;">
                   <div style="margin-left: 5px;" style="color: #364f68;"><h5><strong color="primary"><ion-icon name="lock-closed-outline"></ion-icon> {{ data.closingDate}} </strong></h5></div>
-          <div style="margin-right: 5px; ">Clic to see more</div>
+          <div style="margin-right: 5px; ">{{data.description.substring(0, 18)}}...</div>
 
         </div>
         <div style="display: flex; justify-content:space-between;">
