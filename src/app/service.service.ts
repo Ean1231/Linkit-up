@@ -32,7 +32,6 @@ listAccomodation = [];
 
   }
   
-
   getOpportunities(){
     return new Promise((res, rej)=>{
       this.firestore.collection('timeline').valueChanges().subscribe((items: any) => {
