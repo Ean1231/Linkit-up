@@ -5,84 +5,31 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
   <ion-content [scrollEvents]="true">
     <div class="banner" style="margin-top: 30px; height: 210px;">
       <img src="../assets/midrand.jpg" style="border-radius: 25px; height: 250px;">
-      
-      <!-- <div class="caption">
-Search and find accomodation near your desired study location 
-</div> -->
     </div> 
-    <!-- <div class="progressIndicator" [style.display]="isProgressVisible ? 'inline' : 'none' ">
-      <mat-progress-bar class=" example-margin" color="danger" mode="query"></mat-progress-bar>
-    </div> -->
-
-  <!-- <div class="search">
-    <ion-item lines="none">
-      <ion-icon slot="start" name="search-outline"></ion-icon>
-      <ion-input (ionInput)="filterData($event)" placeholder="Search by location"></ion-input>
-      <ion-button slot='end'>
-        <i class="fa fa-filter" aria-hidden="true"></i>
-      </ion-button>
-    </ion-item>
-  </div> -->
-
+  <ion-spinner color="tertiary" style="margin-left: 185px; margin-bottom: -250px;" *ngIf="loading"></ion-spinner>
   <div (click)="details(data)"  class="container" *ngFor="let data of accomodation" >
-    <div class="card cardContent" style="box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.10);
-    ">
+    <div class="card cardContent" style="box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.10);">
       <div>
         <img class="img1" src="{{data.image}}" style="height: 80px; width: 80%; " /><br>
       <p style="margin-left: 18px; color: green;">Available</p>  
       </div>
 
       <div style="margin-left: 0px;">
-        <h5 class="card-title" style="margin-right: 2px;"><strong>{{ data.AccomodationName }}</strong></h5>
-
-        <!-- <small style="color: rgb(240, 116, 116); font-size: 12pt"
-          >{{ data.description }}</small
-        > -->
-
+        <h6 class="card-title" style="margin-right: 2px;"><strong>{{ data.AccomodationName }}</strong></h6>
         <div style=" justify-content:space-between;">
                   <div style="margin-left: 5px;" style="color: #364f68;"><h5><strong color="primary">R {{ data.price}} rent</strong></h5></div>
-          <div style="margin-right: 5px; ">Dep: R{{data.deposit}}</div>
+          <div style="margin-right: 5px; ">Deposit: R{{data.deposit}}</div>
 
         </div>
         <div style="display: flex; justify-content:space-between;">
-          <!-- <div style="margin-left: 5px;" style="color: #364f68;"><h4><strong>R {{ data.price}} rent</strong></h4></div> -->
           <div (click)="share()" style="margin-left: 180px; margin-top: -22px; color: #364f68;"><ion-icon name="share-social-outline"></ion-icon></div>
-
         </div>
-        
-        <!-- <div style="display: flex; justify-content:space-between;">
-          <div style="margin-left: 5px;" style="color: #364f68;"><h5><strong>R {{ data.price}} rent</strong></h5></div>
-          <div style="margin-right: 5px; "><small>Dep: R{{data.price}}</small></div>
-
-        </div> -->
-        
       </div>
       
     </div>
     <div style="margin: 15px;"></div>
   </div>
 </ion-content>
-
-  
- 
- 
-
-          
-          
-  
-  
-  
-  <!-- <div *ngIf="showUniversities">
-  
-    <ion-item *ngFor= "let university of Universities" (click)="submit(university)"> <br>
-      Institution: {{university.University}} <br>
-      Aps Score: {{university.aps}} <br>
-      Course you qualify for: {{university.Field}} in {{ university.QualificationType }}<br>
-      City: {{university.City}}
-       </ion-item>
-  
-  </div> -->

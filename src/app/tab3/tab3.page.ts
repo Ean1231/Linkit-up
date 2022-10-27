@@ -19,27 +19,28 @@ import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 export class Tab3Page {
   opportunities = [] ;
   bursaries = [];
-
   showContent:boolean =true;
   readMoreContent:boolean =false;
   data:any;
   datta:any;
-
+  loading: any;
+  search: string;
 
   constructor(public router: Router, public firestore: AngularFirestore,public service: ServiceService,  public load: LoadingController, private alertController: ToastController, public alertControllerr: AlertController)
  {
-  this.presentLoadingWithOptions();
+  this.loading = true;
   this.service.getOpportunities().then((items:any)=>{
+   this.loading = false;
     console.log(items);
      this.opportunities = items;
+    //  this.loading = false;
   });
 
   this.service.getBursaries().then((items:any)=>{
-   // console.log(items);
+    this.loading = false;
      this.bursaries = items;
-  
+    //  this.loading = false;
   });
-
  }
 
  ngOnInit() {
@@ -94,14 +95,13 @@ bursaryDetails(data){
  async presentLoadingWithOptions() {
   const loading = await this.load.create({
     spinner: "circles",
-    duration: 1000,
+    duration: this.loading,
     message: "Please wait",
-    translucent: true,
+    translucent: this.loading = false,
     cssClass: "custom-class custom-loading",
     backdropDismiss: true,
   });
   await loading.present();
-
   const { role, data } = await loading.onDidDismiss();
   console.log("Loading dismissed with role:", role);
 }
@@ -124,20 +124,11 @@ async share(){
    
 }
 
-
-filterData(ev: any) {
-  
-  const val = ev.target.value;
-  if (val && val.trim() != "") {
-    this.opportunities = this.opportunities.filter((item) => {
-      
-      return item.type.toLowerCase().indexOf(val.toLowerCase()) > -1;
-    })
-    
-  }
-}
-
-
-  
-
+// filterData(ev: any) {
+//   const val = ev.target.value;
+//      if (val && val.trim() != "") {
+//         this.opportunities = this.opportunities.filter((item) => {
+//         return item.type.toLowerCase().indexOf(val.toLowerCase()) > -1;
+//     })
+// }}
 }

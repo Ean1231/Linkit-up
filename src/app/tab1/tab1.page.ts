@@ -22,21 +22,18 @@ export class Tab1Page {
   location;
   field;
   accomodation;
-data: any;
-
-
-  
-varsities = [] ;
+  data: any;
+  loading: boolean;
+  varsities = [] ;
   modalCtrl: any;
 
-  constructor(public router: Router, public service :ServiceService,
-    public load: LoadingController, public alertControllerr: AlertController)
+  constructor(public router: Router, public service :ServiceService, public load: LoadingController, public alertControllerr: AlertController)
   {
-    this.presentLoadingWithOptions();
+    this.loading = true;
     this.service.getVarsities().then((items:any)=>{
+     this.loading = false
       console.log(items);
       this.varsities = items;
-
     });
     this.service.getAccomodation().then((items:any)=>{
       console.log(items);

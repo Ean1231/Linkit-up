@@ -12,10 +12,7 @@ listUniversities = [];
 listopportuniites = [];
 listbursaries = [];
 listAccomodation = [];
-  constructor( public firestore:AngularFirestore) { 
-
-  
-  }
+  constructor( public firestore:AngularFirestore) { }
 
 
 

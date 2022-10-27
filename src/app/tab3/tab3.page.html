@@ -6,28 +6,26 @@
 </ion-header>
 
 
-
 <ion-content >
-  <div class="banner" style="margin-top: 30px;">
-    <img style=" border-radius: 20px;" src="../assets/geometric-purple-urban-art-on-brick-wall.jpg">
-    
-    <div class="caption">
-      Bursaries, Career Oppertunities and <br>
-      much more.
+   <div class="banner" style="margin-top: 30px;">
+     <img style=" border-radius: 20px;" src="../assets/geometric-purple-urban-art-on-brick-wall.jpg">
+        <div class="caption">
+          Bursaries, Career Oppertunities and <br>
+          much more.
+        </div>
+  </div> <br>
+
+      <ion-searchbar placeholder="Search " [(ngModel)]="search" showCancelButton="focus" animated="true"  search-icon="search-circle"></ion-searchbar>     
+
+  <div style="display: flex; gap:180px;">
+    <div>
     </div>
-  </div> 
-
-
-  <div class="search">
-    <ion-item lines="none">
-      <ion-icon slot="start" name="search-outline"></ion-icon>
-      <ion-input (ionInput)="filterData($event)" placeholder="Search"></ion-input>
-      <ion-button slot='end'>
-        <i class="fa fa-filter" aria-hidden="true"></i>
-      </ion-button>
-    </ion-item>
+    <div>
+      &nbsp;
+      <ion-spinner *ngIf="loading" color="tertiary" name="dots"></ion-spinner>
+    </div>
   </div>
-
+    
   <div class="title">
     <h2>Workshop/Event</h2>
     <p [routerLink]="'/all-opportunities'">See all</p>
@@ -36,14 +34,12 @@
   <div class="bursary-slider">
       <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" class="default-left-padding">
 
-          <ion-slide (click)="details(data)" *ngFor="let data of opportunities">
+          <ion-slide (click)="details(data)" *ngFor="let data of opportunities | filter:search">
                   <ion-col class="ion-text-left">
                       <ion-card>
                           <ion-card-header class="ion-no-padding">
                               <img style="height: 100px; width: 200px;" src={{data.img}}>
                           </ion-card-header>
-
-
                           <ion-card-content>
                               <p class="date">{{data.closingDate}}</p>
                               <h2 class="eventName">{{data.title.substring(0, 12)}}..</h2>
@@ -52,51 +48,13 @@
                               <div class="additional-info">
                                   <div class="attendees">
                                       <i class="fa fa-user" aria-hidden="true"></i>
-                                     
                                   </div>
-
                                   <p class="time">{{data.studyField}}</p>
                               </div>
                           </ion-card-content>
                       </ion-card>
                   </ion-col>
-
-
           </ion-slide>
-          <!--
-          <ion-slide>
-      <ion-col class="ion-text-left">
-        <ion-card>
-          <ion-card-header class="ion-no-padding">
-            <img src="../assets/nsfas.png" >
-          </ion-card-header>
-
-
-          <ion-card-content>
-            <p class="date">21 July 2021</p>
-            <h2 class="eventName">NSFAS</h2>
-            <p class="location"><ion-icon name="location" style="margin-right: 5px;"></ion-icon> Kimberley, Galeshewe</p>
-
-            <div class="additional-info">
-              <div class="attendees">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <i class="fa fa-user" aria-hidden="true" style="color: green;"></i>
-                <i class="fa fa-user" aria-hidden="true" style="color: orange;"></i>
-                <i class="fa fa-user" aria-hidden="true" style="color: black;"></i>
-                <div class="count">
-                  <i class="fa fa-user" aria-hidden="true"></i>
-                  <p>+11</p>
-                </div>
-              </div>
-
-              <p class="time">10:25pm</p>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-slide>
-      -->
-
       </ion-slides>
   </div>
   <div class="default-top-padding title">
@@ -124,23 +82,6 @@
   </div>
     </ion-slide>
 
-<!-- 
-    <ion-slide>
-      
-      <div class="accom">
-        <img src="../assets/nsfas.jpg">
-    
-        <div class="info">
-          <div class="content">
-            <h6>NSFAS Applications</h6>
-            <p class="stats">
-              <span><ion-icon name="eye"></ion-icon>&nbsp;2.3K</span>
-              <span><ion-icon name="heart"></ion-icon>3758</span>
-            </p>
-          </div>
-        </div>
-      </div>
-        </ion-slide> -->
   </ion-slides>
   </div>
  

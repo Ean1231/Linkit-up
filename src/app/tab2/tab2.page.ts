@@ -230,7 +230,6 @@ export class Tab2Page {
     public load: LoadingController,
     public alertController: AlertController)
   {
-    this.presentLoadingWithOptions();
     this.initializeApp();   
 
 
