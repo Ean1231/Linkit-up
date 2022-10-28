@@ -9,11 +9,15 @@ import { ServiceService } from '../service.service';
 export class AllBursaruesPage implements OnInit {
 bursaries =[]
 data: any;
+loading:boolean;
+search:any;
+
   constructor(private service: ServiceService, public router: Router) {
+    this.loading = true;
     this.service.getBursaries().then((items:any)=>{
         console.log(items);
         this.bursaries = items;
-     
+        this.loading = false;
      });
    }
 

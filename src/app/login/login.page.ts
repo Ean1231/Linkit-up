@@ -31,7 +31,6 @@ password ;
   login(){
     this.auth.Login(this.email ,this.password).then(()=>{
         this.router.navigateByUrl('/tabs/tabs/tab3')
-
     }).catch((error)=>{
       this.presentAlert(error.message);
        

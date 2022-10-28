@@ -24,10 +24,11 @@ Search for a study institutuion using your AP score</div>
             <!-- <ion-item style="margin-left: 24px; margin-right: 24px; border-radius: 30px;">
               
             </ion-item> -->
-             <label style="margin: 4%;" for="text"><b>Enter Score</b></label>
+            <div style="margin-bottom: -23px;">
+              <label style="margin: 4%;" for="text"><b>Your Score</b></label>
+              <ion-input type="text" class="form-control"   aria-describedby="basic-addon1" style="margin-left: 15px; width: 90%; padding-right: 20px;" #aps >{{data.sum}}</ion-input>
+            </div>
              <br>
-             <input type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1"  style="width:93%; margin-right: 12px;" #aps>
-            <br>
                             <label style="margin: 4%;" for="validationDefault04"><b>Choose Location</b></label>
                             <select  [(ngModel)]="location" class="custom-select" id="validationDefault04" required   style="width:93%; margin-left: 12px;" >
                               <option selected disabled value="">Choose Location</option>
@@ -75,7 +76,7 @@ Search for a study institutuion using your AP score</div>
                           </div>
                         <br>
                   <div class="btnButtons">
-              <ion-button  color="primary" (click)="submit(aps.value)"  type="button" style="width: 200px; ">Submit</ion-button>
+              <ion-button  color="primary" (click)="submit(aps.value)"  type="button" style="width: 200px; ">Continue</ion-button>
                         
           </div>
           

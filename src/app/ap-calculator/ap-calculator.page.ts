@@ -30,7 +30,6 @@ export class ApCalculatorPage implements OnInit {
   public load: LoadingController,
   public alertController: AlertController)
 {
-  this.presentLoadingWithOptions();
   this.initializeApp();   
 
 
@@ -71,7 +70,7 @@ export class ApCalculatorPage implements OnInit {
       buttons: [ {
         text: 'ok',
         handler: () => {
-          this.router.navigateByUrl('/tabs/tabs/tab1', {state: {sum:this.sum}})
+          this.router.navigateByUrl('/ap-search', {state: {sum:this.sum}})
         
         }
       },]

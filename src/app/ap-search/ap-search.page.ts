@@ -19,6 +19,7 @@ export class ApSearchPage implements OnInit {
   field;
   varsities = [] ;
   modalCtrl: any;
+  data: any;
 
   constructor(public router: Router, public service :ServiceService,
     public load: LoadingController, public alertControllerr: AlertController)
@@ -71,14 +72,9 @@ export class ApSearchPage implements OnInit {
   }
 
   submit (ap){
-  
     let aps = this.varsities.filter(aps => aps.aps == ap);
-    console.log(aps);
     let location =  aps.filter(location =>location.location == this.location) ;
-    console.log(this.field)
     let field =  location.filter(field =>field.qualification == this.field) ;
-    console.log(field)
-   console.log(location)
     this.router.navigateByUrl('/institutions', {state:field})
   }
 
@@ -86,9 +82,10 @@ export class ApSearchPage implements OnInit {
     return await this.modalCtrl.dismiss();
   }
 
- 
 
   ngOnInit() {
+    this.data = this.router.getCurrentNavigation().extras.state;
+    console.log(this.data, "The data")
   }
 
 }

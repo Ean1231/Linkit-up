@@ -10,42 +10,30 @@
 <ion-content>
   <div class="search">
     <ion-item lines="none">
-      <ion-icon slot="start" name="search-outline"></ion-icon>
-      <ion-input (ionInput)="filterData($event)" placeholder="Search by title"></ion-input>
-      
+      <!-- <ion-input (ionInput)="filterData($event)" placeholder="Search by title"></ion-input> -->
+      <ion-searchbar placeholder="Search " [(ngModel)]="search" showCancelButton="focus" animated="true"  search-icon="search-circle"></ion-searchbar> 
     </ion-item>
   </div>
-  <div (click)="bursaryDetails(data)"  class="container" *ngFor="let data of bursaries">
+
+  <div>
+    &nbsp;
+    <ion-spinner *ngIf="loading" color="tertiary" name="dots"></ion-spinner>
+  </div>
+
+  <div (click)="bursaryDetails(data)"  class="container" *ngFor="let data of bursaries | filter:search">
     <div class="card cardContent" style="box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.10); height: 150px;">
       <div>
         <img class="img1" src="{{data.img}}" style="height: 80px; width: 80%; " /><br>
-      <!-- <p style="margin-left: 18px; color: green;">Available</p>   -->
       </div>
 
       <div style="margin-left: 0px;">
         <p class="card-title" style="margin-right: 2px; margin-top: 10px;"><strong>{{ data.title.substring(0, 25)}}</strong></p>
-
-        <!-- <small style="color: rgb(240, 116, 116); font-size: 12pt"
-          >{{ data.description }}</small
-        > -->
-
-        <div style=" justify-content:space-between;">
-                  <div style="margin-left: 5px;" style="color: #364f68;"><h5><strong color="primary"><ion-icon name="lock-closed-outline"></ion-icon> {{ data.closingDate}} </strong></h5></div>
-          <div style="margin-right: 5px; ">{{data.description.substring(0, 18)}}...</div>
-
-        </div>
+         <div style=" justify-content:space-between;">
+            <div style="margin-left: 5px;" style="color: #364f68;"><h5><strong color="primary"><ion-icon name="lock-closed-outline"></ion-icon> {{ data.closingDate}} </strong></h5></div>
+            <div style="margin-right: 5px; ">{{data.description.substring(0, 18)}}...</div>
+         </div>
         <div style="display: flex; justify-content:space-between;">
-          <!-- <div style="margin-left: 5px;" style="color: #364f68;"><h4><strong>R {{ data.price}} rent</strong></h4></div> -->
-          <!-- <div (click)="share()" style="margin-left: 180px; margin-top: -22px; color: #364f68;"><ion-icon name="share-social-outline"></ion-icon></div> -->
-
         </div>
-        
-        <!-- <div style="display: flex; justify-content:space-between;">
-          <div style="margin-left: 5px;" style="color: #364f68;"><h5><strong>R {{ data.price}} rent</strong></h5></div>
-          <div style="margin-right: 5px; "><small>Dep: R{{data.price}}</small></div>
-
-        </div> -->
-        
       </div>
       
     </div>
