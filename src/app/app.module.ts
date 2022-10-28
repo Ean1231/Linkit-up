@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InstitutionListPipe } from './institution-list.pipe';
 import { InstitutionsPipe } from './institutions.pipe';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { InstitutionsPipe } from './institutions.pipe';
   
   declarations: [AppComponent, InstitutionListPipe, InstitutionsPipe],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireAuthModule,
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireAuthModule,  ReactiveFormsModule,
+    FormsModule,
    AngularFireModule.initializeApp(environment.firebaseConfig), AngularFirestoreModule, AngularFireAuthModule],
   
   providers: [

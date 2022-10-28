@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { RegisterPageRoutingModule } from './register-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { RegisterPage } from './register.page';
 
@@ -12,6 +13,7 @@ import { RegisterPage } from './register.page';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     RegisterPageRoutingModule
   ],

@@ -8,15 +8,15 @@
     <p>Lets get started</p>
   </div>
 
-  <ion-input placeholder="Username" class="primary-input" [(ngModel)]="email"></ion-input>
-  <ion-input placeholder="Password" type="password" class="primary-input" [(ngModel)]="password"></ion-input>
+  <ion-input placeholder="Username" type="text" class="primary-input" #email ></ion-input>
+  <ion-input placeholder="Password" type="password" class="primary-input" #password></ion-input>
 
   <div class="ion-margin-top ion-text-right forget" >
     <a style="margin-right: 18px; margin-left: 20px;" [routerLink]="['/forgot-password']"  (click)="dismiss()" class="small-text">Forgot Password?</a>
   </div>
 
   <div class="ion-margin-top">
-    <ion-button type="submit" expand="block" (click)="login(); dismiss()">LOGIN</ion-button>
+    <ion-button type="submit" expand="block" (click)="login(email, password); dismiss()">LOGIN</ion-button>
   </div>
 
   <div class="ion-margin-top ion-text-center">

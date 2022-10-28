@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { AuthService} from "../auth.service"
 
@@ -21,11 +22,33 @@ export class RegisterPage implements OnInit {
   confirmPassword
   Date
   password
+  signupForm: FormGroup;
   constructor(public router: Router, public auth:AuthService, private firestore: AngularFirestore, public alertController: AlertController, public modalCtrl: ModalController,
   ){ }
 
   ngOnInit() {
+    this.signupForm = new FormGroup({
+      'name': new FormControl('', Validators.required),
+      'surname': new FormControl('', Validators.required),
+      'email': new FormControl(),
+      'password': new FormControl('', Validators.required),
+  });
   }
+
+
+  signup(){
+    this.auth.Register(this.signupForm.value)
+    .then((result) => {
+      if (result == null)  
+      this.router.navigate(['login']);
+      setTimeout(()=>{   
+    }, 10000);
+    }).catch((error) => {
+      window.alert(error.message);
+    })
+    // this.sendEmail(this.email, this.displayName);
+}
+
 
   SignUp(email, password, name, surname){
     let id = this.firestore.createId();
@@ -50,6 +73,7 @@ export class RegisterPage implements OnInit {
       
     })
   }
+  
   
   async presentAlert(message) {
     const alert = await this.alertController.create({

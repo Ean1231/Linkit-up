@@ -7,17 +7,19 @@
     <h4>Signup</h4>
     <p>Register with Link-Up to get started</p>
   </div>
+<form id="register"  style="margin-top: 10px; --ion-background-color :white; " [formGroup]="signupForm" (ngSubmit)="signup()">
+  <ion-input placeholder="Full Name" formControlName="name" [(ngModel)]="name" class="primary-input"></ion-input>
+  <ion-input placeholder="Surname" formControlName="surname" [(ngModel)]="surname" class="primary-input"></ion-input>
+  <ion-input placeholder="Email" formControlName="email" [(ngModel)]="email" class="primary-input"></ion-input>
+  <ion-input placeholder="Password" formControlName="password"  [(ngModel)]="password" type="password" class="primary-input"></ion-input>
 
-  <ion-input placeholder="Full Name" [(ngModel)]="name" class="primary-input"></ion-input>
-  <ion-input placeholder="Surname" [(ngModel)]="surname" class="primary-input"></ion-input>
-  <ion-input placeholder="Email" [(ngModel)]="email" class="primary-input"></ion-input>
-  <ion-input placeholder="Password"  [(ngModel)]="password" type="password" class="primary-input"></ion-input>
 
+</form>
 
   
 
   <div class="ion-margin-top">
-    <ion-button expand="block" (click)="SignUp(email, password, name, surname)" >SIGN UP</ion-button>
+    <ion-button expand="block" (click)="signup(); dismiss()" >SIGN UP</ion-button>
   </div>
 
   <div class="ion-margin-top ion-text-center">

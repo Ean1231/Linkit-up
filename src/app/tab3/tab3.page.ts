@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFirestore} from '@angular/fire/firestore';
-// import { Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ServiceService } from '../service.service';
 import { LoadingController } from "@ionic/angular";
 import { Plugins } from '@capacitor/core';
@@ -10,6 +10,8 @@ import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
+import  { AuthService} from "../auth.service"
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-tab3',
@@ -25,8 +27,9 @@ export class Tab3Page {
   datta:any;
   loading: any;
   search: string;
+  user: Observable<any>;
 
-  constructor(public router: Router, public firestore: AngularFirestore,public service: ServiceService,  public load: LoadingController, private alertController: ToastController, public alertControllerr: AlertController)
+  constructor(public router: Router, public firestore: AngularFirestore,public service: ServiceService,  public load: LoadingController, private alertController: ToastController, public alertControllerr: AlertController, public auth: AngularFireAuth)
  {
   this.loading = true;
   this.service.getOpportunities().then((items:any)=>{
@@ -47,7 +50,15 @@ export class Tab3Page {
   this.data = this.router.getCurrentNavigation().extras.state;
   console.log(this.data)
 
- 
+  //for current username to display
+  this.auth.authState.subscribe((user) => {
+    if (user) {
+      let emailLower = user.email.toLowerCase();
+      this.user = this.firestore.collection('users').doc(emailLower).valueChanges();
+    } else {
+   console.log("error")
+    }
+  });
 }
 
 details(data){
@@ -122,6 +133,25 @@ async share(){
     dialogTitle: 'Share with buddies'
   });
    
+}
+
+async presentAlert2() {
+  const alert = await this.alertController.create({
+    header: 'Are you sure?',
+    cssClass: 'custom-alert',
+    buttons: [
+      {
+        text: 'No',
+        cssClass: 'alert-button-cancel',
+      },
+      {
+        text: 'Yes',
+        cssClass: 'alert-button-confirm',
+      },
+    ],
+  });
+
+  await alert.present();
 }
 
 // filterData(ev: any) {

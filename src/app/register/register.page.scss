@@ -16,3 +16,23 @@ p {
     font-size: small;
     color: #999999;
 }
+.show-error{
+    padding-top: 0.2rem;
+    color: red;
+    font-size: 12px;
+}
+input{
+    --placeholder-color: red;
+    --placeholder-opacity: 1;
+}.showDiv {
+    background-color: aqua;
+    height: 200px;
+    width: 500px;
+ }
+ 
+ .hideDiv {
+    display: none;
+ }ion-content{
+
+    --ion-background-color :white;
+    }
