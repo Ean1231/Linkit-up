@@ -11,7 +11,7 @@
   <ion-input placeholder="Username" type="text" class="primary-input" #email ></ion-input>
   <ion-input placeholder="Password" type="password" class="primary-input" #password></ion-input>
 
-  <ion-spinner color="tertiary" style="margin-left: 170px; margin-bottom: -250px;" *ngIf="loading"></ion-spinner>
+  <ion-spinner name="bubbles" color="tertiary" style="margin-left: 170px; margin-bottom: -250px;" *ngIf="loading"></ion-spinner>
 
   <div class="ion-margin-top ion-text-right forget" >
     <a style="margin-right: 18px; margin-left: 20px;" [routerLink]="['/forgot-password']"  (click)="dismiss()" class="small-text">Forgot Password?</a>
@@ -21,7 +21,7 @@
     <ion-button type="submit" expand="block" (click)="login(email, password)">LOGIN</ion-button>
   </div>
 
-  <div (click)="dismiss()" class="ion-margin-top ion-text-center">
-    <a >Close</a>
-  </div>
+  <ion-button expand="block" fill="outline" (click)="dismiss()" class="ion-margin-top ion-text-center">
+  Close
+  </ion-button>
 </ion-content>

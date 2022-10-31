@@ -45,6 +45,8 @@ export class LoginPage implements OnInit {
         this.dismiss();
         this.router.navigate(['/tabs/tabs/tab3']);  
       }).catch((error) => {
+        this.presentAlert(error.message)
+        this.loading = false;
        console.log(error.message)
       })
   }
