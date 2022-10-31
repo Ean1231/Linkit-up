@@ -10,7 +10,6 @@
 <ion-content>
   <div class="search">
     <ion-item lines="none">
-      <!-- <ion-input (ionInput)="filterData($event)" placeholder="Search by title"></ion-input> -->
       <ion-searchbar placeholder="Search " [(ngModel)]="search" showCancelButton="focus" animated="true"  search-icon="search-circle"></ion-searchbar> 
     </ion-item>
   </div>
@@ -25,7 +24,7 @@
       <div>
         <img class="img1" src="{{data.img}}" style="height: 80px; width: 80%; " /><br>
       </div>
-
+       
       <div style="margin-left: 0px;">
         <p class="card-title" style="margin-right: 2px; margin-top: 10px;"><strong>{{ data.title.substring(0, 25)}}</strong></p>
          <div style=" justify-content:space-between;">
@@ -35,7 +34,6 @@
         <div style="display: flex; justify-content:space-between;">
         </div>
       </div>
-      
     </div>
     <div style="margin: 15px;"></div>
   </div><br><br>

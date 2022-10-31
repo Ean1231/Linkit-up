@@ -11,6 +11,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   password ;
+  loading: boolean;
   constructor(
     public modalCtrl: ModalController,
     public auth: AuthService,
@@ -36,9 +37,12 @@ export class LoginPage implements OnInit {
   // }
 
   login(email, password) { 
+    this.loading = true;
     this.auth.SignIn(email.value, password.value)
       .then(() => {
+        this.loading = false;
         // console.log(email)
+        this.dismiss();
         this.router.navigate(['/tabs/tabs/tab3']);  
       }).catch((error) => {
        console.log(error.message)

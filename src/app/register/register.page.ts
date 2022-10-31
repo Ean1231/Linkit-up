@@ -6,6 +6,7 @@ import { AlertController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { AuthService} from "../auth.service"
+import { LoginPage } from '../login/login.page';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { AuthService} from "../auth.service"
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-
+  loading: boolean;
   showmessage
   name
   surname
@@ -37,12 +38,13 @@ export class RegisterPage implements OnInit {
 
 
   signup(){
+    this.loading = true;
     this.auth.Register(this.signupForm.value)
     .then((result) => {
+      this.loading = false;
       if (result == null)  
-      this.router.navigate(['login']);
-      setTimeout(()=>{   
-    }, 10000);
+      this.dismiss();
+      this.login();
     }).catch((error) => {
       window.alert(error.message);
     })
@@ -95,6 +97,18 @@ export class RegisterPage implements OnInit {
 
   async dismiss() {
     return await this.modalCtrl.dismiss();
+  }
+
+  async login() {
+    const modal = await this.modalCtrl.create({
+      component: LoginPage,
+      animated: true,
+      mode: 'ios',
+      backdropDismiss: false,
+      cssClass: 'register-modal',
+    })
+
+    return await modal.present();
   }
 
 }

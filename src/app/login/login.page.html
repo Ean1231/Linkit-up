@@ -11,15 +11,17 @@
   <ion-input placeholder="Username" type="text" class="primary-input" #email ></ion-input>
   <ion-input placeholder="Password" type="password" class="primary-input" #password></ion-input>
 
+  <ion-spinner color="tertiary" style="margin-left: 170px; margin-bottom: -250px;" *ngIf="loading"></ion-spinner>
+
   <div class="ion-margin-top ion-text-right forget" >
     <a style="margin-right: 18px; margin-left: 20px;" [routerLink]="['/forgot-password']"  (click)="dismiss()" class="small-text">Forgot Password?</a>
   </div>
 
   <div class="ion-margin-top">
-    <ion-button type="submit" expand="block" (click)="login(email, password); dismiss()">LOGIN</ion-button>
+    <ion-button type="submit" expand="block" (click)="login(email, password)">LOGIN</ion-button>
   </div>
 
-  <div class="ion-margin-top ion-text-center">
-    <a (click)="dismiss()">Close</a>
+  <div (click)="dismiss()" class="ion-margin-top ion-text-center">
+    <a >Close</a>
   </div>
 </ion-content>

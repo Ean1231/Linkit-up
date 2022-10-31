@@ -3,9 +3,11 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  
   <div class="title">
     <h4>Signup</h4>
     <p>Register with Link-Up to get started</p>
+    <ion-spinner color="tertiary" style="margin-left: 150px;" *ngIf="loading" name="dots"></ion-spinner>
   </div>
 <form id="register"  style="margin-top: 10px; --ion-background-color :white; " [formGroup]="signupForm" (ngSubmit)="signup()">
   <ion-input placeholder="Full Name" formControlName="name" [(ngModel)]="name" class="primary-input"></ion-input>
@@ -19,7 +21,7 @@
   
 
   <div class="ion-margin-top">
-    <ion-button expand="block" (click)="signup(); dismiss()" >SIGN UP</ion-button>
+    <ion-button expand="block" (click)="signup()" >SIGN UP</ion-button>
   </div>
 
   <div class="ion-margin-top ion-text-center">
