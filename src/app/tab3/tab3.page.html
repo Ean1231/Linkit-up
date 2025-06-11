@@ -47,7 +47,7 @@
                   <ion-col class="ion-text-left">
                       <ion-card>
                           <ion-card-header class="ion-no-padding">
-                              <img style="height: 100px; width: 200px;" src={{data.img}}>
+                              <img style="height: auto; width: 100%;" src={{data.img}}>
                           </ion-card-header>
                           <ion-card-content>
                               <p class="date">{{data.closingDate}}</p>
@@ -77,7 +77,7 @@
     <ion-slide (click)="bursaryDetails(data)"  *ngFor="let data of bursaries">
       
   <div style="height: 100px; width: 700px;"  class="accom">
-    <img style="object-fit: contain;" src={{data.img}}>
+    <img style="object-fit: contain; height: auto; width: 100%;" src={{data.img}}>
 
     <div class="info">
       <div class="content">
