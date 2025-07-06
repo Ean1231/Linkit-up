@@ -1,17 +1,300 @@
+// Modern Login Page Styles
+.modern-login-content {
+  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 480px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+// Logo Section
+.logo-section {
+  text-align: center;
+  margin-bottom: 40px;
+  animation: fadeInUp 0.8s ease-out;
+
+  .logo-circle {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+
+    ion-icon {
+      font-size: 60px;
+      color: white;
+    }
+  }
+
+  .app-title {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .app-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 300;
+  }
+}
+
+// Form Section
+.form-section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  padding: 40px 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  animation: slideUp 0.6s ease-out 0.2s both;
+  width: 100%;
+}
+
+// Input Group
+.input-group {
+  margin-bottom: 24px;
+  width: 100%;
+
+  .input-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+
+    .input-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      color: var(--ion-color-medium);
+      font-size: 20px;
+    }
+
+    .password-toggle-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      color: var(--ion-color-medium);
+      font-size: 20px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--ion-color-primary);
+      }
+    }
+
+    .modern-input {
+      --background: white;
+      --border-radius: 16px;
+      --border-color: rgba(var(--ion-color-light-rgb), 0.5);
+      --color: #1a1a1a;
+      --placeholder-color: #666666;
+      --padding-start: 48px;
+      --padding-end: 16px;
+      --padding-top: 16px;
+      --padding-bottom: 16px;
+      --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      font-size: 1rem;
+      font-weight: 500;
+      height: 56px;
+      width: 100%;
+      display: block;
+
+      &.ion-focused {
+        --border-color: var(--ion-color-primary);
+        --box-shadow: 0 4px 20px rgba(var(--ion-color-primary-rgb), 0.2);
+        --color: #000000;
+  }
+}
+
+    // Add extra padding for password field to accommodate eye icon
+    &:has(.password-toggle-icon) .modern-input {
+      --padding-end: 52px;
+    }
+
+    // Ensure ion-input takes full width
+    ion-input {
+      width: 100%;
+    }
+  }
+}
+
+// Button Spinner
+.button-spinner {
+  --color: white;
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+}
+
+// Forgot Password
+.forgot-password {
+  text-align: right;
+  margin-bottom: 24px;
+
+  .forgot-link {
+    --color: var(--ion-color-primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+}
+
+// Buttons
+.login-button {
+  --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+  --border-radius: 16px;
+  --box-shadow: 0 8px 24px rgba(var(--ion-color-primary-rgb), 0.3);
+  --color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  height: 56px;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+
+  &:hover:not(.button-disabled) {
+    transform: translateY(-2px);
+    --box-shadow: 0 12px 32px rgba(var(--ion-color-primary-rgb), 0.4);
+  }
+
+  &.button-disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  // Ensure proper alignment of spinner and text
+  .button-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.close-button {
+  --border-radius: 16px;
+  --border-color: rgba(var(--ion-color-medium-rgb), 0.3);
+  --color: var(--ion-color-medium);
+  font-weight: 500;
+  font-size: 0.9rem;
+  height: 48px;
+
+  &:hover {
+    --color: var(--ion-color-primary);
+    --border-color: var(--ion-color-primary);
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive Design
+@media (max-width: 480px) {
+  .login-container {
+    padding: 16px;
+  }
+
+  .form-section {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+
+  .logo-section {
+    .logo-circle {
+      width: 80px;
+      height: 80px;
+      
+      ion-icon {
+        font-size: 48px;
+      }
+    }
+
+    .app-title {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+// Legacy styles (keeping for compatibility)
 .title {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .title h4 {
-    color: var(--ion-color-primary);
+  color: var(--ion-color-primary);
 }
 
 .title p {
-    margin-top: 0 !important;
-    color: #999999;
-    font-size: small;
+  margin-top: 0 !important;
+  color: #999999;
+  font-size: small;
 }
 
 .forget a {
-    font-size: small !important;
+  font-size: small !important;
+}
+.alternative-actions {
+  text-align: center;
+  margin-top: 20px;
+
+  .signup-prompt {
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    .signup-link {
+      --color: var(--ion-color-primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin: 0;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }

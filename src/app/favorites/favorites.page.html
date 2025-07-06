@@ -1,0 +1,142 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tabs/tab3" (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        <h1>Saved Items</h1>
+      </ion-text>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="favorites-content">
+  <!-- Pull to refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="refreshFavorites($event)">
+    <ion-refresher-content 
+      pulling-icon="chevron-down-circle-outline"
+      pulling-text="Pull to refresh"
+      refreshing-spinner="crescent"
+      refreshing-text="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <ion-icon name="bookmarks-outline" class="hero-icon"></ion-icon>
+      <h2 class="hero-title">Your Saved Items</h2>
+      <p class="hero-subtitle">Keep track of opportunities that interest you</p>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-container" *ngIf="loading">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Loading your saved items...</p>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!loading && isEmpty">
+    <div class="empty-content">
+      <ion-icon name="bookmark-outline" class="empty-icon"></ion-icon>
+      <h3 class="empty-title">No Saved Items Yet</h3>
+      <p class="empty-subtitle">Start exploring opportunities and bursaries to save items you're interested in.</p>
+      <ion-button 
+        fill="solid" 
+        color="primary" 
+        [routerLink]="['/tabs/tabs/tab3']"
+        class="explore-button">
+        <ion-icon name="compass-outline" slot="start"></ion-icon>
+        Explore Opportunities
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Favorites List -->
+  <div class="favorites-section" *ngIf="!loading && !isEmpty">
+    <div class="section-header">
+      <h3>{{ favorites.length }} Saved {{ favorites.length === 1 ? 'Item' : 'Items' }}</h3>
+    </div>
+
+    <div class="favorites-grid">
+      <div 
+        class="favorite-card" 
+        *ngFor="let favorite of favorites; let i = index"
+        [style.animation-delay]="i * 100 + 'ms'">
+        
+        <!-- Card Header -->
+        <div class="card-header">
+          <div class="card-image">
+            <img [src]="favorite.img || '/assets/banner.jpg'" [alt]="favorite.title">
+            <div class="card-badge">
+              <ion-chip [color]="favorite.category === 'opportunity' ? 'primary' : 'success'" class="category-chip">
+                <ion-icon [name]="favorite.category === 'opportunity' ? 'briefcase-outline' : 'school-outline'"></ion-icon>
+                <ion-label>{{ favorite.category | titlecase }}</ion-label>
+              </ion-chip>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Content -->
+        <div class="card-content">
+          <h4 class="card-title">{{ favorite.title }}</h4>
+          <p class="card-description">{{ favorite.description }}</p>
+          
+          <!-- Card Details -->
+          <div class="card-details">
+            <div class="detail-item" *ngIf="favorite.institution">
+              <ion-icon name="business-outline" color="medium"></ion-icon>
+              <span>{{ favorite.institution }}</span>
+            </div>
+            <div class="detail-item" *ngIf="favorite.closingDate">
+              <ion-icon name="calendar-outline" color="medium"></ion-icon>
+              <span>{{ favorite.closingDate }}</span>
+            </div>
+            <div class="detail-item">
+              <ion-icon name="time-outline" color="medium"></ion-icon>
+              <span>Saved {{ favorite.dateAdded | date:'MMM d, y' }}</span>
+            </div>
+          </div>
+
+          <!-- Card Actions -->
+          <div class="card-actions">
+            <ion-button 
+              fill="solid" 
+              size="small" 
+              [color]="favorite.category === 'opportunity' ? 'primary' : 'success'"
+              (click)="viewDetails(favorite)"
+              class="action-button">
+              <ion-icon name="eye-outline" slot="start"></ion-icon>
+              View Details
+            </ion-button>
+            
+            <ion-button 
+              fill="clear" 
+              size="small" 
+              color="medium"
+              (click)="shareItem(favorite)"
+              class="action-button">
+              <ion-icon name="share-outline"></ion-icon>
+            </ion-button>
+            
+            <ion-button 
+              fill="clear" 
+              size="small" 
+              color="danger"
+              (click)="removeFromFavorites(favorite)"
+              class="action-button">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Padding -->
+  <div class="bottom-padding"></div>
+</ion-content> 

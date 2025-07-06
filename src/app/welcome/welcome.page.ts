@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { LoginPage } from '../login/login.page';
-import { RegisterPage } from '../register/register.page';
-import {  MenuController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-welcome',
@@ -13,7 +11,7 @@ export class WelcomePage implements OnInit {
   
 
   constructor(
-    public modalCtrl: ModalController,
+    private router: Router,
     public menuCtrl: MenuController
   ) { }
 
@@ -21,27 +19,11 @@ export class WelcomePage implements OnInit {
     this.menuCtrl.enable(false);
   }
 
-  async login() {
-    const modal = await this.modalCtrl.create({
-      component: LoginPage,
-      animated: true,
-      mode: 'ios',
-      backdropDismiss: false,
-      cssClass: 'login-modal',
-    })
-
-    return await modal.present();
+  login() {
+    this.router.navigate(['/login']);
   }
 
-  async register() {
-    const modal = await this.modalCtrl.create({
-      component: RegisterPage,
-      animated: true,
-      mode: 'ios',
-      backdropDismiss: false,
-      cssClass: 'register-modal',
-    })
-
-    return await modal.present();
+  register() {
+    this.router.navigate(['/register']);
   }
 }

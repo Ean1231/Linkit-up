@@ -1,7 +1,426 @@
+// Modern Tab2 AP Calculator Page Styles
+.modern-content {
+  --background: #f8f9fa;
+}
 
+// Header Styles
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
 
-  
- 
+  .title-icon {
+    font-size: 1.2rem;
+  }
+}
+
+// Hero Section
+.hero-section {
+  margin-bottom: 24px;
+
+  .hero-image {
+    position: relative;
+    height: 240px;
+    border-radius: 0 0 24px 24px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.85) 0%, rgba(118, 75, 162, 0.85) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .hero-content {
+        text-align: center;
+        color: white;
+        padding: 20px;
+
+        .hero-icon {
+          width: 80px;
+          height: 80px;
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 20px;
+          backdrop-filter: blur(10px);
+          border: 2px solid rgba(255, 255, 255, 0.3);
+
+          ion-icon {
+            font-size: 40px;
+            color: white;
+          }
+        }
+
+        h2 {
+          font-size: 2rem;
+          font-weight: 700;
+          margin: 0 0 12px 0;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+          font-size: 1rem;
+          margin: 0;
+          opacity: 0.95;
+          max-width: 400px;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+}
+
+// Info Section
+.info-section {
+  padding: 0 16px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+
+  .info-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .info-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(var(--ion-color-primary-rgb), 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+
+    .info-content {
+      flex: 1;
+
+      h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--ion-color-dark);
+        margin: 0 0 8px 0;
+      }
+
+      p {
+        font-size: 0.9rem;
+        color: var(--ion-color-medium);
+        margin: 0;
+        line-height: 1.4;
+      }
+    }
+  }
+}
+
+// Action Section
+.action-section {
+  padding: 0 16px;
+  margin-bottom: 32px;
+
+  .main-action-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(var(--ion-color-primary-rgb), 0.1);
+
+    .action-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+
+      .action-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        ion-icon {
+          font-size: 30px;
+          color: white;
+        }
+      }
+
+      .action-text {
+        flex: 1;
+
+        h3 {
+          font-size: 1.4rem;
+          font-weight: 700;
+          color: var(--ion-color-dark);
+          margin: 0 0 6px 0;
+        }
+
+        p {
+          font-size: 1rem;
+          color: var(--ion-color-medium);
+          margin: 0;
+          line-height: 1.4;
+        }
+      }
+    }
+
+    .action-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+
+      .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(var(--ion-color-success-rgb), 0.1);
+        padding: 8px 12px;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        color: var(--ion-color-success);
+        font-weight: 500;
+
+        ion-icon {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .calculator-button {
+      --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+      --border-radius: 16px;
+      --box-shadow: 0 8px 24px rgba(var(--ion-color-primary-rgb), 0.3);
+      --color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      height: 56px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        --box-shadow: 0 12px 32px rgba(var(--ion-color-primary-rgb), 0.4);
+      }
+    }
+  }
+}
+
+// Benefits Section
+.benefits-section {
+  padding: 0 16px;
+  margin-bottom: 24px;
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ion-color-dark);
+    text-align: center;
+    margin: 0 0 24px 0;
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+
+    .benefit-item {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .benefit-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(var(--ion-color-primary-rgb), 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+
+        ion-icon {
+          font-size: 28px;
+          color: var(--ion-color-primary);
+        }
+      }
+
+      h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--ion-color-dark);
+        margin: 0 0 8px 0;
+      }
+
+      p {
+        font-size: 0.9rem;
+        color: var(--ion-color-medium);
+        margin: 0;
+        line-height: 1.4;
+      }
+    }
+  }
+}
+
+// Bottom Padding
+.bottom-padding {
+  height: 24px;
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .info-section {
+    grid-template-columns: 1fr;
+    padding: 0 12px;
+    gap: 12px;
+
+    .info-card {
+      padding: 16px;
+    }
+  }
+
+  .action-section {
+    padding: 0 12px;
+
+    .main-action-card {
+      padding: 20px;
+
+      .action-header {
+        .action-icon {
+          width: 50px;
+          height: 50px;
+
+          ion-icon {
+            font-size: 24px;
+          }
+        }
+
+        .action-text h3 {
+          font-size: 1.2rem;
+        }
+      }
+
+      .action-features {
+        gap: 8px;
+
+        .feature-item {
+          padding: 6px 10px;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+
+  .benefits-section {
+    padding: 0 12px;
+
+    .benefits-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+
+      .benefit-item {
+        padding: 16px;
+
+        .benefit-icon {
+          width: 50px;
+          height: 50px;
+
+          ion-icon {
+            font-size: 24px;
+          }
+        }
+      }
+    }
+  }
+
+  .hero-section .hero-image {
+    height: 200px;
+
+    .hero-overlay .hero-content {
+      .hero-icon {
+        width: 60px;
+        height: 60px;
+
+        ion-icon {
+          font-size: 30px;
+        }
+      }
+
+      h2 {
+        font-size: 1.6rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .action-section .main-action-card .action-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .benefits-section .section-title {
+    font-size: 1.3rem;
+  }
+}
+
+// Legacy styles (keeping for compatibility)
+.banner {
+  margin-top: 30px;
+
+  img {
+    border-radius: 20px;
+    height: 215px;
+  }
+}
+
+.caption {
+  // Legacy caption styles
+}
+
 .subject{
 	display: grid;
 	grid-template-columns: repeat(2, 50%);

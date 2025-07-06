@@ -1,24 +1,81 @@
-
-
-<ion-content  text-center class="ion-padding ion-text-center" color="primary">
-  <br><br>  
-  
-  <div style="display: flex; align-content: center;">
-        <div style="width: 100px;">
-            
+<ion-content class="modern-welcome-content">
+  <div class="welcome-container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <div class="logo-container">
+        <div class="logo-wrapper">
+          <ion-img src="assets/img/linkupup.png" alt="Link-Up Logo" class="app-logo"></ion-img>
         </div>
-        <div>
-            <ion-img  src="assets/img/linkupup.png" alt="App Logo" style="height: 150px; width:150px;"></ion-img>
-        </div>
-
+        <div class="logo-glow"></div>
+      </div>
+      
+      <div class="hero-text">
+        <h1 class="main-title">Link-Up</h1>
+        <h2 class="hero-subtitle">Linking you to your future</h2>
+        <p class="hero-description">
+          Discover opportunities, find funding, and connect with institutions 
+          that will shape your academic and professional journey.
+        </p>
+      </div>
     </div>
 
-    <div class="title">
-       
-    </div><br>
-    <h2>Linking you to your future</h2><br><br>
-    <div class="ion-margin-top">
-        <ion-button expand="block" class="ion-margin-top" (click)="register()" fill="outline" color="white">SIGN UP</ion-button>
-        <ion-button expand="block" class="ion-margin-top" (click)="login()" color="white">LOGIN</ion-button>
+    <!-- Features Section -->
+    <div class="features-section">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <ion-icon name="school-outline"></ion-icon>
+        </div>
+        <h3>Bursaries & Funding</h3>
+        <p>Find financial support for your education</p>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <ion-icon name="briefcase-outline"></ion-icon>
+        </div>
+        <h3>Career Opportunities</h3>
+        <p>Explore internships and job openings</p>
+      </div>
+      
+      <div class="feature-item">
+        <div class="feature-icon">
+          <ion-icon name="people-outline"></ion-icon>
+        </div>
+        <h3>Network & Connect</h3>
+        <p>Build relationships with institutions</p>
+      </div>
     </div>
+
+    <!-- Action Buttons -->
+    <div class="action-section">
+      <ion-button 
+        expand="block" 
+        class="signup-button"
+        (click)="register()">
+        <ion-icon name="person-add-outline" slot="start"></ion-icon>
+        CREATE ACCOUNT
+      </ion-button>
+      
+      <ion-button 
+        expand="block" 
+        fill="outline" 
+        class="login-button"
+        (click)="login()">
+        <ion-icon name="log-in-outline" slot="start"></ion-icon>
+        SIGN IN
+      </ion-button>
+      
+      <div class="login-prompt">
+        <p>Already have an account? <a (click)="login()" class="login-link">Sign in here</a></p>
+      </div>
+    </div>
+
+    <!-- Decorative Elements -->
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+  </div>
 </ion-content>

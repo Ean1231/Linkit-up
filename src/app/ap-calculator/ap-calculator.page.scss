@@ -1,6 +1,388 @@
-
-
+.calculator-content {
+  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   
+  // Hero Section
+  .hero-section {
+    position: relative;
+    margin-bottom: 1rem;
+    
+    .hero-image {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.8) 0%,
+          rgba(118, 75, 162, 0.8) 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        .hero-content {
+          text-align: center;
+          color: white;
+          
+          .hero-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+          }
+          
+          .hero-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+          }
+          
+          .hero-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin: 0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+          }
+        }
+      }
+    }
+  }
+  
+  // Instruction Card
+  .instruction-card {
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+    
+    .info-card {
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      --background: #ffffff;
+      
+      ion-card-content {
+        .instruction-header {
+          display: flex;
+          align-items: center;
+          margin-bottom: 0.75rem;
+          
+          ion-icon {
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
+          }
+          
+          h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+          }
+        }
+        
+        p {
+          margin: 0;
+          font-size: 1rem;
+          color: #2a2a2a;
+          line-height: 1.6;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+  
+  // Subjects Container
+  .subjects-container {
+    padding: 0 1rem;
+    
+    .subject-card {
+      margin-bottom: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideInUp 0.6s ease forwards;
+      --background: #ffffff;
+      
+      &:nth-child(1) { animation-delay: 0.1s; }
+      &:nth-child(2) { animation-delay: 0.2s; }
+      &:nth-child(3) { animation-delay: 0.3s; }
+      &:nth-child(4) { animation-delay: 0.4s; }
+      &:nth-child(5) { animation-delay: 0.5s; }
+      &:nth-child(6) { animation-delay: 0.6s; }
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      }
+      
+      ion-card-header {
+        padding: 1rem 1rem 0.5rem;
+        
+        ion-card-title {
+          display: flex;
+          align-items: center;
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          
+          ion-icon {
+            font-size: 1.3rem;
+            margin-right: 0.75rem;
+          }
+        }
+      }
+      
+      ion-card-content {
+        padding: 0.5rem 1rem 1rem;
+        
+        .subject-inputs {
+          display: grid;
+          gap: 1rem;
+          
+          .input-group {
+            .custom-item {
+              --border-radius: 12px;
+              --border-width: 2px;
+              --border-color: #d0d0d0;
+              --highlight-color-focused: var(--ion-color-primary);
+              --background: #ffffff;
+              margin-bottom: 0;
+              
+              &.item-has-focus {
+                --border-color: var(--ion-color-primary);
+                --background: white;
+              }
+              
+              ion-label {
+                font-weight: 600;
+                color: #1a1a1a;
+                margin-bottom: 0.5rem;
+                font-size: 0.95rem;
+              }
+              
+              ion-select {
+                --placeholder-color: #666666;
+                --color: #1a1a1a;
+                font-size: 0.95rem;
+                font-weight: 500;
+                color: #1a1a1a !important;
+                
+                &.select-expanded {
+                  --color: #1a1a1a;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // Calculate Section
+  .calculate-section {
+    padding: 2rem 1rem;
+    
+    .calculate-button {
+      --border-radius: 25px;
+      --padding-top: 1rem;
+      --padding-bottom: 1rem;
+      --box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: 0.5px;
+      
+      &:hover {
+        --box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+        transform: translateY(-2px);
+      }
+      
+      ion-icon {
+        font-size: 1.3rem;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+  
+  // Results Section
+  .results-section {
+    padding: 0 1rem;
+    
+    .result-card {
+      border-radius: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+      animation: resultAppear 0.8s ease forwards;
+      
+      ion-card-content {
+        padding: 2rem;
+        
+        .result-content {
+          text-align: center;
+          
+          .result-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 1;
+            color: #ffffff;
+          }
+          
+          .result-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            color: #ffffff;
+          }
+          
+          .result-score {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+            color: #ffffff;
+            background: linear-gradient(45deg, #ffffff, #f8f9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+          }
+          
+          .result-description {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin: 0;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+  
+  // Bottom Padding
+  .bottom-padding {
+    height: 2rem;
+  }
+}
+
+// Animations
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes resultAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+// Responsive Design
+@media (min-width: 768px) {
+  .calculator-content {
+    .subjects-container {
+      .subject-card {
+        ion-card-content {
+          .subject-inputs {
+            grid-template-columns: 1fr 200px;
+            align-items: end;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .calculator-content {
+    .subjects-container {
+      padding: 0 2rem;
+    }
+    
+    .instruction-card {
+      padding: 0 2rem;
+    }
+    
+    .calculate-section {
+      padding: 2rem 2rem;
+    }
+    
+    .results-section {
+      padding: 0 2rem;
+    }
+  }
+}
+
+// Custom Ionic Select Styling
+.select-interface-action-sheet {
+  .action-sheet-button {
+    --color: #1a1a1a;
+    font-size: 1rem;
+    font-weight: 500;
+    
+    &.action-sheet-selected {
+      --color: var(--ion-color-primary);
+      font-weight: 600;
+    }
+  }
+}
+
+// Fix ion-select selected text visibility
+ion-select {
+  --color: #1a1a1a !important;
+  
+  .select-text {
+    color: #1a1a1a !important;
+    font-weight: 500;
+  }
+  
+  .select-placeholder {
+    color: #666666 !important;
+  }
+}
+
+// Additional styling for selected values
+.custom-item {
+  ion-select {
+    .select-text {
+      color: #1a1a1a !important;
+      font-weight: 500;
+    }
+  }
+}
+
+// Loading States
+.calculating {
+  .calculate-button {
+    --color: var(--ion-color-medium);
+    pointer-events: none;
+    opacity: 0.6;
+  }
+}
  
 .subject{
 	display: grid;
@@ -8,7 +390,9 @@
 }
 
 p{
-	color: #7857fe98;
+	color: #1a1a1a;
+  font-weight: 500;
+  font-size: 1rem;
   }
 
   select

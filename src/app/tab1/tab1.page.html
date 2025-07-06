@@ -1,38 +1,118 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title style="margin-left: 20px;">Accomodation</ion-title>
-   <ion-icon (click)="presentAlert()" slot="start" name="log-out-outline" style="height: 30px; width: 30px; margin-left: 15px;"></ion-icon>
+    <ion-title class="header-title">
+      <ion-icon name="home-outline" class="title-icon"></ion-icon>
+      Accommodation
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="presentAlert()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-  <ion-content [scrollEvents]="true">
-    <div class="banner" style="margin-top: 30px; height: 210px;">
-      <img src="../assets/midrand.jpg" style="border-radius: 25px; height: 250px;">
-    </div> 
-                             <!-- Loader -->
-  <ion-spinner color="tertiary" style="margin-left: 185px; margin-bottom: -250px;" *ngIf="loading"></ion-spinner>
-                            <!-- end of loader -->
-                            
-  <div (click)="details(data)"  class="container" *ngFor="let data of accomodation" >
-    <div class="card cardContent" style="box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.10);">
-      <div>
-        <img class="img1" src="{{data.image}}" style="height: 80px; width: 80%; " /><br>
-      <p style="margin-left: 18px; color: green;">Available</p>  
-      </div>
-
-      <div style="margin-left: 0px;">
-        <h6 class="card-title" style="margin-right: 2px;"><strong>{{ data.AccomodationName }}</strong></h6>
-        <div style=" justify-content:space-between;">
-                  <div style="margin-left: 5px;" style="color: #364f68;"><h5><strong color="primary">R {{ data.price}} rent</strong></h5></div>
-          <div style="margin-right: 5px; ">Deposit: R{{data.deposit}}</div>
-
-        </div>
-        <div style="display: flex; justify-content:space-between;">
-          <div (click)="share()" style="margin-left: 180px; margin-top: -22px; color: #364f68;"><ion-icon name="share-social-outline"></ion-icon></div>
+<ion-content class="modern-content">
+  <!-- Hero Banner -->
+  <div class="hero-banner">
+    <div class="hero-image">
+      <img src="../assets/midrand.jpg" alt="Accommodation">
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <h2>Find Your Perfect Home</h2>
+          <p>Discover comfortable and affordable accommodation options</p>
         </div>
       </div>
-      
     </div>
-    <div style="margin: 15px;"></div>
   </div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-container" *ngIf="loading">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Loading accommodation options...</p>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-section">
+    <ion-searchbar 
+      placeholder="Search accommodations..." 
+      class="modern-searchbar"
+      search-icon="search-outline">
+    </ion-searchbar>
+  </div>
+
+  <!-- Accommodation Cards -->
+  <div class="accommodation-grid">
+    <div class="accommodation-card" 
+         *ngFor="let data of accomodation" 
+         (click)="details(data)">
+      
+      <div class="card-image">
+        <img [src]="data.image" [alt]="data.AccomodationName">
+        <div class="availability-badge">
+          <ion-chip color="success" class="available-chip">
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            <ion-label>Available</ion-label>
+          </ion-chip>
+        </div>
+      </div>
+
+      <div class="card-content">
+        <div class="card-header">
+          <h3 class="card-title">{{ data.AccomodationName }}</h3>
+          <ion-button fill="clear" size="small" (click)="share(); $event.stopPropagation()">
+            <ion-icon name="share-social-outline" color="medium"></ion-icon>
+          </ion-button>
+        </div>
+
+        <div class="pricing-section">
+          <div class="rent-price">
+            <span class="currency">R</span>
+            <span class="amount">{{ data.price }}</span>
+            <span class="period">/month</span>
+          </div>
+          <div class="deposit-info">
+            <ion-icon name="wallet-outline" color="medium"></ion-icon>
+            <span>Deposit: R{{ data.deposit }}</span>
+          </div>
+        </div>
+
+        <div class="card-features">
+          <div class="feature-item">
+            <ion-icon name="location-outline" color="primary"></ion-icon>
+            <span>Prime Location</span>
+          </div>
+          <div class="feature-item">
+            <ion-icon name="wifi-outline" color="primary"></ion-icon>
+            <span>Free WiFi</span>
+          </div>
+          <div class="feature-item">
+            <ion-icon name="car-outline" color="primary"></ion-icon>
+            <span>Parking</span>
+          </div>
+        </div>
+
+        <ion-button 
+          expand="block" 
+          fill="outline" 
+          class="view-details-btn"
+          (click)="details(data); $event.stopPropagation()">
+          <ion-icon name="eye-outline" slot="start"></ion-icon>
+          View Details
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!loading && accomodation?.length === 0">
+    <div class="empty-icon">
+      <ion-icon name="home-outline"></ion-icon>
+    </div>
+    <h3>No Accommodations Found</h3>
+    <p>We couldn't find any accommodations at the moment. Please check back later.</p>
+  </div>
+
+  <!-- Bottom Padding -->
+  <div class="bottom-padding"></div>
 </ion-content>

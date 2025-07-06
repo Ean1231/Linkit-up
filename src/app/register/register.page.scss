@@ -36,3 +36,884 @@ input{
 
     --ion-background-color :white;
     }
+
+// Modern Register Page Styles
+.modern-register-content {
+  --background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px 0;
+  position: relative;
+  overflow: hidden;
+
+  // Animated background particles
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    animation: backgroundShift 20s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+.register-container {
+  width: 100%;
+  max-width: 480px;
+  padding: 20px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+// Logo Section
+.logo-section {
+  text-align: center;
+  margin-bottom: 32px;
+  animation: fadeInUp 0.8s ease-out;
+
+  .logo-circle {
+    width: 110px;
+    height: 110px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    backdrop-filter: blur(20px);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    animation: logoFloat 3s ease-in-out infinite;
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.2),
+      0 0 30px rgba(255, 255, 255, 0.1),
+      inset 0 2px 10px rgba(255, 255, 255, 0.2);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+      border-radius: 50%;
+      z-index: -1;
+      animation: rotateGradient 4s linear infinite;
+    }
+
+    ion-icon {
+      font-size: 58px;
+      color: white;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+      animation: iconBreathe 2s ease-in-out infinite;
+    }
+  }
+
+  .app-title {
+    color: white;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0 0 12px 0;
+    text-shadow: 
+      2px 2px 4px rgba(0, 0, 0, 0.3),
+      0 0 20px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(45deg, #ffffff, #f8f9ff, #e8eaff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+    animation: titleGlow 3s ease-in-out infinite;
+  }
+
+  .app-subtitle {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 300;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    animation: subtitleFade 2s ease-in-out infinite;
+  }
+}
+
+// Form Section
+.form-section {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.98) 0%, 
+    rgba(255, 255, 255, 0.95) 50%, 
+    rgba(245, 247, 255, 0.95) 100%);
+  border-radius: 28px;
+  padding: 44px 36px;
+  box-shadow: 
+    0 25px 70px rgba(0, 0, 0, 0.15),
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9),
+    0 0 0 1px rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(30px);
+  animation: slideUpFancy 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(102, 126, 234, 0.5), 
+      rgba(118, 75, 162, 0.5), 
+      rgba(240, 147, 251, 0.5), 
+      transparent);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: floatingLight 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+// Signup Form
+.signup-form {
+  width: 100%;
+
+  .input-group {
+    margin-bottom: 24px;
+    width: 100%;
+
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 22px;
+      width: 100%;
+      animation: inputSlideIn 0.6s ease-out var(--delay);
+
+      &:nth-child(1) { --delay: 0.3s; }
+      &:nth-child(2) { --delay: 0.4s; }
+      &:nth-child(3) { --delay: 0.5s; }
+      &:nth-child(4) { --delay: 0.6s; }
+
+      .input-icon {
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        color: #8e9aaf;
+        font-size: 22px;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .password-toggle-icon {
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        color: #8e9aaf;
+        font-size: 22px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        padding: 8px;
+        border-radius: 50%;
+
+        &:hover {
+          color: var(--ion-color-primary);
+          background: rgba(var(--ion-color-primary-rgb), 0.1);
+          transform: translateY(-50%) scale(1.1);
+        }
+
+        &:active {
+          transform: translateY(-50%) scale(0.95);
+        }
+      }
+
+      .modern-input {
+        --background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 255, 0.9));
+        --border-radius: 18px;
+        --border-color: rgba(142, 154, 175, 0.3);
+        --color: #2d3748;
+        --placeholder-color: #8e9aaf;
+        --padding-start: 54px;
+        --padding-end: 18px;
+        --padding-top: 18px;
+        --padding-bottom: 18px;
+        --box-shadow: 
+          0 8px 25px rgba(0, 0, 0, 0.06),
+          0 3px 12px rgba(0, 0, 0, 0.04),
+          inset 0 1px 3px rgba(255, 255, 255, 0.8);
+        font-size: 1rem;
+        font-weight: 500;
+        height: 60px;
+        width: 100%;
+        display: block;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+
+        &.ion-focused {
+          --border-color: var(--ion-color-primary);
+          --box-shadow: 
+            0 12px 35px rgba(var(--ion-color-primary-rgb), 0.15),
+            0 5px 20px rgba(var(--ion-color-primary-rgb), 0.1),
+            inset 0 1px 3px rgba(255, 255, 255, 0.8);
+          --color: #1a202c;
+          transform: translateY(-2px);
+        }
+
+        &.ion-invalid.ion-touched {
+          --border-color: var(--ion-color-danger);
+          --box-shadow: 
+            0 8px 25px rgba(var(--ion-color-danger-rgb), 0.15),
+            0 3px 12px rgba(var(--ion-color-danger-rgb), 0.1);
+          animation: inputShake 0.5s ease-in-out;
+        }
+
+        &.ion-valid.ion-touched {
+          --border-color: var(--ion-color-success);
+          --box-shadow: 
+            0 8px 25px rgba(var(--ion-color-success-rgb), 0.15),
+            0 3px 12px rgba(var(--ion-color-success-rgb), 0.1);
+        }
+      }
+
+      // Floating label effect
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--ion-color-primary), var(--ion-color-secondary));
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transform: translateX(-50%);
+        border-radius: 2px;
+      }
+
+      &:has(.modern-input.ion-focused)::after {
+        width: 100%;
+      }
+
+      // Add extra padding for password field to accommodate eye icon
+      &:has(.password-toggle-icon) .modern-input {
+        --padding-end: 58px;
+      }
+
+      // Icon animation on focus
+      &:has(.modern-input.ion-focused) .input-icon {
+        color: var(--ion-color-primary);
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      // Ensure ion-input takes full width
+      ion-input {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// Button Spinner
+.button-spinner {
+  --color: white;
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+}
+
+// Terms Section
+.terms-section {
+  margin: 24px 0 28px;
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(248, 250, 255, 0.1));
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  animation: termsSlideIn 0.8s ease-out 0.7s both;
+
+  .terms-text {
+    font-size: 0.85rem;
+    color: #6b7280;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 400;
+
+    .terms-link {
+      color: var(--ion-color-primary);
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      transition: all 0.3s ease;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--ion-color-primary), var(--ion-color-secondary));
+        transition: width 0.3s ease;
+      }
+
+      &:hover {
+        color: var(--ion-color-secondary);
+        transform: translateY(-1px);
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// Alternative Actions
+.alternative-actions {
+  text-align: center;
+  margin-top: 24px;
+  animation: alternativeSlideIn 0.8s ease-out 0.8s both;
+
+  .login-prompt {
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(248, 250, 255, 0.8));
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    box-shadow: 
+      0 8px 25px rgba(0, 0, 0, 0.05),
+      inset 0 1px 2px rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 35px rgba(0, 0, 0, 0.1),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9);
+    }
+
+    .login-link {
+      --color: var(--ion-color-primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin: 0;
+      text-decoration: none;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -4px;
+        right: -4px;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(var(--ion-color-primary-rgb), 0.1), rgba(var(--ion-color-secondary-rgb), 0.1));
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      &:hover {
+        --color: var(--ion-color-secondary);
+        transform: scale(1.05);
+
+        &::before {
+          opacity: 1;
+        }
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
+
+@keyframes termsSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes alternativeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Buttons
+.signup-button {
+  --background: linear-gradient(135deg, 
+    rgba(40, 167, 69, 1) 0%, 
+    rgba(102, 126, 234, 1) 50%, 
+    rgba(118, 75, 162, 1) 100%);
+  --border-radius: 20px;
+  --box-shadow: 
+    0 15px 35px rgba(40, 167, 69, 0.3),
+    0 8px 20px rgba(102, 126, 234, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  --color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  height: 64px;
+  margin-bottom: 20px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.2), 
+      transparent);
+    transition: left 0.6s ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+  }
+
+  &:hover:not(.button-disabled) {
+    transform: translateY(-4px) scale(1.02);
+    --box-shadow: 
+      0 25px 50px rgba(40, 167, 69, 0.4),
+      0 12px 30px rgba(102, 126, 234, 0.3),
+      inset 0 2px 4px rgba(255, 255, 255, 0.4);
+    
+    &::before {
+      left: 100%;
+    }
+
+    &::after {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+  }
+
+  &:active:not(.button-disabled) {
+    transform: translateY(-2px) scale(0.98);
+    transition: all 0.1s ease;
+  }
+
+  &.button-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    --background: linear-gradient(135deg, #a0a0a0, #808080);
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  // Ensure proper alignment of spinner and text
+  .button-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  // Ripple effect on click
+  &:active:not(.button-disabled) {
+    &::after {
+      width: 200%;
+      height: 200%;
+      opacity: 0.3;
+      transition: all 0.1s ease;
+    }
+  }
+}
+
+// Header styling
+ion-header {
+  ion-toolbar {
+    --background: transparent;
+    --border-color: transparent;
+    --color: white;
+    
+    ion-title {
+      font-weight: 600;
+    }
+    
+    ion-back-button {
+      --color: white;
+      --icon-font-size: 24px;
+    }
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUpFancy {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+@keyframes iconBreathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 
+      2px 2px 4px rgba(0, 0, 0, 0.3),
+      0 0 20px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    text-shadow: 
+      2px 2px 4px rgba(0, 0, 0, 0.3),
+      0 0 30px rgba(255, 255, 255, 0.4);
+  }
+}
+
+@keyframes subtitleFade {
+  0%, 100% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes rotateGradient {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes backgroundShift {
+  0%, 100% {
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  }
+  50% {
+    background: 
+      radial-gradient(circle at 60% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes floatingLight {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-45%, -45%) scale(1.2);
+    opacity: 0.6;
+  }
+}
+
+@keyframes inputSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes inputShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+// Floating Particles
+.modern-register-content {
+  .floating-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      animation: particleFloat 15s linear infinite;
+
+      &:nth-child(1) {
+        left: 10%;
+        animation-delay: 0s;
+        animation-duration: 20s;
+      }
+
+      &:nth-child(2) {
+        left: 20%;
+        animation-delay: 2s;
+        animation-duration: 18s;
+      }
+
+      &:nth-child(3) {
+        left: 30%;
+        animation-delay: 4s;
+        animation-duration: 22s;
+      }
+
+      &:nth-child(4) {
+        left: 40%;
+        animation-delay: 6s;
+        animation-duration: 16s;
+      }
+
+      &:nth-child(5) {
+        left: 50%;
+        animation-delay: 8s;
+        animation-duration: 19s;
+      }
+
+      &:nth-child(6) {
+        left: 60%;
+        animation-delay: 10s;
+        animation-duration: 21s;
+      }
+
+      &:nth-child(7) {
+        left: 70%;
+        animation-delay: 12s;
+        animation-duration: 17s;
+      }
+
+      &:nth-child(8) {
+        left: 80%;
+        animation-delay: 14s;
+        animation-duration: 23s;
+      }
+
+      &:nth-child(9) {
+        left: 90%;
+        animation-delay: 16s;
+        animation-duration: 20s;
+      }
+    }
+  }
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+// Responsive Design
+@media (max-width: 480px) {
+  .register-container {
+    padding: 16px;
+  }
+
+  .form-section {
+    padding: 32px 24px;
+    border-radius: 24px;
+  }
+
+  .logo-section {
+    margin-bottom: 24px;
+
+    .logo-circle {
+      width: 90px;
+      height: 90px;
+      
+      ion-icon {
+        font-size: 48px;
+      }
+    }
+
+    .app-title {
+      font-size: 1.8rem;
+    }
+
+    .app-subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  .signup-form .input-group .input-wrapper .modern-input {
+    height: 56px;
+    font-size: 0.95rem;
+  }
+
+  .signup-button {
+    height: 60px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .form-section {
+    padding: 28px 20px;
+  }
+
+  .logo-section {
+    .logo-circle {
+      width: 80px;
+      height: 80px;
+      
+      ion-icon {
+        font-size: 42px;
+      }
+    }
+
+    .app-title {
+      font-size: 1.6rem;
+    }
+
+    .app-subtitle {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Dark Mode Support
+@media (prefers-color-scheme: dark) {
+  .form-section {
+    background: rgba(var(--ion-color-step-100), 0.95);
+  }
+
+  .terms-section .terms-text {
+    color: var(--ion-color-light);
+  }
+}

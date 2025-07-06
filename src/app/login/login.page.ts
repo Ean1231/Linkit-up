@@ -12,6 +12,8 @@ import { AlertController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   password ;
   loading: boolean;
+  showPassword: boolean = false;
+  
   constructor(
     public modalCtrl: ModalController,
     public auth: AuthService,
@@ -20,6 +22,10 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
   async dismiss() {

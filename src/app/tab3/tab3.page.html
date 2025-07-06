@@ -1,99 +1,169 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <!-- <ion-title style="margin-left: 20px;">Opportunities</ion-title> -->
-   <ion-icon (click)="presentAlert()" slot="start" name="ellipsis-vertical-outline" style="height: 30px; width: 20px;"></ion-icon>
+    <ion-title slot="start" class="header-title">
+      <ion-text color="light">
+        <h1>Opportunities</h1>
+      </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="presentAlert()">
+        <ion-icon name="ellipsis-vertical-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
-  <!-- <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
 </ion-header>
 
-
-<ion-content >
-   <div class="banner" style="margin-top: 30px;">
-     <img style=" border-radius: 20px;" src="../assets/geometric-purple-urban-art-on-brick-wall.jpg">
-        <div class="caption">
-          Bursaries, Career Oppertunities and <br>
-          much more. <br>
-
-          <div style="color: black; margin-bottom: -40px; background-color: white; border-radius: 20px;padding-top: 1px;padding-bottom:1px;">
-            <h3 ><span style="margin:15px;">Welcome {{ (user | async)?.name }}</span>  </h3>
+<ion-content class="modern-content">
+  <!-- Hero Banner Section -->
+  <div class="hero-banner">
+    <div class="hero-overlay">
+      <div class="hero-content">
+        <h2 class="hero-title">Discover Your Future</h2>
+        <p class="hero-subtitle">Bursaries, Career Opportunities and much more</p>
+        <div class="welcome-card" *ngIf="user | async as currentUser">
+          <ion-avatar class="user-avatar">
+            <ion-icon name="person-circle-outline"></ion-icon>
+          </ion-avatar>
+          <div class="welcome-text">
+            <h3>Welcome back, {{ currentUser.name }}!</h3>
+            <p>Ready to explore new opportunities?</p>
           </div>
-         
         </div>
-        <div>
-          
-        </div>
-  </div> <br>
-
-      <ion-searchbar placeholder="Search " [(ngModel)]="search" showCancelButton="focus" animated="true"  search-icon="search-circle"></ion-searchbar>     
-     
-  <div style="display: flex; gap:170px;">
-    <div>
-    </div>
-    <div>
-      &nbsp;
-      <ion-spinner *ngIf="loading" color="tertiary" ></ion-spinner>
-    </div>
-  </div>
-    
-  <div class="title">
-    <h2>Workshop/Event</h2>
-    <p [routerLink]="'/all-opportunities'">See all</p>
-  </div>
-
-  <div class="bursary-slider">
-      <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" class="default-left-padding">
-
-          <ion-slide (click)="details(data)" *ngFor="let data of opportunities | filter:search">
-                  <ion-col class="ion-text-left">
-                      <ion-card>
-                          <ion-card-header class="ion-no-padding">
-                              <img style="height: auto; width: 100%;" src={{data.img}}>
-                          </ion-card-header>
-                          <ion-card-content>
-                              <p class="date">{{data.closingDate}}</p>
-                              <h2 class="eventName">{{data.title.substring(0, 12)}}..</h2>
-                              <p class="location"><ion-icon name="location" style="margin-right: 5px;"></ion-icon>{{data.type}}</p>
-
-                              <div class="additional-info">
-                                  <div class="attendees">
-                                      <i class="fa fa-user" aria-hidden="true"></i>
-                                  </div>
-                                  <p class="time">{{data.studyField}}</p>
-                              </div>
-                          </ion-card-content>
-                      </ion-card>
-                  </ion-col>
-          </ion-slide>
-      </ion-slides>
-  </div>
-  <div class="default-top-padding title">
-    <h2>Need Funding?</h2>
-    <p [routerLink]="'/all-bursarues'">See all</p>
-  </div>
-
-
-  <div  class="bursary-slider">
-     <ion-slides   [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" class="default-left-padding">
-    <ion-slide (click)="bursaryDetails(data)"  *ngFor="let data of bursaries">
-      
-  <div style="height: 100px; width: 700px;"  class="accom">
-    <img style="object-fit: contain; height: auto; width: 100%;" src={{data.img}}>
-
-    <div class="info">
-      <div class="content">
-        <h6>{{data.title.substring(0, 10)}}</h6>
-        <p class="stats">
-          <span><ion-icon name="lock-closed-outline"></ion-icon></span>
-          <span>{{data.closingDate}}</span>
-        </p>
       </div>
     </div>
   </div>
-    </ion-slide>
 
-  </ion-slides>
+  <!-- Search Section -->
+  <div class="search-section">
+    <ion-searchbar 
+      placeholder="Search opportunities..." 
+      [(ngModel)]="search" 
+      showClearButton="focus" 
+      class="modern-searchbar"
+      search-icon="search-outline">
+    </ion-searchbar>
   </div>
- 
+
+  <!-- Loading Spinner -->
+  <div class="loading-container" *ngIf="loading">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Loading amazing opportunities...</p>
+  </div>
+
+  <!-- Workshops/Events Section -->
+  <div class="section-container">
+    <div class="section-header">
+      <div class="section-title">
+        <ion-icon name="calendar-outline" class="section-icon"></ion-icon>
+        <h2>Workshops & Events</h2>
+      </div>
+      <ion-button fill="clear" color="primary" [routerLink]="'/all-opportunities'">
+        <span>See all</span>
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div class="cards-slider">
+      <ion-slides [options]="{ slidesPerView: 'auto', spaceBetween: 16, freeMode: true }" class="opportunities-slider">
+        <ion-slide *ngFor="let data of opportunities | filter:search" class="slide-item">
+          <div class="modern-card opportunity-card" (click)="details(data)">
+            <div class="card-image">
+              <img [src]="data.img" [alt]="data.title">
+              <div class="card-badge">
+                <ion-chip color="primary" class="date-chip">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <ion-label>{{ data.closingDate }}</ion-label>
+                </ion-chip>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">{{ data.title }}</h3>
+              <div class="card-details">
+                <div class="detail-item">
+                  <ion-icon name="location-outline" color="medium"></ion-icon>
+                  <span>{{ data.type }}</span>
+                </div>
+                <div class="detail-item">
+                  <ion-icon name="school-outline" color="medium"></ion-icon>
+                  <span>{{ data.studyField }}</span>
+                </div>
+              </div>
+              <ion-button fill="clear" size="small" class="card-action">
+                <span>Learn More</span>
+                <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+
+  <!-- Bursaries Section -->
+  <div class="section-container">
+    <div class="section-header">
+      <div class="section-title">
+        <ion-icon name="school-outline" class="section-icon"></ion-icon>
+        <h2>Need Funding?</h2>
+      </div>
+      <ion-button fill="clear" color="primary" [routerLink]="'/all-bursarues'">
+        <span>See all</span>
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div class="cards-slider">
+      <ion-slides [options]="{ slidesPerView: 'auto', spaceBetween: 16, freeMode: true }" class="bursaries-slider">
+        <ion-slide *ngFor="let data of bursaries" class="slide-item">
+          <div class="modern-card bursary-card" (click)="bursaryDetails(data)">
+            <div class="bursary-image">
+              <img [src]="data.img" [alt]="data.title">
+            </div>
+            <div class="bursary-content">
+              <h4 class="bursary-title">{{ data.title }}</h4>
+              <div class="bursary-info">
+                <ion-chip color="success" class="deadline-chip">
+                  <ion-icon name="lock-closed-outline"></ion-icon>
+                  <ion-label>{{ data.closingDate }}</ion-label>
+                </ion-chip>
+              </div>
+              <ion-button fill="solid" size="small" color="success" class="apply-btn">
+                Apply Now
+              </ion-button>
+            </div>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+
+  <!-- Quick Actions Section -->
+  <div class="section-container">
+    <div class="quick-actions">
+      <h3>Quick Actions</h3>
+      <div class="action-grid">
+        <ion-button fill="outline" class="action-button" [routerLink]="['/favorites']">
+          <ion-icon name="bookmark-outline" slot="start"></ion-icon>
+          Favorites
+        </ion-button>
+        <ion-button fill="outline" class="action-button">
+          <ion-icon name="notifications-outline" slot="start"></ion-icon>
+          Notifications
+        </ion-button>
+        <ion-button fill="outline" class="action-button">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          Profile
+        </ion-button>
+        <ion-button fill="outline" class="action-button">
+          <ion-icon name="help-circle-outline" slot="start"></ion-icon>
+          Help
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Padding -->
+  <div class="bottom-padding"></div>
 </ion-content>
   
     

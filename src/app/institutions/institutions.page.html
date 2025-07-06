@@ -1,39 +1,78 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Institutions</ion-title>
+    <ion-title>
+      <ion-text color="light">
+        <h1>Institutions</h1>
+      </ion-text>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <div *ngIf="data.length == 0 ; then thenBlock else elseBlock"></div>
-    <ng-template #thenBlock> No course available at moment. </ng-template>
+<ion-content class="institutions-content">
+  <!-- Loading/Empty State -->
+  <div *ngIf="data.length == 0" class="empty-state">
+    <div class="empty-content">
+      <ion-icon name="school-outline" class="empty-icon"></ion-icon>
+      <h2>No Institutions Found</h2>
+      <p>No courses are available at the moment. Please try again later or adjust your search criteria.</p>
+      <ion-button fill="outline" color="primary" routerLink="/ap-search">
+        <ion-icon name="search-outline" slot="start"></ion-icon>
+        Search Again
+      </ion-button>
+    </div>
+  </div>
 
-    <ng-template #elseBlock>
-      <div (click)="details(data)" class="container" *ngFor="let data of data">
-        <div class="card cardContent">
-          <div >
-            <img src="{{data.img}}" alt="image" />
-          </div>
+  <!-- Institutions List -->
+  <div *ngIf="data.length > 0" class="institutions-container">
+    <div class="results-header">
+      <h2>Found {{data.length}} Institution{{data.length > 1 ? 's' : ''}}</h2>
+      <p>Select an institution to view more details</p>
+    </div>
 
-          <div>
-            <h5 class="card-title">{{ data.institution }}</h5>
-
-            <small style="color: gray; font-size: 12pt"
-              >{{ data.location }}</small
-            >
-
-            <div style="display: flex; justify-content:space-between;">
-              <div><small>{{ data.qualification}}</small></div>
-              <div><small>{{data.years}}</small></div>
-  
-            </div>
+    <div class="institutions-grid">
+      <ion-card 
+        *ngFor="let institution of data; let i = index" 
+        class="institution-card"
+        [style.animation-delay]="(i * 0.1) + 's'"
+        (click)="details(institution)">
+        
+        <div class="card-image">
+          <img [src]="institution.img" [alt]="institution.institution" />
+          <div class="card-overlay">
+            <ion-icon name="arrow-forward-outline" class="view-icon"></ion-icon>
           </div>
         </div>
-      </div>
-    </ng-template>
-  </ion-list>
+        
+        <ion-card-content>
+          <div class="card-header">
+            <h3 class="institution-name">{{ institution.institution }}</h3>
+            <div class="location-badge">
+              <ion-icon name="location-outline"></ion-icon>
+              <span>{{ institution.location }}</span>
+            </div>
+          </div>
+          
+          <div class="card-details">
+            <div class="qualification-info">
+              <ion-icon name="school-outline" color="primary"></ion-icon>
+              <div class="qualification-text">
+                <p class="qualification-title">{{ institution.qualification }}</p>
+                <small class="duration">{{ institution.years }}</small>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card-action">
+            <ion-button fill="clear" size="small" color="primary">
+              <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+              View Details
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>

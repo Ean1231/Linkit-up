@@ -1,63 +1,138 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title></ion-title>
+    <ion-title>
+      <ion-text color="light">
+        <h1>Accommodation Details</h1>
+      </ion-text>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ml-1" style="height: 100%">
-    <div class="card" style=" height: 100%">
-      <img style="height: 250px;" src="{{showdata.image}}" class="card-img-top" alt="..." />
-
-      <div class="card-body">
-        <h5 class="card-title">{{showdata.AccomodationName}}</h5>
-        <h3>Description</h3>
-        <p color="primary">{{showdata.description.substring(0, 280)}}... </p>
-        <div style="display:flex;">
-          <h6><ion-icon name="location-outline"></ion-icon>{{showdata.location}}</h6>
-<h6 style="margin-left: 90px;"><ion-icon name="call-outline"></ion-icon>{{showdata.contact}}</h6>
-
-        </div>
-      </div>
-      <div class="border-top"></div>
-      <div
-        class="container mt-3"
-        style="
-          display: grid;
-          grid-template-columns: 50% 50%;
-          gap: 12px;
-          height: 100%;
-        "
-      > 
-      </div>
-
-      <div style="display:grid;  grid-template-columns: 50% 50%;  ">
-        <!-- <div class="m-0">
-          <ion-icon color="primary" name="location-outline"></ion-icon>
-          <small class="pl-2">{{location}}</small><br />
-        </div> -->
-
-        <!-- <div class="ml-5">
-          <ion-icon color="primary" name="call-outline"></ion-icon>
-          <small class="pl-2">{{contact}} </small>
-        </div> -->
-        <!-- <div class="">
-          <ion-icon color="primary" name="mail-outline"></ion-icon>
-          <small class="pl-2"> {{showdata.email}} </small>
-        </div> -->
-        <div >
-         <a href={{showdata.link}}> 
-           <ion-button style="width: 100%; margin-left: 90px;"
-            
-            
-          >
-            Apply
-          </ion-button></a>
+<ion-content class="accommodation-content">
+  <!-- Hero Section with Image -->
+  <div class="hero-section">
+    <div class="hero-image">
+      <img [src]="showdata.image" [alt]="showdata.AccomodationName">
+      <div class="hero-overlay">
+        <div class="hero-badge">
+          <ion-icon name="home-outline"></ion-icon>
+          <span>Accommodation</span>
         </div>
       </div>
     </div>
+      </div>
+
+  <!-- Accommodation Information -->
+  <div class="content-container">
+    <!-- Accommodation Name Card -->
+    <ion-card class="accommodation-card">
+      <ion-card-content>
+        <div class="accommodation-header">
+          <h2 class="accommodation-name">{{showdata.AccomodationName}}</h2>
+          <div class="accommodation-type">
+            <ion-icon name="bed-outline" color="primary"></ion-icon>
+            <span>Student Accommodation</span>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Description Card -->
+    <ion-card class="description-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="document-text-outline" color="secondary"></ion-icon>
+          Description
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p class="description-text">{{showdata.description.substring(0, 280)}}...</p>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Contact Information Card -->
+    <ion-card class="contact-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="information-circle-outline" color="tertiary"></ion-icon>
+          Contact Information
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="contact-grid">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <ion-icon name="location-outline" color="primary"></ion-icon>
+            </div>
+            <div class="contact-details">
+              <p class="contact-label">Location</p>
+              <p class="contact-value">{{showdata.location}}</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <ion-icon name="call-outline" color="success"></ion-icon>
+            </div>
+            <div class="contact-details">
+              <p class="contact-label">Phone</p>
+              <p class="contact-value">{{showdata.contact}}</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <ion-icon name="globe-outline" color="warning"></ion-icon>
+            </div>
+            <div class="contact-details">
+              <p class="contact-label">Website</p>
+              <p class="contact-value">Visit Website</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <ion-icon name="time-outline" color="medium"></ion-icon>
+            </div>
+            <div class="contact-details">
+              <p class="contact-label">Availability</p>
+              <p class="contact-value">Contact for Details</p>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Apply Button Section -->
+    <div class="apply-section">
+      <ion-card class="apply-card">
+        <ion-card-content>
+          <div class="apply-content">
+            <div class="apply-text">
+              <h3>Ready to Apply?</h3>
+              <p>Click below to visit the accommodation website and start your application process.</p>
+            </div>
+            <div class="apply-action">
+              <a [href]="showdata.link" target="_blank" rel="noopener noreferrer">
+                <ion-button 
+                  expand="block" 
+                  size="large" 
+                  color="primary"
+                  class="apply-button">
+                  <ion-icon name="open-outline" slot="start"></ion-icon>
+                  Apply Now
+                </ion-button>
+              </a>
+        </div>
+      </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
+
+  <!-- Bottom Padding -->
+  <div class="bottom-padding"></div>
 </ion-content>

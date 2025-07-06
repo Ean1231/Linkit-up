@@ -1,95 +1,145 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-icon (click)="presentAlert()" slot="start" name="log-out-outline" style="height: 30px; width: 30px; margin-left: 15px;"></ion-icon>
-    <ion-title>AP Search</ion-title>
+    <ion-title>
+      <ion-text color="light">
+        <h1>AP Search</h1>
+      </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="presentAlert()">
+        <ion-icon name="log-out-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-
-<div class="banner" style="margin-top: 30px;">
-  <img src="../assets/high-angle-shot-purple-calculator-lights-186564793.jpg" style="border-radius: 20px; height: 200px;" >
-  
-  <div class="caption">
-Search for a study institutuion using your AP score</div>
+<ion-content class="search-content">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-image">
+      <img src="../assets/high-angle-shot-purple-calculator-lights-186564793.jpg" alt="AP Search">
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <ion-icon name="search-outline" class="hero-icon"></ion-icon>
+          <h2 class="hero-title">Find Your Institution</h2>
+          <p class="hero-subtitle">Search for study institutions using your AP score</p>
+        </div>
+      </div>
 </div> 
-
-  
- 
- 
-
-           <div style="margin-top: 20px;">
-            <!-- <ion-item style="margin-left: 24px; margin-right: 24px; border-radius: 30px;">
-              
-            </ion-item> -->
-            <div style="margin-bottom: -23px;">
-              <label style="margin: 4%;" for="text"><b>Your Score</b></label>
-              <ion-input type="text" class="form-control"   aria-describedby="basic-addon1" style="margin-left: 15px; width: 90%; padding-right: 20px;" #aps >{{data.sum}}</ion-input>
             </div>
-             <br>
-                            <label style="margin: 4%;" for="validationDefault04"><b>Choose Location</b></label>
-                            <select  [(ngModel)]="location" class="custom-select" id="validationDefault04" required   style="width:93%; margin-left: 12px;" >
-                              <option selected disabled value="">Choose Location</option>
-                              <option>Kimberley</option>
-                              <option>Mahikeng</option>
-                              <option>Johhanesburg</option>
-                              <option>Bloemfontein</option>
-                              <option>De Aar</option>
-                              <option>vredendal</option>
-                              <option>Pretoria</option>
-                              <option>Cape Town</option>
-                              
-                            </select>
-                        
 
-                        
-                            <label style="margin: 4%;" for="validationDefault04"><b>Preffered Field of study</b></label>
-                            <select [(ngModel)]="field" class="custom-select" id="validationDefault04" required  style="width:93%; margin-left: 12px;">
-                              <option selected disabled value="">Choose Field of study</option>
-                              <option class='form-control' value="Diploma in Retail Management " >Diploma in Retail Management </option>
-                              <option class='form-control' value="Advanced Diploma in Management">Advanced Diploma in Management</option>
-                              <option class='form-control' value="Postgraduate Diploma in Public Management " >Postgraduate Diploma in Public Management </option>
-                              <option class='form-control' value="Postgraduate Diploma in Entrepreneurship">Postgraduate Diploma in Entrepreneurship</option>
-                              <option class='form-control' value="Bachelor of Education – Intermediate Phase " >Bachelor of Education – Intermediate Phase </option>
-                              <option class='form-control' value="Bachelor of Education – Senior & FET Phase " >Bachelor of Education – Senior & FET Phase </option>
-                              <option class='form-control' value="Bachelor of Education Honours – Curriculum Development ">Bachelor of Education Honours – Curriculum Development </option>
-                              <option class='form-control' value="Bachelor of Science  " >Bachelor of Science  </option>
-                              <option class='form-control' value="Postgraduate Diploma in Management">Postgraduate Diploma in Management</option>
-                              <option class='form-control' value="Bachelor of Commerce in Human Resource Management " >Bachelor of Commerce in Human Resource Management</option>
-                              <option class='form-control' value="MOBILE APP DEVELOPMENT">MOBILE APP DEVELOPMENT</option>
-                              <option class='form-control' value="DIPLOMA IN SYSTEMS DEVELOPMENT" >DIPLOMA IN SYSTEMS DEVELOPMENT </option>
-                              <option class='form-control' value="SOFTWARE SPECIALIST" >SOFTWARE SPECIALIST </option>
-                              <option class='form-control' value="COMPUTER CLERK">COMPUTER CLERK </option>
-                              <option class='form-control' value="Bachelor in Education (BEd)">Bachelor in Education (BEd) </option> 
-                              <option class='form-control' value="Law">Law </option> 
-                              <option class='form-control' value="Management Sciences in Accountancy">Management Sciences in Accountancy </option>
-                              <option class='form-control' value="Management Sciences in Accountancy">Bachelor of commercial accounting </option>
-                              <option class='form-control' value="Management Sciences in Accountancy">Bachelor of commerce in accounting </option>
-                              <option class='form-control' value="Management Sciences in Accountancy">Advanced diploma in management </option>
-                              <option class='form-control' value="Management Sciences in Accountancy">Bachelor of arts </option>
-                              <option class='form-control' value="Management Sciences in Accountancy">Higher certificate in heritage studies</option>
-                              <option class='form-control' value="Management Sciences in Accountancy">Higher certificate in Court Interpreting</option>
+  <!-- Search Form -->
+  <div class="search-container">
+    <!-- AP Score Card -->
+    <ion-card class="search-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="trophy-outline" color="primary"></ion-icon>
+          Your AP Score
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item fill="outline" class="custom-item">
+          <ion-label position="stacked">Enter Your AP Score</ion-label>
+          <ion-input 
+            type="number" 
+            placeholder="Enter your AP score" 
+            #aps 
+            [value]="data.sum">
+          </ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
 
-                            </select>
+    <!-- Location Card -->
+    <ion-card class="search-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="location-outline" color="secondary"></ion-icon>
+          Choose Location
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item fill="outline" class="custom-item">
+          <ion-label position="stacked">Select Your Preferred Location</ion-label>
+          <ion-select 
+            placeholder="Choose location" 
+            interface="action-sheet" 
+            [(ngModel)]="location">
+            <ion-select-option value="Kimberley">Kimberley</ion-select-option>
+            <ion-select-option value="Mahikeng">Mahikeng</ion-select-option>
+            <ion-select-option value="Johhanesburg">Johannesburg</ion-select-option>
+            <ion-select-option value="Bloemfontein">Bloemfontein</ion-select-option>
+            <ion-select-option value="De Aar">De Aar</ion-select-option>
+            <ion-select-option value="vredendal">Vredendal</ion-select-option>
+            <ion-select-option value="Pretoria">Pretoria</ion-select-option>
+            <ion-select-option value="Cape Town">Cape Town</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Field of Study Card -->
+    <ion-card class="search-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="school-outline" color="tertiary"></ion-icon>
+          Field of Study
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item fill="outline" class="custom-item">
+          <ion-label position="stacked">Select Your Preferred Field</ion-label>
+          <ion-select 
+            placeholder="Choose field of study" 
+            interface="action-sheet" 
+            [(ngModel)]="field">
+            <ion-select-option value="Diploma in Retail Management">Diploma in Retail Management</ion-select-option>
+            <ion-select-option value="Advanced Diploma in Management">Advanced Diploma in Management</ion-select-option>
+            <ion-select-option value="Postgraduate Diploma in Public Management">Postgraduate Diploma in Public Management</ion-select-option>
+            <ion-select-option value="Postgraduate Diploma in Entrepreneurship">Postgraduate Diploma in Entrepreneurship</ion-select-option>
+            <ion-select-option value="Bachelor of Education – Intermediate Phase">Bachelor of Education – Intermediate Phase</ion-select-option>
+            <ion-select-option value="Bachelor of Education – Senior & FET Phase">Bachelor of Education – Senior & FET Phase</ion-select-option>
+            <ion-select-option value="Bachelor of Education Honours – Curriculum Development">Bachelor of Education Honours – Curriculum Development</ion-select-option>
+            <ion-select-option value="Bachelor of Science">Bachelor of Science</ion-select-option>
+            <ion-select-option value="Postgraduate Diploma in Management">Postgraduate Diploma in Management</ion-select-option>
+            <ion-select-option value="Bachelor of Commerce in Human Resource Management">Bachelor of Commerce in Human Resource Management</ion-select-option>
+            <ion-select-option value="MOBILE APP DEVELOPMENT">Mobile App Development</ion-select-option>
+            <ion-select-option value="DIPLOMA IN SYSTEMS DEVELOPMENT">Diploma in Systems Development</ion-select-option>
+            <ion-select-option value="SOFTWARE SPECIALIST">Software Specialist</ion-select-option>
+            <ion-select-option value="COMPUTER CLERK">Computer Clerk</ion-select-option>
+            <ion-select-option value="Bachelor in Education (BEd)">Bachelor in Education (BEd)</ion-select-option>
+            <ion-select-option value="Law">Law</ion-select-option>
+            <ion-select-option value="Management Sciences in Accountancy">Management Sciences in Accountancy</ion-select-option>
+            <ion-select-option value="Bachelor of commercial accounting">Bachelor of Commercial Accounting</ion-select-option>
+            <ion-select-option value="Bachelor of commerce in accounting">Bachelor of Commerce in Accounting</ion-select-option>
+            <ion-select-option value="Advanced diploma in management">Advanced Diploma in Management</ion-select-option>
+            <ion-select-option value="Bachelor of arts">Bachelor of Arts</ion-select-option>
+            <ion-select-option value="Higher certificate in heritage studies">Higher Certificate in Heritage Studies</ion-select-option>
+            <ion-select-option value="Higher certificate in Court Interpreting">Higher Certificate in Court Interpreting</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
                           </div>
-                        <br>
-                  <div class="btnButtons">
-              <ion-button  color="primary" (click)="submit(aps.value)"  type="button" style="width: 200px; ">Continue</ion-button>
-                        
+
+  <!-- Search Button -->
+  <div class="search-button-section">
+    <ion-button 
+      expand="block" 
+      size="large" 
+      color="primary" 
+      (click)="submit(aps.value)"
+      class="search-button">
+      <ion-icon name="search-outline" slot="start"></ion-icon>
+      Find Institutions
+    </ion-button>
           </div>
           
-  
-  
-  
-  <!-- <div *ngIf="showUniversities">
-  
-    <ion-item *ngFor= "let university of Universities" (click)="submit(university)"> <br>
-      Institution: {{university.University}} <br>
-      Aps Score: {{university.aps}} <br>
-      Course you qualify for: {{university.Field}} in {{ university.QualificationType }}<br>
-      City: {{university.City}}
-       </ion-item>
-  
-  </div> -->
+  <!-- Bottom Padding -->
+  <div class="bottom-padding"></div>
+</ion-content>
+

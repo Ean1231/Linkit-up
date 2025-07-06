@@ -1,62 +1,153 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title></ion-title>
+    <ion-title class="header-title">
+      <ion-icon name="school-outline" class="title-icon"></ion-icon>
+      Bursary Details
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <div class="ml-1" style="height: 100%">
-      <div class="card" style=" height: 100%">
-        <img src="{{showdata.img}}" class="card-img-top" alt="..." />
-
-        <div class="card-body">
-          <h5 class="card-title">{{showdata.title}}</h5>
-          <h3>Description</h3>
-          <p color="primary">{{showdata.description.substring(0, 280)}}... </p>
-          <h6>Closing Date: {{showdata.closingDate}}</h6>
-        </div>
-        <div class="border-top"></div>
-        <div
-          class="container mt-3"
-          style="
-            display: grid;
-            grid-template-columns: 50% 50%;
-            gap: 12px;
-            height: 100%;
-          "
-        > 
-        </div>
-
-        <div style="display:grid;  grid-template-columns: 50% 50%;  ">
-          <!-- <div class="m-0">
-            <ion-icon color="primary" name="location-outline"></ion-icon>
-            <small class="pl-2">{{location}}</small><br />
-          </div> -->
-
-          <!-- <div class="ml-5">
-            <ion-icon color="primary" name="call-outline"></ion-icon>
-            <small class="pl-2">{{contact}} </small>
-          </div> -->
-          <!-- <div class="">
-            <ion-icon color="primary" name="mail-outline"></ion-icon>
-            <small class="pl-2"> {{showdata.email}} </small>
-          </div> -->
-          <div >
-           <a href={{showdata.link}}> 
-             <ion-button style="width: 100%; margin-left: 90px;"
-              
-              
-            >
-              Apply
-            </ion-button></a>
-          </div>
+<ion-content class="modern-bursary-content">
+  <div class="bursary-detail-container">
+    <!-- Hero Image Section -->
+    <div class="hero-image-section">
+      <img [src]="showdata.img" [alt]="showdata.title" class="bursary-hero-image">
+      <div class="hero-overlay">
+        <div class="hero-badge">
+          <ion-chip color="warning" class="deadline-chip">
+            <ion-icon name="time-outline"></ion-icon>
+            <ion-label>Closes: {{ showdata.closingDate }}</ion-label>
+          </ion-chip>
         </div>
       </div>
     </div>
-  </ion-list>
- 
+
+    <!-- Content Section -->
+    <div class="content-section">
+      <div class="bursary-header">
+        <h1 class="bursary-title">{{ showdata.title }}</h1>
+        <div class="bursary-meta">
+          <div class="meta-item">
+            <ion-icon name="calendar-outline" color="primary"></ion-icon>
+            <span>Deadline: {{ showdata.closingDate }}</span>
+          </div>
+          <div class="meta-item">
+            <ion-icon name="business-outline" color="primary"></ion-icon>
+            <span>Organization</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Description Card -->
+      <div class="info-card">
+        <div class="card-header">
+          <ion-icon name="document-text-outline" color="primary"></ion-icon>
+          <h3>Description</h3>
+        </div>
+        <div class="card-content">
+          <p class="description-text">{{ showdata.description }}</p>
+        </div>
+      </div>
+
+      <!-- Requirements Card -->
+      <div class="info-card" *ngIf="showdata.requirements">
+        <div class="card-header">
+          <ion-icon name="checkmark-done-outline" color="success"></ion-icon>
+          <h3>Requirements</h3>
+        </div>
+        <div class="card-content">
+          <ul class="requirements-list">
+            <li>South African citizen</li>
+            <li>Academic excellence (minimum 65% average)</li>
+            <li>Financial need demonstrated</li>
+            <li>Community involvement</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Benefits Card -->
+      <div class="info-card">
+        <div class="card-header">
+          <ion-icon name="gift-outline" color="tertiary"></ion-icon>
+          <h3>What's Covered</h3>
+        </div>
+        <div class="card-content">
+          <div class="benefits-grid">
+            <div class="benefit-item">
+              <ion-icon name="school-outline" color="primary"></ion-icon>
+              <span>Tuition Fees</span>
+            </div>
+            <div class="benefit-item">
+              <ion-icon name="home-outline" color="primary"></ion-icon>
+              <span>Accommodation</span>
+            </div>
+            <div class="benefit-item">
+              <ion-icon name="library-outline" color="primary"></ion-icon>
+              <span>Study Materials</span>
+            </div>
+            <div class="benefit-item">
+              <ion-icon name="card-outline" color="primary"></ion-icon>
+              <span>Living Allowance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Application Process Card -->
+      <div class="info-card">
+        <div class="card-header">
+          <ion-icon name="clipboard-outline" color="warning"></ion-icon>
+          <h3>How to Apply</h3>
+        </div>
+        <div class="card-content">
+          <div class="steps-list">
+            <div class="step-item">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Prepare Documents</h4>
+                <p>Gather all required documents including ID, academic records, and proof of income.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Complete Application</h4>
+                <p>Fill out the online application form with accurate information.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Submit & Wait</h4>
+                <p>Submit your application and wait for the selection process to complete.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <div class="action-section">
+        <a [href]="showdata.link" target="_blank" class="apply-link">
+          <ion-button 
+            expand="block" 
+            class="apply-button"
+            size="large">
+            <ion-icon name="open-outline" slot="start"></ion-icon>
+            Apply Now
+          </ion-button>
+        </a>
+        
+        <div class="action-info">
+          <p>
+            <ion-icon name="information-circle-outline" color="medium"></ion-icon>
+            You will be redirected to the official application portal
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

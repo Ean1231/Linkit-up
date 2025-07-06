@@ -1,35 +1,136 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title style="margin-left: 20px;">Calculate AP score</ion-title>
-   <ion-icon (click)="presentAlert()" slot="start" name="log-out-outline" style="height: 30px; width: 30px; margin-left: 15px;"></ion-icon>
+    <ion-title class="header-title">
+      <ion-icon name="calculator-outline" class="title-icon"></ion-icon>
+      AP Calculator
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="presentAlert()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [scrollEvents]="true">
-  <div class="banner" style="margin-top: 30px;">
-    <img src="../assets/high-angle-shot-purple-calculator-lights-186564793.jpg" style="border-radius: 20px; height: 215px;">
-    
-    <div class="caption">
-     Calculate Aps and search to see at what Higher institution you can study
+<ion-content class="modern-content">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-image">
+      <img src="../assets/high-angle-shot-purple-calculator-lights-186564793.jpg" alt="Calculator">
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <div class="hero-icon">
+            <ion-icon name="calculator-outline"></ion-icon>
+          </div>
+          <h2>Calculate Your APS</h2>
+          <p>Determine your Admission Point Score and discover which institutions you qualify for</p>
+        </div>
+      </div>
     </div>
-  </div> 
-  
-  <div >
-    <div style="margin-top: 90px;">
-      <ion-button style="margin: 10px;" expand="block" color="primary" [routerLink]="'/ap-calculator'">
-        <ion-icon name="calculator-outline"></ion-icon>AP Calculator
-      </ion-button>
-    </div>
-    
-    <!-- <div >
-      <ion-button style="width: 165px;" color="primary" expand="block" [routerLink]="'/ap-search'">
-        <ion-icon name="search-circle-outline"></ion-icon> Ap Search
-      </ion-button>
-    </div> -->
   </div>
 
+  <!-- Info Cards Section -->
+  <div class="info-section">
+    <div class="info-card">
+      <div class="info-icon">
+        <ion-icon name="school-outline" color="primary"></ion-icon>
+      </div>
+      <div class="info-content">
+        <h3>What is APS?</h3>
+        <p>Admission Point Score determines your eligibility for higher education institutions</p>
+      </div>
+    </div>
 
-  
+    <div class="info-card">
+      <div class="info-icon">
+        <ion-icon name="trophy-outline" color="success"></ion-icon>
+      </div>
+      <div class="info-content">
+        <h3>Find Your Path</h3>
+        <p>Discover universities and courses that match your academic achievements</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Section -->
+  <div class="action-section">
+    <div class="main-action-card">
+      <div class="action-header">
+        <div class="action-icon">
+          <ion-icon name="calculator"></ion-icon>
+        </div>
+        <div class="action-text">
+          <h3>APS Calculator</h3>
+          <p>Calculate your Admission Point Score based on your matric results</p>
+        </div>
+      </div>
+
+      <div class="action-features">
+        <div class="feature-item">
+          <ion-icon name="checkmark-circle-outline" color="success"></ion-icon>
+          <span>Quick & Easy</span>
+        </div>
+        <div class="feature-item">
+          <ion-icon name="shield-checkmark-outline" color="success"></ion-icon>
+          <span>Accurate Results</span>
+        </div>
+        <div class="feature-item">
+          <ion-icon name="school-outline" color="success"></ion-icon>
+          <span>Institution Matching</span>
+        </div>
+      </div>
+
+      <ion-button 
+        expand="block" 
+        class="calculator-button"
+        [routerLink]="'/ap-calculator'">
+        <ion-icon name="calculator-outline" slot="start"></ion-icon>
+        Start Calculating
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Benefits Section -->
+  <div class="benefits-section">
+    <h3 class="section-title">Why Calculate Your APS?</h3>
+    
+    <div class="benefits-grid">
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <ion-icon name="compass-outline"></ion-icon>
+        </div>
+        <h4>Plan Your Future</h4>
+        <p>Make informed decisions about your academic journey</p>
+      </div>
+
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <ion-icon name="search-outline"></ion-icon>
+        </div>
+        <h4>Find Opportunities</h4>
+        <p>Discover courses and institutions that match your score</p>
+      </div>
+
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <ion-icon name="time-outline"></ion-icon>
+        </div>
+        <h4>Save Time</h4>
+        <p>Avoid applying to institutions where you don't qualify</p>
+      </div>
+
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <ion-icon name="trending-up-outline"></ion-icon>
+        </div>
+        <h4>Track Progress</h4>
+        <p>Monitor your academic performance and improvement</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Padding -->
+  <div class="bottom-padding"></div>
 </ion-content>
    
 

@@ -112,10 +112,31 @@ export class AuthService {
     
   }
 
-  
-  
+  // Get current user ID (email) for favorites and other user-specific operations
+  getCurrentUserId(): string | null {
+    if (this.userData && this.userData.email) {
+      return this.userData.email.toLowerCase();
+    }
+    
+    // Try to get from localStorage as fallback
+    const storedUser = localStorage.getItem('user');
+    if (storedUser && storedUser !== 'null') {
+      try {
+        const user = JSON.parse(storedUser);
+        return user.email ? user.email.toLowerCase() : null;
+      } catch (error) {
+        console.error('Error parsing stored user data:', error);
+        return null;
+      }
+    }
+    
+    return null;
+  }
 
- 
+  // Check if user is logged in
+  isLoggedIn(): boolean {
+    return this.getCurrentUserId() !== null;
+  }
 
   }
 

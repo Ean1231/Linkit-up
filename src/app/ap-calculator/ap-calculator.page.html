@@ -1,362 +1,496 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-buttons slot="end">
-      <ion-back-button></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tabs/tab1"></ion-back-button>
     </ion-buttons>
-    <ion-icon (click)="presentAlert()" slot="start" name="log-out-outline" style="height: 30px; width: 30px; margin-left: 15px;"></ion-icon>
-    <ion-title>AP Calculator</ion-title>
+    <ion-title>
+      <ion-text color="light">
+        <h1>AP Calculator</h1>
+      </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="presentAlert()">
+        <ion-icon name="log-out-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-
-<ion-content [scrollEvents]="true">
-  <div class="banner" style="margin-top: 30px;">
-    <img src="../assets/high-angle-shot-purple-calculator-lights-186564793.jpg" style="border-radius: 20px; height: 200px;" >
-    
-    <div class="caption">
-Calculate Your AP Score</div>
+<ion-content class="calculator-content">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-image">
+      <img src="../assets/high-angle-shot-purple-calculator-lights-186564793.jpg" alt="Calculator">
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <ion-icon name="calculator-outline" class="hero-icon"></ion-icon>
+          <h2 class="hero-title">Calculate Your AP Score</h2>
+          <p class="hero-subtitle">Enter your subject marks to calculate your Admission Points Score</p>
+        </div>
+      </div>
   </div> 
-  
-<ion-list>
-    
-
-<div class="subject">
-  <div class="mt-3">
-    <label for="edit-submitted-first-language" style="margin-left: 11px;">Language</label>
-    <select required="required" class="custom-select" style="width: 160px; margin-left: 12px;" >
-
-      <option value="" selected="selected">Choose subject</option>
-      <option value="Afrikaans-First-Additional-Language">Afrikaans First Additional Language</option>
-      <option value="Afrikaans-Home-Language">Afrikaans Home Language</option>
-      <option value="English-First-Additional-Language">English First Additional Language</option>
-      <option value="English-Home-Language">English Home Language</option>
-      <option value="IsiNdebele-First-Additional-Language">IsiNdebele First Additional Language</option>
-      <option value="IsiNdebele-Home-Language">IsiNdebele Home Language</option>
-      <option value="IsiXhosa-First-Additional-Language">IsiXhosa First Additional Language</option>
-      <option value="IsiXhosa-Home-Language">IsiXhosa Home Language</option>
-      <option value="IsiZulu-First-Additional-Language">IsiZulu First Additional Language</option>
-      <option value="IsiZulu-Home-Language">IsiZulu Home Language</option>
-      <option value="Sepedi-First-Additional-Language">Sepedi First Additional Language</option>
-      <option value="Sepedi-Home-Language">Sepedi Home Language</option>
-      <option value="Sesotho-First-Additional-Language">Sesotho First Additional Language</option>
-      <option value="Sesotho-Home-Language">Sesotho Home Language</option>
-      <option value="Setswana-First-Additional-Language">Setswana First Additional Language</option>
-      <option value="Setswana-Home-Language">Setswana Home Language</option>
-      <option value="SiSwati-First-Additional-Language">SiSwati First Additional Language</option>
-      <option value="SiSwati-Home-Language">SiSwati Home Language</option>
-      <option value="Tshivenda-First-Additional-Language">Tshivenda First Additional Language</option>
-      <option value="Tshivenda-Home-Language">Tshivenda Home Language</option>
-      <option value="Xitsonga-First-Additional-Language">Xitsonga First Additional Language</option>
-      <option value="Xitsonga-Home-Language">Xitsonga Home Language</option></select>
   </div>
 
-  
-  <div style="margin-top: 46px;">
-    <select required="required" class="custom-select" style="width: 150px; margin-left: 12px;" [(ngModel)]="perc" >
-    <option value="" selected="selected">Select your Mark</option>
-   <option *ngFor="let mar of marks">
-     {{mar.name}}
-   </option>
-   
-  </select>
+  <!-- Instructions Card -->
+  <div class="instruction-card">
+    <ion-card class="info-card">
+      <ion-card-content>
+        <div class="instruction-header">
+          <ion-icon name="information-circle-outline" color="primary"></ion-icon>
+          <h3>How to Calculate</h3>
+        </div>
+        <p>Select your subjects and enter your marks (as percentages) to calculate your AP Score. You need at least 6 subjects including the compulsory subjects.</p>
+      </ion-card-content>
+    </ion-card>
   </div>
 
-
-  <div class="mt-3">
-    <label for="edit-submitted-first-language" style="margin-left: 11px;">Language</label>
-    <select required="required" class="custom-select" style="width: 160px; margin-left: 12px;" >
-      <option value="" selected="selected">Choose subject</option>
-      <option value="Afrikaans-First-Additional-Language">Afrikaans First Additional Language</option>
-      <option value="Afrikaans-Home-Language">Afrikaans Home Language</option><option value="English-First-Additional-Language">English First Additional Language</option>
-      <option value="English-Home-Language">English Home Language</option><option value="IsiNdebele-First-Additional-Language">IsiNdebele First Additional Language</option>
-      <option value="IsiNdebele-Home-Language">IsiNdebele Home Language</option><option value="IsiXhosa-First-Additional-Language">IsiXhosa First Additional Language</option>
-      <option value="IsiXhosa-Home-Language">IsiXhosa Home Language</option><option value="IsiZulu-First-Additional-Language">IsiZulu First Additional Language</option>
-      <option value="IsiZulu-Home-Language">IsiZulu Home Language</option><option value="Sepedi-First-Additional-Language">Sepedi First Additional Language</option>
-      <option value="Sepedi-Home-Language">Sepedi Home Language</option><option value="Sesotho-First-Additional-Language">Sesotho First Additional Language</option>
-      <option value="Sesotho-Home-Language">Sesotho Home Language</option><option value="Setswana-First-Additional-Language">Setswana First Additional Language</option>
-      <option value="Setswana-Home-Language">Setswana Home Language</option><option value="SiSwati-First-Additional-Language">SiSwati First Additional Language</option>
-      <option value="SiSwati-Home-Language">SiSwati Home Language</option><option value="Tshivenda-First-Additional-Language">Tshivenda First Additional Language</option>
-      <option value="Tshivenda-Home-Language">Tshivenda Home Language</option><option value="Xitsonga-First-Additional-Language">Xitsonga First Additional Language</option>
-      <option value="Xitsonga-Home-Language">Xitsonga Home Language</option></select>
+  <!-- Subjects Form -->
+  <div class="subjects-container">
+    <!-- Subject 1 - Language -->
+    <ion-card class="subject-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="library-outline" color="primary"></ion-icon>
+          Subject 1 - Language (Compulsory)
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="subject-inputs">
+          <div class="input-group">
+            <ion-item fill="outline" class="custom-item">
+              <ion-label position="stacked">Choose Language Subject</ion-label>
+              <ion-select placeholder="Select your language subject" interface="action-sheet">
+                <ion-select-option value="Afrikaans-First-Additional-Language">Afrikaans First Additional Language</ion-select-option>
+                <ion-select-option value="Afrikaans-Home-Language">Afrikaans Home Language</ion-select-option>
+                <ion-select-option value="English-First-Additional-Language">English First Additional Language</ion-select-option>
+                <ion-select-option value="English-Home-Language">English Home Language</ion-select-option>
+                <ion-select-option value="IsiNdebele-First-Additional-Language">IsiNdebele First Additional Language</ion-select-option>
+                <ion-select-option value="IsiNdebele-Home-Language">IsiNdebele Home Language</ion-select-option>
+                <ion-select-option value="IsiXhosa-First-Additional-Language">IsiXhosa First Additional Language</ion-select-option>
+                <ion-select-option value="IsiXhosa-Home-Language">IsiXhosa Home Language</ion-select-option>
+                <ion-select-option value="IsiZulu-First-Additional-Language">IsiZulu First Additional Language</ion-select-option>
+                <ion-select-option value="IsiZulu-Home-Language">IsiZulu Home Language</ion-select-option>
+                <ion-select-option value="Sepedi-First-Additional-Language">Sepedi First Additional Language</ion-select-option>
+                <ion-select-option value="Sepedi-Home-Language">Sepedi Home Language</ion-select-option>
+                <ion-select-option value="Sesotho-First-Additional-Language">Sesotho First Additional Language</ion-select-option>
+                <ion-select-option value="Sesotho-Home-Language">Sesotho Home Language</ion-select-option>
+                <ion-select-option value="Setswana-First-Additional-Language">Setswana First Additional Language</ion-select-option>
+                <ion-select-option value="Setswana-Home-Language">Setswana Home Language</ion-select-option>
+                <ion-select-option value="SiSwati-First-Additional-Language">SiSwati First Additional Language</ion-select-option>
+                <ion-select-option value="SiSwati-Home-Language">SiSwati Home Language</ion-select-option>
+                <ion-select-option value="Tshivenda-First-Additional-Language">Tshivenda First Additional Language</ion-select-option>
+                <ion-select-option value="Tshivenda-Home-Language">Tshivenda Home Language</ion-select-option>
+                <ion-select-option value="Xitsonga-First-Additional-Language">Xitsonga First Additional Language</ion-select-option>
+                <ion-select-option value="Xitsonga-Home-Language">Xitsonga Home Language</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+          <div class="input-group">
+            <ion-item fill="outline" class="custom-item">
+              <ion-label position="stacked">Your Mark (%)</ion-label>
+              <ion-select placeholder="Select your mark" interface="action-sheet" [(ngModel)]="perc">
+                <ion-select-option *ngFor="let mar of marks" [value]="mar.name">
+                  {{mar.name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
   </div>
+      </ion-card-content>
+    </ion-card>
 
- <div style="margin-top: 46px;">
-      <select required="required" class="custom-select" style="width: 150px; margin-left: 12px;" [(ngModel)]="perc1" >
-        <option value="" selected="selected"></option>
-  
-        <option *ngFor="let mar of marks">
+    <!-- Subject 2 - Second Language -->
+    <ion-card class="subject-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="language-outline" color="secondary"></ion-icon>
+          Subject 2 - Second Language (Compulsory)
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="subject-inputs">
+          <div class="input-group">
+            <ion-item fill="outline" class="custom-item">
+              <ion-label position="stacked">Choose Second Language</ion-label>
+              <ion-select placeholder="Select your second language" interface="action-sheet">
+                <ion-select-option value="Afrikaans-First-Additional-Language">Afrikaans First Additional Language</ion-select-option>
+                <ion-select-option value="Afrikaans-Home-Language">Afrikaans Home Language</ion-select-option>
+                <ion-select-option value="English-First-Additional-Language">English First Additional Language</ion-select-option>
+                <ion-select-option value="English-Home-Language">English Home Language</ion-select-option>
+                <ion-select-option value="IsiNdebele-First-Additional-Language">IsiNdebele First Additional Language</ion-select-option>
+                <ion-select-option value="IsiNdebele-Home-Language">IsiNdebele Home Language</ion-select-option>
+                <ion-select-option value="IsiXhosa-First-Additional-Language">IsiXhosa First Additional Language</ion-select-option>
+                <ion-select-option value="IsiXhosa-Home-Language">IsiXhosa Home Language</ion-select-option>
+                <ion-select-option value="IsiZulu-First-Additional-Language">IsiZulu First Additional Language</ion-select-option>
+                <ion-select-option value="IsiZulu-Home-Language">IsiZulu Home Language</ion-select-option>
+                <ion-select-option value="Sepedi-First-Additional-Language">Sepedi First Additional Language</ion-select-option>
+                <ion-select-option value="Sepedi-Home-Language">Sepedi Home Language</ion-select-option>
+                <ion-select-option value="Sesotho-First-Additional-Language">Sesotho First Additional Language</ion-select-option>
+                <ion-select-option value="Sesotho-Home-Language">Sesotho Home Language</ion-select-option>
+                <ion-select-option value="Setswana-First-Additional-Language">Setswana First Additional Language</ion-select-option>
+                <ion-select-option value="Setswana-Home-Language">Setswana Home Language</ion-select-option>
+                <ion-select-option value="SiSwati-First-Additional-Language">SiSwati First Additional Language</ion-select-option>
+                <ion-select-option value="SiSwati-Home-Language">SiSwati Home Language</ion-select-option>
+                <ion-select-option value="Tshivenda-First-Additional-Language">Tshivenda First Additional Language</ion-select-option>
+                <ion-select-option value="Tshivenda-Home-Language">Tshivenda Home Language</ion-select-option>
+                <ion-select-option value="Xitsonga-First-Additional-Language">Xitsonga First Additional Language</ion-select-option>
+                <ion-select-option value="Xitsonga-Home-Language">Xitsonga Home Language</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+          <div class="input-group">
+            <ion-item fill="outline" class="custom-item">
+              <ion-label position="stacked">Your Mark (%)</ion-label>
+              <ion-select placeholder="Select your mark" interface="action-sheet" [(ngModel)]="perc1">
+                <ion-select-option *ngFor="let mar of marks" [value]="mar.name">
        {{mar.name}}
-     </option>
-     
-    </select>
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
     </div>
-  
-    <div class="mt-3">
-        <label style="margin-left: 11px;" for="validationDefault04">Maths</label>
-        <select class="custom-select" id="validationDefault04" required  style="width: 160px; margin-left: 12px;">
-        <option value="" selected="selected">Choose subject</option>
-        <option value="Mathematical-Literacy">Mathematical Literacy</option>
-        <option value="Mathematics">Mathematics</option></select>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Subject 3 - Mathematics -->
+    <ion-card class="subject-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="calculator-outline" color="tertiary"></ion-icon>
+          Subject 3 - Mathematics (Compulsory)
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="subject-inputs">
+          <div class="input-group">
+            <ion-item fill="outline" class="custom-item">
+              <ion-label position="stacked">Choose Mathematics Subject</ion-label>
+              <ion-select placeholder="Select mathematics subject" interface="action-sheet">
+                <ion-select-option value="Mathematical-Literacy">Mathematical Literacy</ion-select-option>
+                <ion-select-option value="Mathematics">Mathematics</ion-select-option>
+              </ion-select>
+            </ion-item>
     </div>
-  
-    <div style="margin-top: 46px;">
-      <select required="required" class="custom-select" style="width: 150px; margin-left: 12px;" [(ngModel)]="perc2" >
-        <option value="" selected="selected">Enter your Marks...</option>
-        <option *ngFor="let mar of marks">
+          <div class="input-group">
+            <ion-item fill="outline" class="custom-item">
+              <ion-label position="stacked">Your Mark (%)</ion-label>
+              <ion-select placeholder="Select your mark" interface="action-sheet" [(ngModel)]="perc2">
+                <ion-select-option *ngFor="let mar of marks" [value]="mar.name">
        {{mar.name}}
-     </option>
-     
-    </select>
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
     </div>
-  
-    <div class="mt-4">
-  
-      <select class="custom-select" id="validationDefault04" required  style="width: 160px; margin-left: 12px;">
-        <option value="" selected="selected">Choose subject</option>
-        <option value="ABRSM-Practical-Music-Grade-7">ABRSM Practical Music Grade 7</option>
-        <option value="Accounting">Accounting</option>
-        <option value="Afrikaans-Second-Additional-Language">Afrikaans Second Additional Language</option>
-        <option value="Agricultural-Management-Practices">Agricultural Management Practices</option>
-        <option value="Agricultural-Sciences">Agricultural Sciences</option>
-        <option value="Agricultural-Technology">Agricultural Technology</option>
-        <option value="Arabic-Second-Additional-Language">Arabic Second Additional Language</option>
-        <option value="Business-Studies">Business Studies</option>
-        <option value="Chinese-A-Level">Chinese A-Level</option>
-        <option value="Civil-Technology">Civil Technology</option>
-        <option value="Computer-Applications-Technology">Computer Applications Technology</option>
-        <option value="Consumer-Studies">Consumer Studies</option>
-        <option value="Dance-Studies">Dance Studies</option>
-        <option value="Design">Design</option>
-        <option value="Dramatic-Arts">Dramatic Arts</option>
-        <option value="Economics">Economics</option>
-        <option value="Electrical-Technology">Electrical Technology</option>
-        <option value="Engineering-Graphics-and-Design">Engineering Graphics and Design</option>
-        <option value="English-Second-Additional-Language">English Second Additional Language</option>
-        <option value="Equine-Studies">Equine Studies</option>
-        <option value="French-Second-Additional-Language">French Second Additional Language</option>
-        <option value="Geography">Geography</option>
-        <option value="German-Home-Language">German Home Language</option>
-        <option value="German-Second-Additional-Language">German Second Additional Language</option>
-        <option value="Gujarati-First-Additional-Language">Gujarati First Additional Language</option>
-        <option value="Gujarati-Second-Additional-Language">Gujarati Second Additional Language</option>
-        <option value="Hebrew-Second-Additional-Language">Hebrew Second Additional Language</option>
-        <option value="Hindi-First-Additional-Language">Hindi First Additional Language</option>
-        <option value="Hindi-Second-Additional-Language">Hindi Second Additional Language</option>
-        <option value="History">History</option>
-        <option value="Hospitality-Studies">Hospitality Studies</option>
-        <option value="Information-Technology">Information Technology</option>
-          <option value="IsiNdebele-Second-Additional-Language">IsiNdebele Second Additional Language</option>
-          <option value="IsiXhosa-Second-Additional-Language">IsiXhosa Second Additional Language</option>
-          <option value="IsiZulu-Second-Additional-Language">IsiZulu Second Additional Language</option>
-          <option value="Italian-Second-Additional-Language">Italian Second Additional Language</option>
-          <option value="Latin-Second-Additional-Language">Latin Second Additional Language</option>
-          <option value="Life-Sciences">Life Sciences</option>
-          <option value="Maritime-Economics">Maritime Economics</option>
-          <option value="Mechanical-Technology">Mechanical Technology</option>
-          <option value="Modern-Greek-Second-Additional-Language">Modern Greek Second Additional Language</option>
-          <option value="Music">Music</option><option value="Nautical-Science">Nautical Science</option>
-          <option value="Physical-Sciences">Physical Sciences</option>
-          <option value="Portuguese-Second-Additional-Language">Portuguese Second Additional Language</option>
-          <option value="Religion-Studies">Religion Studies</option>
-          <option value="Sepedi-Second-Additional-Language">Sepedi Second Additional Language</option>
-          <option value="Sesotho-Second-Additional-Language">Sesotho Second Additional Language</option>
-          <option value="Setswana-Second-Additional-Language">Setswana Second Additional Language</option>
-          <option value="Spanish-Second-Additional-Language">Spanish Second Additional Language</option>
-          <option value="Sport-and-Exercise-Science">Sport and Exercise Science</option>
-          <option value="Tamil-First-Additional-Language">Tamil First Additional Language</option>
-          <option value="Tamil-Second-Additional-Language">Tamil Second Additional Language</option>
-          <option value="TCL-Practical-Music-Grade-7">TCL Practical Music Grade 7</option>
-          <option value="Telegu-Second-Additional-Language">Telegu Second Additional Language</option>
-          <option value="Tourism">Tourism</option><option value="UNISA-Practical-Music-Grade-7">UNISA Practical Music Grade 7</option>
-          <option value="Urdu-First-Additional-Language">Urdu First Additional Language</option>
-          <option value="Urdu-Second-Additional-Language">Urdu Second Additional Language</option>
-          <option value="Visual-Arts">Visual Arts</option>
-          <option value="Xitsonga-Second-Additional-Language">Xitsonga Second Additional Language</option></select>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Subject 4 - Elective -->
+    <ion-card class="subject-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="school-outline" color="success"></ion-icon>
+          Subject 4 - Elective
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="subject-inputs">
+          <div class="input-group">
+            <ion-item fill="outline" class="custom-item">
+              <ion-label position="stacked">Choose Elective Subject</ion-label>
+              <ion-select placeholder="Select elective subject" interface="action-sheet">
+                <ion-select-option value="ABRSM-Practical-Music-Grade-7">ABRSM Practical Music Grade 7</ion-select-option>
+                <ion-select-option value="Accounting">Accounting</ion-select-option>
+                <ion-select-option value="Afrikaans-Second-Additional-Language">Afrikaans Second Additional Language</ion-select-option>
+                <ion-select-option value="Agricultural-Management-Practices">Agricultural Management Practices</ion-select-option>
+                <ion-select-option value="Agricultural-Sciences">Agricultural Sciences</ion-select-option>
+                <ion-select-option value="Agricultural-Technology">Agricultural Technology</ion-select-option>
+                <ion-select-option value="Arabic-Second-Additional-Language">Arabic Second Additional Language</ion-select-option>
+                <ion-select-option value="Business-Studies">Business Studies</ion-select-option>
+                <ion-select-option value="Chinese-A-Level">Chinese A-Level</ion-select-option>
+                <ion-select-option value="Civil-Technology">Civil Technology</ion-select-option>
+                <ion-select-option value="Computer-Applications-Technology">Computer Applications Technology</ion-select-option>
+                <ion-select-option value="Consumer-Studies">Consumer Studies</ion-select-option>
+                <ion-select-option value="Dance-Studies">Dance Studies</ion-select-option>
+                <ion-select-option value="Design">Design</ion-select-option>
+                <ion-select-option value="Dramatic-Arts">Dramatic Arts</ion-select-option>
+                <ion-select-option value="Economics">Economics</ion-select-option>
+                <ion-select-option value="Electrical-Technology">Electrical Technology</ion-select-option>
+                <ion-select-option value="Engineering-Graphics-and-Design">Engineering Graphics and Design</ion-select-option>
+                <ion-select-option value="English-Second-Additional-Language">English Second Additional Language</ion-select-option>
+                <ion-select-option value="Equine-Studies">Equine Studies</ion-select-option>
+                <ion-select-option value="French-Second-Additional-Language">French Second Additional Language</ion-select-option>
+                <ion-select-option value="Geography">Geography</ion-select-option>
+                <ion-select-option value="German-Home-Language">German Home Language</ion-select-option>
+                <ion-select-option value="German-Second-Additional-Language">German Second Additional Language</ion-select-option>
+                <ion-select-option value="Gujarati-First-Additional-Language">Gujarati First Additional Language</ion-select-option>
+                <ion-select-option value="Gujarati-Second-Additional-Language">Gujarati Second Additional Language</ion-select-option>
+                <ion-select-option value="Hebrew-Second-Additional-Language">Hebrew Second Additional Language</ion-select-option>
+                <ion-select-option value="Hindi-First-Additional-Language">Hindi First Additional Language</ion-select-option>
+                <ion-select-option value="Hindi-Second-Additional-Language">Hindi Second Additional Language</ion-select-option>
+                <ion-select-option value="History">History</ion-select-option>
+                <ion-select-option value="Hospitality-Studies">Hospitality Studies</ion-select-option>
+                <ion-select-option value="Information-Technology">Information Technology</ion-select-option>
+                <ion-select-option value="IsiNdebele-Second-Additional-Language">IsiNdebele Second Additional Language</ion-select-option>
+                <ion-select-option value="IsiXhosa-Second-Additional-Language">IsiXhosa Second Additional Language</ion-select-option>
+                <ion-select-option value="IsiZulu-Second-Additional-Language">IsiZulu Second Additional Language</ion-select-option>
+                <ion-select-option value="Italian-Second-Additional-Language">Italian Second Additional Language</ion-select-option>
+                <ion-select-option value="Latin-Second-Additional-Language">Latin Second Additional Language</ion-select-option>
+                <ion-select-option value="Life-Sciences">Life Sciences</ion-select-option>
+                <ion-select-option value="Maritime-Economics">Maritime Economics</ion-select-option>
+                <ion-select-option value="Mechanical-Technology">Mechanical Technology</ion-select-option>
+                <ion-select-option value="Modern-Greek-Second-Additional-Language">Modern Greek Second Additional Language</ion-select-option>
+                <ion-select-option value="Music">Music</ion-select-option>
+                <ion-select-option value="Nautical-Science">Nautical Science</ion-select-option>
+                <ion-select-option value="Physical-Sciences">Physical Sciences</ion-select-option>
+                <ion-select-option value="Portuguese-Second-Additional-Language">Portuguese Second Additional Language</ion-select-option>
+                <ion-select-option value="Religion-Studies">Religion Studies</ion-select-option>
+                <ion-select-option value="Sepedi-Second-Additional-Language">Sepedi Second Additional Language</ion-select-option>
+                <ion-select-option value="Sesotho-Second-Additional-Language">Sesotho Second Additional Language</ion-select-option>
+                <ion-select-option value="Setswana-Second-Additional-Language">Setswana Second Additional Language</ion-select-option>
+                <ion-select-option value="Spanish-Second-Additional-Language">Spanish Second Additional Language</ion-select-option>
+                <ion-select-option value="Sport-and-Exercise-Science">Sport and Exercise Science</ion-select-option>
+                <ion-select-option value="Tamil-First-Additional-Language">Tamil First Additional Language</ion-select-option>
+                <ion-select-option value="Tamil-Second-Additional-Language">Tamil Second Additional Language</ion-select-option>
+                <ion-select-option value="TCL-Practical-Music-Grade-7">TCL Practical Music Grade 7</ion-select-option>
+                <ion-select-option value="Telegu-Second-Additional-Language">Telegu Second Additional Language</ion-select-option>
+                <ion-select-option value="Tourism">Tourism</ion-select-option>
+                <ion-select-option value="UNISA-Practical-Music-Grade-7">UNISA Practical Music Grade 7</ion-select-option>
+                <ion-select-option value="Urdu-First-Additional-Language">Urdu First Additional Language</ion-select-option>
+                <ion-select-option value="Urdu-Second-Additional-Language">Urdu Second Additional Language</ion-select-option>
+                <ion-select-option value="Visual-Arts">Visual Arts</ion-select-option>
+                <ion-select-option value="Xitsonga-Second-Additional-Language">Xitsonga Second Additional Language</ion-select-option>
+              </ion-select>
+            </ion-item>
     </div>
-  
-    <div style="margin-top: 24px;">
-      <select required="required" class="custom-select" style="width: 150px; margin-left: 12px;" [(ngModel)]="perc3" >
-        <option value="" selected="selected">Enter your Marks...</option>
-        <option *ngFor="let mar of marks">
+          <div class="input-group">
+            <ion-item fill="outline" class="custom-item">
+              <ion-label position="stacked">Your Mark (%)</ion-label>
+              <ion-select placeholder="Select your mark" interface="action-sheet" [(ngModel)]="perc3">
+                <ion-select-option *ngFor="let mar of marks" [value]="mar.name">
        {{mar.name}}
-     </option>
-     
-    </select>
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
     </div>
-  
-    <div class="mt-5">
-      
-  
-      <select class="custom-select" id="validationDefault04" required  style="width: 160px; margin-left: 12px;">
-        <option value="" selected="selected">Choose subject</option>
-        <option value="ABRSM-Practical-Music-Grade-7">ABRSM Practical Music Grade 7</option>
-        <option value="Accounting">Accounting</option>
-        <option value="Afrikaans-Second-Additional-Language">Afrikaans Second Additional Language</option>
-        <option value="Agricultural-Management-Practices">Agricultural Management Practices</option>
-        <option value="Agricultural-Sciences">Agricultural Sciences</option>
-        <option value="Agricultural-Technology">Agricultural Technology</option>
-        <option value="Arabic-Second-Additional-Language">Arabic Second Additional Language</option>
-        <option value="Business-Studies">Business Studies</option>
-        <option value="Chinese-A-Level">Chinese A-Level</option>
-        <option value="Civil-Technology">Civil Technology</option>
-        <option value="Computer-Applications-Technology">Computer Applications Technology</option>
-        <option value="Consumer-Studies">Consumer Studies</option>
-        <option value="Dance-Studies">Dance Studies</option>
-        <option value="Design">Design</option>
-        <option value="Dramatic-Arts">Dramatic Arts</option>
-        <option value="Economics">Economics</option>
-        <option value="Electrical-Technology">Electrical Technology</option>
-        <option value="Engineering-Graphics-and-Design">Engineering Graphics and Design</option>
-        <option value="English-Second-Additional-Language">English Second Additional Language</option>
-        <option value="Equine-Studies">Equine Studies</option>
-        <option value="French-Second-Additional-Language">French Second Additional Language</option>
-        <option value="Geography">Geography</option>
-        <option value="German-Home-Language">German Home Language</option>
-        <option value="German-Second-Additional-Language">German Second Additional Language</option>
-        <option value="Gujarati-First-Additional-Language">Gujarati First Additional Language</option>
-        <option value="Gujarati-Second-Additional-Language">Gujarati Second Additional Language</option>
-        <option value="Hebrew-Second-Additional-Language">Hebrew Second Additional Language</option>
-        <option value="Hindi-First-Additional-Language">Hindi First Additional Language</option>
-        <option value="Hindi-Second-Additional-Language">Hindi Second Additional Language</option>
-        <option value="History">History</option>
-        <option value="Hospitality-Studies">Hospitality Studies</option>
-        <option value="Information-Technology">Information Technology</option>
-          <option value="IsiNdebele-Second-Additional-Language">IsiNdebele Second Additional Language</option>
-          <option value="IsiXhosa-Second-Additional-Language">IsiXhosa Second Additional Language</option>
-          <option value="IsiZulu-Second-Additional-Language">IsiZulu Second Additional Language</option>
-          <option value="Italian-Second-Additional-Language">Italian Second Additional Language</option>
-          <option value="Latin-Second-Additional-Language">Latin Second Additional Language</option>
-          <option value="Life-Sciences">Life Sciences</option>
-          <option value="Maritime-Economics">Maritime Economics</option>
-          <option value="Mechanical-Technology">Mechanical Technology</option>
-          <option value="Modern-Greek-Second-Additional-Language">Modern Greek Second Additional Language</option>
-          <option value="Music">Music</option><option value="Nautical-Science">Nautical Science</option>
-          <option value="Physical-Sciences">Physical Sciences</option>
-          <option value="Portuguese-Second-Additional-Language">Portuguese Second Additional Language</option>
-          <option value="Religion-Studies">Religion Studies</option>
-          <option value="Sepedi-Second-Additional-Language">Sepedi Second Additional Language</option>
-          <option value="Sesotho-Second-Additional-Language">Sesotho Second Additional Language</option>
-          <option value="Setswana-Second-Additional-Language">Setswana Second Additional Language</option>
-          <option value="Spanish-Second-Additional-Language">Spanish Second Additional Language</option>
-          <option value="Sport-and-Exercise-Science">Sport and Exercise Science</option>
-          <option value="Tamil-First-Additional-Language">Tamil First Additional Language</option>
-          <option value="Tamil-Second-Additional-Language">Tamil Second Additional Language</option>
-          <option value="TCL-Practical-Music-Grade-7">TCL Practical Music Grade 7</option>
-          <option value="Telegu-Second-Additional-Language">Telegu Second Additional Language</option>
-          <option value="Tourism">Tourism</option><option value="UNISA-Practical-Music-Grade-7">UNISA Practical Music Grade 7</option>
-          <option value="Urdu-First-Additional-Language">Urdu First Additional Language</option>
-          <option value="Urdu-Second-Additional-Language">Urdu Second Additional Language</option>
-          <option value="Visual-Arts">Visual Arts</option>
-          <option value="Xitsonga-Second-Additional-Language">Xitsonga Second Additional Language</option></select>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Subject 5 - Elective -->
+    <ion-card class="subject-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="book-outline" color="warning"></ion-icon>
+          Subject 5 - Elective
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="subject-inputs">
+          <div class="input-group">
+            <ion-item fill="outline" class="custom-item">
+              <ion-label position="stacked">Choose Elective Subject</ion-label>
+              <ion-select placeholder="Select elective subject" interface="action-sheet">
+                <ion-select-option value="ABRSM-Practical-Music-Grade-7">ABRSM Practical Music Grade 7</ion-select-option>
+                <ion-select-option value="Accounting">Accounting</ion-select-option>
+                <ion-select-option value="Afrikaans-Second-Additional-Language">Afrikaans Second Additional Language</ion-select-option>
+                <ion-select-option value="Agricultural-Management-Practices">Agricultural Management Practices</ion-select-option>
+                <ion-select-option value="Agricultural-Sciences">Agricultural Sciences</ion-select-option>
+                <ion-select-option value="Agricultural-Technology">Agricultural Technology</ion-select-option>
+                <ion-select-option value="Arabic-Second-Additional-Language">Arabic Second Additional Language</ion-select-option>
+                <ion-select-option value="Business-Studies">Business Studies</ion-select-option>
+                <ion-select-option value="Chinese-A-Level">Chinese A-Level</ion-select-option>
+                <ion-select-option value="Civil-Technology">Civil Technology</ion-select-option>
+                <ion-select-option value="Computer-Applications-Technology">Computer Applications Technology</ion-select-option>
+                <ion-select-option value="Consumer-Studies">Consumer Studies</ion-select-option>
+                <ion-select-option value="Dance-Studies">Dance Studies</ion-select-option>
+                <ion-select-option value="Design">Design</ion-select-option>
+                <ion-select-option value="Dramatic-Arts">Dramatic Arts</ion-select-option>
+                <ion-select-option value="Economics">Economics</ion-select-option>
+                <ion-select-option value="Electrical-Technology">Electrical Technology</ion-select-option>
+                <ion-select-option value="Engineering-Graphics-and-Design">Engineering Graphics and Design</ion-select-option>
+                <ion-select-option value="English-Second-Additional-Language">English Second Additional Language</ion-select-option>
+                <ion-select-option value="Equine-Studies">Equine Studies</ion-select-option>
+                <ion-select-option value="French-Second-Additional-Language">French Second Additional Language</ion-select-option>
+                <ion-select-option value="Geography">Geography</ion-select-option>
+                <ion-select-option value="German-Home-Language">German Home Language</ion-select-option>
+                <ion-select-option value="German-Second-Additional-Language">German Second Additional Language</ion-select-option>
+                <ion-select-option value="Gujarati-First-Additional-Language">Gujarati First Additional Language</ion-select-option>
+                <ion-select-option value="Gujarati-Second-Additional-Language">Gujarati Second Additional Language</ion-select-option>
+                <ion-select-option value="Hebrew-Second-Additional-Language">Hebrew Second Additional Language</ion-select-option>
+                <ion-select-option value="Hindi-First-Additional-Language">Hindi First Additional Language</ion-select-option>
+                <ion-select-option value="Hindi-Second-Additional-Language">Hindi Second Additional Language</ion-select-option>
+                <ion-select-option value="History">History</ion-select-option>
+                <ion-select-option value="Hospitality-Studies">Hospitality Studies</ion-select-option>
+                <ion-select-option value="Information-Technology">Information Technology</ion-select-option>
+                <ion-select-option value="IsiNdebele-Second-Additional-Language">IsiNdebele Second Additional Language</ion-select-option>
+                <ion-select-option value="IsiXhosa-Second-Additional-Language">IsiXhosa Second Additional Language</ion-select-option>
+                <ion-select-option value="IsiZulu-Second-Additional-Language">IsiZulu Second Additional Language</ion-select-option>
+                <ion-select-option value="Italian-Second-Additional-Language">Italian Second Additional Language</ion-select-option>
+                <ion-select-option value="Latin-Second-Additional-Language">Latin Second Additional Language</ion-select-option>
+                <ion-select-option value="Life-Sciences">Life Sciences</ion-select-option>
+                <ion-select-option value="Maritime-Economics">Maritime Economics</ion-select-option>
+                <ion-select-option value="Mechanical-Technology">Mechanical Technology</ion-select-option>
+                <ion-select-option value="Modern-Greek-Second-Additional-Language">Modern Greek Second Additional Language</ion-select-option>
+                <ion-select-option value="Music">Music</ion-select-option>
+                <ion-select-option value="Nautical-Science">Nautical Science</ion-select-option>
+                <ion-select-option value="Physical-Sciences">Physical Sciences</ion-select-option>
+                <ion-select-option value="Portuguese-Second-Additional-Language">Portuguese Second Additional Language</ion-select-option>
+                <ion-select-option value="Religion-Studies">Religion Studies</ion-select-option>
+                <ion-select-option value="Sepedi-Second-Additional-Language">Sepedi Second Additional Language</ion-select-option>
+                <ion-select-option value="Sesotho-Second-Additional-Language">Sesotho Second Additional Language</ion-select-option>
+                <ion-select-option value="Setswana-Second-Additional-Language">Setswana Second Additional Language</ion-select-option>
+                <ion-select-option value="Spanish-Second-Additional-Language">Spanish Second Additional Language</ion-select-option>
+                <ion-select-option value="Sport-and-Exercise-Science">Sport and Exercise Science</ion-select-option>
+                <ion-select-option value="Tamil-First-Additional-Language">Tamil First Additional Language</ion-select-option>
+                <ion-select-option value="Tamil-Second-Additional-Language">Tamil Second Additional Language</ion-select-option>
+                <ion-select-option value="TCL-Practical-Music-Grade-7">TCL Practical Music Grade 7</ion-select-option>
+                <ion-select-option value="Telegu-Second-Additional-Language">Telegu Second Additional Language</ion-select-option>
+                <ion-select-option value="Tourism">Tourism</ion-select-option>
+                <ion-select-option value="UNISA-Practical-Music-Grade-7">UNISA Practical Music Grade 7</ion-select-option>
+                <ion-select-option value="Urdu-First-Additional-Language">Urdu First Additional Language</ion-select-option>
+                <ion-select-option value="Urdu-Second-Additional-Language">Urdu Second Additional Language</ion-select-option>
+                <ion-select-option value="Visual-Arts">Visual Arts</ion-select-option>
+                <ion-select-option value="Xitsonga-Second-Additional-Language">Xitsonga Second Additional Language</ion-select-option>
+              </ion-select>
+            </ion-item>
     </div>
-  
-  
-    <div style="margin-top: 48px;">
-      <select required="required" class="custom-select" style="width: 150px; margin-left: 12px;"  [(ngModel)]="perc4">
-        <option value="" selected="selected">Enter your Marks...</option>
-        <option *ngFor="let mar of marks">
+          <div class="input-group">
+            <ion-item fill="outline" class="custom-item">
+              <ion-label position="stacked">Your Mark (%)</ion-label>
+              <ion-select placeholder="Select your mark" interface="action-sheet" [(ngModel)]="perc4">
+                <ion-select-option *ngFor="let mar of marks" [value]="mar.name">
        {{mar.name}}
-     </option>
-     
-    </select>
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
     </div>
-  
-    <div class="mt-5">
-      
-  
-      <select class="custom-select" id="validationDefault04" required  style="width: 160px; margin-left: 12px;">
-        <option value="" selected="selected">Choose subject</option>
-        <option value="ABRSM-Practical-Music-Grade-7">ABRSM Practical Music Grade 7</option>
-        <option value="Accounting">Accounting</option>
-        <option value="Afrikaans-Second-Additional-Language">Afrikaans Second Additional Language</option>
-        <option value="Agricultural-Management-Practices">Agricultural Management Practices</option>
-        <option value="Agricultural-Sciences">Agricultural Sciences</option>
-        <option value="Agricultural-Technology">Agricultural Technology</option>
-        <option value="Arabic-Second-Additional-Language">Arabic Second Additional Language</option>
-        <option value="Business-Studies">Business Studies</option>
-        <option value="Chinese-A-Level">Chinese A-Level</option>
-        <option value="Civil-Technology">Civil Technology</option>
-        <option value="Computer-Applications-Technology">Computer Applications Technology</option>
-        <option value="Consumer-Studies">Consumer Studies</option>
-        <option value="Dance-Studies">Dance Studies</option>
-        <option value="Design">Design</option>
-        <option value="Dramatic-Arts">Dramatic Arts</option>
-        <option value="Economics">Economics</option>
-        <option value="Electrical-Technology">Electrical Technology</option>
-        <option value="Engineering-Graphics-and-Design">Engineering Graphics and Design</option>
-        <option value="English-Second-Additional-Language">English Second Additional Language</option>
-        <option value="Equine-Studies">Equine Studies</option>
-        <option value="French-Second-Additional-Language">French Second Additional Language</option>
-        <option value="Geography">Geography</option>
-        <option value="German-Home-Language">German Home Language</option>
-        <option value="German-Second-Additional-Language">German Second Additional Language</option>
-        <option value="Gujarati-First-Additional-Language">Gujarati First Additional Language</option>
-        <option value="Gujarati-Second-Additional-Language">Gujarati Second Additional Language</option>
-        <option value="Hebrew-Second-Additional-Language">Hebrew Second Additional Language</option>
-        <option value="Hindi-First-Additional-Language">Hindi First Additional Language</option>
-        <option value="Hindi-Second-Additional-Language">Hindi Second Additional Language</option>
-        <option value="History">History</option>
-        <option value="Hospitality-Studies">Hospitality Studies</option>
-        <option value="Information-Technology">Information Technology</option>
-          <option value="IsiNdebele-Second-Additional-Language">IsiNdebele Second Additional Language</option>
-          <option value="IsiXhosa-Second-Additional-Language">IsiXhosa Second Additional Language</option>
-          <option value="IsiZulu-Second-Additional-Language">IsiZulu Second Additional Language</option>
-          <option value="Italian-Second-Additional-Language">Italian Second Additional Language</option>
-          <option value="Latin-Second-Additional-Language">Latin Second Additional Language</option>
-          <option value="Life-Sciences">Life Sciences</option>
-          <option value="Maritime-Economics">Maritime Economics</option>
-          <option value="Mechanical-Technology">Mechanical Technology</option>
-          <option value="Modern-Greek-Second-Additional-Language">Modern Greek Second Additional Language</option>
-          <option value="Music">Music</option><option value="Nautical-Science">Nautical Science</option>
-          <option value="Physical-Sciences">Physical Sciences</option>
-          <option value="Portuguese-Second-Additional-Language">Portuguese Second Additional Language</option>
-          <option value="Religion-Studies">Religion Studies</option>
-          <option value="Sepedi-Second-Additional-Language">Sepedi Second Additional Language</option>
-          <option value="Sesotho-Second-Additional-Language">Sesotho Second Additional Language</option>
-          <option value="Setswana-Second-Additional-Language">Setswana Second Additional Language</option>
-          <option value="Spanish-Second-Additional-Language">Spanish Second Additional Language</option>
-          <option value="Sport-and-Exercise-Science">Sport and Exercise Science</option>
-          <option value="Tamil-First-Additional-Language">Tamil First Additional Language</option>
-          <option value="Tamil-Second-Additional-Language">Tamil Second Additional Language</option>
-          <option value="TCL-Practical-Music-Grade-7">TCL Practical Music Grade 7</option>
-          <option value="Telegu-Second-Additional-Language">Telegu Second Additional Language</option>
-          <option value="Tourism">Tourism</option>
-          <option value="UNISA-Practical-Music-Grade-7">UNISA Practical Music Grade 7</option>
-          <option value="Urdu-First-Additional-Language">Urdu First Additional Language</option>
-          <option value="Urdu-Second-Additional-Language">Urdu Second Additional Language</option>
-          <option value="Visual-Arts">Visual Arts</option>
-          <option value="Xitsonga-Second-Additional-Language">Xitsonga Second Additional Language</option></select>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Subject 6 - Elective -->
+    <ion-card class="subject-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="library-outline" color="danger"></ion-icon>
+          Subject 6 - Elective
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="subject-inputs">
+          <div class="input-group">
+            <ion-item fill="outline" class="custom-item">
+              <ion-label position="stacked">Choose Elective Subject</ion-label>
+              <ion-select placeholder="Select elective subject" interface="action-sheet">
+                <ion-select-option value="ABRSM-Practical-Music-Grade-7">ABRSM Practical Music Grade 7</ion-select-option>
+                <ion-select-option value="Accounting">Accounting</ion-select-option>
+                <ion-select-option value="Afrikaans-Second-Additional-Language">Afrikaans Second Additional Language</ion-select-option>
+                <ion-select-option value="Agricultural-Management-Practices">Agricultural Management Practices</ion-select-option>
+                <ion-select-option value="Agricultural-Sciences">Agricultural Sciences</ion-select-option>
+                <ion-select-option value="Agricultural-Technology">Agricultural Technology</ion-select-option>
+                <ion-select-option value="Arabic-Second-Additional-Language">Arabic Second Additional Language</ion-select-option>
+                <ion-select-option value="Business-Studies">Business Studies</ion-select-option>
+                <ion-select-option value="Chinese-A-Level">Chinese A-Level</ion-select-option>
+                <ion-select-option value="Civil-Technology">Civil Technology</ion-select-option>
+                <ion-select-option value="Computer-Applications-Technology">Computer Applications Technology</ion-select-option>
+                <ion-select-option value="Consumer-Studies">Consumer Studies</ion-select-option>
+                <ion-select-option value="Dance-Studies">Dance Studies</ion-select-option>
+                <ion-select-option value="Design">Design</ion-select-option>
+                <ion-select-option value="Dramatic-Arts">Dramatic Arts</ion-select-option>
+                <ion-select-option value="Economics">Economics</ion-select-option>
+                <ion-select-option value="Electrical-Technology">Electrical Technology</ion-select-option>
+                <ion-select-option value="Engineering-Graphics-and-Design">Engineering Graphics and Design</ion-select-option>
+                <ion-select-option value="English-Second-Additional-Language">English Second Additional Language</ion-select-option>
+                <ion-select-option value="Equine-Studies">Equine Studies</ion-select-option>
+                <ion-select-option value="French-Second-Additional-Language">French Second Additional Language</ion-select-option>
+                <ion-select-option value="Geography">Geography</ion-select-option>
+                <ion-select-option value="German-Home-Language">German Home Language</ion-select-option>
+                <ion-select-option value="German-Second-Additional-Language">German Second Additional Language</ion-select-option>
+                <ion-select-option value="Gujarati-First-Additional-Language">Gujarati First Additional Language</ion-select-option>
+                <ion-select-option value="Gujarati-Second-Additional-Language">Gujarati Second Additional Language</ion-select-option>
+                <ion-select-option value="Hebrew-Second-Additional-Language">Hebrew Second Additional Language</ion-select-option>
+                <ion-select-option value="Hindi-First-Additional-Language">Hindi First Additional Language</ion-select-option>
+                <ion-select-option value="Hindi-Second-Additional-Language">Hindi Second Additional Language</ion-select-option>
+                <ion-select-option value="History">History</ion-select-option>
+                <ion-select-option value="Hospitality-Studies">Hospitality Studies</ion-select-option>
+                <ion-select-option value="Information-Technology">Information Technology</ion-select-option>
+                <ion-select-option value="IsiNdebele-Second-Additional-Language">IsiNdebele Second Additional Language</ion-select-option>
+                <ion-select-option value="IsiXhosa-Second-Additional-Language">IsiXhosa Second Additional Language</ion-select-option>
+                <ion-select-option value="IsiZulu-Second-Additional-Language">IsiZulu Second Additional Language</ion-select-option>
+                <ion-select-option value="Italian-Second-Additional-Language">Italian Second Additional Language</ion-select-option>
+                <ion-select-option value="Latin-Second-Additional-Language">Latin Second Additional Language</ion-select-option>
+                <ion-select-option value="Life-Sciences">Life Sciences</ion-select-option>
+                <ion-select-option value="Maritime-Economics">Maritime Economics</ion-select-option>
+                <ion-select-option value="Mechanical-Technology">Mechanical Technology</ion-select-option>
+                <ion-select-option value="Modern-Greek-Second-Additional-Language">Modern Greek Second Additional Language</ion-select-option>
+                <ion-select-option value="Music">Music</ion-select-option>
+                <ion-select-option value="Nautical-Science">Nautical Science</ion-select-option>
+                <ion-select-option value="Physical-Sciences">Physical Sciences</ion-select-option>
+                <ion-select-option value="Portuguese-Second-Additional-Language">Portuguese Second Additional Language</ion-select-option>
+                <ion-select-option value="Religion-Studies">Religion Studies</ion-select-option>
+                <ion-select-option value="Sepedi-Second-Additional-Language">Sepedi Second Additional Language</ion-select-option>
+                <ion-select-option value="Sesotho-Second-Additional-Language">Sesotho Second Additional Language</ion-select-option>
+                <ion-select-option value="Setswana-Second-Additional-Language">Setswana Second Additional Language</ion-select-option>
+                <ion-select-option value="Spanish-Second-Additional-Language">Spanish Second Additional Language</ion-select-option>
+                <ion-select-option value="Sport-and-Exercise-Science">Sport and Exercise Science</ion-select-option>
+                <ion-select-option value="Tamil-First-Additional-Language">Tamil First Additional Language</ion-select-option>
+                <ion-select-option value="Tamil-Second-Additional-Language">Tamil Second Additional Language</ion-select-option>
+                <ion-select-option value="TCL-Practical-Music-Grade-7">TCL Practical Music Grade 7</ion-select-option>
+                <ion-select-option value="Telegu-Second-Additional-Language">Telegu Second Additional Language</ion-select-option>
+                <ion-select-option value="Tourism">Tourism</ion-select-option>
+                <ion-select-option value="UNISA-Practical-Music-Grade-7">UNISA Practical Music Grade 7</ion-select-option>
+                <ion-select-option value="Urdu-First-Additional-Language">Urdu First Additional Language</ion-select-option>
+                <ion-select-option value="Urdu-Second-Additional-Language">Urdu Second Additional Language</ion-select-option>
+                <ion-select-option value="Visual-Arts">Visual Arts</ion-select-option>
+                <ion-select-option value="Xitsonga-Second-Additional-Language">Xitsonga Second Additional Language</ion-select-option>
+              </ion-select>
+            </ion-item>
     </div>
-  
-    <div style="margin-top: 48px;">
-      <select required="required" class="custom-select" style="width: 150px; margin-left: 12px;" [(ngModel)]="perc5" >
-        <option value="" selected="true">Enter your Marks...</option>
-        <option *ngFor="let mar of marks">
+          <div class="input-group">
+            <ion-item fill="outline" class="custom-item">
+              <ion-label position="stacked">Your Mark (%)</ion-label>
+              <ion-select placeholder="Select your mark" interface="action-sheet" [(ngModel)]="perc5">
+                <ion-select-option *ngFor="let mar of marks" [value]="mar.name">
        {{mar.name}}
-     </option>
-    </select>
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
     </div>
 
-
-
-<div class="submit mt-3" style="margin-left: 120px; ">
-  <ion-button color="primary" (click)="calculate(sum)" >
-    Calculate
+  <!-- Calculate Button -->
+  <div class="calculate-section">
+    <ion-button 
+      expand="block" 
+      size="large" 
+      color="primary" 
+      (click)="calculate(sum)"
+      class="calculate-button">
+      <ion-icon name="calculator-outline" slot="start"></ion-icon>
+      Calculate AP Score
   </ion-button>
 </div>
-<br>
- <!-- <ion-label>
-    Aps Score: {{sum}}
-  </ion-label>
- -->
 
+  <!-- Results Section -->
+  <div class="results-section" *ngIf="sum !== undefined">
+    <ion-card class="result-card">
+      <ion-card-content>
+        <div class="result-content">
+          <ion-icon name="trophy-outline" class="result-icon"></ion-icon>
+          <h2 class="result-title">Your AP Score</h2>
+          <div class="result-score">{{sum}}</div>
+          <p class="result-description">This is your Admission Points Score based on your subject marks.</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
 </div>
 
-
-
-  </ion-list>
-
-  
+  <!-- Bottom Padding -->
+  <div class="bottom-padding"></div>
 </ion-content>
    
 

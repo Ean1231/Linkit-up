@@ -1,3 +1,433 @@
+// Modern Tab3 Page Styles
+.modern-content {
+  --background: #ffffff;
+}
+
+// Header Styles
+.header-title {
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+  }
+}
+
+// Hero Banner Section
+.hero-banner {
+  position: relative;
+  height: 280px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow: hidden;
+  margin-bottom: 20px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../assets/geometric-purple-urban-art-on-brick-wall.jpg') center/cover;
+    opacity: 0.3;
+    z-index: 1;
+  }
+
+  .hero-overlay {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .hero-content {
+    width: 100%;
+    color: white;
+    text-align: center;
+
+    .hero-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    .welcome-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      padding: 16px;
+      margin: 0 auto;
+      max-width: 300px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      animation: slideUp 0.6s ease-out;
+
+      .user-avatar {
+        width: 48px;
+        height: 48px;
+        
+        ion-icon {
+          font-size: 48px;
+          color: var(--ion-color-primary);
+        }
+      }
+
+      .welcome-text {
+        flex: 1;
+        text-align: left;
+        
+        h3 {
+          color:  var(--ion-color-medium);
+          font-size: 1.1rem;
+          font-weight: 600;
+          margin: 0 0 4px 0;
+        }
+        
+        p {
+          color: var(--ion-color-medium);
+          font-size: 0.9rem;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+// Search Section
+.search-section {
+  padding: 0 16px 20px;
+  margin-top: -10px;
+
+  .modern-searchbar {
+    --background: white;
+    --border-radius: 16px;
+    --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --color: var(--ion-color-dark);
+    --placeholder-color: var(--ion-color-medium);
+    --icon-color: var(--ion-color-primary);
+  }
+}
+
+// Loading Container
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  gap: 16px;
+
+  p {
+    color: var(--ion-color-medium);
+    font-size: 1rem;
+  }
+}
+
+// Section Container
+.section-container {
+  margin-bottom: 32px;
+  padding: 0 16px;
+}
+
+// Section Header
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .section-icon {
+      font-size: 24px;
+      color: var(--ion-color-primary);
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--ion-color-medium);
+      margin: 0;
+    }
+  }
+}
+
+// Cards Slider
+.cards-slider {
+  .opportunities-slider,
+  .bursaries-slider {
+    padding-bottom: 10px;
+  }
+
+  .slide-item {
+    width: auto;
+    height: auto;
+  }
+}
+
+// Modern Card Styles
+.modern-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Opportunity Card
+.opportunity-card {
+  width: 280px;
+  margin-right: 16px;
+
+  .card-image {
+    position: relative;
+    height: 160px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+
+      .date-chip {
+        --background: rgba(255, 255, 255, 0.95);
+        --color: var(--ion-color-primary);
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .card-content {
+    padding: 16px;
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ion-color-dark);
+      margin: 0 0 12px 0;
+      line-height: 1.3;
+    }
+
+    .card-details {
+      margin-bottom: 16px;
+
+      .detail-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 6px;
+        font-size: 0.9rem;
+        color: var(--ion-color-medium);
+
+        ion-icon {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .card-action {
+      --color: var(--ion-color-primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+  }
+
+  &:hover .card-image img {
+    transform: scale(1.05);
+  }
+}
+
+// Bursary Card
+.bursary-card {
+  width: 240px;
+  margin-right: 16px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+
+  .bursary-image {
+    height: 100px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+  }
+
+  .bursary-content {
+    padding: 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .bursary-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ion-color-dark);
+      margin: 0 0 8px 0;
+      line-height: 1.3;
+    }
+
+    .bursary-info {
+      margin-bottom: 12px;
+
+      .deadline-chip {
+        --background: rgba(var(--ion-color-success-rgb), 0.1);
+        --color: var(--ion-color-success);
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+    }
+
+    .apply-btn {
+      margin-top: auto;
+      --border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+  }
+
+  &:hover .bursary-image img {
+    transform: scale(1.05);
+  }
+}
+
+// Quick Actions Section
+.quick-actions {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ion-color-medium);
+    margin: 0 0 16px 0;
+  }
+
+  .action-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+    .action-button {
+      --border-radius: 12px;
+      --border-color: var(--ion-color-light);
+      --color: var(--ion-color-medium);
+      font-size: 0.9rem;
+      font-weight: 500;
+      height: 48px;
+
+      &:hover {
+        --color: var(--ion-color-primary);
+        --border-color: var(--ion-color-primary);
+      }
+    }
+  }
+}
+
+// Bottom Padding
+.bottom-padding {
+  height: 80px;
+}
+
+// Animations
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .hero-banner {
+    height: 240px;
+
+    .hero-content {
+      .hero-title {
+        font-size: 1.8rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .opportunity-card {
+    width: 260px;
+  }
+
+  .bursary-card {
+    width: 220px;
+  }
+
+  .quick-actions .action-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Dark Mode Support
+@media (prefers-color-scheme: dark) {
+  .modern-card {
+    background: var(--ion-color-step-50);
+    
+    .card-title,
+    .bursary-title {
+      color: var(--ion-color-light);
+    }
+  }
+
+  .quick-actions {
+    background: var(--ion-color-step-50);
+    
+    h3 {
+      color: var(--ion-color-light);
+    }
+  }
+
+  .hero-content .welcome-card {
+    background: rgba(var(--ion-color-step-100), 0.95);
+  }
+}
+
 ion-header {
   position: absolute;
 }

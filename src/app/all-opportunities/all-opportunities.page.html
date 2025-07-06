@@ -1,53 +1,130 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="end">
-      <ion-back-button></ion-back-button>
+<ion-header [translucent]="true" class="modern-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs" class="custom-back-button"></ion-back-button>
     </ion-buttons>
-    <ion-title></ion-title>
+    <ion-title class="page-title">
+      <div class="title-content">
+        <ion-icon name="briefcase" class="title-icon"></ion-icon>
+        <span>Opportunities</span>
+      </div>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="search">
-    <ion-item lines="none">
-      <ion-searchbar placeholder="Search " [(ngModel)]="search" showCancelButton="focus" animated="true"  search-icon="search-circle"></ion-searchbar>
-    </ion-item>
+<ion-content [fullscreen]="true" class="modern-opportunities-content">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-background"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Discover Your Future</h1>
+      <p class="hero-subtitle">Explore amazing opportunities that await you</p>
+    </div>
   </div>
 
-  <div (click)="details(data)"  class="container" *ngFor="let data of opportunities | filter:search" >
-    <div class="card cardContent" style="box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.10); height: 150px;">
-      <div>
-        <img class="img1" src="{{data.img}}" style="height: 80px; width: 80%; " /><br>
-      <!-- <p style="margin-left: 18px; color: green;">Available</p>   -->
+  <!-- Search Section -->
+  <div class="search-section">
+    <div class="search-container">
+      <div class="search-wrapper">
+        <ion-icon name="search" class="search-icon"></ion-icon>
+        <ion-searchbar 
+          #search
+          placeholder="Search opportunities..." 
+          [(ngModel)]="searchTerm" 
+          (ionInput)="filterData($event)"
+          class="modern-searchbar"
+          showCancelButton="focus" 
+          animated="true">
+        </ion-searchbar>
       </div>
-
-      <div style="margin-left: 0px;">
-        <p class="card-title" style="margin-right: 2px; margin-top: 10px;"><strong>{{ data.title.substring(0, 20) }}</strong></p>
-
-        <!-- <small style="color: rgb(240, 116, 116); font-size: 12pt"
-          >{{ data.description }}</small
-        > -->
-
-        <div style=" justify-content:space-between;">
-                  <div style="margin-left: 5px;" style="color: #364f68;"><h5><strong color="primary"><ion-icon name="lock-closed-outline"></ion-icon> {{ data.closingDate}} </strong></h5></div>
-          <div style="margin-right: 5px; ">Type: {{data.type}}</div>
-
-        </div>
-        <div style="display: flex; justify-content:space-between;">
-          <!-- <div style="margin-left: 5px;" style="color: #364f68;"><h4><strong>R {{ data.price}} rent</strong></h4></div> -->
-          <!-- <div (click)="share()" style="margin-left: 180px; margin-top: -22px; color: #364f68;"><ion-icon name="share-social-outline"></ion-icon></div> -->
-
-        </div>
-        
-        <!-- <div style="display: flex; justify-content:space-between;">
-          <div style="margin-left: 5px;" style="color: #364f68;"><h5><strong>R {{ data.price}} rent</strong></h5></div>
-          <div style="margin-right: 5px; "><small>Dep: R{{data.price}}</small></div>
-
-        </div> -->
-        
-      </div>
-      
     </div>
-    <div style="margin: 15px;"></div>
-  </div><br><br>
+      </div>
+
+  <!-- Opportunities Grid -->
+  <div class="opportunities-container">
+    <div class="opportunities-header">
+      <h2 class="section-title">Available Opportunities</h2>
+      <div class="results-count">
+        <ion-badge color="primary" class="count-badge">
+          {{ (opportunities | filter:searchTerm)?.length || 0 }} found
+        </ion-badge>
+      </div>
+    </div>
+
+    <div class="opportunities-grid">
+      <div 
+        *ngFor="let data of opportunities | filter:searchTerm; let i = index" 
+        class="opportunity-card" 
+        (click)="details(data)"
+        [style.animation-delay]="(i * 0.1) + 's'">
+
+        <div class="card-image-container">
+          <img [src]="data.img" [alt]="data.title" class="card-image" />
+          <div class="image-overlay">
+            <ion-icon name="arrow-forward" class="view-icon"></ion-icon>
+          </div>
+          <div class="status-badge">
+            <ion-badge color="success" class="available-badge">Available</ion-badge>
+          </div>
+        </div>
+
+        <div class="card-content">
+          <div class="card-header">
+            <h3 class="card-title">{{ data.title }}</h3>
+            <div class="card-type">
+              <ion-chip color="primary" class="type-chip">
+                <ion-icon name="bookmark"></ion-icon>
+                <ion-label>{{ data.type }}</ion-label>
+              </ion-chip>
+            </div>
+          </div>
+
+          <div class="card-details">
+            <div class="detail-item">
+              <ion-icon name="calendar" class="detail-icon"></ion-icon>
+              <span class="detail-label">Closing Date:</span>
+              <span class="detail-value">{{ data.closingDate }}</span>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <ion-button 
+              fill="clear" 
+              size="small" 
+              class="action-button"
+              (click)="details(data); $event.stopPropagation()">
+              <ion-icon name="eye" slot="start"></ion-icon>
+              View Details
+            </ion-button>
+            
+            <ion-button 
+              fill="clear" 
+              size="small" 
+              class="action-button share-button"
+              (click)="shareOpportunity(data); $event.stopPropagation()">
+              <ion-icon name="share-social" slot="icon-only"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+        
+        <div class="card-hover-effect"></div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="(opportunities | filter:searchTerm)?.length === 0" class="empty-state">
+      <div class="empty-icon">
+        <ion-icon name="search-circle"></ion-icon>
+      </div>
+      <h3 class="empty-title">No opportunities found</h3>
+      <p class="empty-message">Try adjusting your search terms or check back later for new opportunities.</p>
+    </div>
+  </div>
+
+  <!-- Floating Action Button -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" class="modern-fab">
+      <ion-icon name="filter"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

@@ -1,40 +1,141 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="end">
-      <ion-back-button></ion-back-button>
+<ion-header [translucent]="true" class="modern-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs" class="custom-back-button"></ion-back-button>
     </ion-buttons>
-    <ion-title></ion-title>
+    <ion-title class="page-title">
+      <div class="title-content">
+        <ion-icon name="school" class="title-icon"></ion-icon>
+        <span>Bursaries</span>
+      </div>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="search">
-    <ion-item lines="none">
-      <ion-searchbar placeholder="Search " [(ngModel)]="search" showCancelButton="focus" animated="true"  search-icon="search-circle"></ion-searchbar> 
-    </ion-item>
+<ion-content [fullscreen]="true" class="modern-opportunities-content">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-background"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Fund Your Dreams</h1>
+      <p class="hero-subtitle">Discover bursaries that can make your education affordable</p>
+    </div>
   </div>
 
-  <div>
-    &nbsp;
-    <ion-spinner *ngIf="loading" color="tertiary" name="dots"></ion-spinner>
-  </div>
-
-  <div (click)="bursaryDetails(data)"  class="container" *ngFor="let data of bursaries | filter:search">
-    <div class="card cardContent" style="box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.10); height: 150px;">
-      <div>
-        <img class="img1" src="{{data.img}}" style="height: 80px; width: 80%; " /><br>
-      </div>
-       
-      <div style="margin-left: 0px;">
-        <p class="card-title" style="margin-right: 2px; margin-top: 10px;"><strong>{{ data.title.substring(0, 25)}}</strong></p>
-         <div style=" justify-content:space-between;">
-            <div style="margin-left: 5px;" style="color: #364f68;"><h5><strong color="primary"><ion-icon name="lock-closed-outline"></ion-icon> {{ data.closingDate}} </strong></h5></div>
-            <div style="margin-right: 5px; ">{{data.description.substring(0, 18)}}...</div>
-         </div>
-        <div style="display: flex; justify-content:space-between;">
-        </div>
+  <!-- Search Section -->
+  <div class="search-section">
+    <div class="search-container">
+      <div class="search-wrapper">
+        <ion-icon name="search" class="search-icon"></ion-icon>
+        <ion-searchbar 
+          #search
+          placeholder="Search bursaries..." 
+          [(ngModel)]="searchTerm" 
+          (ionInput)="filterData($event)"
+          class="modern-searchbar"
+          showCancelButton="focus" 
+          animated="true">
+        </ion-searchbar>
       </div>
     </div>
-    <div style="margin: 15px;"></div>
-  </div><br><br>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="loading-section">
+    <ion-spinner color="primary" name="dots"></ion-spinner>
+    <p class="loading-text">Loading bursaries...</p>
+  </div>
+
+  <!-- Bursaries Grid -->
+  <div class="opportunities-container" *ngIf="!loading">
+    <div class="opportunities-header">
+      <h2 class="section-title">Available Bursaries</h2>
+      <div class="results-count">
+        <ion-badge color="primary" class="count-badge">
+          {{ (bursaries | filter:searchTerm)?.length || 0 }} found
+        </ion-badge>
+      </div>
+    </div>
+
+    <div class="opportunities-grid">
+      <div 
+        *ngFor="let data of bursaries | filter:searchTerm; let i = index" 
+        class="opportunity-card" 
+        (click)="bursaryDetails(data)"
+        [style.animation-delay]="(i * 0.1) + 's'">
+        
+        <div class="card-image-container">
+          <img [src]="data.img" [alt]="data.title" class="card-image" />
+          <div class="image-overlay">
+            <ion-icon name="arrow-forward" class="view-icon"></ion-icon>
+          </div>
+          <div class="status-badge">
+            <ion-badge color="success" class="available-badge">Available</ion-badge>
+          </div>
+        </div>
+
+        <div class="card-content">
+          <div class="card-header">
+            <h3 class="card-title">{{ data.title }}</h3>
+            <div class="card-type">
+              <ion-chip color="primary" class="type-chip">
+                <ion-icon name="wallet"></ion-icon>
+                <ion-label>Bursary</ion-label>
+              </ion-chip>
+            </div>
+          </div>
+
+          <div class="card-details">
+            <div class="detail-item">
+              <ion-icon name="calendar" class="detail-icon"></ion-icon>
+              <span class="detail-label">Closing Date:</span>
+              <span class="detail-value">{{ data.closingDate }}</span>
+            </div>
+            <div class="detail-item" *ngIf="data.description">
+              <ion-icon name="information-circle" class="detail-icon"></ion-icon>
+              <span class="detail-label">Info:</span>
+              <span class="detail-value">{{ data.description.substring(0, 30) }}...</span>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <ion-button 
+              fill="clear" 
+              size="small" 
+              class="action-button"
+              (click)="bursaryDetails(data); $event.stopPropagation()">
+              <ion-icon name="eye" slot="start"></ion-icon>
+              View Details
+            </ion-button>
+            
+            <ion-button 
+              fill="clear" 
+              size="small" 
+              class="action-button share-button"
+              (click)="shareBursary(data); $event.stopPropagation()">
+              <ion-icon name="share-social" slot="icon-only"></ion-icon>
+            </ion-button>
+         </div>
+        </div>
+
+        <div class="card-hover-effect"></div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="(bursaries | filter:searchTerm)?.length === 0" class="empty-state">
+      <div class="empty-icon">
+        <ion-icon name="search-circle"></ion-icon>
+      </div>
+      <h3 class="empty-title">No bursaries found</h3>
+      <p class="empty-message">Try adjusting your search terms or check back later for new bursaries.</p>
+    </div>
+  </div>
+
+  <!-- Floating Action Button -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" class="modern-fab">
+      <ion-icon name="filter"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

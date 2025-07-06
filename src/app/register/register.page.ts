@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Location } from '@angular/common';
 
 import { AuthService} from "../auth.service"
-import { LoginPage } from '../login/login.page';
 
 
 @Component({
@@ -15,7 +14,7 @@ import { LoginPage } from '../login/login.page';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  loading: boolean;
+  loading: boolean = false;
   showmessage
   name
   surname
@@ -24,16 +23,27 @@ export class RegisterPage implements OnInit {
   Date
   password
   signupForm: FormGroup;
-  constructor(public router: Router, public auth:AuthService, private firestore: AngularFirestore, public alertController: AlertController, public modalCtrl: ModalController,
+  showPassword: boolean = false;
+  
+  constructor(
+    public router: Router, 
+    public auth:AuthService, 
+    private firestore: AngularFirestore, 
+    public alertController: AlertController,
+    private location: Location
   ){ }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
       'name': new FormControl('', Validators.required),
       'surname': new FormControl('', Validators.required),
-      'email': new FormControl(),
-      'password': new FormControl('', Validators.required),
+      'email': new FormControl('', [Validators.required, Validators.email]),
+      'password': new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
 
@@ -43,8 +53,8 @@ export class RegisterPage implements OnInit {
     .then((result) => {
       this.loading = false;
       if (result == null)  
-      this.dismiss();
-      this.login();
+      this.goBack();
+      this.goToLogin();
     }).catch((error) => {
       window.alert(error.message);
     })
@@ -84,7 +94,7 @@ export class RegisterPage implements OnInit {
       buttons: [{
         text:'OK',
         handler: () => {
-         this.dismiss()
+         this.goBack()
         }
       
       }]
@@ -95,20 +105,12 @@ export class RegisterPage implements OnInit {
   }
   
 
-  async dismiss() {
-    return await this.modalCtrl.dismiss();
+  goBack() {
+    this.location.back();
   }
 
-  async login() {
-    const modal = await this.modalCtrl.create({
-      component: LoginPage,
-      animated: true,
-      mode: 'ios',
-      backdropDismiss: false,
-      cssClass: 'register-modal',
-    })
-
-    return await modal.present();
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 
 }

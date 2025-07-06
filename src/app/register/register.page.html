@@ -1,30 +1,140 @@
-<ion-header>
-
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/welcome"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Account</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  
-  <div class="title">
-    <h4>Signup</h4>
-    <p>Register with Link-Up to get started</p>
-    <ion-spinner color="tertiary" style="margin-left: 150px;" *ngIf="loading" name="dots"></ion-spinner>
+<ion-content [fullscreen]="true" class="modern-register-content">
+  <!-- Floating Particles -->
+  <div class="floating-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
   </div>
-<form id="register"  style="margin-top: 10px; --ion-background-color :white; " [formGroup]="signupForm" (ngSubmit)="signup()">
-  <ion-input placeholder="Full Name" formControlName="name" [(ngModel)]="name" class="primary-input"></ion-input>
-  <ion-input placeholder="Surname" formControlName="surname" [(ngModel)]="surname" class="primary-input"></ion-input>
-  <ion-input placeholder="Email" formControlName="email" [(ngModel)]="email" class="primary-input"></ion-input>
-  <ion-input placeholder="Password" formControlName="password"  [(ngModel)]="password" type="password" class="primary-input"></ion-input>
-
-
-</form>
-
   
+  <div class="register-container">
+    <!-- Logo Section -->
+    <div class="logo-section">
+      <div class="logo-circle">
+        <ion-icon name="person-add-outline"></ion-icon>
+      </div>
+      <h1 class="app-title">Create Account</h1>
+      <p class="app-subtitle">Join Link-Up to discover your future</p>
+    </div>
 
-  <div class="ion-margin-top">
-    <ion-button expand="block" (click)="signup()" >SIGN UP</ion-button>
-  </div>
+    <!-- Form Section -->
+    <div class="form-section">
+      <form [formGroup]="signupForm" (ngSubmit)="signup()" class="signup-form">
+        <div class="input-group">
+          <div class="input-wrapper">
+            <ion-icon name="person-outline" class="input-icon"></ion-icon>
+            <ion-input 
+              placeholder="First Name" 
+              formControlName="name" 
+              [(ngModel)]="name" 
+              class="modern-input"
+              fill="outline"
+              autocomplete="given-name">
+            </ion-input>
+          </div>
+          
+          <div class="input-wrapper">
+            <ion-icon name="person-outline" class="input-icon"></ion-icon>
+            <ion-input 
+              placeholder="Last Name" 
+              formControlName="surname" 
+              [(ngModel)]="surname" 
+              class="modern-input"
+              fill="outline"
+              autocomplete="family-name">
+            </ion-input>
+          </div>
+          
+          <div class="input-wrapper">
+            <ion-icon name="mail-outline" class="input-icon"></ion-icon>
+            <ion-input 
+              placeholder="Email Address" 
+              formControlName="email" 
+              [(ngModel)]="email" 
+              type="email"
+              class="modern-input"
+              fill="outline"
+              autocomplete="email">
+            </ion-input>
+          </div>
+          
+          <div class="input-wrapper">
+            <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
+            <ion-input 
+              placeholder="Password (min 6 characters)" 
+              formControlName="password" 
+              [(ngModel)]="password" 
+              [type]="showPassword ? 'text' : 'password'"
+              class="modern-input"
+              fill="outline"
+              autocomplete="new-password">
+            </ion-input>
+            <ion-icon 
+              [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" 
+              class="password-toggle-icon"
+              (click)="togglePasswordVisibility()">
+            </ion-icon>
+          </div>
+        </div>
 
-  <div class="ion-margin-top ion-text-center">
-    <a (click)="dismiss()">Close</a>
+        <!-- Sign Up Button -->
+        <ion-button 
+          type="submit"
+          expand="block" 
+          class="signup-button"
+          [disabled]="loading || !signupForm.valid">
+          <ion-spinner 
+            *ngIf="loading" 
+            name="crescent" 
+            slot="start" 
+            class="button-spinner">
+          </ion-spinner>
+          <ion-icon 
+            *ngIf="!loading" 
+            name="person-add-outline" 
+            slot="start">
+          </ion-icon>
+          <span *ngIf="!loading">CREATE ACCOUNT</span>
+          <span *ngIf="loading">CREATING ACCOUNT...</span>
+        </ion-button>
+
+        <!-- Terms and Privacy -->
+        <div class="terms-section">
+          <p class="terms-text">
+            By creating an account, you agree to our 
+            <a href="#" class="terms-link">Terms of Service</a> and 
+            <a href="#" class="terms-link">Privacy Policy</a>
+          </p>
+        </div>
+
+        <!-- Alternative Actions -->
+        <div class="alternative-actions">
+          <p class="login-prompt">
+            Already have an account? 
+        <ion-button 
+              fill="clear" 
+              size="small" 
+              [routerLink]="['/login']"
+              class="login-link">
+              Sign in here
+        </ion-button>
+          </p>
+        </div>
+      </form>
+    </div>
   </div>
 </ion-content>

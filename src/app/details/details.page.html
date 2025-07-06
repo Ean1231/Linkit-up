@@ -1,65 +1,140 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>About Institution</ion-title>
+    <ion-title>
+      <ion-text color="light">
+        <h1>Institution Details</h1>
+      </ion-text>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-
-
-
-<ion-content style="height: 100%">
-  <ion-list>
-    <div class="ml-1" style="height: 100%">
-      <div class="card" style=" height: 100%">
-        <img src="{{showdata.img}}" class="card-img-top" alt="..." />
-
-        <div class="card-body">
-          <h5 class="card-title">{{showdata.institution}}</h5>
-          <h3>Description</h3>
-          <p color="primary">{{showdata.description}}</p>
-        </div>
-        <div class="border-top"></div>
-        <div
-          class="container mt-3"
-          style="
-            display: grid;
-            grid-template-columns: 50% 50%;
-            gap: 12px;
-            height: 100%;
-          "
-        > 
-        </div>
-
-        <div style="display:grid;  grid-template-columns: 50% 50%;  ">
-          <div class="m-0">
-            <ion-icon color="primary" name="location-outline"></ion-icon>
-            <small class="pl-2">{{showdata.location}}</small><br />
-          </div>
-
-          <div class="ml-5">
-            <ion-icon color="primary" name="call-outline"></ion-icon>
-            <small class="pl-2">{{showdata.contact}} </small>
-          </div>
-          <div class="">
-            <ion-icon color="primary" name="mail-outline"></ion-icon>
-            <small class="pl-2"> {{showdata.email}} </small>
-          </div>
-          <div class="ml-5">
-           <a href={{showdata.website}}> 
-             <ion-button
-              
-              
-            >
-              Apply
-            </ion-button></a>
-          </div>
+<ion-content class="details-content">
+  <!-- Hero Section with Image -->
+  <div class="hero-section">
+    <div class="hero-image">
+      <img [src]="showdata.img" [alt]="showdata.institution">
+      <div class="hero-overlay">
+        <div class="hero-badge">
+          <ion-icon name="school-outline"></ion-icon>
+          <span>Institution</span>
         </div>
       </div>
     </div>
-  </ion-list>
+  </div>
+
+  <!-- Institution Information -->
+  <div class="content-container">
+    <!-- Institution Name Card -->
+    <ion-card class="institution-card">
+      <ion-card-content>
+        <div class="institution-header">
+          <h2 class="institution-name">{{showdata.institution}}</h2>
+          <div class="institution-type">
+            <ion-icon name="ribbon-outline" color="primary"></ion-icon>
+            <span>Educational Institution</span>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Description Card -->
+    <ion-card class="description-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="document-text-outline" color="secondary"></ion-icon>
+          Description
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p class="description-text">{{showdata.description}}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Contact Information Card -->
+    <ion-card class="contact-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="information-circle-outline" color="tertiary"></ion-icon>
+          Contact Information
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="contact-grid">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <ion-icon name="location-outline" color="primary"></ion-icon>
+            </div>
+            <div class="contact-details">
+              <p class="contact-label">Location</p>
+              <p class="contact-value">{{showdata.location}}</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <ion-icon name="call-outline" color="success"></ion-icon>
+            </div>
+            <div class="contact-details">
+              <p class="contact-label">Phone</p>
+              <p class="contact-value">{{showdata.contact}}</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <ion-icon name="mail-outline" color="warning"></ion-icon>
+            </div>
+            <div class="contact-details">
+              <p class="contact-label">Email</p>
+              <p class="contact-value">{{showdata.email}}</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <ion-icon name="globe-outline" color="medium"></ion-icon>
+            </div>
+            <div class="contact-details">
+              <p class="contact-label">Website</p>
+              <p class="contact-value">Visit Website</p>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Apply Button Section -->
+    <div class="apply-section">
+      <ion-card class="apply-card">
+        <ion-card-content>
+          <div class="apply-content">
+            <div class="apply-text">
+              <h3>Ready to Apply?</h3>
+              <p>Click below to visit the official website and start your application process.</p>
+            </div>
+            <div class="apply-action">
+              <a [href]="showdata.website" target="_blank" rel="noopener noreferrer">
+                <ion-button 
+                  expand="block" 
+                  size="large" 
+                  color="primary"
+                  class="apply-button">
+                  <ion-icon name="open-outline" slot="start"></ion-icon>
+                  Apply Now
+                </ion-button>
+              </a>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <!-- Bottom Padding -->
+  <div class="bottom-padding"></div>
 </ion-content>
 
 

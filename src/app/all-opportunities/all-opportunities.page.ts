@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServiceService } from '../service.service';
 import { Router } from '@angular/router'
-import { IonSearchbar } from '@ionic/angular';
+import { IonSearchbar, ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-all-opportunities',
   templateUrl: './all-opportunities.page.html',
@@ -11,7 +12,13 @@ export class AllOpportunitiesPage implements OnInit {
   @ViewChild('search', {static: false}) search: IonSearchbar;
   opportunities = [] ;
 data: any;
-  constructor(public service: ServiceService, public router: Router) { 
+  searchTerm: string = '';
+  
+  constructor(
+    public service: ServiceService, 
+    public router: Router,
+    private toastController: ToastController
+  ) { 
     this.service.getOpportunities().then((items:any)=>{
       console.log(items);
        this.opportunities = items;
@@ -38,14 +45,37 @@ ionViewDidEnter(){
 
 
   filterData(ev: any) {
-  
-    const val = ev.target.value;
-    if (val && val.trim() != "") {
-      this.opportunities = this.opportunities.filter((item) => {
+    this.searchTerm = ev.target.value;
+  }
+
+  async shareOpportunity(opportunity: any) {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: opportunity.title,
+          text: `Check out this opportunity: ${opportunity.title}`,
+          url: window.location.href
+        });
+      } else {
+        // Fallback for browsers that don't support Web Share API
+        const toast = await this.toastController.create({
+          message: 'Link copied to clipboard!',
+          duration: 2000,
+          position: 'bottom',
+          color: 'success'
+        });
+        await toast.present();
         
-        return item.type.toLowerCase().indexOf(val.toLowerCase()) > -1;
-      })
-      
+        // Copy to clipboard
+        const textArea = document.createElement('textarea');
+        textArea.value = `Check out this opportunity: ${opportunity.title} - ${window.location.href}`;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+    } catch (error) {
+      console.log('Error sharing:', error);
     }
   }
 

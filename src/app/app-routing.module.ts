@@ -62,7 +62,8 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./onboarding/onboarding.module').then( m => m.OnboardingPageModule)
-  },  {
+  },
+  {
     path: 'opportunity-details',
     loadChildren: () => import('./opportunity-details/opportunity-details.module').then( m => m.OpportunityDetailsPageModule)
   },
@@ -86,16 +87,10 @@ const routes: Routes = [
     path: 'accomodation-details',
     loadChildren: () => import('./accomodation-details/accomodation-details.module').then( m => m.AccomodationDetailsPageModule)
   },
-
-
-
-
-
-
-
-
- 
-
+  {
+    path: 'favorites',
+    loadChildren: () => import('./favorites/favorites.module').then( m => m.FavoritesPageModule)
+  }
 ];
 @NgModule({
   imports: [

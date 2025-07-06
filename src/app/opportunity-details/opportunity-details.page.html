@@ -1,61 +1,170 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="end">
-      <ion-back-button></ion-back-button>
+<ion-header [translucent]="true" class="modern-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/all-opportunities" class="custom-back-button"></ion-back-button>
     </ion-buttons>
-    <ion-title></ion-title>
+    <ion-title class="page-title">
+      <div class="title-content">
+        <ion-icon name="document-text" class="title-icon"></ion-icon>
+        <span>Opportunity Details</span>
+      </div>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="shareOpportunity()" fill="clear" class="share-header-button">
+        <ion-icon name="share-social" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <div class="ml-1" style="height: 100%">
-      <div class="card" style=" height: 100%">
-        <img src="{{showdata.img}}" class="card-img-top" alt="..." />
-
-        <div class="card-body">
-          <h3>{{showdata.title}}</h3>
-          <h5 class="card-title">{{showdata.institution}}</h5>
-          <h3>Description</h3>
-          <p color="primary">{{showdata.description.substring(0, 300)}}... </p>
+<ion-content [fullscreen]="true" class="modern-details-content">
+  <!-- Hero Image Section -->
+  <div class="hero-image-section" *ngIf="showdata?.img">
+    <div class="image-container">
+      <img [src]="showdata.img" [alt]="showdata.title" class="hero-image" />
+      <div class="image-overlay">
+        <div class="overlay-gradient"></div>
+        <div class="hero-badge">
+          <ion-badge color="success" class="available-badge">
+            <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+            Available
+          </ion-badge>
         </div>
-        <div class="border-top"></div>
-        <div
-          class="container mt-3"
-          style="
-            display: grid;
-            grid-template-columns: 50% 50%;
-            gap: 12px;
-            height: 100%;
-          "
-        > 
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="content-section">
+    <div class="main-content">
+      <!-- Header Card -->
+      <div class="header-card">
+        <div class="title-section">
+          <h1 class="opportunity-title">{{ showdata?.title }}</h1>
+          <div class="institution-info">
+            <ion-icon name="school" class="institution-icon"></ion-icon>
+            <h2 class="institution-name">{{ showdata?.institution }}</h2>
+          </div>
+        </div>
+        
+        <div class="quick-actions">
+          <ion-button 
+            fill="clear" 
+            class="action-icon-button"
+            (click)="shareOpportunity()">
+            <ion-icon name="share-social" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button 
+            fill="clear" 
+            class="action-icon-button"
+            [class.favorited]="isFavorite"
+            (click)="addToFavorites()">
+            <ion-icon [name]="heartIconName" [color]="heartIconColor" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+
+      <!-- Description Card -->
+      <div class="description-card">
+        <div class="card-header">
+          <div class="header-content">
+            <ion-icon name="information-circle" class="header-icon"></ion-icon>
+            <h3 class="card-title">Description</h3>
+          </div>
+        </div>
+        <div class="card-content">
+          <p class="description-text">{{ showdata?.description }}</p>
+        </div>
+      </div>
+
+      <!-- Info Cards Grid -->
+      <div class="info-cards-grid">
+        <div class="info-card" *ngIf="showdata?.closingDate">
+          <div class="info-card-content">
+            <ion-icon name="calendar" class="info-icon"></ion-icon>
+            <div class="info-text">
+              <span class="info-label">Closing Date</span>
+              <span class="info-value">{{ showdata.closingDate }}</span>
+            </div>
+          </div>
         </div>
 
-        <div style="display:grid;  grid-template-columns: 50% 50%;  ">
-          <!-- <div class="m-0">
-            <ion-icon color="primary" name="location-outline"></ion-icon>
-            <small class="pl-2">{{location}}</small><br />
-          </div> -->
+        <div class="info-card" *ngIf="showdata?.type">
+          <div class="info-card-content">
+            <ion-icon name="bookmark" class="info-icon"></ion-icon>
+            <div class="info-text">
+              <span class="info-label">Type</span>
+              <span class="info-value">{{ showdata.type }}</span>
+            </div>
+          </div>
+        </div>
 
-          <!-- <div class="ml-5">
-            <ion-icon color="primary" name="call-outline"></ion-icon>
-            <small class="pl-2">{{contact}} </small>
-          </div> -->
-          <!-- <div class="">
-            <ion-icon color="primary" name="mail-outline"></ion-icon>
-            <small class="pl-2"> {{showdata.email}} </small>
-          </div> -->
-          <div >
-           <a href={{showdata.link}}> 
-             <ion-button style="width: 100%; margin-left: 90px;"
-              
-              
-            >
-              Apply
-            </ion-button></a>
+        <div class="info-card" *ngIf="showdata?.location">
+          <div class="info-card-content">
+            <ion-icon name="location" class="info-icon"></ion-icon>
+            <div class="info-text">
+              <span class="info-label">Location</span>
+              <span class="info-value">{{ showdata.location }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card" *ngIf="showdata?.contact">
+          <div class="info-card-content">
+            <ion-icon name="call" class="info-icon"></ion-icon>
+            <div class="info-text">
+              <span class="info-label">Contact</span>
+              <span class="info-value">{{ showdata.contact }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Requirements Card (if available) -->
+      <div class="requirements-card" *ngIf="showdata?.requirements">
+        <div class="card-header">
+          <div class="header-content">
+            <ion-icon name="list" class="header-icon"></ion-icon>
+            <h3 class="card-title">Requirements</h3>
+          </div>
+        </div>
+        <div class="card-content">
+          <p class="requirements-text">{{ showdata.requirements }}</p>
+        </div>
+      </div>
+
+      <!-- Contact Information Card -->
+      <div class="contact-card" *ngIf="showdata?.email">
+        <div class="card-header">
+          <div class="header-content">
+            <ion-icon name="mail" class="header-icon"></ion-icon>
+            <h3 class="card-title">Contact Information</h3>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="contact-item">
+            <ion-icon name="mail-outline" class="contact-icon"></ion-icon>
+            <span class="contact-text">{{ showdata.email }}</span>
           </div>
         </div>
       </div>
     </div>
-  </ion-list>
+  </div>
+
+  <!-- Floating Apply Button -->
+  <div class="floating-apply-section">
+    <div class="apply-container">
+      <a [href]="showdata?.link" target="_blank" class="apply-link">
+        <ion-button 
+          expand="block" 
+          class="apply-button"
+          [disabled]="!showdata?.link">
+          <ion-icon name="paper-plane" slot="start"></ion-icon>
+          Apply Now
+          <ion-icon name="arrow-forward" slot="end"></ion-icon>
+        </ion-button>
+      </a>
+      <p class="apply-note">You'll be redirected to the official application page</p>
+    </div>
+  </div>
 </ion-content>

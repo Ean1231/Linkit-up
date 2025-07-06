@@ -1,27 +1,94 @@
 <ion-header>
-
 </ion-header>
 
-<ion-content class="ion-padding">
-  <div class="title">
-    <h4>Login</h4>
-    <p>Lets get started</p>
+<ion-content class="modern-login-content">
+  <div class="login-container">
+    <!-- Logo Section -->
+    <div class="logo-section">
+      <div class="logo-circle">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </div>
+      <h1 class="app-title">Welcome Back</h1>
+      <p class="app-subtitle">Sign in to continue your journey</p>
+    </div>
+
+    <!-- Form Section -->
+    <div class="form-section">
+      <div class="input-group">
+        <div class="input-wrapper">
+          <ion-icon name="mail-outline" class="input-icon"></ion-icon>
+          <ion-input 
+            placeholder="Email address" 
+            type="email" 
+            class="modern-input" 
+            #email
+            fill="outline">
+          </ion-input>
+        </div>
+        
+        <div class="input-wrapper">
+          <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
+          <ion-input 
+            placeholder="Password" 
+            [type]="showPassword ? 'text' : 'password'" 
+            class="modern-input" 
+            #password
+            fill="outline">
+          </ion-input>
+          <ion-icon 
+            [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" 
+            class="password-toggle-icon"
+            (click)="togglePasswordVisibility()">
+          </ion-icon>
+        </div>
+      </div>
+
+      <!-- Forgot Password -->
+      <div class="forgot-password">
+        <ion-button 
+          fill="clear" 
+          size="small" 
+          [routerLink]="['/forgot-password']" 
+          (click)="dismiss()"
+          class="forgot-link">
+          Forgot Password?
+        </ion-button>
+      </div>
+
+      <!-- Login Button -->
+      <ion-button 
+        expand="block" 
+        class="login-button"
+        (click)="login(email, password)"
+        [disabled]="loading">
+        <ion-spinner 
+          *ngIf="loading" 
+          name="crescent" 
+          slot="start" 
+          class="button-spinner">
+        </ion-spinner>
+        <ion-icon 
+          *ngIf="!loading" 
+          name="log-in-outline" 
+          slot="start">
+        </ion-icon>
+        <span *ngIf="!loading">LOGIN</span>
+        <span *ngIf="loading">SIGNING IN...</span>
+      </ion-button>
+
+      <!-- Close Button -->
+      <div class="alternative-actions" style="color: black;">
+        <p class="signup-prompt">
+          Don't have an account? 
+      <ion-button 
+            fill="clear" 
+            size="small" 
+            [routerLink]="['/register']"
+            class="signup-link">
+            Sign up here
+      </ion-button>
+        </p>
+      </div>
+    </div>
   </div>
-
-  <ion-input placeholder="Username" type="text" class="primary-input" #email ></ion-input>
-  <ion-input placeholder="Password" type="password" class="primary-input" #password></ion-input>
-
-  <ion-spinner name="bubbles" color="tertiary" style="margin-left: 170px; margin-bottom: -250px;" *ngIf="loading"></ion-spinner>
-
-  <div class="ion-margin-top ion-text-right forget" >
-    <a style="margin-right: 18px; margin-left: 20px;" [routerLink]="['/forgot-password']"  (click)="dismiss()" class="small-text">Forgot Password?</a>
-  </div>
-
-  <div class="ion-margin-top">
-    <ion-button type="submit" expand="block" (click)="login(email, password)">LOGIN</ion-button>
-  </div>
-
-  <ion-button expand="block" fill="outline" (click)="dismiss()" class="ion-margin-top ion-text-center">
-  Close
-  </ion-button>
 </ion-content>
