@@ -1,15 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/tabs/tab3" (click)="goBack()">
-        <ion-icon name="chevron-back-outline"></ion-icon>
-      </ion-back-button>
-    </ion-buttons>
-    <ion-title>
+    <ion-title slot="start" class="header-title">
       <ion-text color="light">
         <h1>Saved Items</h1>
       </ion-text>
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="refreshFavorites(null)">
+        <ion-icon name="refresh-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -77,6 +77,14 @@
                 <ion-icon [name]="favorite.category === 'opportunity' ? 'briefcase-outline' : 'school-outline'"></ion-icon>
                 <ion-label>{{ favorite.category | titlecase }}</ion-label>
               </ion-chip>
+              <!-- Status Badge -->
+              <ion-chip 
+                *ngIf="favorite.closingDate"
+                [color]="isFavoriteClosed(favorite) ? 'danger' : 'success'" 
+                [class]="'status-chip' + (isFavoriteClosed(favorite) ? ' closed-badge' : ' available-badge')">
+                <ion-icon [name]="isFavoriteClosed(favorite) ? 'close-circle-outline' : 'checkmark-circle-outline'"></ion-icon>
+                <ion-label>{{ isFavoriteClosed(favorite) ? 'CLOSED' : 'Available' }}</ion-label>
+              </ion-chip>
             </div>
           </div>
         </div>
@@ -94,7 +102,13 @@
             </div>
             <div class="detail-item" *ngIf="favorite.closingDate">
               <ion-icon name="calendar-outline" color="medium"></ion-icon>
-              <span>{{ favorite.closingDate }}</span>
+              <span>Closing Date:</span>
+              <ion-chip 
+                [color]="getDateChipColor(favorite)" 
+                [class]="'date-chip' + (isFavoriteClosed(favorite) ? ' closed-chip' : '') + (getDateChipColor(favorite) === 'warning' ? ' urgent-chip' : '')">
+                <ion-icon name="time-outline" slot="start"></ion-icon>
+                <ion-label>{{ formatClosingDate(favorite.closingDate) }}</ion-label>
+              </ion-chip>
             </div>
             <div class="detail-item">
               <ion-icon name="time-outline" color="medium"></ion-icon>
@@ -107,11 +121,12 @@
             <ion-button 
               fill="solid" 
               size="small" 
-              [color]="favorite.category === 'opportunity' ? 'primary' : 'success'"
+              [disabled]="isFavoriteClosed(favorite)"
+              [color]="isFavoriteClosed(favorite) ? 'medium' : (favorite.category === 'opportunity' ? 'primary' : 'success')"
               (click)="viewDetails(favorite)"
-              class="action-button">
+              [class]="'action-button' + (isFavoriteClosed(favorite) ? ' disabled-button' : '')">
               <ion-icon name="eye-outline" slot="start"></ion-icon>
-              View Details
+              {{ isFavoriteClosed(favorite) ? 'View Details (Closed)' : 'View Details' }}
             </ion-button>
             
             <ion-button 

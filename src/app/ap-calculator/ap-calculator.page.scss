@@ -1,5 +1,5 @@
 .calculator-content {
-  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --background: #ffffff;
   
   // Hero Section
   .hero-section {
@@ -25,8 +25,8 @@
         bottom: 0;
         background: linear-gradient(
           135deg,
-          rgba(102, 126, 234, 0.8) 0%,
-          rgba(118, 75, 162, 0.8) 100%
+          rgba(30, 30, 30, 0.7) 0%,
+          rgba(60, 60, 60, 0.7) 100%
         );
         display: flex;
         align-items: center;
@@ -67,8 +67,9 @@
     
     .info-card {
       border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       --background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.05);
       
       ion-card-content {
         .instruction-header {
@@ -92,7 +93,7 @@
         p {
           margin: 0;
           font-size: 1rem;
-          color: #2a2a2a;
+          color: #4a4a4a;
           line-height: 1.6;
           font-weight: 500;
         }
@@ -107,12 +108,13 @@
     .subject-card {
       margin-bottom: 1.5rem;
       border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       transition: all 0.3s ease;
       opacity: 0;
       transform: translateY(20px);
       animation: slideInUp 0.6s ease forwards;
       --background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.05);
       
       &:nth-child(1) { animation-delay: 0.1s; }
       &:nth-child(2) { animation-delay: 0.2s; }
@@ -123,7 +125,7 @@
       
       &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
       }
       
       ion-card-header {
@@ -154,7 +156,7 @@
             .custom-item {
               --border-radius: 12px;
               --border-width: 2px;
-              --border-color: #d0d0d0;
+              --border-color: #e0e0e0;
               --highlight-color-focused: var(--ion-color-primary);
               --background: #ffffff;
               margin-bottom: 0;
@@ -197,14 +199,14 @@
       --border-radius: 25px;
       --padding-top: 1rem;
       --padding-bottom: 1rem;
-      --box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+      --box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
       font-size: 1.2rem;
       font-weight: 700;
       text-transform: none;
       letter-spacing: 0.5px;
       
       &:hover {
-        --box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+        --box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
         transform: translateY(-2px);
       }
       
@@ -221,10 +223,11 @@
     
     .result-card {
       border-radius: 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.15);
       animation: resultAppear 0.8s ease forwards;
+      --background: transparent;
       
       ion-card-content {
         padding: 2rem;
@@ -236,35 +239,28 @@
             font-size: 3.5rem;
             margin-bottom: 1rem;
             opacity: 1;
-            color: #ffffff;
+            color: var(--ion-color-primary);
           }
           
           .result-title {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-            color: #ffffff;
+            color: #1a1a1a;
           }
           
           .result-score {
             font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
-            color: #ffffff;
-            background: linear-gradient(45deg, #ffffff, #f8f9ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--ion-color-primary);
+            text-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
           }
           
           .result-description {
             font-size: 1.1rem;
-            opacity: 0.95;
             margin: 0;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-            color: #ffffff;
+            color: #4a4a4a;
             font-weight: 500;
           }
         }
@@ -390,7 +386,7 @@ ion-select {
 }
 
 p{
-	color: #1a1a1a;
+	color: #4a4a4a;
   font-weight: 500;
   font-size: 1rem;
   }

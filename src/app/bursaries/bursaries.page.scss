@@ -49,8 +49,6 @@
 
     .hero-badge {
       .deadline-chip {
-        --background: rgba(255, 193, 7, 0.9);
-        --color: white;
         backdrop-filter: blur(10px);
         font-weight: 600;
         font-size: 0.9rem;
@@ -58,6 +56,40 @@
 
         ion-icon {
           font-size: 18px;
+        }
+        
+        &:not(.enhanced-deadline-chip) {
+          --background: rgba(255, 193, 7, 0.9);
+          --color: white;
+        }
+        
+        &.enhanced-deadline-chip {
+          font-weight: 700;
+          
+          &[color="warning"] {
+            --background: rgba(255, 193, 7, 0.9);
+            --color: #333;
+            animation: urgentPulse 2s infinite;
+          }
+          
+          &[color="danger"], &.closed-chip {
+            --background: rgba(220, 53, 69, 0.95);
+            --color: white;
+            animation: closedBlink 3s infinite;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 800;
+          }
+          
+          &[color="success"] {
+            --background: rgba(40, 167, 69, 0.9);
+            --color: white;
+          }
+          
+          &[color="tertiary"] {
+            --background: rgba(124, 58, 237, 0.9);
+            --color: white;
+          }
         }
       }
     }
@@ -102,6 +134,20 @@
       span {
         color: #2d3748; // Made span text darker
         font-weight: 600;
+        
+        &.closed-text {
+          color: #dc2626;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          animation: closedBlink 3s infinite;
+        }
+        
+        &.urgent-text {
+          color: #f59e0b;
+          font-weight: 700;
+          animation: urgentPulse 2s infinite;
+        }
       }
 
       ion-icon {
@@ -325,6 +371,17 @@
       &:active {
         transform: translateY(0);
       }
+      
+      &.closed-button {
+        --background: linear-gradient(135deg, #dc2626, #b91c1c);
+        --color: white;
+        animation: closedBlink 3s infinite;
+        cursor: not-allowed;
+        
+        &:hover {
+          transform: none;
+        }
+      }
     }
   }
 
@@ -360,6 +417,37 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+// Closed state animations
+@keyframes closedBlink {
+  0%, 70% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  85% { 
+    opacity: 0.7;
+    transform: scale(0.98);
+  }
+  100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes urgentPulse {
+  0% { 
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+  }
+  50% { 
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(255, 193, 7, 0.6);
+  }
+  100% { 
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
   }
 }
 

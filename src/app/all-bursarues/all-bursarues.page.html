@@ -70,7 +70,11 @@
             <ion-icon name="arrow-forward" class="view-icon"></ion-icon>
           </div>
           <div class="status-badge">
-            <ion-badge color="success" class="available-badge">Available</ion-badge>
+            <ion-badge 
+              [color]="isBursaryClosed(data) ? 'danger' : 'success'" 
+              [class]="'available-badge' + (isBursaryClosed(data) ? ' closed-badge' : ' available-badge-active')">
+              {{ isBursaryClosed(data) ? 'CLOSED' : 'Available' }}
+            </ion-badge>
           </div>
         </div>
 
@@ -89,7 +93,12 @@
             <div class="detail-item">
               <ion-icon name="calendar" class="detail-icon"></ion-icon>
               <span class="detail-label">Closing Date:</span>
-              <span class="detail-value">{{ data.closingDate }}</span>
+              <ion-chip 
+                [color]="getDateChipColor(data)" 
+                [class]="'date-chip' + (isBursaryClosed(data) ? ' closed-chip' : '') + (getDateChipColor(data) === 'warning' ? ' urgent-chip' : '')">
+                <ion-icon name="time" slot="start"></ion-icon>
+                <ion-label>{{ formatClosingDate(data.closingDate) }}</ion-label>
+              </ion-chip>
             </div>
             <div class="detail-item" *ngIf="data.description">
               <ion-icon name="information-circle" class="detail-icon"></ion-icon>
@@ -100,12 +109,13 @@
 
           <div class="card-actions">
             <ion-button 
-              fill="clear" 
+              [disabled]="isBursaryClosed(data)"
+              [fill]="isBursaryClosed(data) ? 'outline' : 'clear'" 
               size="small" 
-              class="action-button"
+              [class]="'action-button' + (isBursaryClosed(data) ? ' disabled-button' : '')"
               (click)="bursaryDetails(data); $event.stopPropagation()">
               <ion-icon name="eye" slot="start"></ion-icon>
-              View Details
+              {{ isBursaryClosed(data) ? 'View Details' : 'View Details' }}
             </ion-button>
             
             <ion-button 

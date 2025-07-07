@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title slot="start" class="header-title">
       <ion-text color="light">
@@ -11,18 +11,26 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content class="modern-content">
   <!-- Hero Banner Section -->
   <div class="hero-banner">
     <div class="hero-overlay">
       <div class="hero-content">
-        <h2 class="hero-title">Discover Your Future</h2>
-        <p class="hero-subtitle">Bursaries, Career Opportunities and much more</p>
+        <h2 class="hero-title" style="color: white;">Discover Your Future</h2>
+        <p class="hero-subtitle" style="color: white;">Bursaries, Career Opportunities and much more</p>
         <div class="welcome-card" *ngIf="user | async as currentUser">
           <ion-avatar class="user-avatar">
-            <ion-icon name="person-circle-outline"></ion-icon>
+            <img 
+              *ngIf="currentUser.profilePicture" 
+              [src]="currentUser.profilePicture" 
+              [alt]="currentUser.name + ' profile picture'"
+              class="profile-image">
+            <ion-icon 
+              *ngIf="!currentUser.profilePicture" 
+              name="person-circle-outline">
+            </ion-icon>
           </ion-avatar>
           <div class="welcome-text">
             <h3>Welcome back, {{ currentUser.name }}!</h3>
@@ -54,25 +62,47 @@
   <div class="section-container">
     <div class="section-header">
       <div class="section-title">
-        <ion-icon name="calendar-outline" class="section-icon"></ion-icon>
+        <ion-icon 
+          name="calendar-outline" 
+          class="section-icon clickable-icon" 
+          (click)="openDateFilter()"
+          [class.active]="dateFilter">
+        </ion-icon>
         <h2>Workshops & Events</h2>
+        <ion-chip *ngIf="dateFilter" color="primary" class="filter-chip" (click)="clearDateFilter()">
+          <ion-icon name="calendar" slot="start"></ion-icon>
+          <ion-label>{{ formatDateFilter(dateFilter) }}</ion-label>
+          <ion-icon name="close-circle" slot="end"></ion-icon>
+        </ion-chip>
       </div>
       <ion-button fill="clear" color="primary" [routerLink]="'/all-opportunities'">
-        <span>See all</span>
+        <span>All</span>
         <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
       </ion-button>
     </div>
 
     <div class="cards-slider">
       <ion-slides [options]="{ slidesPerView: 'auto', spaceBetween: 16, freeMode: true }" class="opportunities-slider">
-        <ion-slide *ngFor="let data of opportunities | filter:search" class="slide-item">
+        <ion-slide *ngFor="let data of getFilteredOpportunities()" class="slide-item">
           <div class="modern-card opportunity-card" (click)="details(data)">
             <div class="card-image">
               <img [src]="data.img" [alt]="data.title">
               <div class="card-badge">
-                <ion-chip color="primary" class="date-chip">
+                <!-- Show CLOSED badge if past closing date -->
+                <ion-chip 
+                  *ngIf="isOpportunityClosed(data.closingDate)" 
+                  color="danger" 
+                  class="status-chip closed-chip">
+                  <ion-icon name="close-circle"></ion-icon>
+                  <ion-label>CLOSED</ion-label>
+                </ion-chip>
+                <!-- Show closing date if still open -->
+                <ion-chip 
+                  *ngIf="!isOpportunityClosed(data.closingDate)" 
+                  [color]="getDateChipColor(data.closingDate)" 
+                  class="date-chip enhanced-date-chip">
                   <ion-icon name="time-outline"></ion-icon>
-                  <ion-label>{{ data.closingDate }}</ion-label>
+                  <ion-label>{{ formatClosingDate(data.closingDate) }}</ion-label>
                 </ion-chip>
               </div>
             </div>
@@ -103,32 +133,58 @@
   <div class="section-container">
     <div class="section-header">
       <div class="section-title">
-        <ion-icon name="school-outline" class="section-icon"></ion-icon>
+        <ion-icon 
+          name="calendar-outline" 
+          class="section-icon clickable-icon" 
+          (click)="openBursaryDateFilter()"
+          [class.active]="bursaryDateFilter">
+        </ion-icon>
         <h2>Need Funding?</h2>
+        <ion-chip *ngIf="bursaryDateFilter" color="primary" class="filter-chip" (click)="clearBursaryDateFilter()">
+          <ion-icon name="calendar" slot="start"></ion-icon>
+          <ion-label>{{ formatDateFilter(bursaryDateFilter) }}</ion-label>
+          <ion-icon name="close-circle" slot="end"></ion-icon>
+        </ion-chip>
       </div>
       <ion-button fill="clear" color="primary" [routerLink]="'/all-bursarues'">
-        <span>See all</span>
+        <span>All</span>
         <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
       </ion-button>
     </div>
 
     <div class="cards-slider">
       <ion-slides [options]="{ slidesPerView: 'auto', spaceBetween: 16, freeMode: true }" class="bursaries-slider">
-        <ion-slide *ngFor="let data of bursaries" class="slide-item">
+        <ion-slide *ngFor="let data of getFilteredBursaries()" class="slide-item">
           <div class="modern-card bursary-card" (click)="bursaryDetails(data)">
             <div class="bursary-image">
               <img [src]="data.img" [alt]="data.title">
+              <!-- Bursary status badge overlay -->
+              <div class="bursary-badge" *ngIf="isOpportunityClosed(data.closingDate)">
+                <ion-chip color="danger" class="closed-chip small">
+                  <ion-icon name="close-circle"></ion-icon>
+                  <ion-label>CLOSED</ion-label>
+                </ion-chip>
+              </div>
             </div>
             <div class="bursary-content">
               <h4 class="bursary-title">{{ data.title }}</h4>
               <div class="bursary-info">
-                <ion-chip color="success" class="deadline-chip">
-                  <ion-icon name="lock-closed-outline"></ion-icon>
-                  <ion-label>{{ data.closingDate }}</ion-label>
+                <ion-chip 
+                  [color]="isOpportunityClosed(data.closingDate) ? 'danger' : getDateChipColor(data.closingDate)" 
+                  class="deadline-chip enhanced-deadline-chip">
+                  <ion-icon [name]="isOpportunityClosed(data.closingDate) ? 'close-circle' : 'time-outline'"></ion-icon>
+                  <ion-label>
+                    {{ isOpportunityClosed(data.closingDate) ? 'Closed' : formatClosingDate(data.closingDate) }}
+                  </ion-label>
                 </ion-chip>
               </div>
-              <ion-button fill="solid" size="small" color="success" class="apply-btn">
-                Apply Now
+              <ion-button 
+                fill="solid" 
+                size="small" 
+                [color]="isOpportunityClosed(data.closingDate) ? 'medium' : 'success'" 
+                class="apply-btn"
+                [disabled]="isOpportunityClosed(data.closingDate)">
+                {{ isOpportunityClosed(data.closingDate) ? 'Application Closed' : 'Apply Now' }}
               </ion-button>
             </div>
           </div>
@@ -140,15 +196,24 @@
   <!-- Quick Actions Section -->
   <div class="section-container">
     <div class="quick-actions">
-      <h3>Quick Actions</h3>
+      <h3 style="color: azure;">Quick Actions</h3>
       <div class="action-grid">
-        <ion-button fill="outline" class="action-button" [routerLink]="['/favorites']">
-          <ion-icon name="bookmark-outline" slot="start"></ion-icon>
-          Favorites
+        <ion-button fill="outline" class="action-button" [routerLink]="['/past-papers']">
+          <ion-icon name="document-text-outline" slot="start"></ion-icon>
+          Past papers
+        </ion-button>
+        <ion-button fill="outline" class="action-button" (click)="showContactDetails()">
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+          Contact us
         </ion-button>
         <ion-button fill="outline" class="action-button">
+          <ion-icon name="log-out-outline" slot="start"></ion-icon>
+          Sign out
+        </ion-button>
+        <!-- <ion-button fill="outline" class="action-button" (click)="viewNotifications()">
           <ion-icon name="notifications-outline" slot="start"></ion-icon>
           Notifications
+          <ion-badge *ngIf="notificationCount > 0" color="danger" slot="end">{{ notificationCount }}</ion-badge>
         </ion-button>
         <ion-button fill="outline" class="action-button">
           <ion-icon name="person-outline" slot="start"></ion-icon>
@@ -157,7 +222,11 @@
         <ion-button fill="outline" class="action-button">
           <ion-icon name="help-circle-outline" slot="start"></ion-icon>
           Help
-        </ion-button>
+        </ion-button> -->
+        <!-- <ion-button fill="outline" class="action-button" [routerLink]="['/notification-debug']">
+          <ion-icon name="bug-outline" slot="start"></ion-icon>
+          Debug FCM
+        </ion-button> -->
       </div>
     </div>
   </div>
@@ -165,6 +234,8 @@
   <!-- Bottom Padding -->
   <div class="bottom-padding"></div>
 </ion-content>
+
+
   
     
     

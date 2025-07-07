@@ -1,0 +1,156 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Edit Profile</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="edit-profile-content">
+  <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+    
+    <!-- Profile Picture Section -->
+    <div class="profile-picture-section">
+      <ion-avatar class="edit-avatar">
+        <img [src]="selectedImage || profileData?.profilePicture || '/assets/profile.png'" alt="Profile Picture">
+      </ion-avatar>
+      <ion-button fill="clear" color="primary" (click)="changeProfilePicture()" [disabled]="isLoading">
+        <ion-icon name="camera-outline" slot="start"></ion-icon>
+        Change Photo
+      </ion-button>
+      <div class="image-info" *ngIf="imageFile">
+        <ion-chip color="success">
+          <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+          <ion-label>New image selected</ion-label>
+        </ion-chip>
+      </div>
+    </div>
+
+    <!-- Personal Information -->
+    <div class="form-section">
+      <h3>Personal Information</h3>
+      
+      <ion-item>
+        <ion-label position="stacked">First Name *</ion-label>
+        <ion-input
+          formControlName="name"
+          placeholder="Enter your first name"
+          [class.invalid]="profileForm.get('name')?.invalid && profileForm.get('name')?.touched">
+        </ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched">
+        First name is required
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Last Name *</ion-label>
+        <ion-input
+          formControlName="surname"
+          placeholder="Enter your last name"
+          [class.invalid]="profileForm.get('surname')?.invalid && profileForm.get('surname')?.touched">
+        </ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="profileForm.get('surname')?.invalid && profileForm.get('surname')?.touched">
+        Last name is required
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Email *</ion-label>
+        <ion-input
+          formControlName="email"
+          type="email"
+          placeholder="Enter your email"
+          [class.invalid]="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+        </ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+        Valid email is required
+      </div>
+
+      <ion-item>
+        <ion-label position="stacked">Phone Number</ion-label>
+        <ion-input
+          formControlName="phone"
+          type="tel"
+          placeholder="Enter your phone number">
+        </ion-input>
+      </ion-item>
+
+      <ion-item button (click)="getLocation()">
+        <ion-label position="stacked">Location</ion-label>
+        <ion-input
+          formControlName="location"
+          placeholder="Click to get current location or enter manually"
+          readonly>
+        </ion-input>
+        <ion-button fill="clear" slot="end" (click)="getLocation()">
+          <ion-icon name="location-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </div>
+
+    <!-- Education Information -->
+    <div class="form-section">
+      <h3>Education</h3>
+      
+      <ion-item>
+        <ion-label position="stacked">Education Level</ion-label>
+        <ion-select formControlName="educationLevel" placeholder="Select your education level">
+          <ion-select-option value="Grade 8">Grade 8</ion-select-option>
+          <ion-select-option value="Grade 9">Grade 9</ion-select-option>
+          <ion-select-option value="Grade 10">Grade 10</ion-select-option>
+          <ion-select-option value="Grade 11">Grade 11</ion-select-option>
+          <ion-select-option value="Grade 12">Grade 12</ion-select-option>
+          <ion-select-option value="Certificate">Certificate</ion-select-option>
+          <ion-select-option value="Diploma">Diploma</ion-select-option>
+          <ion-select-option value="Bachelor's Degree">Bachelor's Degree</ion-select-option>
+          <ion-select-option value="Honours Degree">Honours Degree</ion-select-option>
+          <ion-select-option value="Master's Degree">Master's Degree</ion-select-option>
+          <ion-select-option value="Doctoral Degree">Doctoral Degree</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Field of Study</ion-label>
+        <ion-select formControlName="fieldOfStudy" placeholder="Select your field of study">
+          <ion-select-option value="Science">Science</ion-select-option>
+          <ion-select-option value="Mathematics">Mathematics</ion-select-option>
+          <ion-select-option value="Commerce">Commerce</ion-select-option>
+          <ion-select-option value="Arts">Arts</ion-select-option>
+          <ion-select-option value="Engineering">Engineering</ion-select-option>
+          <ion-select-option value="Medicine">Medicine</ion-select-option>
+          <ion-select-option value="Law">Law</ion-select-option>
+          <ion-select-option value="Business">Business</ion-select-option>
+          <ion-select-option value="Information Technology">Information Technology</ion-select-option>
+          <ion-select-option value="Education">Education</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        [disabled]="!profileForm.valid || isLoading"
+        class="save-btn">
+        <ion-icon name="save-outline" slot="start"></ion-icon>
+        <span *ngIf="!isLoading">Save Changes</span>
+        <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+      </ion-button>
+      
+      <ion-button 
+        expand="block" 
+        fill="clear" 
+        color="medium" 
+        (click)="dismiss()"
+        [disabled]="isLoading">
+        Cancel
+      </ion-button>
+    </div>
+  </form>
+</ion-content> 

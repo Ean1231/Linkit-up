@@ -81,6 +81,15 @@
           font-size: 48px;
           color: var(--ion-color-primary);
         }
+        
+        .profile-image {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2px solid rgba(255, 255, 255, 0.3);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
       }
 
       .welcome-text {
@@ -215,12 +224,60 @@
       position: absolute;
       top: 12px;
       right: 12px;
+      z-index: 10;
 
-      .date-chip {
+      .date-chip, .enhanced-date-chip {
         --background: rgba(255, 255, 255, 0.95);
         --color: var(--ion-color-primary);
         font-size: 0.8rem;
         font-weight: 600;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .enhanced-date-chip {
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 4px 8px;
+        
+        ion-icon {
+          margin-right: 4px;
+        }
+        
+        // Color-specific styling
+        &.chip-success {
+          --background: rgba(40, 167, 69, 0.9);
+          --color: white;
+        }
+        
+        &.chip-warning {
+          --background: rgba(255, 193, 7, 0.9);
+          --color: #333;
+          animation: urgentPulse 2s infinite;
+        }
+        
+        &.chip-tertiary {
+          --background: rgba(124, 58, 237, 0.9);
+          --color: white;
+        }
+      }
+
+      .closed-chip {
+        --background: rgba(220, 53, 69, 0.95);
+        --color: white;
+        font-size: 0.9rem;
+        font-weight: 800;
+        padding: 6px 10px;
+        box-shadow: 0 3px 12px rgba(220, 53, 69, 0.4);
+        animation: closedBlink 3s infinite;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        
+        ion-icon {
+          margin-right: 4px;
+          font-size: 16px;
+        }
       }
     }
   }
@@ -274,6 +331,7 @@
   flex-direction: column;
 
   .bursary-image {
+    position: relative;
     height: 100px;
     overflow: hidden;
 
@@ -282,6 +340,29 @@
       height: 100%;
       object-fit: cover;
       transition: transform 0.3s ease;
+    }
+
+    .bursary-badge {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      z-index: 10;
+
+      .closed-chip.small {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+        --background: rgba(220, 53, 69, 0.95);
+        --color: white;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4);
+        
+        ion-icon {
+          font-size: 12px;
+          margin-right: 2px;
+        }
+      }
     }
   }
 
@@ -308,6 +389,41 @@
         font-size: 0.8rem;
         font-weight: 600;
       }
+
+      .enhanced-deadline-chip {
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 4px 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        
+        ion-icon {
+          margin-right: 4px;
+          font-size: 14px;
+        }
+
+        // Color variants for urgency levels
+        &[color="warning"] {
+          --background: rgba(255, 193, 7, 0.9);
+          --color: #333;
+          animation: urgentPulse 2s infinite;
+        }
+
+        &[color="danger"] {
+          --background: rgba(220, 53, 69, 0.9);
+          --color: white;
+          animation: closedBlink 3s infinite;
+        }
+
+        &[color="success"] {
+          --background: rgba(40, 167, 69, 0.9);
+          --color: white;
+        }
+
+        &[color="tertiary"] {
+          --background: rgba(124, 58, 237, 0.9);
+          --color: white;
+        }
+      }
     }
 
     .apply-btn {
@@ -315,6 +431,18 @@
       --border-radius: 12px;
       font-weight: 600;
       font-size: 0.9rem;
+      transition: all 0.3s ease;
+
+      &[disabled] {
+        --opacity: 0.6;
+        --color: var(--ion-color-medium);
+        --background: var(--ion-color-step-100);
+        cursor: not-allowed;
+        
+        &:hover {
+          transform: none;
+        }
+      }
     }
   }
 
@@ -714,6 +842,107 @@ ion-header {
           border-bottom-right-radius: 13px;
           border-top-right-radius: 13px;
         }
+
+// Date Filtering Styles
+.clickable-icon {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  
+  &.active {
+    color: var(--ion-color-tertiary) !important;
+    animation: pulse 2s infinite;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.filter-chip {
+  margin-left: 8px;
+  --background: var(--ion-color-primary);
+  --color: white;
+  font-size: 0.8rem;
+  animation: slideIn 0.3s ease-out;
+  
+  ion-icon {
+    font-size: 14px;
+  }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes urgentPulse {
+  0% { 
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+  }
+  50% { 
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(255, 193, 7, 0.6);
+  }
+  100% { 
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+  }
+}
+
+@keyframes closedBlink {
+  0%, 70% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  85% { 
+    opacity: 0.7;
+    transform: scale(0.98);
+  }
+  100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Action Sheet Styles
+.date-filter-action-sheet {
+  .action-sheet-button {
+    ion-icon {
+      color: var(--ion-color-primary);
+    }
+  }
+  
+  .action-sheet-destructive {
+    ion-icon {
+      color: var(--ion-color-danger);
+    }
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .modern-content {
+    --background: #1a1a1a;
+  }
+  
+  .modern-card {
+    background: #2d2d2d;
+  }
+}
 
         
           

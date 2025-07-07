@@ -25,9 +25,15 @@
       <div class="image-overlay">
         <div class="overlay-gradient"></div>
         <div class="hero-badge">
-          <ion-badge color="success" class="available-badge">
-            <ion-icon name="checkmark-circle" slot="start"></ion-icon>
-            Available
+          <ion-badge 
+            [color]="isOpportunityClosed(showdata?.closingDate) ? 'danger' : 'success'" 
+            class="status-badge"
+            [class.closed-badge]="isOpportunityClosed(showdata?.closingDate)">
+            <ion-icon 
+              [name]="isOpportunityClosed(showdata?.closingDate) ? 'close-circle' : 'checkmark-circle'" 
+              slot="start">
+            </ion-icon>
+            {{ isOpportunityClosed(showdata?.closingDate) ? 'CLOSED' : 'Available' }}
           </ion-badge>
         </div>
       </div>
@@ -81,10 +87,21 @@
       <div class="info-cards-grid">
         <div class="info-card" *ngIf="showdata?.closingDate">
           <div class="info-card-content">
-            <ion-icon name="calendar" class="info-icon"></ion-icon>
+            <ion-icon 
+              [name]="isOpportunityClosed(showdata.closingDate) ? 'close-circle' : 'calendar'" 
+              class="info-icon"
+              [color]="isOpportunityClosed(showdata.closingDate) ? 'danger' : getDateChipColor(showdata.closingDate)">
+            </ion-icon>
             <div class="info-text">
-              <span class="info-label">Closing Date</span>
-              <span class="info-value">{{ showdata.closingDate }}</span>
+              <span class="info-label">
+                {{ isOpportunityClosed(showdata.closingDate) ? 'Status' : 'Closing Date' }}
+              </span>
+              <span 
+                class="info-value"
+                [class.closed-text]="isOpportunityClosed(showdata.closingDate)"
+                [class.urgent-text]="!isOpportunityClosed(showdata.closingDate) && getDateChipColor(showdata.closingDate) === 'warning'">
+                {{ isOpportunityClosed(showdata.closingDate) ? 'CLOSED' : formatClosingDate(showdata.closingDate) }}
+              </span>
             </div>
           </div>
         </div>
@@ -154,7 +171,7 @@
   <!-- Floating Apply Button -->
   <div class="floating-apply-section">
     <div class="apply-container">
-      <a [href]="showdata?.link" target="_blank" class="apply-link">
+      <a [href]="showdata?.link" target="_blank" class="apply-link" *ngIf="!isOpportunityClosed(showdata?.closingDate)">
         <ion-button 
           expand="block" 
           class="apply-button"
@@ -164,6 +181,15 @@
           <ion-icon name="arrow-forward" slot="end"></ion-icon>
         </ion-button>
       </a>
+      <ion-button 
+        *ngIf="isOpportunityClosed(showdata?.closingDate)"
+        expand="block" 
+        class="apply-button closed-button"
+        disabled="true">
+        <ion-icon name="close-circle" slot="start"></ion-icon>
+        Application Closed
+        <ion-icon name="ban" slot="end"></ion-icon>
+      </ion-button>
       <p class="apply-note">You'll be redirected to the official application page</p>
     </div>
   </div>

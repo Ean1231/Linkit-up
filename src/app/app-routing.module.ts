@@ -60,6 +60,10 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
+    path: 'notification-debug',
+    loadChildren: () => import('./notification-debug/notification-debug.module').then( m => m.NotificationDebugPageModule)
+  },
+  {
     path: '',
     loadChildren: () => import('./onboarding/onboarding.module').then( m => m.OnboardingPageModule)
   },
@@ -90,6 +94,14 @@ const routes: Routes = [
   {
     path: 'favorites',
     loadChildren: () => import('./favorites/favorites.module').then( m => m.FavoritesPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'past-papers',
+    loadChildren: () => import('./past-papers/past-papers.module').then( m => m.PastPapersPageModule)
   }
 ];
 @NgModule({

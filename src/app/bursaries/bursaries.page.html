@@ -17,9 +17,16 @@
       <img [src]="showdata.img" [alt]="showdata.title" class="bursary-hero-image">
       <div class="hero-overlay">
         <div class="hero-badge">
-          <ion-chip color="warning" class="deadline-chip">
-            <ion-icon name="time-outline"></ion-icon>
-            <ion-label>Closes: {{ showdata.closingDate }}</ion-label>
+          <ion-chip 
+            [color]="isOpportunityClosed(showdata?.closingDate) ? 'danger' : getDateChipColor(showdata?.closingDate)" 
+            class="deadline-chip enhanced-deadline-chip"
+            [class.closed-chip]="isOpportunityClosed(showdata?.closingDate)">
+            <ion-icon 
+              [name]="isOpportunityClosed(showdata?.closingDate) ? 'close-circle' : 'time-outline'">
+            </ion-icon>
+            <ion-label>
+              {{ isOpportunityClosed(showdata?.closingDate) ? 'CLOSED' : 'Closes: ' + formatClosingDate(showdata?.closingDate) }}
+            </ion-label>
           </ion-chip>
         </div>
       </div>
@@ -31,8 +38,15 @@
         <h1 class="bursary-title">{{ showdata.title }}</h1>
         <div class="bursary-meta">
           <div class="meta-item">
-            <ion-icon name="calendar-outline" color="primary"></ion-icon>
-            <span>Deadline: {{ showdata.closingDate }}</span>
+            <ion-icon 
+              [name]="isOpportunityClosed(showdata?.closingDate) ? 'close-circle' : 'calendar-outline'" 
+              [color]="isOpportunityClosed(showdata?.closingDate) ? 'danger' : getDateChipColor(showdata?.closingDate)">
+            </ion-icon>
+            <span 
+              [class.closed-text]="isOpportunityClosed(showdata?.closingDate)"
+              [class.urgent-text]="!isOpportunityClosed(showdata?.closingDate) && getDateChipColor(showdata?.closingDate) === 'warning'">
+              {{ isOpportunityClosed(showdata?.closingDate) ? 'CLOSED' : 'Deadline: ' + formatClosingDate(showdata?.closingDate) }}
+            </span>
           </div>
           <div class="meta-item">
             <ion-icon name="business-outline" color="primary"></ion-icon>
@@ -131,7 +145,7 @@
 
       <!-- Action Button -->
       <div class="action-section">
-        <a [href]="showdata.link" target="_blank" class="apply-link">
+        <a [href]="showdata.link" target="_blank" class="apply-link" *ngIf="!isOpportunityClosed(showdata?.closingDate)">
           <ion-button 
             expand="block" 
             class="apply-button"
@@ -141,10 +155,21 @@
           </ion-button>
         </a>
         
+        <ion-button 
+          *ngIf="isOpportunityClosed(showdata?.closingDate)"
+          expand="block" 
+          class="apply-button closed-button"
+          size="large"
+          disabled="true">
+          <ion-icon name="close-circle" slot="start"></ion-icon>
+          Application Closed
+          <ion-icon name="ban" slot="end"></ion-icon>
+        </ion-button>
+        
         <div class="action-info">
           <p>
             <ion-icon name="information-circle-outline" color="medium"></ion-icon>
-            You will be redirected to the official application portal
+            {{ isOpportunityClosed(showdata?.closingDate) ? 'This bursary application period has ended' : 'You will be redirected to the official application portal' }}
           </p>
         </div>
       </div>

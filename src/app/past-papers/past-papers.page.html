@@ -1,0 +1,260 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab3"></ion-back-button>
+    </ion-buttons>
+    <!-- <ion-title slot="start" class="header-title">
+      <ion-text color="light">
+        <h1>Past Papers</h1>
+      </ion-text>
+    </ion-title> -->
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="refreshFiles()">
+        <ion-icon name="refresh-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="past-papers-content">
+  <!-- Pull to refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="refreshFiles($event)">
+    <ion-refresher-content 
+      pulling-icon="chevron-down-circle-outline"
+      pulling-text="Pull to refresh"
+      refreshing-spinner="crescent"
+      refreshing-text="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <ion-icon name="document-text-outline" class="hero-icon"></ion-icon>
+      <h2 class="hero-title">Past Examination Papers</h2>
+      <p class="hero-subtitle">Download and study previous exam papers to prepare for your exams</p>
+    </div>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-section">
+    <ion-searchbar 
+      placeholder="Search past papers..." 
+      [(ngModel)]="searchTerm" 
+      (ionInput)="filterFiles()"
+      showClearButton="focus" 
+      class="modern-searchbar">
+    </ion-searchbar>
+  </div>
+
+  <!-- Filter Buttons -->
+  <div class="filter-section">
+    <!-- Subject Categories -->
+    <div class="filter-subsection">
+      <h4 class="filter-title">Subjects</h4>
+      <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterFiles()" class="category-segment" scrollable="true">
+        <ion-segment-button value="all">
+          <ion-label>All</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="mathematics">
+          <ion-label>Mathematics</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="science">
+          <ion-label>Science</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="english">
+          <ion-label>English</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="physics">
+          <ion-label>Physics</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="chemistry">
+          <ion-label>Chemistry</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="biology">
+          <ion-label>Biology</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="history">
+          <ion-label>History</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="geography">
+          <ion-label>Geography</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="life sciences">
+          <ion-label>Life Sciences</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="economics">
+          <ion-label>Economics</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="business studies">
+          <ion-label>Business Studies</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="accounting">
+          <ion-label>Accounting</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="tourism">
+          <ion-label>Tourism</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <!-- Grade Levels -->
+    <div class="filter-subsection">
+      <h4 class="filter-title">Grades</h4>
+      <ion-segment [(ngModel)]="selectedGrade" (ionChange)="filterFiles()" class="grade-segment" scrollable="true">
+        <ion-segment-button value="all">
+          <ion-label>All</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="8">
+          <ion-label>Grade 8</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="9">
+          <ion-label>Grade 9</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="10">
+          <ion-label>Grade 10</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="11">
+          <ion-label>Grade 11</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="12">
+          <ion-label>Grade 12</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-container" *ngIf="loading">
+    <div class="loading-content">
+      <div class="loading-spinner">
+        <ion-spinner name="crescent" color="primary"></ion-spinner>
+      </div>
+      <div class="loading-text">
+        <h3 class="loading-title">Loading Past Papers</h3>
+        <p class="loading-subtitle">Fetching examination papers from database...</p>
+        <div class="loading-dots">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+      
+      <!-- Progress indicator -->
+      <div class="loading-progress">
+        <ion-progress-bar type="indeterminate" color="primary"></ion-progress-bar>
+      </div>
+      
+      <!-- Emergency stop button -->
+      <ion-button 
+        fill="clear" 
+        color="medium" 
+        size="small" 
+        (click)="stopLoading()"
+        class="stop-loading-btn">
+        <ion-icon name="stop-circle-outline" slot="start"></ion-icon>
+        Cancel Loading
+      </ion-button>
+    </div>
+  </div>
+
+
+  <!-- Files List -->
+  <div class="files-section" *ngIf="!loading && filteredFiles.length > 0">
+    <div class="section-header">
+      <h3>{{ filteredFiles.length }} Paper{{ filteredFiles.length === 1 ? '' : 's' }} Found</h3>
+    </div>
+
+    <div class="files-grid">
+      <div 
+        class="file-card" 
+        *ngFor="let file of filteredFiles; let i = index"
+        [style.animation-delay]="i * 100 + 'ms'">
+        
+        <!-- File Header -->
+        <div class="file-header">
+          <div class="file-icon">
+            <ion-icon [name]="getFileIcon(file.name)" [color]="getFileColor(file.name)"></ion-icon>
+          </div>
+          <div class="file-badge">
+            <ion-chip [color]="getCategoryColor(file.category)" class="category-chip">
+              <ion-label>{{ file.subject || file.category || 'General' }}</ion-label>
+            </ion-chip>
+          </div>
+        </div>
+
+        <!-- File Content -->
+        <div class="file-content">
+          <h4 class="file-title">{{ file.displayName || file.name }}</h4>
+          <p class="file-description">{{ file.description || 'Examination paper' }}</p>
+          
+                     <!-- File Details -->
+           <div class="file-details">
+             <div class="detail-item">
+               <ion-icon name="school-outline" color="medium"></ion-icon>
+               <span>{{ getGradeDisplayName(file.grade) }}</span>
+             </div>
+             <div class="detail-item" *ngIf="file.examPeriod">
+               <ion-icon name="timer-outline" color="medium"></ion-icon>
+               <span>{{ file.examPeriod }}</span>
+             </div>
+             <div class="detail-item">
+               <ion-icon name="calendar-outline" color="medium"></ion-icon>
+               <span>{{ file.year || 'N/A' }}</span>
+             </div>
+             <div class="detail-item" *ngIf="file.size">
+               <ion-icon name="document-outline" color="medium"></ion-icon>
+               <span>{{ getFileSize(file.size) }}</span>
+             </div>
+           </div>
+
+          <!-- File Actions -->
+          <div class="file-actions">
+            <ion-button 
+              fill="solid" 
+              size="small" 
+              color="primary"
+              (click)="downloadFile(file)"
+              [disabled]="downloadingFiles.has(file.name)"
+              class="action-button">
+              <ion-icon *ngIf="!downloadingFiles.has(file.name)" name="download-outline" slot="start"></ion-icon>
+              <ion-spinner *ngIf="downloadingFiles.has(file.name)" name="crescent" slot="start"></ion-spinner>
+              <span *ngIf="!downloadingFiles.has(file.name)">Download</span>
+              <span *ngIf="downloadingFiles.has(file.name)">Downloading...</span>
+            </ion-button>
+            
+            <ion-button 
+              fill="clear" 
+              size="small" 
+              color="medium"
+              (click)="shareFile(file)"
+              class="action-button">
+              <ion-icon name="share-outline"></ion-icon>
+            </ion-button>
+            
+            <ion-button 
+              fill="clear" 
+              size="small" 
+              color="medium"
+              (click)="viewFileDetails(file)"
+              class="action-button">
+              <ion-icon name="information-circle-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upload Button (Admin only) -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="canUpload">
+    <ion-fab-button color="primary" (click)="uploadFile()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+ 
+
+  <!-- Bottom Padding -->
+  <div class="bottom-padding"></div>
+</ion-content> 

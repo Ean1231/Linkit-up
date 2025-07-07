@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title class="header-title">
       <ion-icon name="home-outline" class="title-icon"></ion-icon>
@@ -10,7 +10,7 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content class="modern-content">
   <!-- Hero Banner -->
@@ -19,8 +19,8 @@
       <img src="../assets/midrand.jpg" alt="Accommodation">
       <div class="hero-overlay">
         <div class="hero-content">
-          <h2>Find Your Perfect Home</h2>
-          <p>Discover comfortable and affordable accommodation options</p>
+          <h2 style="color: white;">Find Your Perfect Home</h2>
+          <p style="color: white;">Discover comfortable and affordable accommodation options</p>
         </div>
       </div>
     </div>
@@ -50,9 +50,11 @@
       <div class="card-image">
         <img [src]="data.image" [alt]="data.AccomodationName">
         <div class="availability-badge">
-          <ion-chip color="success" class="available-chip">
-            <ion-icon name="checkmark-circle-outline"></ion-icon>
-            <ion-label>Available</ion-label>
+          <ion-chip 
+            [color]="isAccommodationClosed(data) ? 'danger' : 'success'" 
+            [class]="'available-chip' + (isAccommodationClosed(data) ? ' closed-chip' : ' available-chip-active')">
+            <ion-icon [name]="isAccommodationClosed(data) ? 'close-circle-outline' : 'checkmark-circle-outline'"></ion-icon>
+            <ion-label>{{ isAccommodationClosed(data) ? 'CLOSED' : 'Available' }}</ion-label>
           </ion-chip>
         </div>
       </div>
@@ -77,6 +79,20 @@
           </div>
         </div>
 
+        <!-- Availability Status -->
+        <div class="availability-status" *ngIf="data.closingDate || data.availableUntil">
+          <div class="availability-item">
+            <ion-icon name="time-outline" color="medium"></ion-icon>
+            <span class="availability-label">Availability:</span>
+            <ion-chip 
+              [color]="getDateChipColor(data)" 
+              [class]="'availability-date-chip' + (isAccommodationClosed(data) ? ' closed-chip' : '') + (getDateChipColor(data) === 'warning' ? ' urgent-chip' : '')">
+              <ion-icon name="calendar-outline" slot="start"></ion-icon>
+              <ion-label>{{ formatClosingDate(data.closingDate || data.availableUntil) }}</ion-label>
+            </ion-chip>
+          </div>
+        </div>
+
         <div class="card-features">
           <div class="feature-item">
             <ion-icon name="location-outline" color="primary"></ion-icon>
@@ -94,11 +110,12 @@
 
         <ion-button 
           expand="block" 
-          fill="outline" 
-          class="view-details-btn"
+          [disabled]="isAccommodationClosed(data)"
+          [fill]="isAccommodationClosed(data) ? 'outline' : 'outline'"
+          [class]="'view-details-btn' + (isAccommodationClosed(data) ? ' disabled-button' : '')"
           (click)="details(data); $event.stopPropagation()">
           <ion-icon name="eye-outline" slot="start"></ion-icon>
-          View Details
+          {{ isAccommodationClosed(data) ? 'View Details (Closed)' : 'View Details' }}
         </ion-button>
       </div>
     </div>
