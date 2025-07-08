@@ -1,10 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title slot="start" class="header-title">
+    <!-- <ion-title slot="start" class="header-title">
       <ion-text color="light">
         <h1>Saved Items</h1>
       </ion-text>
-    </ion-title>
+    </ion-title> -->
     <ion-buttons slot="end">
       <ion-button fill="clear" (click)="refreshFavorites(null)">
         <ion-icon name="refresh-outline" color="light"></ion-icon>
@@ -29,8 +29,28 @@
     <div class="hero-content">
       <ion-icon name="bookmarks-outline" class="hero-icon"></ion-icon>
       <h2 class="hero-title">Your Saved Items</h2>
-      <p class="hero-subtitle">Keep track of opportunities that interest you</p>
+      <p class="hero-subtitle">Keep track of opportunities and bursaries that interest you</p>
     </div>
+  </div>
+
+  <!-- Tabs Section -->
+  <div class="tabs-section" *ngIf="!loading && !isEmpty">
+    <ion-segment [(ngModel)]="selectedTab" (ionChange)="onTabChange($event)" class="favorites-tabs">
+      <ion-segment-button value="opportunities">
+        <ion-icon name="briefcase-outline"></ion-icon>
+        <ion-label>Opportunities</ion-label>
+        <ion-chip *ngIf="opportunitiesCount > 0" color="primary" class="count-chip">
+          {{ opportunitiesCount }}
+        </ion-chip>
+      </ion-segment-button>
+      <ion-segment-button value="bursaries">
+        <ion-icon name="school-outline"></ion-icon>
+        <ion-label>Bursaries</ion-label>
+        <ion-chip *ngIf="bursariesCount > 0" color="success" class="count-chip">
+          {{ bursariesCount }}
+        </ion-chip>
+      </ion-segment-button>
+    </ion-segment>
   </div>
 
   <!-- Loading State -->
@@ -51,21 +71,38 @@
         [routerLink]="['/tabs/tabs/tab3']"
         class="explore-button">
         <ion-icon name="compass-outline" slot="start"></ion-icon>
-        Explore Opportunities
+        Explore Now
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Empty Tab State -->
+  <div class="empty-tab-state" *ngIf="!loading && !isEmpty && filteredFavorites.length === 0">
+    <div class="empty-content">
+      <ion-icon [name]="selectedTab === 'opportunities' ? 'briefcase-outline' : 'school-outline'" class="empty-icon"></ion-icon>
+      <h3 class="empty-title">No {{ selectedTab === 'opportunities' ? 'Opportunities' : 'Bursaries' }} Saved</h3>
+      <p class="empty-subtitle">You haven't saved any {{ selectedTab === 'opportunities' ? 'opportunities' : 'bursaries' }} yet.</p>
+      <ion-button 
+        fill="solid" 
+        [color]="selectedTab === 'opportunities' ? 'primary' : 'success'"
+        [routerLink]="['/tabs/tabs/tab3']"
+        class="explore-button">
+        <ion-icon name="compass-outline" slot="start"></ion-icon>
+        Find {{ selectedTab === 'opportunities' ? 'Opportunities' : 'Bursaries' }}
       </ion-button>
     </div>
   </div>
 
   <!-- Favorites List -->
-  <div class="favorites-section" *ngIf="!loading && !isEmpty">
+  <div class="favorites-section" *ngIf="!loading && !isEmpty && filteredFavorites.length > 0">
     <div class="section-header">
-      <h3>{{ favorites.length }} Saved {{ favorites.length === 1 ? 'Item' : 'Items' }}</h3>
+      <h3>{{ filteredFavorites.length }} Saved {{ selectedTab === 'opportunities' ? 'Opportunities' : 'Bursaries' }}</h3>
     </div>
 
     <div class="favorites-grid">
       <div 
         class="favorite-card" 
-        *ngFor="let favorite of favorites; let i = index"
+        *ngFor="let favorite of filteredFavorites; let i = index"
         [style.animation-delay]="i * 100 + 'ms'">
         
         <!-- Card Header -->

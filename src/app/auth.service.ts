@@ -51,7 +51,7 @@ export class AuthService {
       surname: user.surname,
       email: user.email,
       password: user.password,
-
+      joinedDate: user.joinedDate || new Date().toISOString()
     };
     return userRef.set(userData, {
       merge: true,
@@ -71,7 +71,6 @@ export class AuthService {
   }
 
   Register(user: any) :Promise<any>{
-
     return this.auth.createUserWithEmailAndPassword(user.email, user.password).then((result)=>{
         let emailLower = user.email.toLowerCase();
         this.afStore.doc('/users/' + emailLower)
@@ -80,6 +79,7 @@ export class AuthService {
               surname: user.surname,
               email: user.email,
               password: user.password,
+              joinedDate: new Date().toISOString()
         });
         // result.user.sendEmailVerification();
         // this.SendVerificationMail();

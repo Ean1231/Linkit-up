@@ -27,6 +27,21 @@ export class Tab1Page {
   varsities = [] ;
   modalCtrl: any;
 
+  // Slide options for image carousel
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    spaceBetween: 0,
+    centeredSlides: true,
+    slidesPerView: 1,
+    autoplay: false,
+    loop: false,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    }
+  };
+
   constructor(public router: Router, public service :ServiceService, public load: LoadingController, public alertControllerr: AlertController)
   {
     this.loading = true;

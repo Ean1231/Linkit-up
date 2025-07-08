@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router' ;
-import { ServiceService } from '../service.service'
+import { ServiceService } from '../service.service';
+import { Location } from '@angular/common';
+import { ToastController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-bursaries',
@@ -10,12 +12,110 @@ import { ServiceService } from '../service.service'
 export class BursariesPage implements OnInit {
   bursaries;
   showdata: any;
-  constructor(public router: Router, public service: ServiceService) { }
+  isFavorite: boolean = false;
+  
+  constructor(
+    public router: Router, 
+    public service: ServiceService, 
+    private location: Location,
+    private toastController: ToastController,
+    private loadingController: LoadingController
+  ) { }
 
   ngOnInit() {
     this.showdata = this.router.getCurrentNavigation().extras.state;
     console.log(this.showdata)   
     this.service.getBursaries();
+    this.checkIfFavorite();
+  }
+
+  // Check if current bursary is already in favorites
+  async checkIfFavorite() {
+    try {
+      const favorites: any = await this.service.getFavorites();
+      if (Array.isArray(favorites)) {
+        this.isFavorite = favorites.some(fav => fav.id === this.showdata?.id);
+      } else {
+        this.isFavorite = false;
+      }
+    } catch (error) {
+      console.log('Could not check favorites status:', error);
+      this.isFavorite = false;
+    }
+  }
+
+  // Toggle favorite status
+  async toggleFavorite() {
+    if (!this.showdata) {
+      this.showToast('No bursary data available', 'warning');
+      return;
+    }
+
+    const loading = await this.loadingController.create({
+      message: this.isFavorite ? 'Removing from favorites...' : 'Adding to favorites...',
+      duration: 3000
+    });
+    await loading.present();
+
+    try {
+      if (this.isFavorite) {
+        // Remove from favorites
+        await this.service.removeFromFavorites(this.showdata.id);
+        this.isFavorite = false;
+        this.showToast('Removed from favorites', 'success');
+      } else {
+        // Add to favorites using the bursary-specific method
+        await this.service.addBursaryToFavorites(this.showdata);
+        this.isFavorite = true;
+        this.showToast('Added to favorites', 'success');
+      }
+    } catch (error) {
+      console.error('Error toggling favorite:', error);
+      this.showToast('Error updating favorites', 'danger');
+    } finally {
+      await loading.dismiss();
+    }
+  }
+
+  // Share bursary using Web Share API or fallback to clipboard
+  async shareBursary(bursary: any) {
+    const shareData = {
+      title: bursary.title,
+      text: `Check out this bursary from ${bursary.company}!`,
+      url: window.location.href
+    };
+
+    try {
+      if ('share' in navigator) {
+        await navigator.share(shareData);
+      } else {
+        console.log('Web Share API not supported');
+      }
+    } catch (err) {
+      console.error('Error sharing:', err);
+    }
+  }
+
+  // Show toast message
+  async showToast(message: string, color: string = 'success') {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: 'bottom',
+      color: color,
+      buttons: [
+        {
+          text: 'Dismiss',
+          role: 'cancel'
+        }
+      ]
+    });
+    await toast.present();
+  }
+
+  // Navigate back to previous page
+  goBack() {
+    this.location.back();
   }
 
   // Date checking methods
@@ -121,6 +221,16 @@ export class BursariesPage implements OnInit {
     }
 
     return new Date(NaN);
+  }
+
+  // Check if any coverage benefits are available
+  hasAnyCoverage(): boolean {
+    if (!this.showdata?.whatsCovered) return false;
+    
+    return this.showdata.whatsCovered.tuitionFees ||
+           this.showdata.whatsCovered.accommodation ||
+           this.showdata.whatsCovered.studyMaterial ||
+           this.showdata.whatsCovered.livingAllowance;
   }
 
 }

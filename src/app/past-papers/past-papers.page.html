@@ -47,116 +47,43 @@
     </ion-searchbar>
   </div>
 
-  <!-- Filter Buttons -->
-  <div class="filter-section">
-    <!-- Subject Categories -->
-    <div class="filter-subsection">
-      <h4 class="filter-title">Subjects</h4>
-      <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterFiles()" class="category-segment" scrollable="true">
-        <ion-segment-button value="all">
-          <ion-label>All</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="mathematics">
-          <ion-label>Mathematics</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="science">
-          <ion-label>Science</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="english">
-          <ion-label>English</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="physics">
-          <ion-label>Physics</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="chemistry">
-          <ion-label>Chemistry</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="biology">
-          <ion-label>Biology</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="history">
-          <ion-label>History</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="geography">
-          <ion-label>Geography</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="life sciences">
-          <ion-label>Life Sciences</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="economics">
-          <ion-label>Economics</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="business studies">
-          <ion-label>Business Studies</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="accounting">
-          <ion-label>Accounting</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="tourism">
-          <ion-label>Tourism</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-    </div>
+  <!-- Filter FAB Button -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="filter-fab">
+    <ion-fab-button (click)="openFilterModal()" [class.has-active-filters]="hasActiveFilters()">
+      <ion-icon name="options-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
-    <!-- Grade Levels -->
-    <div class="filter-subsection">
-      <h4 class="filter-title">Grades</h4>
-      <ion-segment [(ngModel)]="selectedGrade" (ionChange)="filterFiles()" class="grade-segment" scrollable="true">
-        <ion-segment-button value="all">
-          <ion-label>All</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="8">
-          <ion-label>Grade 8</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="9">
-          <ion-label>Grade 9</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="10">
-          <ion-label>Grade 10</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="11">
-          <ion-label>Grade 11</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="12">
-          <ion-label>Grade 12</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-    </div>
+  <!-- Active Filters Display -->
+  <div class="active-filters" *ngIf="hasActiveFilters()">
+    <ion-chip *ngIf="selectedCategory !== 'all'" (click)="openFilterModal()">
+      <ion-label>{{ selectedCategory | titlecase }}</ion-label>
+      <ion-icon name="close-circle" (click)="$event.stopPropagation(); selectedCategory = 'all'; filterFiles()"></ion-icon>
+    </ion-chip>
+    <ion-chip *ngIf="selectedGrade !== 'all'" (click)="openFilterModal()">
+      <ion-label>Grade {{ selectedGrade }}</ion-label>
+      <ion-icon name="close-circle" (click)="$event.stopPropagation(); selectedGrade = 'all'; filterFiles()"></ion-icon>
+    </ion-chip>
+    <ion-chip *ngIf="selectedExamPeriod !== 'all'" (click)="openFilterModal()">
+      <ion-label>{{ selectedExamPeriod === 'jan-june' ? 'Jan/June' : 'June/Nov' }}</ion-label>
+      <ion-icon name="close-circle" (click)="$event.stopPropagation(); selectedExamPeriod = 'all'; filterFiles()"></ion-icon>
+    </ion-chip>
+    <ion-chip *ngIf="selectedYear !== 'all'" (click)="openFilterModal()">
+      <ion-label>{{ selectedYear }}</ion-label>
+      <ion-icon name="close-circle" (click)="$event.stopPropagation(); selectedYear = 'all'; filterFiles()"></ion-icon>
+    </ion-chip>
   </div>
 
   <!-- Loading State -->
   <div class="loading-container" *ngIf="loading">
     <div class="loading-content">
-      <div class="loading-spinner">
-        <ion-spinner name="crescent" color="primary"></ion-spinner>
-      </div>
-      <div class="loading-text">
-        <h3 class="loading-title">Loading Past Papers</h3>
-        <p class="loading-subtitle">Fetching examination papers from database...</p>
-        <div class="loading-dots">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
-        </div>
-      </div>
-      
-      <!-- Progress indicator -->
-      <div class="loading-progress">
-        <ion-progress-bar type="indeterminate" color="primary"></ion-progress-bar>
-      </div>
-      
-      <!-- Emergency stop button -->
-      <ion-button 
-        fill="clear" 
-        color="medium" 
-        size="small" 
-        (click)="stopLoading()"
-        class="stop-loading-btn">
-        <ion-icon name="stop-circle-outline" slot="start"></ion-icon>
-        Cancel Loading
-      </ion-button>
+      <ion-spinner name="circular" color="primary"></ion-spinner>
+      <p>Loading past papers...</p>
     </div>
   </div>
+
+  <!-- Main Content -->
+  <div class="main-content" *ngIf="!loading">
 
 
   <!-- Files List -->
@@ -255,6 +182,7 @@
 
  
 
-  <!-- Bottom Padding -->
-  <div class="bottom-padding"></div>
-</ion-content> 
+    <!-- Bottom Padding -->
+    <div class="bottom-padding"></div>
+  </div>
+</ion-content>

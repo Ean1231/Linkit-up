@@ -49,7 +49,14 @@ export class RegisterPage implements OnInit {
 
   signup(){
     this.loading = true;
-    this.auth.Register(this.signupForm.value)
+    
+    // Add join date to the form value
+    const signupData = {
+      ...this.signupForm.value,
+      joinedDate: new Date().toISOString()
+    };
+    
+    this.auth.Register(signupData)
     .then((result) => {
       this.loading = false;
       if (result == null)  
@@ -58,31 +65,28 @@ export class RegisterPage implements OnInit {
     }).catch((error) => {
       window.alert(error.message);
     })
-    // this.sendEmail(this.email, this.displayName);
-}
+  }
 
 
   SignUp(email, password, name, surname){
     let id = this.firestore.createId();
     this.firestore.collection('users').doc(id).set({
-    name: name,
-    surname: surname,
-    email: email,
-    password:password,
-
-    
+      name: name,
+      surname: surname,
+      email: email,
+      password: password,
+      joinedDate: new Date().toISOString()
     }).then(()=>{
-    this.auth.SignUp(email, password, )
-    this.presentAlert('Congradulations!!  Now Sign in with email  and password')
-    setTimeout(()=> this.showmessage = false, 3000);
-    this.name = '';
-    this.surname = '';
-    this.email = '';
-    this.Date = '';
-    this.router.navigateByUrl('')      
+      this.auth.SignUp(email, password)
+      this.presentAlert('Congratulations!! Now Sign in with email and password')
+      setTimeout(()=> this.showmessage = false, 3000);
+      this.name = '';
+      this.surname = '';
+      this.email = '';
+      this.Date = '';
+      this.router.navigateByUrl('')      
     }).catch((error)=>{
       this.presentAlert(error.message)
-      
     })
   }
   

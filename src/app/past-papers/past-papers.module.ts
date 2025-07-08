@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { PastPapersPageRoutingModule } from './past-papers-routing.module';
 import { PastPapersPage } from './past-papers.page';
+import { FilterModalComponent } from './filter-modal/filter-modal.component';
 
 @NgModule({
   imports: [
@@ -13,6 +14,9 @@ import { PastPapersPage } from './past-papers.page';
     IonicModule,
     PastPapersPageRoutingModule
   ],
-  declarations: [PastPapersPage]
+  declarations: [
+    PastPapersPage,
+    FilterModalComponent
+  ]
 })
 export class PastPapersPageModule {} 

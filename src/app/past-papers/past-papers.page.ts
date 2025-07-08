@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, ToastController, LoadingController, ActionSheetController } from '@ionic/angular';
+import { AlertController, ToastController, LoadingController, ActionSheetController, ModalController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { FilterModalComponent } from './filter-modal/filter-modal.component';
 
 interface PastPaperFile {
   id?: string;
@@ -32,6 +33,8 @@ export class PastPapersPage implements OnInit {
   searchTerm = '';
   selectedCategory = 'all';
   selectedGrade = 'all';
+  selectedExamPeriod = 'all';
+  selectedYear = 'all';
   downloadingFiles = new Set<string>();
   canUpload = false; // Set to true for admin users
   databaseConnected = false;
@@ -42,6 +45,7 @@ export class PastPapersPage implements OnInit {
     private toastController: ToastController,
     private loadingController: LoadingController,
     private actionSheetController: ActionSheetController,
+    private modalController: ModalController,
     private authService: AuthService,
     private storage: AngularFireStorage,
     private database: AngularFireDatabase
@@ -49,50 +53,44 @@ export class PastPapersPage implements OnInit {
 
   ngOnInit() {
     console.log('🚀 Past Papers page initializing...');
-    // Basic setup only - actual loading happens in ionViewWillEnter
-    this.checkUploadPermissions();
+    // Set loading state immediately
+    this.loading = true;
+    // Basic setup and start loading data
+    this.initializePage();
   }
 
   async ionViewWillEnter() {
     console.log('📱 Past Papers view entering...');
-    // Only load when the view is actually entered to avoid double loading
-    await this.initializePage();
+    if (!this.files.length) {
+      // If no files loaded yet, ensure loading state is true
+      this.loading = true;
+      await this.initializePage();
+    }
   }
 
   async initializePage() {
     try {
-      console.log('1️⃣ Checking database connection...');
-      await this.checkDatabaseConnection();
-      
-      console.log('2️⃣ Loading files...');
       await this.loadFiles();
-      
-      console.log('3️⃣ Checking upload permissions...');
       this.checkUploadPermissions();
-      
       console.log('✅ Page initialization completed');
     } catch (error) {
       console.error('❌ Page initialization failed:', error);
+      this.loading = false;
+      this.showToast('Failed to load past papers. Please try again.', 'danger');
     }
   }
 
   async loadFiles() {
-    console.log('🔄 Setting loading to TRUE');
-    this.loading = true;
-    
-    // Minimum loading time so user can see the loader
-    const minLoadingTime = new Promise(resolve => setTimeout(resolve, 1000)); // 1 second minimum
-    
     // Set a timeout to prevent infinite loading
     const loadingTimeout = setTimeout(() => {
       if (this.loading) {
         console.log('Loading timeout reached - forcing stop');
         this.loading = false;
-        this.showToast('Loading timeout - check your internet connection and Firebase configuration', 'warning');
+        this.showToast('Loading timeout - check your internet connection', 'warning');
         this.files = [];
         this.filteredFiles = [];
       }
-    }, 10000); // 10 second timeout
+    }, 15000); // 15 second timeout
     
     try {
       console.log('=== STARTING TO LOAD PAST PAPERS ===');
@@ -105,8 +103,6 @@ export class PastPapersPage implements OnInit {
       if (!isConnected) {
         console.log('Database connection failed - checking authentication and permissions');
         this.showToast('Database connection failed. Check authentication and permissions.', 'danger');
-        await minLoadingTime; // Wait for minimum loading time
-        console.log('🔄 Setting loading to FALSE (connection failed)');
         this.loading = false; // Make sure to stop loading
         return;
       }
@@ -248,12 +244,10 @@ export class PastPapersPage implements OnInit {
       this.filteredFiles = [];
       
     } finally {
-      // Wait for minimum loading time, then stop loading
-      await minLoadingTime;
+      // Clear the timeout and stop loading
       clearTimeout(loadingTimeout);
-      console.log('🔄 Setting loading to FALSE');
       this.loading = false;
-      console.log('Loading process completed, loading flag set to false');
+      console.log('Loading process completed');
     }
   }
 
@@ -281,38 +275,71 @@ export class PastPapersPage implements OnInit {
   }
 
   filterFiles() {
-    let filtered = [...this.files];
-    
-    // Filter by search term
-    if (this.searchTerm && this.searchTerm.trim()) {
-      const searchLower = this.searchTerm.toLowerCase();
-      filtered = filtered.filter(file => 
-        file.displayName?.toLowerCase().includes(searchLower) ||
-        file.name.toLowerCase().includes(searchLower) ||
-        file.category?.toLowerCase().includes(searchLower) ||
-        file.subject?.toLowerCase().includes(searchLower) ||
-        file.grade?.toLowerCase().includes(searchLower) ||
-        file.examPeriod?.toLowerCase().includes(searchLower) ||
-        file.year?.includes(searchLower)
-      );
+    console.log('=== STARTING FILTER PROCESS ===');
+    console.log('Current filters:', {
+      searchTerm: this.searchTerm,
+      category: this.selectedCategory,
+      grade: this.selectedGrade,
+      examPeriod: this.selectedExamPeriod,
+      year: this.selectedYear
+    });
+    console.log('Total files before filtering:', this.files.length);
+
+    this.filteredFiles = this.files.filter(file => {
+      console.log('\nChecking file:', file.name);
+      
+      // Search term filter
+      const searchMatch = !this.searchTerm || 
+        file.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        file.subject?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        file.description?.toLowerCase().includes(this.searchTerm.toLowerCase());
+      console.log('Search match:', searchMatch);
+
+      // Category filter
+      const categoryMatch = this.selectedCategory === 'all' || 
+        (file.category?.toLowerCase() === this.selectedCategory.toLowerCase()) ||
+        (file.subject?.toLowerCase() === this.selectedCategory.toLowerCase());
+      console.log('Category match:', categoryMatch, {
+        fileCategory: file.category,
+        fileSubject: file.subject,
+        selectedCategory: this.selectedCategory
+      });
+
+      // Grade filter
+      const gradeMatch = this.selectedGrade === 'all' || 
+        file.grade === this.selectedGrade;
+      console.log('Grade match:', gradeMatch, {
+        fileGrade: file.grade,
+        selectedGrade: this.selectedGrade
+      });
+
+      // Exam Period filter
+      const examPeriodMatch = this.selectedExamPeriod === 'all' || 
+        file.examPeriod?.toLowerCase() === this.selectedExamPeriod.toLowerCase();
+      console.log('Exam period match:', examPeriodMatch, {
+        fileExamPeriod: file.examPeriod,
+        selectedExamPeriod: this.selectedExamPeriod
+      });
+
+      // Year filter
+      const yearMatch = this.selectedYear === 'all' || 
+        file.year === this.selectedYear;
+      console.log('Year match:', yearMatch, {
+        fileYear: file.year,
+        selectedYear: this.selectedYear
+      });
+
+      const finalMatch = searchMatch && categoryMatch && gradeMatch && examPeriodMatch && yearMatch;
+      console.log('Final match:', finalMatch);
+      
+      return finalMatch;
+    });
+
+    console.log(`\n=== FILTER RESULTS ===`);
+    console.log(`Found ${this.filteredFiles.length} matching files out of ${this.files.length} total`);
+    if (this.filteredFiles.length === 0) {
+      console.log('No matches found with current filters');
     }
-    
-    // Filter by category (use subject from database)
-    if (this.selectedCategory && this.selectedCategory !== 'all') {
-      filtered = filtered.filter(file => 
-        file.category?.toLowerCase() === this.selectedCategory.toLowerCase() ||
-        file.subject?.toLowerCase() === this.selectedCategory.toLowerCase()
-      );
-    }
-    
-    // Filter by grade
-    if (this.selectedGrade && this.selectedGrade !== 'all') {
-      filtered = filtered.filter(file => 
-        file.grade?.toLowerCase() === this.selectedGrade.toLowerCase()
-      );
-    }
-    
-    this.filteredFiles = filtered;
   }
 
   async downloadFile(file: PastPaperFile) {
@@ -477,6 +504,8 @@ export class PastPapersPage implements OnInit {
     this.searchTerm = '';
     this.selectedCategory = 'all';
     this.selectedGrade = 'all';
+    this.selectedExamPeriod = 'all';
+    this.selectedYear = 'all';
     this.filterFiles();
     this.showToast('All filters cleared', 'success');
   }
@@ -524,45 +553,35 @@ export class PastPapersPage implements OnInit {
         
         if (uploadsSnapshot.exists()) {
           const uploadsData = uploadsSnapshot.val();
-          console.log('Uploads data:', uploadsData);
-          console.log('Uploads data type:', typeof uploadsData);
-          console.log('Uploads data keys:', Object.keys(uploadsData || {}));
+          // console.log('Uploads data:', uploadsData);
+          // console.log('Uploads data type:', typeof uploadsData);
+          // console.log('Uploads data keys:', Object.keys(uploadsData || {}));
         } else {
-          console.log('❌ No data found in uploads path');
           // this.showToast('Connected to Firebase but no data found in uploads path', 'warning');
         }
       } else {
-        console.log('❌ Database connection failed');
+        // console.log('❌ Database connection failed');
         // this.showToast('Database connection failed', 'danger');
       }
       
     } catch (error) {
-      console.error('❌ Firebase connection error:', error);
-      console.error('Error details:', error.message);
+      // console.error('❌ Firebase connection error:', error);
+      // console.error('Error details:', error.message);
       this.databaseConnected = false;
       // this.showToast('Database connection failed: ' + error.message, 'danger');
     }
   }
 
   showConsoleMessage() {
-    console.log('=== DEBUGGING INFO ===');
-    console.log('Current state:', {
-      databaseConnected: this.databaseConnected,
-      filesLength: this.files.length,
-      filteredFilesLength: this.filteredFiles.length,
-      selectedCategory: this.selectedCategory,
-      selectedGrade: this.selectedGrade,
-      searchTerm: this.searchTerm,
-      loading: this.loading
-    });
+ 
     
-    this.showToast('Debug info logged to console - open developer tools (F12)', 'primary');
+    // this.showToast('Debug info logged to console - open developer tools (F12)', 'primary');
   }
 
   stopLoading() {
-    console.log('=== MANUALLY STOPPING LOADING ===');
+    // console.log('=== MANUALLY STOPPING LOADING ===');
     this.loading = false;
-    this.showToast('Loading stopped manually. Try refreshing or check Firebase connection.', 'warning');
+    // this.showToast('Loading stopped manually. Try refreshing or check Firebase connection.', 'warning');
     
     // Clear arrays if no files are loaded
     if (this.files.length === 0) {
@@ -573,14 +592,14 @@ export class PastPapersPage implements OnInit {
 
   // Test method to manually trigger loading
   testLoader() {
-    console.log('🧪 Testing loader - setting loading to true');
+    // console.log('🧪 Testing loader - setting loading to true');
     this.loading = true;
     
     // Show loader for 3 seconds
     setTimeout(() => {
-      console.log('🧪 Test complete - setting loading to false');
+      // console.log('🧪 Test complete - setting loading to false');
       this.loading = false;
-      this.showToast('Loader test completed', 'success');
+      // this.showToast('Loader test completed', 'success');
     }, 3000);
   }
 
@@ -926,77 +945,77 @@ export class PastPapersPage implements OnInit {
 
   // Enhanced database debugging
   async debugDatabaseStructure() {
-    console.log('=== DEBUGGING DATABASE STRUCTURE ===');
+    // console.log('=== DEBUGGING DATABASE STRUCTURE ===');
     
     try {
       // Test if user is authenticated
       const userId = await this.authService.getCurrentUserId();
-      console.log('Current user:', userId ? 'Authenticated' : 'Not authenticated');
+      // console.log('Current user:', userId ? 'Authenticated' : 'Not authenticated');
       
       // Check database rules and permissions
-      console.log('Testing database permissions...');
+      // console.log('Testing database permissions...');
       const database = this.database.database;
-      console.log('Database URL:', database.ref().toString());
+      // console.log('Database URL:', database.ref().toString());
       
       // Test root level access first
-      console.log('1. Testing root access...');
+      // console.log('1. Testing root access...');
       const rootRef = database.ref('/');
       const rootSnapshot = await rootRef.once('value');
       
       if (rootSnapshot.exists()) {
         const rootData = rootSnapshot.val();
-        console.log('Root data exists:', rootData);
-        console.log('Root data type:', typeof rootData);
+          // console.log('Root data exists:', rootData);
+          // console.log('Root data type:', typeof rootData);
         
         if (rootData && typeof rootData === 'object') {
           const rootKeys = Object.keys(rootData);
-          console.log('Root level keys:', rootKeys);
+          // console.log('Root level keys:', rootKeys);
           
           // Check if uploads key exists
           if (rootKeys.includes('uploads')) {
-            console.log('✅ uploads key found at root level');
+            // console.log('✅ uploads key found at root level');
           } else {
-            console.log('❌ uploads key NOT found at root level');
-            console.log('Available keys:', rootKeys);
+            // console.log('❌ uploads key NOT found at root level');
+            // console.log('Available keys:', rootKeys);
           }
         }
       } else {
-        console.log('❌ Root data does not exist');
+        // console.log('❌ Root data does not exist');
       }
       
       // Test uploads path specifically
-      console.log('2. Testing uploads path...');
+      // console.log('2. Testing uploads path...');
       const uploadsRef = database.ref('uploads');
       const uploadsSnapshot = await uploadsRef.once('value');
       
       if (uploadsSnapshot.exists()) {
-        console.log('✅ Uploads data exists');
+        // console.log('✅ Uploads data exists');
         const uploadsData = uploadsSnapshot.val();
-        console.log('Uploads data:', uploadsData);
-        console.log('Uploads data type:', typeof uploadsData);
+        // console.log('Uploads data:', uploadsData);
+        // console.log('Uploads data type:', typeof uploadsData);
         
         if (uploadsData && typeof uploadsData === 'object') {
           const uploadsKeys = Object.keys(uploadsData);
-          console.log('Found', uploadsKeys.length, 'items in uploads');
+          // console.log('Found', uploadsKeys.length, 'items in uploads');
           
           if (uploadsKeys.length > 0) {
-            console.log('First item key:', uploadsKeys[0]);
-            console.log('First item data:', uploadsData[uploadsKeys[0]]);
+            // console.log('First item key:', uploadsKeys[0]);
+            // console.log('First item data:', uploadsData[uploadsKeys[0]]);
             
             // Validate structure
             const firstItem = uploadsData[uploadsKeys[0]];
             if (firstItem && typeof firstItem === 'object') {
-              console.log('Item structure validation:');
-              console.log('- name:', firstItem.name);
-              console.log('- subject:', firstItem.subject);
-              console.log('- grade:', firstItem.grade);
-              console.log('- examPeriod:', firstItem.examPeriod);
-              console.log('- url:', firstItem.url);
+              // console.log('Item structure validation:');
+              // console.log('- name:', firstItem.name);
+              // console.log('- subject:', firstItem.subject);
+              // console.log('- grade:', firstItem.grade);
+              // console.log('- examPeriod:', firstItem.examPeriod);
+              // console.log('- url:', firstItem.url);
             }
           }
         }
       } else {
-        console.log('❌ Uploads path does not exist');
+        //
       }
       
       // Test other possible paths
@@ -1009,14 +1028,14 @@ export class PastPapersPage implements OnInit {
           const altSnapshot = await altRef.once('value');
           
           if (altSnapshot.exists()) {
-            console.log(`✅ Found data at path: ${path}`);
+            // console.log(`✅ Found data at path: ${path}`);
             const altData = altSnapshot.val();
-            console.log(`${path} data:`, altData);
+            // console.log(`${path} data:`, altData);
           } else {
-            console.log(`❌ No data at path: ${path}`);
+            // console.log(`❌ No data at path: ${path}`);
           }
         } catch (error) {
-          console.log(`Error testing path ${path}:`, error.message);
+          // console.log(`Error testing path ${path}:`, error.message);
         }
       }
       
@@ -1030,14 +1049,14 @@ export class PastPapersPage implements OnInit {
 
   // Manual test function for debugging
   testDatabaseAccess() {
-    console.log('=== MANUAL DATABASE TEST ===');
+    // console.log('=== MANUAL DATABASE TEST ===');
     
     // Test different access methods
     this.testDatabaseMethods();
   }
 
   async testSpecificDataPath() {
-    console.log('=== TESTING SPECIFIC DATA PATH ===');
+    // console.log('=== TESTING SPECIFIC DATA PATH ===');
     
     try {
       const database = this.database.database;
@@ -1048,50 +1067,50 @@ export class PastPapersPage implements OnInit {
       
       if (snapshot.exists()) {
         const data = snapshot.val();
-        console.log('Data found at uploads path:', data);
+        // console.log('Data found at uploads path:', data);
         
         // Look for the specific key from the screenshot
         const keys = Object.keys(data);
-        console.log('Keys found:', keys);
+        // console.log('Keys found:', keys);
         
         // Check if any key matches the pattern from screenshot
         const sampleKey = keys.find(key => key.startsWith('-M'));
         if (sampleKey) {
-          console.log('Found Firebase key:', sampleKey);
-          console.log('Sample data:', data[sampleKey]);
+          // console.log('Found Firebase key:', sampleKey);
+          // console.log('Sample data:', data[sampleKey]);
           
           // Check the structure
           const item = data[sampleKey];
           if (item && item.name && item.subject && item.grade) {
-            console.log('✅ Data structure looks correct!');
+            // console.log('✅ Data structure looks correct!');
             return true;
           } else {
-            console.log('❌ Data structure is missing required fields');
+            // console.log('❌ Data structure is missing required fields');
           }
         } else {
-          console.log('❌ No Firebase-generated keys found');
+          // console.log('❌ No Firebase-generated keys found');
         }
       } else {
-        console.log('❌ No data found at uploads path');
+        // console.log('❌ No data found at uploads path');
       }
       
       return false;
       
     } catch (error) {
-      console.error('Error testing specific path:', error);
+      // console.error('Error testing specific path:', error);
       return false;
     }
   }
 
   async testAndLoadData() {
-    console.log('🧪 TESTING AND LOADING DATA DIRECTLY...');
+    // console.log('🧪 TESTING AND LOADING DATA DIRECTLY...');
     
     this.loading = true;
     
     try {
       // Direct Firebase connection test
       const database = this.database.database;
-      console.log('Firebase URL:', database.ref().toString());
+      // console.log('Firebase URL:', database.ref().toString());
       
       // Test uploads path directly
       const uploadsRef = database.ref('uploads');
@@ -1099,11 +1118,11 @@ export class PastPapersPage implements OnInit {
       
       if (snapshot.exists()) {
         const data = snapshot.val();
-        console.log('✅ Raw data from Firebase:', data);
+        // console.log('✅ Raw data from Firebase:', data);
         
         if (data && typeof data === 'object') {
           const keys = Object.keys(data);
-          console.log(`Found ${keys.length} items`);
+          // console.log(`Found ${keys.length} items`);
           
           // Process immediately
           this.files = [];
@@ -1128,16 +1147,16 @@ export class PastPapersPage implements OnInit {
           }
           
           this.filterFiles();
-          console.log(`✅ Successfully processed ${this.files.length} files`);
+          // console.log(`✅ Successfully processed ${this.files.length} files`);
           this.showToast(`Successfully loaded ${this.files.length} files from Firebase!`, 'success');
         }
       } else {
-        console.log('❌ No data at uploads path');
+        // console.log('❌ No data at uploads path');
         this.showToast('No data found at uploads path in Firebase', 'warning');
       }
       
     } catch (error) {
-      console.error('❌ Test and load failed:', error);
+      // console.error('❌ Test and load failed:', error);
       this.showToast('Failed to load data: ' + error.message, 'danger');
     } finally {
       this.loading = false;
@@ -1145,60 +1164,60 @@ export class PastPapersPage implements OnInit {
   }
 
   async testDatabaseMethods() {
-    console.log('=== COMPREHENSIVE DATABASE TESTING ===');
+    // console.log('=== COMPREHENSIVE DATABASE TESTING ===');
     
     try {
       // Method 1: Direct object access
-      console.log('Method 1: Testing direct object access to uploads...');
+        //
       const objRef = this.database.object('uploads');
       const objData = await Promise.race([
         objRef.valueChanges().toPromise(),
         new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 3000))
       ]);
-      console.log('Object data:', objData);
+      // console.log('Object data:', objData);
       
       if (objData && typeof objData === 'object') {
         const keys = Object.keys(objData);
-        console.log('Found object keys:', keys);
+        // console.log('Found object keys:', keys);
         if (keys.length > 0) {
-          console.log('Sample data structure:', objData[keys[0]]);
+          // console.log('Sample data structure:', objData[keys[0]]);
         }
       }
       
       // Method 2: List access with keys
-      console.log('Method 2: Testing list access with keys...');
+      // console.log('Method 2: Testing list access with keys...');
       const listRef = this.database.list('uploads');
       const listData = await Promise.race([
         listRef.snapshotChanges().toPromise(),
         new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 3000))
       ]);
-      console.log('List data with keys:', listData);
+      // console.log('List data with keys:', listData);
       
       if (listData && Array.isArray(listData) && listData.length > 0) {
-        console.log('Sample list item:', listData[0]);
+        // console.log('Sample list item:', listData[0]);
       }
       
       // Method 3: List access without keys
-      console.log('Method 3: Testing list access without keys...');
+      // console.log('Method 3: Testing list access without keys...');
       const listValues = await Promise.race([
         listRef.valueChanges().toPromise(),
         new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 3000))
       ]);
-      console.log('List values:', listValues);
+      // console.log('List values:', listValues);
       
       // Method 4: Raw database access
-      console.log('Method 4: Testing raw database access...');
+      // console.log('Method 4: Testing raw database access...');
       const database = this.database.database;
       const ref = database.ref('uploads');
       const snapshot = await Promise.race([
         ref.once('value'),
         new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 3000))
       ]) as any;
-      console.log('Raw snapshot exists:', snapshot.exists());
-      console.log('Raw snapshot value:', snapshot.val());
+      // console.log('Raw snapshot exists:', snapshot.exists());
+      // console.log('Raw snapshot value:', snapshot.val());
       
       // Method 5: Test root access
-      console.log('Method 5: Testing root database access...');
+      // console.log('Method 5: Testing root database access...');
       const rootRef = database.ref('/');
       const rootSnapshot = await Promise.race([
         rootRef.once('value'),
@@ -1216,5 +1235,38 @@ export class PastPapersPage implements OnInit {
       console.error('Database test error:', error);
       this.showToast('Database test failed: ' + error.message, 'danger');
     }
+  }
+
+  async openFilterModal() {
+    const modal = await this.modalController.create({
+      component: FilterModalComponent,
+      componentProps: {
+        filters: {
+          category: this.selectedCategory,
+          grade: this.selectedGrade,
+          examPeriod: this.selectedExamPeriod,
+          year: this.selectedYear
+        }
+      },
+      cssClass: 'filter-modal'
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+      this.selectedCategory = data.category;
+      this.selectedGrade = data.grade;
+      this.selectedExamPeriod = data.examPeriod;
+      this.selectedYear = data.year;
+      this.filterFiles();
+    }
+  }
+
+  hasActiveFilters(): boolean {
+    return this.selectedCategory !== 'all' ||
+           this.selectedGrade !== 'all' ||
+           this.selectedExamPeriod !== 'all' ||
+           this.selectedYear !== 'all';
   }
 } 

@@ -518,4 +518,31 @@ ion-header {
       }
     }
   }
+}
+
+// Custom styles for alert inputs
+::ng-deep .custom-alert-input {
+  margin-top: 8px !important;
+  border: 1px solid var(--ion-color-medium) !important;
+  border-radius: 8px !important;
+  padding: 8px !important;
+  background: var(--ion-color-light) !important;
+
+  &:focus {
+    border-color: var(--ion-color-primary) !important;
+  }
+}
+
+::ng-deep .alert-wrapper {
+  .alert-button-group {
+    padding: 8px !important;
+    
+    button {
+      border-radius: 8px !important;
+      
+      &.alert-button-role-cancel {
+        color: var(--ion-color-medium);
+      }
+    }
+  }
 } 

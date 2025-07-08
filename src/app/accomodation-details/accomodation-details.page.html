@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -9,13 +9,33 @@
       </ion-text>
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content class="accommodation-content">
-  <!-- Hero Section with Image -->
+  <!-- Hero Section with Image Gallery -->
   <div class="hero-section">
     <div class="hero-image">
-      <img [src]="showdata.image" [alt]="showdata.AccomodationName">
+      <!-- Image Gallery -->
+      <ion-slides 
+        *ngIf="showdata.images && showdata.images.length > 0; else singleHeroImage"
+        [options]="slideOpts"
+        class="hero-carousel">
+        <ion-slide *ngFor="let imageUrl of showdata.images; let i = index">
+          <img [src]="imageUrl" [alt]="showdata.AccomodationName" (click)="openImageModal(imageUrl)">
+        </ion-slide>
+      </ion-slides>
+      
+      <!-- Fallback to single image -->
+      <ng-template #singleHeroImage>
+        <img [src]="showdata.image" [alt]="showdata.AccomodationName" (click)="openImageModal(showdata.image)">
+      </ng-template>
+
+      <!-- Image counter for multiple images -->
+      <div class="image-counter" *ngIf="showdata.images && showdata.images.length > 1">
+        <ion-icon name="images-outline"></ion-icon>
+        <span>{{ showdata.images.length }} Photos</span>
+      </div>
+
       <div class="hero-overlay">
         <div class="hero-badge">
           <ion-icon name="home-outline"></ion-icon>
@@ -23,7 +43,7 @@
         </div>
       </div>
     </div>
-      </div>
+  </div>
 
   <!-- Accommodation Information -->
   <div class="content-container">
@@ -35,6 +55,108 @@
           <div class="accommodation-type">
             <ion-icon name="bed-outline" color="primary"></ion-icon>
             <span>Student Accommodation</span>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Amenities & Features Card -->
+    <ion-card class="amenities-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="checkmark-circle-outline" color="success"></ion-icon>
+          Amenities & Features
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="amenities-grid">
+          <!-- Location -->
+          <div class="amenity-item" *ngIf="showdata.location">
+            <div class="amenity-icon">
+              <ion-icon name="location-outline" color="primary"></ion-icon>
+            </div>
+            <div class="amenity-details">
+              <p class="amenity-label">Location</p>
+              <p class="amenity-value">{{ showdata.location }}</p>
+            </div>
+          </div>
+
+          <!-- WiFi -->
+          <div class="amenity-item" *ngIf="showdata.wifiAvailable === 'yes'">
+            <div class="amenity-icon">
+              <ion-icon name="wifi-outline" color="secondary"></ion-icon>
+            </div>
+            <div class="amenity-details">
+              <p class="amenity-label">Internet</p>
+              <p class="amenity-value">Free WiFi Available</p>
+            </div>
+          </div>
+
+          <!-- Parking -->
+          <div class="amenity-item" *ngIf="showdata.parkingAvailable === 'yes'">
+            <div class="amenity-icon">
+              <ion-icon name="car-outline" color="tertiary"></ion-icon>
+            </div>
+            <div class="amenity-details">
+              <p class="amenity-label">Parking</p>
+              <p class="amenity-value">{{ showdata.parkingSpaces ? showdata.parkingSpaces + ' Parking Spaces' : 'Parking Available' }}</p>
+            </div>
+          </div>
+
+          <!-- Furnished -->
+          <div class="amenity-item" *ngIf="showdata.furnished === 'yes'">
+            <div class="amenity-icon">
+              <ion-icon name="bed-outline" color="warning"></ion-icon>
+            </div>
+            <div class="amenity-details">
+              <p class="amenity-label">Furnishing</p>
+              <p class="amenity-value">{{ showdata.furnishedType || 'Fully Furnished' }}</p>
+            </div>
+          </div>
+
+          <!-- Price -->
+          <div class="amenity-item" *ngIf="showdata.price">
+            <div class="amenity-icon">
+              <ion-icon name="cash-outline" color="success"></ion-icon>
+            </div>
+            <div class="amenity-details">
+              <p class="amenity-label">Monthly Rent</p>
+              <p class="amenity-value">R{{ showdata.price }}</p>
+            </div>
+          </div>
+
+          <!-- Deposit -->
+          <div class="amenity-item" *ngIf="showdata.deposit">
+            <div class="amenity-icon">
+              <ion-icon name="wallet-outline" color="medium"></ion-icon>
+            </div>
+            <div class="amenity-details">
+              <p class="amenity-label">Deposit</p>
+              <p class="amenity-value">R{{ showdata.deposit }}</p>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Image Gallery Card -->
+    <ion-card class="gallery-card" *ngIf="showdata.images && showdata.images.length > 0">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="images-outline" color="primary"></ion-icon>
+          Photo Gallery ({{ showdata.images.length }} Photos)
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="image-gallery">
+          <div 
+            class="gallery-item" 
+            *ngFor="let imageUrl of showdata.images; let i = index"
+            (click)="openImageModal(imageUrl)">
+            <img [src]="imageUrl" [alt]="showdata.AccomodationName + ' - Image ' + (i + 1)">
+            <div class="gallery-overlay">
+              <ion-icon name="expand-outline"></ion-icon>
+            </div>
           </div>
         </div>
       </ion-card-content>
@@ -63,13 +185,14 @@
       </ion-card-header>
       <ion-card-content>
         <div class="contact-grid">
-          <div class="contact-item">
+          <!-- Contact Person -->
+          <div class="contact-item" *ngIf="showdata.contactPerson || showdata.contactPersonName">
             <div class="contact-icon">
-              <ion-icon name="location-outline" color="primary"></ion-icon>
+              <ion-icon name="person-outline" color="primary"></ion-icon>
             </div>
             <div class="contact-details">
-              <p class="contact-label">Location</p>
-              <p class="contact-value">{{showdata.location}}</p>
+              <p class="contact-label">Contact Person</p>
+              <p class="contact-value">{{ showdata.contactPerson || showdata.contactPersonName }}</p>
             </div>
           </div>
 
@@ -83,7 +206,18 @@
             </div>
           </div>
 
-          <div class="contact-item">
+          <!-- Email if available -->
+          <div class="contact-item" *ngIf="showdata.email">
+            <div class="contact-icon">
+              <ion-icon name="mail-outline" color="tertiary"></ion-icon>
+            </div>
+            <div class="contact-details">
+              <p class="contact-label">Email</p>
+              <p class="contact-value">{{showdata.email}}</p>
+            </div>
+          </div>
+
+          <div class="contact-item" *ngIf="showdata.link">
             <div class="contact-icon">
               <ion-icon name="globe-outline" color="warning"></ion-icon>
             </div>
@@ -93,13 +227,14 @@
             </div>
           </div>
 
+          <!-- Availability -->
           <div class="contact-item">
             <div class="contact-icon">
               <ion-icon name="time-outline" color="medium"></ion-icon>
             </div>
             <div class="contact-details">
               <p class="contact-label">Availability</p>
-              <p class="contact-value">Contact for Details</p>
+              <p class="contact-value">{{ getAvailabilityStatus() }}</p>
             </div>
           </div>
         </div>
@@ -135,4 +270,11 @@
 
   <!-- Bottom Padding -->
   <div class="bottom-padding"></div>
+
+  <!-- Floating Back Button -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="goBack()" class="back-fab">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

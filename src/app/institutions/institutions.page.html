@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -9,32 +9,51 @@
       </ion-text>
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content class="institutions-content">
+  <!-- Add Floating Back Button -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="light" [routerLink]="['/ap-search']">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <ion-searchbar 
+      [(ngModel)]="searchTerm"
+      (ionChange)="searchInstitutions()"
+      placeholder="Search institutions..."
+      animated="true"
+      color="light"
+      class="custom-searchbar">
+    </ion-searchbar>
+  </div>
+
   <!-- Loading/Empty State -->
-  <div *ngIf="data.length == 0" class="empty-state">
+  <div *ngIf="filteredData.length == 0" class="empty-state">
     <div class="empty-content">
       <ion-icon name="school-outline" class="empty-icon"></ion-icon>
       <h2>No Institutions Found</h2>
-      <p>No courses are available at the moment. Please try again later or adjust your search criteria.</p>
-      <ion-button fill="outline" color="primary" routerLink="/ap-search">
-        <ion-icon name="search-outline" slot="start"></ion-icon>
-        Search Again
+      <p>No courses match your search criteria. Try adjusting your search terms.</p>
+      <ion-button fill="outline" color="primary" (click)="clearSearch()">
+        <ion-icon name="refresh-outline" slot="start"></ion-icon>
+        Clear Search
       </ion-button>
     </div>
   </div>
 
   <!-- Institutions List -->
-  <div *ngIf="data.length > 0" class="institutions-container">
+  <div *ngIf="filteredData.length > 0" class="institutions-container">
     <div class="results-header">
-      <h2>Found {{data.length}} Institution{{data.length > 1 ? 's' : ''}}</h2>
+      <h2>Found {{filteredData.length}} Institution{{filteredData.length > 1 ? 's' : ''}}</h2>
       <p>Select an institution to view more details</p>
     </div>
 
     <div class="institutions-grid">
       <ion-card 
-        *ngFor="let institution of data; let i = index" 
+        *ngFor="let institution of filteredData; let i = index" 
         class="institution-card"
         [style.animation-delay]="(i * 0.1) + 's'"
         (click)="details(institution)">
@@ -76,3 +95,55 @@
     </div>
   </div>
 </ion-content>
+
+<style>
+.search-container {
+  padding: 16px;
+  background: rgba(var(--ion-color-primary-rgb), 0.05);
+  border-radius: 0 0 16px 16px;
+}
+
+.custom-searchbar {
+  --border-radius: 10px;
+  --box-shadow: none;
+  --background: white;
+}
+
+.empty-state {
+  padding: 32px 16px;
+  text-align: center;
+}
+
+.empty-state .empty-icon {
+  font-size: 64px;
+  color: var(--ion-color-medium);
+}
+
+.empty-state h2 {
+  margin: 16px 0;
+  color: var(--ion-color-dark);
+}
+
+.empty-state p {
+  color: var(--ion-color-medium);
+  margin-bottom: 24px;
+}
+
+.results-header {
+  padding: 16px;
+  background: rgba(var(--ion-color-primary-rgb), 0.05);
+  margin-bottom: 16px;
+}
+
+.results-header h2 {
+  margin: 0;
+  color: var(--ion-color-dark);
+  font-size: 1.2em;
+}
+
+.results-header p {
+  margin: 8px 0 0;
+  color: var(--ion-color-medium);
+  font-size: 0.9em;
+}
+</style>

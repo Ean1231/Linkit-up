@@ -11,8 +11,12 @@ import { AuthService } from '../auth.service';
 })
 export class FavoritesPage implements OnInit {
   favorites: any[] = [];
+  filteredFavorites: any[] = [];
   loading: boolean = false;
   isEmpty: boolean = false;
+  selectedTab: string = 'opportunities';
+  opportunitiesCount: number = 0;
+  bursariesCount: number = 0;
   
   constructor(
     private router: Router,
@@ -38,11 +42,16 @@ export class FavoritesPage implements OnInit {
       const favorites: any = await this.service.getFavorites();
       this.favorites = favorites || [];
       this.isEmpty = this.favorites.length === 0;
+      this.updateCounts();
+      this.filterFavorites();
       console.log('Loaded favorites:', this.favorites);
     } catch (error) {
       console.error('Error loading favorites:', error);
       this.favorites = [];
+      this.filteredFavorites = [];
       this.isEmpty = true;
+      this.opportunitiesCount = 0;
+      this.bursariesCount = 0;
       
       if (error.message && error.message.includes('logged in')) {
         this.showToast('Please log in to view your saved items', 'warning');
@@ -53,6 +62,24 @@ export class FavoritesPage implements OnInit {
     } finally {
       this.loading = false;
     }
+  }
+
+  updateCounts() {
+    this.opportunitiesCount = this.favorites.filter(f => f.category === 'opportunity').length;
+    this.bursariesCount = this.favorites.filter(f => f.category === 'bursary').length;
+  }
+
+  filterFavorites() {
+    if (this.selectedTab === 'opportunities') {
+      this.filteredFavorites = this.favorites.filter(f => f.category === 'opportunity');
+    } else {
+      this.filteredFavorites = this.favorites.filter(f => f.category === 'bursary');
+    }
+  }
+
+  onTabChange(event: any) {
+    this.selectedTab = event.detail.value;
+    this.filterFavorites();
   }
 
   // Date checking methods for favorites
@@ -172,6 +199,8 @@ export class FavoritesPage implements OnInit {
               await this.service.removeFromFavorites(favorite.id);
               this.favorites = this.favorites.filter(f => f.id !== favorite.id);
               this.isEmpty = this.favorites.length === 0;
+              this.updateCounts();
+              this.filterFavorites();
               this.showToast('Removed from favorites', 'success');
             } catch (error) {
               console.error('Error removing favorite:', error);

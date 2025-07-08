@@ -1,8 +1,8 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/tabs/tab1"></ion-back-button>
-    </ion-buttons>
+    </ion-buttons> -->
     <!-- <ion-title>
       <ion-text color="light">
         <h1>AP Calculator</h1>
@@ -13,10 +13,17 @@
         <ion-icon name="log-out-outline" color="light"></ion-icon>
       </ion-button>
     </ion-buttons> -->
-  </ion-toolbar>
-</ion-header>
+  <!-- </ion-toolbar>
+</ion-header> -->
 
 <ion-content class="calculator-content">
+  <!-- Add Floating Back Button -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="light" [routerLink]="['/tabs/tabs/tab2']">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <!-- Hero Section -->
   <div class="hero-section">
     <div class="hero-image">

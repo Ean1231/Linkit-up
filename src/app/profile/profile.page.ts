@@ -4,6 +4,10 @@ import { AlertController, ToastController, ActionSheetController, ModalControlle
 import { AuthService, User } from '../auth.service';
 import { EditProfileModalComponent } from '../edit-profile-modal/edit-profile-modal.component';
 import { ServiceService } from '../service.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 @Component({
   selector: 'app-profile',
@@ -25,7 +29,9 @@ export class ProfilePage implements OnInit {
     private modalController: ModalController,
     private loadingController: LoadingController,
     private authService: AuthService,
-    private serviceService: ServiceService
+    private serviceService: ServiceService,
+    private firestore: AngularFirestore,
+    private afAuth: AngularFireAuth
   ) { }
 
   ngOnInit() {
@@ -97,8 +103,91 @@ export class ProfilePage implements OnInit {
   async changePassword() {
     const alert = await this.alertController.create({
       header: 'Change Password',
-      message: 'Password change feature coming soon!',
-      buttons: ['OK']
+      inputs: [
+        {
+          name: 'currentPassword',
+          type: 'password',
+          placeholder: 'Current Password',
+          cssClass: 'custom-alert-input'
+        },
+        {
+          name: 'newPassword',
+          type: 'password',
+          placeholder: 'New Password',
+          cssClass: 'custom-alert-input'
+        },
+        {
+          name: 'confirmPassword',
+          type: 'password',
+          placeholder: 'Confirm New Password',
+          cssClass: 'custom-alert-input'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Change Password',
+          handler: async (data) => {
+            // Validate inputs
+            if (!data.currentPassword || !data.newPassword || !data.confirmPassword) {
+              this.showToast('Please fill in all fields', 'warning');
+              return false;
+            }
+
+            if (data.newPassword !== data.confirmPassword) {
+              this.showToast('New passwords do not match', 'warning');
+              return false;
+            }
+
+            if (data.newPassword.length < 6) {
+              this.showToast('New password must be at least 6 characters', 'warning');
+              return false;
+            }
+
+            // Show loading
+            const loading = await this.loadingController.create({
+              message: 'Changing password...',
+              spinner: 'crescent'
+            });
+            await loading.present();
+
+            try {
+              // Get current user
+              const user = await this.authService.auth.currentUser;
+              if (!user || !user.email) {
+                throw new Error('No user logged in');
+              }
+
+              // Reauthenticate with current password
+              const credential = await this.authService.auth.signInWithEmailAndPassword(
+                user.email,
+                data.currentPassword
+              );
+
+              // Update password
+              await user.updatePassword(data.newPassword);
+              
+              await loading.dismiss();
+              this.showToast('Password changed successfully', 'success');
+            } catch (error) {
+              await loading.dismiss();
+              
+              if (error.code === 'auth/wrong-password') {
+                this.showToast('Current password is incorrect', 'danger');
+              } else if (error.code === 'auth/requires-recent-login') {
+                this.showToast('Please log out and log in again before changing password', 'warning');
+              } else {
+                console.error('Error changing password:', error);
+                this.showToast('Error changing password. Please try again.', 'danger');
+              }
+              return false;
+            }
+          }
+        }
+      ]
     });
     await alert.present();
   }
@@ -171,6 +260,92 @@ export class ProfilePage implements OnInit {
       });
       await toast.present();
     }
+  }
+
+  async deleteAccount() {
+    const alert = await this.alertController.create({
+      header: 'Delete Account',
+      message: 'This action cannot be undone. Please enter your password to confirm account deletion.',
+      inputs: [
+        {
+          name: 'password',
+          type: 'password',
+          placeholder: 'Enter your password',
+          cssClass: 'custom-alert-input'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Delete Account',
+          cssClass: 'alert-button-danger',
+          handler: async (data) => {
+            if (!data.password) {
+              this.showToast('Please enter your password', 'warning');
+              return false;
+            }
+
+            const loading = await this.loadingController.create({
+              message: 'Deleting account...'
+            });
+            await loading.present();
+
+            try {
+              // Get current user
+              const user = await this.afAuth.currentUser;
+              if (!user || !user.email) {
+                throw new Error('No user found');
+              }
+
+              // Create credential for reauthentication
+              const credential = firebase.auth.EmailAuthProvider.credential(
+                user.email,
+                data.password
+              );
+
+              // Reauthenticate user before deletion
+              await user.reauthenticateWithCredential(credential);
+
+              // Delete user data from Firestore first
+              await this.firestore.doc(`users/${user.uid}`).delete();
+              
+              // Delete any other user-related data (favorites)
+              const favoritesRef = this.firestore.collection('favorites');
+              const userFavorites = await favoritesRef.ref.where('userId', '==', user.uid).get();
+              
+              const batch = this.firestore.firestore.batch();
+              userFavorites.forEach((doc) => {
+                batch.delete(doc.ref);
+              });
+              await batch.commit();
+
+              // Finally delete the user account
+              await user.delete();
+
+              await loading.dismiss();
+              this.showToast('Account deleted successfully', 'success');
+              
+              // Navigate to welcome page
+              this.router.navigate(['/welcome'], { replaceUrl: true });
+
+            } catch (error) {
+              await loading.dismiss();
+              if (error.code === 'auth/wrong-password') {
+                this.showToast('Incorrect password', 'danger');
+              } else {
+                this.showToast('Failed to delete account: ' + error.message, 'danger');
+              }
+              return false;
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   private async showToast(message: string, color: string = 'success') {

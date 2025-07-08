@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -8,7 +8,7 @@
       Bursary Details
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content class="modern-bursary-content">
   <div class="bursary-detail-container">
@@ -38,19 +38,48 @@
         <h1 class="bursary-title">{{ showdata.title }}</h1>
         <div class="bursary-meta">
           <div class="meta-item">
-            <ion-icon 
-              [name]="isOpportunityClosed(showdata?.closingDate) ? 'close-circle' : 'calendar-outline'" 
-              [color]="isOpportunityClosed(showdata?.closingDate) ? 'danger' : getDateChipColor(showdata?.closingDate)">
-            </ion-icon>
-            <span 
-              [class.closed-text]="isOpportunityClosed(showdata?.closingDate)"
-              [class.urgent-text]="!isOpportunityClosed(showdata?.closingDate) && getDateChipColor(showdata?.closingDate) === 'warning'">
-              {{ isOpportunityClosed(showdata?.closingDate) ? 'CLOSED' : 'Deadline: ' + formatClosingDate(showdata?.closingDate) }}
-            </span>
-          </div>
-          <div class="meta-item">
             <ion-icon name="business-outline" color="primary"></ion-icon>
             <span>Organization</span>
+          </div>
+          
+          <!-- Social Actions Section -->
+          <div class="social-actions-section">
+            <div class="social-actions-container">
+              <!-- Favorite Heart Button -->
+              <ion-button 
+                fill="clear" 
+                size="default"
+                (click)="toggleFavorite()"
+                class="social-action-button favorite-button"
+                [class.is-favorite]="isFavorite">
+                <ion-icon 
+                  [name]="isFavorite ? 'heart' : 'heart-outline'"
+                  [color]="isFavorite ? 'danger' : 'medium'"
+                  class="social-icon">
+                </ion-icon>
+              </ion-button>
+              
+              <!-- Share Button -->
+              <ion-button 
+                fill="clear" 
+                size="small"
+                (click)="shareBursary(showdata)"
+                class="social-action-button share-button">
+                <ion-icon 
+                  name="share-social-outline"
+                  color="medium"
+                  class="social-icon">
+                </ion-icon>
+              </ion-button>
+            </div>
+            
+            <!-- Action Labels -->
+            <div class="social-labels">
+              <span class="social-label" [class.active]="isFavorite">
+                {{ isFavorite ? 'Saved' : 'Save' }}
+              </span>
+              <span class="social-label">Share</span>
+            </div>
           </div>
         </div>
       </div>
@@ -82,6 +111,22 @@
         </div>
       </div>
 
+      <!-- Field of Study Card -->
+      <div class="info-card" *ngIf="showdata.fieldOfStudy">
+        <div class="card-header">
+          <ion-icon name="book-outline" color="secondary"></ion-icon>
+          <h3>Field of Study</h3>
+        </div>
+        <div class="card-content">
+          <div class="field-of-study">
+            <ion-chip color="primary" class="study-field-chip">
+              <ion-icon name="school" slot="start"></ion-icon>
+              <ion-label>{{ showdata.fieldOfStudy }}</ion-label>
+            </ion-chip>
+          </div>
+        </div>
+      </div>
+
       <!-- Benefits Card -->
       <div class="info-card">
         <div class="card-header">
@@ -90,21 +135,38 @@
         </div>
         <div class="card-content">
           <div class="benefits-grid">
-            <div class="benefit-item">
+            <!-- Tuition Fees -->
+            <div class="benefit-item" *ngIf="showdata.whatsCovered?.tuitionFees">
               <ion-icon name="school-outline" color="primary"></ion-icon>
               <span>Tuition Fees</span>
+              <ion-icon name="checkmark-circle" color="success" class="covered-check"></ion-icon>
             </div>
-            <div class="benefit-item">
+            
+            <!-- Accommodation -->
+            <div class="benefit-item" *ngIf="showdata.whatsCovered?.accommodation">
               <ion-icon name="home-outline" color="primary"></ion-icon>
               <span>Accommodation</span>
+              <ion-icon name="checkmark-circle" color="success" class="covered-check"></ion-icon>
             </div>
-            <div class="benefit-item">
+            
+            <!-- Study Materials -->
+            <div class="benefit-item" *ngIf="showdata.whatsCovered?.studyMaterial">
               <ion-icon name="library-outline" color="primary"></ion-icon>
               <span>Study Materials</span>
+              <ion-icon name="checkmark-circle" color="success" class="covered-check"></ion-icon>
             </div>
-            <div class="benefit-item">
+            
+            <!-- Living Allowance -->
+            <div class="benefit-item" *ngIf="showdata.whatsCovered?.livingAllowance">
               <ion-icon name="card-outline" color="primary"></ion-icon>
               <span>Living Allowance</span>
+              <ion-icon name="checkmark-circle" color="success" class="covered-check"></ion-icon>
+            </div>
+
+            <!-- No Benefits Message -->
+            <div class="no-benefits" *ngIf="!hasAnyCoverage()">
+              <ion-icon name="information-circle-outline" color="medium"></ion-icon>
+              <span>Coverage details not specified. Contact the organization for more information.</span>
             </div>
           </div>
         </div>
@@ -175,4 +237,11 @@
       </div>
     </div>
   </div>
+
+  <!-- Floating Back Button -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="goBack()" class="back-fab">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

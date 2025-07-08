@@ -48,7 +48,27 @@
          (click)="details(data)">
       
       <div class="card-image">
-        <img [src]="data.image" [alt]="data.AccomodationName">
+        <!-- Multiple images carousel -->
+        <ion-slides 
+          *ngIf="data.images && data.images.length > 0; else singleImage"
+          [options]="slideOpts"
+          class="accommodation-carousel">
+          <ion-slide *ngFor="let imageUrl of data.images">
+            <img [src]="imageUrl" [alt]="data.AccomodationName" class="carousel-image">
+          </ion-slide>
+        </ion-slides>
+        
+        <!-- Fallback to single image if no images array -->
+        <ng-template #singleImage>
+          <img [src]="data.image" [alt]="data.AccomodationName" class="single-image">
+        </ng-template>
+        
+        <!-- Image counter for multiple images -->
+        <div class="image-counter" *ngIf="data.images && data.images.length > 1">
+          <ion-icon name="images-outline"></ion-icon>
+          <span>{{ data.images.length }}</span>
+        </div>
+        
         <div class="availability-badge">
           <ion-chip 
             [color]="isAccommodationClosed(data) ? 'danger' : 'success'" 
@@ -94,17 +114,28 @@
         </div>
 
         <div class="card-features">
-          <div class="feature-item">
+          <!-- Location - Always show if available -->
+          <div class="feature-item" *ngIf="data.location">
             <ion-icon name="location-outline" color="primary"></ion-icon>
-            <span>Prime Location</span>
+            <span>{{ data.location }}</span>
           </div>
-          <div class="feature-item">
+          
+          <!-- WiFi - Only show if wifiAvailable is 'yes' -->
+          <div class="feature-item" *ngIf="data.wifiAvailable === 'yes'">
             <ion-icon name="wifi-outline" color="primary"></ion-icon>
             <span>Free WiFi</span>
           </div>
-          <div class="feature-item">
+          
+          <!-- Parking - Only show if parkingAvailable is 'yes' and include count if available -->
+          <div class="feature-item" *ngIf="data.parkingAvailable === 'yes'">
             <ion-icon name="car-outline" color="primary"></ion-icon>
-            <span>Parking</span>
+            <span>Parking{{ data.parkingSpaces ? ' (' + data.parkingSpaces + ' spaces)' : '' }}</span>
+          </div>
+          
+          <!-- Furnished - Only show if furnished is 'yes' -->
+          <div class="feature-item" *ngIf="data.furnished === 'yes'">
+            <ion-icon name="bed-outline" color="primary"></ion-icon>
+            <span>Furnished</span>
           </div>
         </div>
 

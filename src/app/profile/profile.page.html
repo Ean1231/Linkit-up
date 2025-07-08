@@ -1,10 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title slot="start" class="header-title">
+    <!-- <ion-title slot="start" class="header-title">
       <ion-text color="light">
         <h1>Profile</h1>
       </ion-text>
-    </ion-title>
+    </ion-title> -->
     <ion-buttons slot="end">
       <ion-button fill="clear" (click)="editProfile()">
         <ion-icon name="create-outline" color="light"></ion-icon>
@@ -27,7 +27,7 @@
         <img [src]="userProfile?.profilePicture || '/assets/profile.png'" alt="Profile Picture">
       </ion-avatar>
       <ion-button fill="clear" class="edit-avatar-btn" (click)="changeAvatar()">
-        <ion-icon name="camera-outline"></ion-icon>
+        <ion-icon name="camera-outline" class="camera-icon"></ion-icon>
       </ion-button>
     </div>
     <div class="profile-info">
@@ -169,6 +169,43 @@
     </ion-button>
   </div>
 
+  <div style="padding: 0;" class="section-container" *ngIf="!isLoading">
+    <ion-button 
+      fill="clear" 
+      color="primary" 
+      expand="full" 
+      class="logout-btn"
+      (click)="deleteAccount()">
+      <ion-icon name="trash-outline" slot="start"></ion-icon>
+      Delete account
+    </ion-button>
+  </div>
+
   <!-- Bottom Padding -->
   <div class="bottom-padding"></div>
-</ion-content> 
+</ion-content>
+
+<style>
+.camera-icon {
+  font-size: 24px;
+  background: var(--ion-color-primary);
+  padding: 8px;
+  border-radius: 50%;
+  color: white;
+}
+
+.edit-avatar-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  margin: 0;
+  height: auto;
+}
+
+.profile-avatar {
+  position: relative;
+  display: inline-block;
+}
+</style> 

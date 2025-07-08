@@ -159,12 +159,12 @@
             <div class="bursary-image">
               <img [src]="data.img" [alt]="data.title">
               <!-- Bursary status badge overlay -->
-              <div class="bursary-badge" *ngIf="isOpportunityClosed(data.closingDate)">
+              <!-- <div class="bursary-badge" *ngIf="isOpportunityClosed(data.closingDate)">
                 <ion-chip color="danger" class="closed-chip small">
                   <ion-icon name="close-circle"></ion-icon>
                   <ion-label>CLOSED</ion-label>
                 </ion-chip>
-              </div>
+              </div> -->
             </div>
             <div class="bursary-content">
               <h4 class="bursary-title">{{ data.title }}</h4>
@@ -196,17 +196,17 @@
   <!-- Quick Actions Section -->
   <div class="section-container">
     <div class="quick-actions">
-      <h3 style="color: azure;">Quick Actions</h3>
+      <h3>Quick Actions</h3>
       <div class="action-grid">
         <ion-button fill="outline" class="action-button" [routerLink]="['/past-papers']">
           <ion-icon name="document-text-outline" slot="start"></ion-icon>
-          Past papers
+          Past question papers
         </ion-button>
         <ion-button fill="outline" class="action-button" (click)="showContactDetails()">
           <ion-icon name="call-outline" slot="start"></ion-icon>
           Contact us
         </ion-button>
-        <ion-button fill="outline" class="action-button">
+        <ion-button fill="outline" class="action-button"  (click)="logout()">
           <ion-icon name="log-out-outline" slot="start"></ion-icon>
           Sign out
         </ion-button>
